@@ -1,0 +1,21 @@
+{
+  "values": [
+    "great_big_world:quartz_brick_wall",
+    "great_big_world:prismarine_brick_wall",
+    "great_big_world:dark_prismarine_wall",
+    "great_big_world:smooth_sandstone_wall",
+    "great_big_world:smooth_red_sandstone_wall",
+    "great_big_world:polished_granite_wall",
+    "great_big_world:polished_andesite_wall",
+    "great_big_world:polished_diorite_wall",
+    "great_big_world:purpur_wall",
+    "great_big_world:cut_copper_wall",
+    "great_big_world:exposed_cut_copper_wall",
+    "great_big_world:weathered_cut_copper_wall",
+    "great_big_world:oxidized_cut_copper_wall",
+    "great_big_world:waxed_cut_copper_wall",
+    "great_big_world:waxed_exposed_cut_copper_wall",
+    "great_big_world:waxed_weathered_cut_copper_wall",
+    "great_big_world:waxed_oxidized_cut_copper_wall"
+  ]
+}

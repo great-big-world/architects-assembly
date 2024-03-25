@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "light=0": {
+      "model": "block/redstone_lamp"
+    },
+    "light=1": {
+      "model": "great_big_world:block/redstone_lamp_on1"
+    },
+    "light=2": {
+      "model": "great_big_world:block/redstone_lamp_on1"
+    },
+    "light=3": {
+      "model": "great_big_world:block/redstone_lamp_on1"
+    },
+    "light=4": {
+      "model": "great_big_world:block/redstone_lamp_on1"
+    },
+    "light=5": {
+      "model": "great_big_world:block/redstone_lamp_on2"
+    },
+    "light=6": {
+      "model": "great_big_world:block/redstone_lamp_on2"
+    },
+    "light=7": {
+      "model": "great_big_world:block/redstone_lamp_on2"
+    },
+    "light=8": {
+      "model": "great_big_world:block/redstone_lamp_on2"
+    },
+    "light=9": {
+      "model": "great_big_world:block/redstone_lamp_on3"
+    },
+    "light=10": {
+      "model": "great_big_world:block/redstone_lamp_on3"
+    },
+    "light=11": {
+      "model": "great_big_world:block/redstone_lamp_on3"
+    },
+    "light=12": {
+      "model": "great_big_world:block/redstone_lamp_on3"
+    },
+    "light=13": {
+      "model": "great_big_world:block/redstone_lamp_on4"
+    },
+    "light=14": {
+      "model": "great_big_world:block/redstone_lamp_on4"
+    },
+    "light=15": {
+      "model": "great_big_world:block/redstone_lamp_on4"
+    }
+  }
+}

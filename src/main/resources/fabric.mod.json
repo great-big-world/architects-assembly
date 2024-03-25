@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "architects_assembly",
+  "version": "${version}",
+  "name": "Architect's Assembly",
+  "description": "",
+  "authors": [
+    "creoii"
+  ],
+  "contact": {},
+  "license": "All Rights Reserved",
+  "icon": "assets/architects_assembly/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "dev.creoii.greatbigworld.architectsassembly.ArchitectsAssembly"
+    ],
+    "client": [
+      "dev.creoii.greatbigworld.architectsassembly.client.ArchitectsAssemblyClient"
+    ]
+  },
+  "accessWidener": "architects_assembly.accesswidener",
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  },
+  "mixins": [
+    "architects_assembly.mixins.json"
+  ],
+  "custom": {
+    "modmenu": {
+      "parent": {
+        "id": "great_big_world",
+        "name": "Great Big World",
+        "description": ""
+      }
+    }
+  }
+}

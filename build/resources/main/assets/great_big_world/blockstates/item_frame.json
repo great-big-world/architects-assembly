@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "dyed=false,map=false": {
+      "model": "block/item_frame"
+    },
+    "dyed=false,map=true": {
+      "model": "block/item_frame_map"
+    },
+    "dyed=true,map=false": {
+      "model": "great_big_world:block/dyed_item_frame"
+    },
+    "dyed=true,map=true": {
+      "model": "block/item_frame_map"
+    }
+  }
+}

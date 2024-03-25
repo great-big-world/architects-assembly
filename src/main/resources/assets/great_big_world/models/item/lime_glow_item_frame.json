@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "item/glow_item_frame",
+    "layer1": "great_big_world:item/dyed_glow_item_frame_overlay"
+  }
+}

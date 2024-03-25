@@ -1,0 +1,7 @@
+loom {
+    accessWidenerPath = file("src/main/resources/architects_assembly.accesswidener")
+}
+
+loom.mods.register("architects_assembly") {
+    sourceSet sourceSets.data
+}

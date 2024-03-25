@@ -1,0 +1,8 @@
+{
+  "parent": "great_big_world:block/vertical_slab",
+  "textures": {
+    "bottom": "block/quartz_block_top",
+    "side": "block/quartz_block_side",
+    "top": "block/quartz_block_top"
+  }
+}

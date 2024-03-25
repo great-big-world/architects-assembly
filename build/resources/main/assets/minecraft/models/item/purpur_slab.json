@@ -1,0 +1,11 @@
+{
+  "parent": "block/purpur_slab",
+  "overrides": [
+    {
+      "predicate": {
+        "great_big_world:placement": 1
+      },
+      "model": "great_big_world:item/vertical_purpur_slab"
+    }
+  ]
+}

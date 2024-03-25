@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "dyed_glow_item_frames",
+  "ingredients": [
+    {
+      "item": "minecraft:glow_item_frame"
+    },
+    {
+      "item": "minecraft:purple_dye"
+    }
+  ],
+  "result": {
+    "item": "great_big_world:purple_glow_item_frame"
+  }
+}

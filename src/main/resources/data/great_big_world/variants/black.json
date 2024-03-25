@@ -1,0 +1,22 @@
+{
+  "values": [
+    "minecraft:black_wool",
+    "minecraft:black_carpet",
+    "minecraft:black_concrete_powder",
+    "minecraft:black_concrete",
+    "minecraft:black_terracotta",
+    "minecraft:black_glazed_terracotta",
+    "minecraft:black_banner",
+    "minecraft:black_shulker_box",
+    "minecraft:black_dye",
+    "minecraft:black_candle",
+    "minecraft:black_stained_glass",
+    "minecraft:black_stained_glass_pane",
+    "minecraft:black_bed",
+    "great_big_world:chiseled_black_stained_glass",
+    "great_big_world:chiseled_black_stained_glass_pane",
+    "great_big_world:black_item_frame",
+    "great_big_world:black_glow_item_frame",
+    "great_big_world:black_glass_shard"
+  ]
+}

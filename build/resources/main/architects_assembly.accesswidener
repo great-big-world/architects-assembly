@@ -1,0 +1,15 @@
+accessWidener v2 named
+accessible class net/minecraft/client/gui/screen/recipebook/RecipeAlternativesWidget$AlternativeButtonWidget
+
+accessible method net/minecraft/item/ItemUsageContext getHitResult ()Lnet/minecraft/util/hit/BlockHitResult;
+accessible method net/minecraft/recipe/CuttingRecipe$Serializer <init> (Lnet/minecraft/recipe/CuttingRecipe$RecipeFactory;)V
+
+accessible field net/minecraft/item/MiningToolItem miningSpeed F
+accessible field net/minecraft/block/Block cachedItem Lnet/minecraft/item/Item;
+accessible field net/minecraft/item/ItemPlacementContext placementPos Lnet/minecraft/util/math/BlockPos;
+accessible field net/minecraft/client/gui/DrawContext client Lnet/minecraft/client/MinecraftClient;
+accessible field net/minecraft/client/gui/screen/recipebook/RecipeResultCollection unlockedRecipes Ljava/util/Set;
+accessible field net/minecraft/client/option/KeyBinding boundKey Lnet/minecraft/client/util/InputUtil$Key;
+accessible field net/minecraft/client/render/item/ItemRenderer builtinModelItemRenderer Lnet/minecraft/client/render/item/BuiltinModelItemRenderer;
+accessible field net/minecraft/block/FireBlock burnChances Lit/unimi/dsi/fastutil/objects/Object2IntMap;
+accessible field net/minecraft/block/FireBlock spreadChances Lit/unimi/dsi/fastutil/objects/Object2IntMap;

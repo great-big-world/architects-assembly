@@ -1,0 +1,58 @@
+ENTITIES
+Copper Golem
+Tuff Golem
+
+BLOCKS
+Glass Furnace
+Kiln*
+Polished Glass
+Paper Lantern
+Paper Panel
+Lapis Bricks*
+Gilded Lapis Bricks
+Copper Bars
+Gold Bars
+Gold Door
+Gold Trapdoor
+Chiseled Mineral Blocks
+Sandstone Pillars*
+Sandstone Tiles
+Mud Brick Pillars
+Chiseled Mud Bricks
+Mud Brick Tiles
+Chiseled Prismarine Bricks*
+Quartz & Smooth Quartz Walls*
+Red Nether Brick Fence & Fence Gate*
+
+ITEMS
+Copper Wrench
+Barometer
+
+ENCHANTMENTS
+Reach
+Quickplace
+Quickbreak
+
+IMPROVEMENTS
+F3 Menu
+Lanterns
+Pressure Plates
+Chains
+Smelting Recipes*
+Creative Inventory
+In-World Crafting Alternatives
+Stonecutters & Sawmills
+Copper Doors & Trapdoors*
+Nametags
+Allays
+
+BUGS
+Unlocked recipes dont unblack until reload world
+
+Slabs display vertical by default
+Slab Placement does not save... player-specific persistent state
+
+Chiseled Plank & Log assets
+Stained Shattered Glass & assets
+
+Cycle Hotbar duplication bug?

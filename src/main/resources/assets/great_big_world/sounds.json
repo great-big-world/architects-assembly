@@ -1,0 +1,36 @@
+{
+  "item.pickaxe.crack": {
+    "sounds": [
+      "great_big_world:item/pickaxe/crack1",
+      "great_big_world:item/pickaxe/crack2",
+      "great_big_world:item/pickaxe/crack3"
+    ],
+    "subtitle": "great_big_world.subtitles.item.pickaxe.crack"
+  },
+  "block.glass.repair": {
+    "sounds": [
+      "great_big_world:block/glass_repair"
+    ],
+    "subtitle": "great_big_world.subtitles.block.glass.repair"
+  },
+  "ui.sawmill.select_recipe": {
+    "sounds": [
+      "random/click"
+    ]
+  },
+  "ui.sawmill.take_result": {
+    "sounds": [
+      "ui/stonecutter/cut1",
+      {
+        "name": "ui/stonecutter/cut1",
+        "pitch": 0.92
+      },
+      "ui/stonecutter/cut2",
+      {
+        "name": "ui/stonecutter/cut2",
+        "pitch": 0.92
+      }
+    ],
+    "subtitle": "great_big_world.subtitles.ui.sawmill.take_result"
+  }
+}

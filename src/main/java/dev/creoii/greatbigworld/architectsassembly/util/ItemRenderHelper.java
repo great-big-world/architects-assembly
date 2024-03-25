@@ -1,0 +1,141 @@
+package dev.creoii.greatbigworld.architectsassembly.util;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.StainedGlassPaneBlock;
+import net.minecraft.block.TranslucentBlock;
+import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.*;
+import net.minecraft.client.render.item.ItemRenderer;
+import net.minecraft.client.render.model.BakedModel;
+import net.minecraft.client.render.model.BakedQuad;
+import net.minecraft.client.render.model.json.ModelTransformationMode;
+import net.minecraft.client.util.ModelIdentifier;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.*;
+import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.util.crash.CrashException;
+import net.minecraft.util.crash.CrashReport;
+import net.minecraft.util.crash.CrashReportSection;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MatrixUtil;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
+import org.joml.Matrix4f;
+
+import java.util.List;
+
+public final class ItemRenderHelper {
+    private static final ModelIdentifier TRIDENT = ModelIdentifier.ofVanilla("trident", "inventory");
+    private static final ModelIdentifier SPYGLASS = ModelIdentifier.ofVanilla("spyglass", "inventory");
+
+    public static void drawItemSilhouette(DrawContext context, @Nullable LivingEntity entity, @Nullable World world, ItemStack stack, int x, int y, int seed, int z) {
+        if (stack.isEmpty()) {
+            return;
+        }
+        BakedModel bakedModel = context.client.getItemRenderer().getModel(stack, world, entity, seed);
+        context.getMatrices().push();
+        context.getMatrices().translate(x + 8, y + 8, 150 + (bakedModel.hasDepth() ? z : 0));
+        try {
+            boolean bl = !bakedModel.isSideLit();
+            context.getMatrices().multiplyPositionMatrix(new Matrix4f().scaling(1f, -1f, 1f));
+            context.getMatrices().scale(16f, 16f, 16f);
+            if (bl)
+                DiffuseLighting.disableGuiDepthLighting();
+            renderItemSilhouette(context.client.getItemRenderer(), stack, ModelTransformationMode.GUI, false, context.getMatrices(), context.getVertexConsumers(), 0, OverlayTexture.DEFAULT_UV, bakedModel);
+            context.draw();
+            if (bl)
+                DiffuseLighting.enableGuiDepthLighting();
+        } catch (Throwable throwable) {
+            CrashReport crashReport = CrashReport.create(throwable, "Rendering item");
+            CrashReportSection crashReportSection = crashReport.addElement("Item being rendered");
+            crashReportSection.add("Item Type", () -> String.valueOf(stack.getItem()));
+            crashReportSection.add("Item Damage", () -> String.valueOf(stack.getDamage()));
+            crashReportSection.add("Item NBT", () -> String.valueOf(stack.getNbt()));
+            crashReportSection.add("Item Foil", () -> String.valueOf(stack.hasGlint()));
+            throw new CrashException(crashReport);
+        }
+        context.getMatrices().pop();
+    }
+
+    public static void renderItemSilhouette(ItemRenderer itemRenderer, ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, BakedModel model) {
+        if (!stack.isEmpty()) {
+            matrices.push();
+
+            boolean bl = renderMode == ModelTransformationMode.GUI || renderMode == ModelTransformationMode.GROUND || renderMode == ModelTransformationMode.FIXED;
+            if (bl) {
+                if (stack.isOf(Items.TRIDENT)) {
+                    model = itemRenderer.getModels().getModelManager().getModel(TRIDENT);
+                } else if (stack.isOf(Items.SPYGLASS)) {
+                    model = itemRenderer.getModels().getModelManager().getModel(SPYGLASS);
+                }
+            }
+
+            model.getTransformation().getTransformation(renderMode).apply(leftHanded, matrices);
+            matrices.translate(-.5f, -.5f, -.5f);
+            if (!model.isBuiltin()) {
+                boolean bl2;
+                if (renderMode != ModelTransformationMode.GUI && !renderMode.isFirstPerson() && stack.getItem() instanceof BlockItem) {
+                    Block block = ((BlockItem)stack.getItem()).getBlock();
+                    bl2 = !(block instanceof TranslucentBlock) && !(block instanceof StainedGlassPaneBlock);
+                } else {
+                    bl2 = true;
+                }
+
+                VertexConsumer vertexConsumer;
+                RenderLayer renderLayer = RenderLayers.getItemLayer(stack, bl2);
+                if (usesDynamicDisplay(stack) && stack.hasGlint()) {
+                    matrices.push();
+                    MatrixStack.Entry entry = matrices.peek();
+                    if (renderMode == ModelTransformationMode.GUI) {
+                        MatrixUtil.scale(entry.getPositionMatrix(), .5f);
+                    } else if (renderMode.isFirstPerson()) {
+                        MatrixUtil.scale(entry.getPositionMatrix(), .75f);
+                    }
+
+                    if (bl2) {
+                        vertexConsumer = ItemRenderer.getDirectDynamicDisplayGlintConsumer(vertexConsumers, renderLayer, entry);
+                    } else {
+                        vertexConsumer = ItemRenderer.getDynamicDisplayGlintConsumer(vertexConsumers, renderLayer, entry);
+                    }
+
+                    matrices.pop();
+                } else if (bl2) {
+                    vertexConsumer = ItemRenderer.getDirectItemGlintConsumer(vertexConsumers, renderLayer, true, stack.hasGlint());
+                } else {
+                    vertexConsumer = ItemRenderer.getItemGlintConsumer(vertexConsumers, renderLayer, true, stack.hasGlint());
+                }
+
+                renderBakedItemModelSilhouette(model, overlay, matrices, vertexConsumer);
+            } else {
+                itemRenderer.builtinModelItemRenderer.render(stack, renderMode, matrices, vertexConsumers, light, overlay);
+            }
+
+            matrices.pop();
+        }
+    }
+
+    private static void renderBakedItemModelSilhouette(BakedModel model, int overlay, MatrixStack matrices, VertexConsumer vertices) {
+        Random random = Random.create();
+        Direction[] directions = Direction.values();
+        for (Direction direction : directions) {
+            random.setSeed(42L);
+            renderBakedItemQuadsSilhouette(matrices, vertices, model.getQuads(null, direction, random), overlay);
+        }
+
+        random.setSeed(42L);
+        renderBakedItemQuadsSilhouette(matrices, vertices, model.getQuads(null, null, random), overlay);
+    }
+
+    private static void renderBakedItemQuadsSilhouette(MatrixStack matrices, VertexConsumer vertices, List<BakedQuad> quads, int overlay) {
+        MatrixStack.Entry entry = matrices.peek();
+        for (BakedQuad bakedQuad : quads) {
+            vertices.quad(entry, bakedQuad, 0, 0, 0, 0, overlay);
+        }
+    }
+
+    private static boolean usesDynamicDisplay(ItemStack stack) {
+        return stack.isIn(ItemTags.COMPASSES) || stack.isOf(Items.CLOCK);
+    }
+}
