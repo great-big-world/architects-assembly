@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/template_glass_pane_noside_alt",
-  "textures": {
-    "pane": "great_big_world:block/chiseled_blue_stained_glass"
-  }
-}

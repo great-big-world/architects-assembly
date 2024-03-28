@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "block/stripped_oak_log_top",
-    "side": "great_big_world:block/stripped_chiseled_oak_log"
-  }
-}

@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column_horizontal",
-  "textures": {
-    "end": "block/polished_diorite",
-    "side": "great_big_world:block/polished_diorite_slab"
-  }
-}

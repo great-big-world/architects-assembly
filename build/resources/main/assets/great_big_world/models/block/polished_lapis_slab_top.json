@@ -1,8 +1,0 @@
-{
-  "parent": "block/slab_top",
-  "textures": {
-    "bottom": "great_big_world:block/polished_lapis",
-    "side": "great_big_world:block/polished_lapis",
-    "top": "great_big_world:block/polished_lapis"
-  }
-}
