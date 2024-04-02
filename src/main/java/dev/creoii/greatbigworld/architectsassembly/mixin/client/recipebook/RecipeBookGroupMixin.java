@@ -1,4 +1,4 @@
-package dev.creoii.greatbigworld.architectsassembly.mixin;
+package dev.creoii.greatbigworld.architectsassembly.mixin.client.recipebook;
 
 import net.minecraft.client.recipebook.RecipeBookGroup;
 import net.minecraft.item.ItemStack;

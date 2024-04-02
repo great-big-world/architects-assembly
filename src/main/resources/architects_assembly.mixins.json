@@ -50,7 +50,7 @@
     "world.feature.GeodeFeatureMixin"
   ],
   "client": [
-    "RecipeBookGroupMixin",
+    "client.recipebook.RecipeBookGroupMixin",
     "client.CreativeInventoryScreenMixin",
     "client.HeldItemRendererMixin",
     "client.ItemFrameEntityRendererMixin",
