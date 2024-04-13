@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Unique;
 
 @Mixin(PlayerEntity.class)
 public class PlayerEntityMixin implements SlabPlacer, FreePlacer {
-    @Unique private SlabItem.SlabPlacement gbw$slabPlacementType = SlabItem.SlabPlacement.NORMAL;
+    @Unique private SlabItem.SlabPlacement gbw$slabPlacementType = SlabItem.SlabPlacement.VERTICAL;
     @Unique private boolean gbw$freePlacing = false;
 
     @Override

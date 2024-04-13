@@ -20,8 +20,8 @@ import java.util.Map;
 public final class ArchitectsAssemblyItems {
     public static void register() {
         registerItems();
-        registerDecorativeBlocks();
         registerVerticalSlabs();
+        registerDecorativeBlocks();
         registerMissingBlocks();
         registerImprovedBlocks();
         registerMiscBlocks();
