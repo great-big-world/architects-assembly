@@ -1,7 +1,6 @@
 package dev.creoii.greatbigworld.architectsassembly.registry;
 
 import com.google.common.collect.ImmutableMap;
-import com.mojang.serialization.Lifecycle;
 import dev.creoii.creoapi.api.item.CreoItemSettings;
 import dev.creoii.greatbigworld.architectsassembly.ArchitectsAssembly;
 import dev.creoii.greatbigworld.architectsassembly.item.DyedItemFrameItem;
@@ -199,8 +198,6 @@ public final class ArchitectsAssemblyItems {
     public static final Item WAXED_OXIDIZED_CUT_COPPER_WALL = new BlockItem(ArchitectsAssemblyBlocks.WAXED_OXIDIZED_CUT_COPPER_WALL, new CreoItemSettings());
 
     private static void registerDecorativeBlocks() {
-        final SimpleDefaultedRegistry<Item> items = (SimpleDefaultedRegistry<Item>) Registries.ITEM;
-
         Registry.register(Registries.ITEM, new Identifier(ArchitectsAssembly.NAMESPACE, "chiseled_glass"), CHISELED_GLASS);
         Registry.register(Registries.ITEM, new Identifier(ArchitectsAssembly.NAMESPACE, "chiseled_glass_pane"), CHISELED_GLASS_PANE);
         Registry.register(Registries.ITEM, new Identifier(ArchitectsAssembly.NAMESPACE, "chiseled_brown_stained_glass"), CHISELED_BROWN_STAINED_GLASS);
@@ -243,7 +240,7 @@ public final class ArchitectsAssemblyItems {
         Registry.register(Registries.ITEM, new Identifier(ArchitectsAssembly.NAMESPACE, "mossy_brick_stairs"), MOSSY_BRICK_STAIRS);
         Registry.register(Registries.ITEM, new Identifier(ArchitectsAssembly.NAMESPACE, "mossy_brick_slab"), MOSSY_BRICK_SLAB);
         Registry.register(Registries.ITEM, new Identifier(ArchitectsAssembly.NAMESPACE, "mossy_brick_wall"), MOSSY_BRICK_WALL);
-        items.set(items.getRawId(Items.GLASS), RegistryKey.of(RegistryKeys.ITEM, new Identifier("glass")), GLASS, Lifecycle.stable());
+        Registry.register(Registries.ITEM, new Identifier("glass"), GLASS);
         Registry.register(Registries.ITEM, new Identifier(ArchitectsAssembly.NAMESPACE, "shattered_glass"), SHATTERED_GLASS);
         Registry.register(Registries.ITEM, new Identifier(ArchitectsAssembly.NAMESPACE, "chiseled_oak_planks"), CHISELED_OAK_PLANKS);
         Registry.register(Registries.ITEM, new Identifier(ArchitectsAssembly.NAMESPACE, "chiseled_oak_log"), CHISELED_OAK_LOG);
@@ -368,71 +365,69 @@ public final class ArchitectsAssemblyItems {
     public static final Item WAXED_EXPOSED_CUT_COPPER_SLAB = new SlabItem(Blocks.WAXED_EXPOSED_CUT_COPPER_SLAB, ArchitectsAssemblyBlocks.VERTICAL_WAXED_EXPOSED_CUT_COPPER_SLAB, new CreoItemSettings());
     public static final Item WAXED_CUT_COPPER_SLAB = new SlabItem(Blocks.WAXED_CUT_COPPER_SLAB, ArchitectsAssemblyBlocks.VERTICAL_WAXED_CUT_COPPER_SLAB, new CreoItemSettings());
     public static final Item COBBLED_DEEPSLATE_SLAB = new SlabItem(Blocks.COBBLED_DEEPSLATE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_COBBLED_DEEPSLATE_SLAB, new CreoItemSettings());
-    public static final Item POLISHED_DEEPSLATE_SLAB = new SlabItem(Blocks.POLISHED_DEEPSLATE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_POLISHED_DEEPSLATE_SLAB, CreoItemSettings.copyOf(Items.POLISHED_DEEPSLATE_SLAB));
+    public static final Item POLISHED_DEEPSLATE_SLAB = new SlabItem(Blocks.POLISHED_DEEPSLATE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_POLISHED_DEEPSLATE_SLAB, new CreoItemSettings());
     public static final Item DEEPSLATE_TILE_SLAB = new SlabItem(Blocks.DEEPSLATE_TILE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_DEEPSLATE_TILE_SLAB, new CreoItemSettings());
     public static final Item DEEPSLATE_BRICK_SLAB = new SlabItem(Blocks.DEEPSLATE_BRICK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_DEEPSLATE_BRICK_SLAB, new CreoItemSettings());
     public static final Item MOSSY_COBBLESTONE_SLAB = new SlabItem(Blocks.MOSSY_COBBLESTONE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_MOSSY_COBBLESTONE_SLAB, new CreoItemSettings());
 
     private static void registerVerticalSlabs() {
-        final SimpleDefaultedRegistry<Item> items = (SimpleDefaultedRegistry<Item>) Registries.ITEM;
-
-        items.set(items.getRawId(Items.OAK_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("oak_slab")), OAK_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.SPRUCE_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("spruce_slab")), SPRUCE_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.BIRCH_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("birch_slab")), BIRCH_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.JUNGLE_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("jungle_slab")), JUNGLE_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.DARK_OAK_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("dark_oak_slab")), DARK_OAK_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.ACACIA_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("acacia_slab")), ACACIA_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.MANGROVE_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("mangrove_slab")), MANGROVE_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.CHERRY_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("cherry_slab")), CHERRY_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.BAMBOO_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("bamboo_slab")), BAMBOO_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.BAMBOO_MOSAIC_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("bamboo_mosaic_slab")), BAMBOO_MOSAIC_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.CRIMSON_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("crimson_slab")), CRIMSON_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.WARPED_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("warped_slab")), WARPED_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.STONE_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("stone_slab")), STONE_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.SMOOTH_STONE_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("smooth_stone_slab")), SMOOTH_STONE_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.SANDSTONE_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("sandstone_slab")), SANDSTONE_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.CUT_SANDSTONE_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("cut_sandstone_slab")), CUT_SANDSTONE_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.PETRIFIED_OAK_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("petrified_oak_slab")), PETRIFIED_OAK_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.COBBLESTONE_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("cobblestone_slab")), COBBLESTONE_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.BRICK_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("brick_slab")), BRICK_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.STONE_BRICK_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("stone_brick_slab")), STONE_BRICK_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.MUD_BRICK_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("mud_brick_slab")), MUD_BRICK_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.NETHER_BRICK_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("nether_brick_slab")), NETHER_BRICK_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.QUARTZ_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("quartz_slab")), QUARTZ_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.RED_SANDSTONE_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("red_sandstone_slab")), RED_SANDSTONE_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.CUT_RED_SANDSTONE_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("cut_red_sandstone_slab")), CUT_RED_SANDSTONE_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.PURPUR_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("purpur_slab")), PURPUR_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.PRISMARINE_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("prismarine_slab")), PRISMARINE_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.PRISMARINE_BRICK_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("prismarine_brick_slab")), PRISMARINE_BRICK_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.DARK_PRISMARINE_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("dark_prismarine_slab")), DARK_PRISMARINE_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.GRANITE_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("granite_slab")), GRANITE_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.POLISHED_GRANITE_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("polished_granite_slab")), POLISHED_GRANITE_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.ANDESITE_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("andesite_slab")), ANDESITE_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.POLISHED_ANDESITE_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("polished_andesite_slab")), POLISHED_ANDESITE_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.DIORITE_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("diorite_slab")), DIORITE_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.POLISHED_DIORITE_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("polished_diorite_slab")), POLISHED_DIORITE_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.SMOOTH_SANDSTONE_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("smooth_sandstone_slab")), SMOOTH_SANDSTONE_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.SMOOTH_QUARTZ_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("smooth_quartz_slab")), SMOOTH_QUARTZ_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.SMOOTH_RED_SANDSTONE_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("smooth_red_sandstone_slab")), SMOOTH_RED_SANDSTONE_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.MOSSY_STONE_BRICK_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("mossy_stone_brick_slab")), MOSSY_STONE_BRICK_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.END_STONE_BRICK_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("end_stone_brick_slab")), END_STONE_BRICK_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.RED_NETHER_BRICK_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("red_nether_brick_slab")), RED_NETHER_BRICK_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.BLACKSTONE_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("blackstone_slab")), BLACKSTONE_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.POLISHED_BLACKSTONE_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("polished_blackstone_slab")), POLISHED_BLACKSTONE_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.POLISHED_BLACKSTONE_BRICK_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("polished_blackstone_brick_slab")), POLISHED_BLACKSTONE_BRICK_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.OXIDIZED_CUT_COPPER_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("oxidized_cut_copper_slab")), OXIDIZED_CUT_COPPER_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.WEATHERED_CUT_COPPER_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("weathered_cut_copper_slab")), WEATHERED_CUT_COPPER_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.EXPOSED_CUT_COPPER_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("exposed_cut_copper_slab")), EXPOSED_CUT_COPPER_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.CUT_COPPER_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("cut_copper_slab")), CUT_COPPER_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.WAXED_OXIDIZED_CUT_COPPER_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("waxed_oxidized_cut_copper_slab")), WAXED_OXIDIZED_CUT_COPPER_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.WAXED_WEATHERED_CUT_COPPER_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("waxed_weathered_cut_copper_slab")), WAXED_WEATHERED_CUT_COPPER_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.WAXED_EXPOSED_CUT_COPPER_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("waxed_exposed_cut_copper_slab")), WAXED_EXPOSED_CUT_COPPER_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.WAXED_CUT_COPPER_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("waxed_cut_copper_slab")), WAXED_CUT_COPPER_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.COBBLED_DEEPSLATE_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("cobbled_deepslate_slab")), COBBLED_DEEPSLATE_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.POLISHED_DEEPSLATE_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("polished_deepslate_slab")), POLISHED_DEEPSLATE_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.DEEPSLATE_TILE_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("deepslate_tile_slab")), DEEPSLATE_TILE_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.DEEPSLATE_BRICK_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("deepslate_brick_slab")), DEEPSLATE_BRICK_SLAB, Lifecycle.stable());
-        items.set(items.getRawId(Items.MOSSY_COBBLESTONE_SLAB), RegistryKey.of(RegistryKeys.ITEM, new Identifier("mossy_cobblestone_slab")), MOSSY_COBBLESTONE_SLAB, Lifecycle.stable());
+        Registry.register(Registries.ITEM, new Identifier("oak_slab"), OAK_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("spruce_slab"), SPRUCE_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("birch_slab"), BIRCH_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("jungle_slab"), JUNGLE_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("dark_oak_slab"), DARK_OAK_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("acacia_slab"), ACACIA_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("mangrove_slab"), MANGROVE_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("cherry_slab"), CHERRY_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("bamboo_slab"), BAMBOO_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("bamboo_mosaic_slab"), BAMBOO_MOSAIC_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("crimson_slab"), CRIMSON_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("warped_slab"), WARPED_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("stone_slab"), STONE_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("smooth_stone_slab"), SMOOTH_STONE_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("sandstone_slab"), SANDSTONE_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("cut_sandstone_slab"), CUT_SANDSTONE_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("petrified_oak_slab"), PETRIFIED_OAK_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("cobblestone_slab"), COBBLESTONE_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("brick_slab"), BRICK_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("stone_brick_slab"), STONE_BRICK_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("mud_brick_slab"), MUD_BRICK_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("nether_brick_slab"), NETHER_BRICK_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("quartz_slab"), QUARTZ_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("red_sandstone_slab"), RED_SANDSTONE_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("cut_red_sandstone_slab"), CUT_RED_SANDSTONE_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("purpur_slab"), PURPUR_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("prismarine_slab"), PRISMARINE_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("prismarine_brick_slab"), PRISMARINE_BRICK_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("dark_prismarine_slab"), DARK_PRISMARINE_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("granite_slab"), GRANITE_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("polished_granite_slab"), POLISHED_GRANITE_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("andesite_slab"), ANDESITE_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("polished_andesite_slab"), POLISHED_ANDESITE_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("diorite_slab"), DIORITE_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("polished_diorite_slab"), POLISHED_DIORITE_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("smooth_sandstone_slab"), SMOOTH_SANDSTONE_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("smooth_quartz_slab"), SMOOTH_QUARTZ_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("smooth_red_sandstone_slab"), SMOOTH_RED_SANDSTONE_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("mossy_stone_brick_slab"), MOSSY_STONE_BRICK_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("end_stone_brick_slab"), END_STONE_BRICK_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("red_nether_brick_slab"), RED_NETHER_BRICK_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("blackstone_slab"), BLACKSTONE_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("polished_blackstone_slab"), POLISHED_BLACKSTONE_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("polished_blackstone_brick_slab"), POLISHED_BLACKSTONE_BRICK_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("oxidized_cut_copper_slab"), OXIDIZED_CUT_COPPER_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("weathered_cut_copper_slab"), WEATHERED_CUT_COPPER_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("exposed_cut_copper_slab"), EXPOSED_CUT_COPPER_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("cut_copper_slab"), CUT_COPPER_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("waxed_oxidized_cut_copper_slab"), WAXED_OXIDIZED_CUT_COPPER_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("waxed_weathered_cut_copper_slab"), WAXED_WEATHERED_CUT_COPPER_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("waxed_exposed_cut_copper_slab"), WAXED_EXPOSED_CUT_COPPER_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("waxed_cut_copper_slab"), WAXED_CUT_COPPER_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("cobbled_deepslate_slab"), COBBLED_DEEPSLATE_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("polished_deepslate_slab"), POLISHED_DEEPSLATE_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("deepslate_tile_slab"), DEEPSLATE_TILE_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("deepslate_brick_slab"), DEEPSLATE_BRICK_SLAB);
+        Registry.register(Registries.ITEM, new Identifier("mossy_cobblestone_slab"), MOSSY_COBBLESTONE_SLAB);
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(entries -> {
             replaceVanillaSlabs(entries.getDisplayStacks());
@@ -568,11 +563,9 @@ public final class ArchitectsAssemblyItems {
     public static final Item REDSTONE_LAMP = new BlockItem(ArchitectsAssemblyBlocks.REDSTONE_LAMP, new CreoItemSettings());
 
     private static void registerImprovedBlocks() {
-        final SimpleDefaultedRegistry<Item> items = (SimpleDefaultedRegistry<Item>) Registries.ITEM;
-
-        items.set(items.getRawId(Items.TORCH), RegistryKey.of(RegistryKeys.ITEM, new Identifier("torch")), TORCH, Lifecycle.stable());
-        items.set(items.getRawId(Items.SOUL_TORCH), RegistryKey.of(RegistryKeys.ITEM, new Identifier("soul_torch")), SOUL_TORCH, Lifecycle.stable());
-        items.set(items.getRawId(Items.REDSTONE_LAMP), RegistryKey.of(RegistryKeys.ITEM, new Identifier("redstone_lamp")), REDSTONE_LAMP, Lifecycle.stable());
+        Registry.register(Registries.ITEM, new Identifier("torch"), TORCH);
+        Registry.register(Registries.ITEM, new Identifier("soul_torch"), SOUL_TORCH);
+        Registry.register(Registries.ITEM, new Identifier("redstone_lamp"), REDSTONE_LAMP);
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(entries -> {
             replaceImprovedBlocks(entries.getDisplayStacks());

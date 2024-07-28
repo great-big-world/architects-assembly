@@ -2,11 +2,13 @@ package dev.creoii.greatbigworld.architectsassembly.util;
 
 import dev.creoii.greatbigworld.architectsassembly.ArchitectsAssembly;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.RegistryByteBuf;
+import net.minecraft.network.codec.PacketCodec;
+import net.minecraft.network.packet.CustomPayload;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 
 public final class HotbarCycleHelper {
@@ -30,14 +32,14 @@ public final class HotbarCycleHelper {
             }
         }
 
-        PacketByteBuf buf = PacketByteBufs.create();
+        /*PacketByteBuf buf = PacketByteBufs.create();
         for (int i = 0; i < PlayerInventory.MAIN_SIZE; ++i) {
             ItemStack stack = temp.get(i);
             inventory.main.set(i, stack);
             buf.writeInt(i);
             buf.writeItemStack(stack);
-        }
-        ClientPlayNetworking.send(ArchitectsAssembly.SYNC_INVENTORY_PACKET_ID, buf);
+        }*/
+        ClientPlayNetworking.send(SyncInventory.INSTANCE);
     }
 
     private static int cycle(int index, int amount) {
@@ -54,5 +56,16 @@ public final class HotbarCycleHelper {
         }
 
         return cycled;
+    }
+
+    public record SyncInventory() implements CustomPayload {
+        public static final CustomPayload.Id<SyncInventory> PACKET_ID = new CustomPayload.Id<>(new Identifier(ArchitectsAssembly.NAMESPACE, "sync_inventory"));
+        public static final SyncInventory INSTANCE = new SyncInventory();
+        public static final PacketCodec<RegistryByteBuf, SyncInventory> PACKET_CODEC = PacketCodec.unit(INSTANCE);
+
+        @Override
+        public Id<? extends CustomPayload> getId() {
+            return PACKET_ID;
+        }
     }
 }

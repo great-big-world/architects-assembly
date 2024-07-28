@@ -2,7 +2,6 @@ package dev.creoii.greatbigworld.architectsassembly.block;
 
 import dev.creoii.greatbigworld.architectsassembly.client.screen.SawmillScreenHandler;
 import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyStats;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.StonecutterBlock;
@@ -13,7 +12,6 @@ import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -23,11 +21,11 @@ public class SawmillBlock extends StonecutterBlock {
     private static final Text TITLE = Text.translatable("container.sawmill");
 
     public SawmillBlock() {
-        super(FabricBlockSettings.copy(Blocks.STONECUTTER).strength(2f).sounds(BlockSoundGroup.WOOD));
+        super(Settings.copy(Blocks.STONECUTTER).strength(2f).sounds(BlockSoundGroup.WOOD));
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if (world.isClient) {
             return ActionResult.SUCCESS;
         }

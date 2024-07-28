@@ -1,11 +1,11 @@
 package dev.creoii.greatbigworld.architectsassembly.mixin.item;
 
 import dev.creoii.greatbigworld.architectsassembly.client.ArchitectsAssemblyClient;
-import net.minecraft.client.item.TooltipContext;
+import net.minecraft.client.item.TooltipType;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.LingeringPotionItem;
 import net.minecraft.text.Text;
-import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -16,7 +16,7 @@ import java.util.List;
 @Mixin(LingeringPotionItem.class)
 public class LingeringPotionItemMixin {
     @Inject(method = "appendTooltip", at = @At("HEAD"), cancellable = true)
-    private void gbw$ctrlViewPotionTooltips(ItemStack stack, World world, List<Text> tooltip, TooltipContext context, CallbackInfo ci) {
+    private void gbw$ctrlViewPotionTooltips(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType type, CallbackInfo ci) {
         if (!ArchitectsAssemblyClient.shouldExpandTooltips())
             ci.cancel();
     }

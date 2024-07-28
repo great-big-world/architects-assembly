@@ -28,7 +28,7 @@ public abstract class BucketItemMixin {
     @Shadow protected abstract void playEmptyingSound(@Nullable PlayerEntity player, WorldAccess world, BlockPos pos);
 
     @ModifyArg(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/BucketItem;placeFluid(Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/hit/BlockHitResult;)Z"))
-    private BlockPos gbw$fixFluidloggingFilling(BlockPos pos, @Local World world, @Local PlayerEntity user, @Local BlockState blockState, @Local(ordinal = 0) BlockPos blockPos, @Local(ordinal = 1) BlockPos blockPos2) {
+    private BlockPos gbw$fixFluidloggingFilling(BlockPos pos, @Local(argsOnly = true) World world, @Local(argsOnly = true) PlayerEntity user, @Local BlockState blockState, @Local(ordinal = 0) BlockPos blockPos, @Local(ordinal = 1) BlockPos blockPos2) {
         return blockState.getBlock() instanceof FluidFillable fluidFillable && fluidFillable.canFillWithFluid(user, world, pos, blockState, fluid) ? blockPos : blockPos2;
     }
 

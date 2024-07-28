@@ -51,7 +51,7 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
             if (stack.isIn(ItemTags.SLABS)) {
                 return SlabItem.getPlacement(entity);
             }
-            return 0;
+            return 0f;
         });
 
         LanguageEvents.LOAD_TRANSLATION.register((langCode, consumer, translationKey, translated) -> {
@@ -146,8 +146,9 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
             return true;
         if (item instanceof VariantItem variantItem) {
             for (Variant variant : Variant.VARIANTS.values()) {
-                if (variant.getItems().contains(item) || variant.isStackInTags(item.getDefaultStack()))
+                if (variant.getItems().contains(item) || variant.isStackInTags(item.getDefaultStack())) {
                     variantItem.gbw$addVariant(variant);
+                }
             }
 
             if (!variantItem.gbw$getVariants().isEmpty()) {

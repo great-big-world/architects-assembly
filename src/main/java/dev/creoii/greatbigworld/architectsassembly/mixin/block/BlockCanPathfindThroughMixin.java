@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class BlockCanPathfindThroughMixin {
     @SuppressWarnings("deprecation")
     @Inject(method = "canPathfindThrough", at = @At("HEAD"), cancellable = true)
-    private void gbw$fixNavigationForWater(BlockState state, BlockView world, BlockPos pos, NavigationType type, CallbackInfoReturnable<Boolean> cir) {
+    private void gbw$fixNavigationForWater(BlockState state, NavigationType type, CallbackInfoReturnable<Boolean> cir) {
         if (type == NavigationType.WATER) {
             if (state.getProperties().contains(Fluidloggable.FLUIDLOGGED)) {
                 cir.setReturnValue(state.get(Fluidloggable.FLUIDLOGGED).getFluid().isIn(FluidTags.WATER));

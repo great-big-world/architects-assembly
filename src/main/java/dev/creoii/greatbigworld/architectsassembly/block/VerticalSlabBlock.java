@@ -36,9 +36,7 @@ public class VerticalSlabBlock extends Block implements Fluidloggable {
     private final Identifier slabItemIdOverride;
 
     public VerticalSlabBlock(Settings settings, @Nullable Identifier slabItemIdOverride) {
-        super(settings.luminance(state -> {
-            return state.get(FLUIDLOGGED) == FluidType.LAVA ? 15 : 0;
-        }));
+        super(settings.luminance(state -> state.get(FLUIDLOGGED) == FluidType.LAVA ? 15 : 0));
         setDefaultState(getDefaultState().with(TYPE, VerticalSlabType.NORTH).with(FACING, Direction.NORTH).with(FLUIDLOGGED, FluidType.EMPTY));
         this.slabItemIdOverride = slabItemIdOverride;
     }
@@ -58,14 +56,12 @@ public class VerticalSlabBlock extends Block implements Fluidloggable {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public BlockState rotate(BlockState state, BlockRotation rotation) {
         Direction direction = rotation.rotate(state.get(TYPE).getDirection());
         return state.get(TYPE) == VerticalSlabType.DOUBLE ? state : state.with(TYPE, VerticalSlabType.fromDirection(direction)).with(FACING, direction);
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public BlockState mirror(BlockState state, BlockMirror mirror) {
         VerticalSlabType type = state.get(TYPE);
         if (type == VerticalSlabType.DOUBLE || mirror == BlockMirror.NONE)
@@ -80,7 +76,6 @@ public class VerticalSlabBlock extends Block implements Fluidloggable {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public boolean hasSidedTransparency(BlockState state) {
         return state.get(TYPE) != VerticalSlabType.DOUBLE;
     }
@@ -108,7 +103,6 @@ public class VerticalSlabBlock extends Block implements Fluidloggable {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return state.get(TYPE).getShape();
     }
@@ -138,14 +132,12 @@ public class VerticalSlabBlock extends Block implements Fluidloggable {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public boolean canReplace(BlockState state, ItemPlacementContext context) {
         VerticalSlabType type = state.get(TYPE);
         return type != VerticalSlabType.DOUBLE && context.getStack().isOf(asItem()) && (context.canReplaceExisting() && (context.getSide() == type.getDirection() && getDirectionForPlacement(context) == type.getDirection()) || (!context.canReplaceExisting() && context.getSide() != type.getDirection()));
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public FluidState getFluidState(BlockState state) {
         FluidType fluidType = state.get(FLUIDLOGGED);
         if (fluidType.getFluid() instanceof FlowableFluid flowableFluid) {
@@ -165,7 +157,6 @@ public class VerticalSlabBlock extends Block implements Fluidloggable {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (state.get(FLUIDLOGGED) != FluidType.EMPTY) {
             Fluid fluid = state.get(FLUIDLOGGED).getFluid();
@@ -176,8 +167,7 @@ public class VerticalSlabBlock extends Block implements Fluidloggable {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
-        return type == NavigationType.WATER && world.getFluidState(pos).isIn(FluidTags.WATER);
+    protected boolean canPathfindThrough(BlockState state, NavigationType type) {
+        return type == NavigationType.WATER && state.getFluidState().isIn(FluidTags.WATER);
     }
 }

@@ -9,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.registry.tag.TagKey;
@@ -45,8 +46,8 @@ public abstract class PickaxeItemMixin extends MiningToolItem {
             .put(Blocks.END_STONE_BRICKS, ArchitectsAssemblyBlocks.CRACKED_END_STONE_BRICKS)
             .build();
 
-    public PickaxeItemMixin(float attackDamage, float attackSpeed, ToolMaterial material, TagKey<Block> effectiveBlocks, Settings settings) {
-        super(attackDamage, attackSpeed, material, effectiveBlocks, settings);
+    public PickaxeItemMixin(ToolMaterial material, TagKey<Block> effectiveBlocks, Settings settings) {
+        super(material, effectiveBlocks, settings);
     }
 
     public UseAction getUseAction(ItemStack stack) {
@@ -84,9 +85,7 @@ public abstract class PickaxeItemMixin extends MiningToolItem {
                 world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(player, cracked));
 
                 if (!player.isCreative()) {
-                    stack.damage(1, player, p -> {
-                        p.sendToolBreakStatus(p.getActiveHand());
-                    });
+                    stack.damage(1, player, LivingEntity.getSlotForHand(player.getActiveHand()));
                 }
 
                 player.swingHand(player.getActiveHand());
@@ -100,7 +99,7 @@ public abstract class PickaxeItemMixin extends MiningToolItem {
         if (player.isSpectator())
             return null;
 
-        HitResult hit = player.raycast(PlayerEntity.getReachDistance(player.isCreative()), 0f, false);
+        HitResult hit = player.raycast(player.getAttributeValue(EntityAttributes.PLAYER_BLOCK_INTERACTION_RANGE), 0f, false);
         if (hit instanceof BlockHitResult blockHitResult) {
             Block block = world.getBlockState(blockHitResult.getBlockPos()).getBlock();
             if (CRACKED_BLOCKS.containsKey(block)) {

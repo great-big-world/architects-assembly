@@ -5,17 +5,19 @@ import com.google.common.collect.ImmutableMap;
 import dev.creoii.creoapi.api.event.misc.RecipeEvents;
 import dev.creoii.greatbigworld.architectsassembly.block.VerticalSlabBlock;
 import dev.creoii.greatbigworld.architectsassembly.registry.*;
+import dev.creoii.greatbigworld.architectsassembly.util.HotbarCycleHelper;
 import dev.creoii.greatbigworld.architectsassembly.variant.Variant;
 import dev.creoii.greatbigworld.architectsassembly.world.feature.MossifyVegetationPatchFeature;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
+import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FireBlock;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -30,6 +32,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -37,7 +40,6 @@ import java.util.Optional;
 public class ArchitectsAssembly implements ModInitializer {
     public static final String NAMESPACE = "great_big_world";
     public static final Logger LOGGER = LogManager.getLogger(ArchitectsAssembly.class);
-    public static final Identifier SYNC_INVENTORY_PACKET_ID = new Identifier(ArchitectsAssembly.NAMESPACE, "sync_inventory");
     private final Map<RecipeType<?>, List<Identifier>> RECIPES_TO_REMOVE = new ImmutableMap.Builder<RecipeType<?>, List<Identifier>>()
             .put(RecipeType.CRAFTING, new ImmutableList.Builder<Identifier>()
                     .add(new Identifier("chiseled_deepslate"))
@@ -57,6 +59,7 @@ public class ArchitectsAssembly implements ModInitializer {
     @Override
     @SuppressWarnings("deprecation")
     public void onInitialize() {
+        ArchitectsAssemblyDataComponents.register();
         ArchitectsAssemblyBlocks.register();
         ArchitectsAssemblyItems.register();
         ArchitectsAssemblySoundEvents.register();
@@ -65,6 +68,8 @@ public class ArchitectsAssembly implements ModInitializer {
         ArchitectsAssemblyStats.register();
 
         Registry.register(Registries.FEATURE, new Identifier(NAMESPACE, "mossify_vegetation_patch"), new MossifyVegetationPatchFeature(VegetationPatchFeatureConfig.CODEC));
+
+        PayloadTypeRegistry.playC2S().register(HotbarCycleHelper.SyncInventory.PACKET_ID, HotbarCycleHelper.SyncInventory.PACKET_CODEC);
 
         FireBlock fireBlock = (FireBlock) Blocks.FIRE;
         fireBlock.burnChances.forEach((block, integer) -> {
@@ -80,14 +85,14 @@ public class ArchitectsAssembly implements ModInitializer {
             }
         });
 
-        ServerPlayNetworking.registerGlobalReceiver(SYNC_INVENTORY_PACKET_ID, (server, player, handler, buf, responseSender) -> {
-            server.execute(() -> {
+        ServerPlayNetworking.registerGlobalReceiver(HotbarCycleHelper.SyncInventory.PACKET_ID, (payload, context) -> {
+            /*int index = payload.index();
+            ItemStack stack = payload.stack();
+            context.player().getServer().execute(() -> {
                 for (int i = 0; i < PlayerInventory.MAIN_SIZE; ++i) {
-                    int index = buf.readInt();
-                    ItemStack stack = buf.readItemStack();
                     player.getInventory().main.set(index, stack);
                 }
-            });
+            });*/
         });
 
         RecipeEvents.LOAD_RECIPE.register((builder, recipeEntry) -> {
@@ -115,7 +120,7 @@ public class ArchitectsAssembly implements ModInitializer {
                             Variant variant = Variant.GSON.fromJson(result, Variant.class).build(identifier1);
 
                             if (variant.getItems().isEmpty() && variant.getItemTags().isEmpty()) {
-                                ArchitectsAssembly.LOGGER.warn("Found empty variant definition: '" + identifier + "'");
+                                ArchitectsAssembly.LOGGER.warn("Found empty variant definition: '{}'", identifier);
                                 continue;
                             }
 

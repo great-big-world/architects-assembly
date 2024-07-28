@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 
 public enum FluidType implements StringIdentifiable {
     EMPTY("empty", Fluids.EMPTY, () -> ItemStack.EMPTY),
-    WATER("water", Fluids.WATER, () -> Items.WATER_BUCKET.getDefaultStack()),
+    WATER("water", Fluids.WATER, () -> Items.WATER_BUCKET.getDefaultStack()), // DO NOT USE METHOD SUPPLIERS HERE
     LAVA("lava", Fluids.LAVA, () -> Items.LAVA_BUCKET.getDefaultStack());
 
     private final String name;

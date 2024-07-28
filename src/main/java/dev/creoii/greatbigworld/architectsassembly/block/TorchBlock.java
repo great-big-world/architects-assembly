@@ -7,8 +7,8 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.*;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.registry.Registries;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
@@ -29,9 +29,9 @@ import java.util.Map;
 import java.util.Set;
 
 public class TorchBlock extends AbstractTorchBlock {
-    protected static final MapCodec<DefaultParticleType> PARTICLE_TYPE_CODEC = Registries.PARTICLE_TYPE.getCodec().comapFlatMap(particleType -> {
-        DataResult<DefaultParticleType> dataResult;
-        if (particleType instanceof DefaultParticleType defaultParticleType) {
+    protected static final MapCodec<SimpleParticleType> PARTICLE_TYPE_CODEC = Registries.PARTICLE_TYPE.getCodec().comapFlatMap(particleType -> {
+        DataResult<SimpleParticleType> dataResult;
+        if (particleType instanceof SimpleParticleType defaultParticleType) {
             dataResult = DataResult.success(defaultParticleType);
         } else dataResult = DataResult.error(() -> "Not a SimpleParticleType: " + particleType);
         return dataResult;
@@ -53,9 +53,9 @@ public class TorchBlock extends AbstractTorchBlock {
             Direction.EAST, Block.createCuboidShape(0d, 3d, 5.5d, 5d, 13d, 10.5d),
             Direction.UP, SHAPE
     ));
-    protected final DefaultParticleType particle;
+    protected final SimpleParticleType particle;
 
-    public TorchBlock(DefaultParticleType particle, Settings settings) {
+    public TorchBlock(SimpleParticleType particle, Settings settings) {
         super(settings);
         this.particle = particle;
         setDefaultState(getStateManager().getDefaultState().with(UP, false).with(NORTH, false).with(SOUTH, false).with(EAST, false).with(WEST, false));

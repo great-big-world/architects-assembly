@@ -34,7 +34,6 @@ public abstract class BlockGetFluidStateMixin extends Block implements Fluidlogg
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public FluidState getFluidState(BlockState state) {
         if (state.get(Fluidloggable.FLUIDLOGGED).getFluid() instanceof FlowableFluid flowableFluid) {
             return flowableFluid.getStill(false);

@@ -36,7 +36,6 @@ public class RedstoneLampBlock extends Block {
         return super.getPlacementState(ctx);
     }
 
-    @SuppressWarnings("deprecation")
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
         if (!world.isClient) {
             if (!world.isReceivingRedstonePower(pos)) {
@@ -50,7 +49,6 @@ public class RedstoneLampBlock extends Block {
         }
     }
 
-    @SuppressWarnings("deprecation")
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (state.get(LIGHT) != 0 && !world.isReceivingRedstonePower(pos)) {
             world.setBlockState(pos, state.with(LIGHT, 0), 2);

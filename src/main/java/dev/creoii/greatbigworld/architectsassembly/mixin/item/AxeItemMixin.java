@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Oxidizable;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.registry.tag.TagKey;
@@ -36,8 +37,8 @@ public abstract class AxeItemMixin extends MiningToolItem {
     @Shadow @Final protected static Map<Block, Block> STRIPPED_BLOCKS;
     @Shadow protected abstract Optional<BlockState> tryStrip(World world, BlockPos pos, @Nullable PlayerEntity player, BlockState state);
 
-    public AxeItemMixin(float attackDamage, float attackSpeed, ToolMaterial material, TagKey<Block> effectiveBlocks, Settings settings) {
-        super(attackDamage, attackSpeed, material, effectiveBlocks, settings);
+    public AxeItemMixin(ToolMaterial material, TagKey<Block> effectiveBlocks, Settings settings) {
+        super(material, effectiveBlocks, settings);
     }
 
     public UseAction getUseAction(ItemStack stack) {
@@ -57,7 +58,7 @@ public abstract class AxeItemMixin extends MiningToolItem {
     }
 
     @Inject(method = "useOnBlock", at = @At("HEAD"), cancellable = true)
-    private void gbw_cancelDefaultBehavior(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir) {
+    private void gbw$cancelDefaultBehavior(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir) {
         cir.setReturnValue(ActionResult.PASS);
     }
 
@@ -79,9 +80,7 @@ public abstract class AxeItemMixin extends MiningToolItem {
                     world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(player, optional.get()));
 
                     if (!player.isCreative()) {
-                        stack.damage(1, player, p -> {
-                            p.sendToolBreakStatus(p.getActiveHand());
-                        });
+                        stack.damage(1, player, LivingEntity.getSlotForHand(player.getActiveHand()));
                     }
 
                     player.swingHand(player.getActiveHand());
@@ -96,7 +95,7 @@ public abstract class AxeItemMixin extends MiningToolItem {
         if (player.isSpectator())
             return null;
 
-        HitResult hit = player.raycast(PlayerEntity.getReachDistance(player.isCreative()), 0f, false);
+        HitResult hit = player.raycast(player.getAttributeValue(EntityAttributes.PLAYER_BLOCK_INTERACTION_RANGE), 0f, false);
         if (hit instanceof BlockHitResult blockHitResult) {
             BlockState state = world.getBlockState(blockHitResult.getBlockPos());
             if (STRIPPED_BLOCKS.containsKey(state.getBlock())) {

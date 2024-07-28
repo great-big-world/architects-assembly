@@ -52,7 +52,6 @@ public final class ItemRenderHelper {
             CrashReportSection crashReportSection = crashReport.addElement("Item being rendered");
             crashReportSection.add("Item Type", () -> String.valueOf(stack.getItem()));
             crashReportSection.add("Item Damage", () -> String.valueOf(stack.getDamage()));
-            crashReportSection.add("Item NBT", () -> String.valueOf(stack.getNbt()));
             crashReportSection.add("Item Foil", () -> String.valueOf(stack.hasGlint()));
             throw new CrashException(crashReport);
         }
@@ -131,7 +130,7 @@ public final class ItemRenderHelper {
     private static void renderBakedItemQuadsSilhouette(MatrixStack matrices, VertexConsumer vertices, List<BakedQuad> quads, int overlay) {
         MatrixStack.Entry entry = matrices.peek();
         for (BakedQuad bakedQuad : quads) {
-            vertices.quad(entry, bakedQuad, 0, 0, 0, 0, overlay);
+            vertices.quad(entry, bakedQuad, 0, 0, 0, 0, overlay, 0);
         }
     }
 

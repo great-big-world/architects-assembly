@@ -2,7 +2,6 @@ package dev.creoii.greatbigworld.architectsassembly.mixin.entity;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import dev.creoii.greatbigworld.architectsassembly.util.ExtendedItemFrame;
-import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
@@ -17,7 +16,6 @@ import net.minecraft.item.Items;
 import net.minecraft.item.map.MapState;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.tag.ItemTags;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -52,9 +50,9 @@ public abstract class ItemFrameEntityMixin extends AbstractDecorationEntity impl
     }
 
     @Inject(method = "initDataTracker", at = @At("TAIL"))
-    private void gbw$trackData(CallbackInfo ci) {
-        getDataTracker().startTracking(COLOR, NO_COLOR);
-        getDataTracker().startTracking(WAXED, false);
+    private void gbw$trackData(DataTracker.Builder builder, CallbackInfo ci) {
+        builder.add(COLOR, NO_COLOR);
+        builder.add(WAXED, false);
     }
 
     @Inject(method = "writeCustomDataToNbt", at = @At("TAIL"))
@@ -102,7 +100,7 @@ public abstract class ItemFrameEntityMixin extends AbstractDecorationEntity impl
             if (bl2 && !isRemoved() && !getWorld().isClient) {
                 if (itemStack.isOf(Items.FILLED_MAP)) {
                     MapState mapState = FilledMapItem.getMapState(itemStack, getWorld());
-                    if (mapState != null && mapState.iconCountNotLessThan(256)) {
+                    if (mapState != null && mapState.decorationCountNotLessThan(256)) {
                         cir.setReturnValue(ActionResult.FAIL);
                     }
                 }

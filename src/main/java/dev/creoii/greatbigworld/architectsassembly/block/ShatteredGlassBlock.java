@@ -12,7 +12,6 @@ import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -24,9 +23,8 @@ public class ShatteredGlassBlock extends TransparentBlock {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        ItemStack stack = player.getStackInHand(hand);
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        ItemStack stack = player.getStackInHand(player.getActiveHand());
         if (stack.isOf(ArchitectsAssemblyItems.GLASS_SHARD)) {
             world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(player, state));
             world.setBlockState(pos, ArchitectsAssemblyBlocks.GLASS.getDefaultState(), 3);
@@ -35,11 +33,10 @@ public class ShatteredGlassBlock extends TransparentBlock {
                 stack.decrement(1);
             return ActionResult.success(world.isClient);
         }
-        return super.onUse(state, world, pos, player, hand, hit);
+        return super.onUse(state, world, pos, player, hit);
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
         if (!world.isClient) {
             BlockPos pos = hit.getBlockPos();

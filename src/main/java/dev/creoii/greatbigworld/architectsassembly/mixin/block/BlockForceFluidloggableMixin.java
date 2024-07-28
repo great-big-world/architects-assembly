@@ -37,7 +37,6 @@ public abstract class BlockForceFluidloggableMixin extends Block implements Flui
         return getDefaultState().with(FLUIDLOGGED, FLUIDS.get(ctx.getWorld().getFluidState(ctx.getBlockPos()).getFluid()));
     }
 
-    @SuppressWarnings("deprecation")
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (state.get(FLUIDLOGGED) != FluidType.EMPTY) {
             world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
@@ -47,7 +46,6 @@ public abstract class BlockForceFluidloggableMixin extends Block implements Flui
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public FluidState getFluidState(BlockState state) {
         if (state.get(Fluidloggable.FLUIDLOGGED).getFluid() instanceof FlowableFluid flowableFluid) {
             return flowableFluid.getStill(false);

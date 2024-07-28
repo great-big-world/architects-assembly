@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CampfireBlock;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.registry.tag.TagKey;
@@ -35,8 +36,8 @@ import java.util.Map;
 public abstract class ShovelItemMixin extends MiningToolItem {
     @Shadow @Final protected static Map<Block, BlockState> PATH_STATES;
 
-    public ShovelItemMixin(float attackDamage, float attackSpeed, ToolMaterial material, TagKey<Block> effectiveBlocks, Settings settings) {
-        super(attackDamage, attackSpeed, material, effectiveBlocks, settings);
+    public ShovelItemMixin(ToolMaterial material, TagKey<Block> effectiveBlocks, Settings settings) {
+        super(material, effectiveBlocks, settings);
     }
 
     public UseAction getUseAction(ItemStack stack) {
@@ -56,7 +57,7 @@ public abstract class ShovelItemMixin extends MiningToolItem {
     }
 
     @Inject(method = "useOnBlock", at = @At(value = "INVOKE", target = "Ljava/util/Map;get(Ljava/lang/Object;)Ljava/lang/Object;", shift = At.Shift.BY, by = 2), cancellable = true)
-    private void gbw_cancelDefaultBehavior(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir, @Local World world, @Local BlockPos blockPos, @Local(ordinal = 0) BlockState blockState, @Local PlayerEntity playerEntity) {
+    private void gbw$cancelDefaultBehavior(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir, @Local World world, @Local BlockPos blockPos, @Local(ordinal = 0) BlockState blockState, @Local PlayerEntity playerEntity) {
         if (blockState.getBlock() instanceof CampfireBlock && blockState.get(CampfireBlock.LIT)) {
             CampfireBlock.extinguish(playerEntity, world, blockPos, blockState);
             if (!world.isClient) {
@@ -64,9 +65,7 @@ public abstract class ShovelItemMixin extends MiningToolItem {
                 world.setBlockState(blockPos, state, 11);
                 world.emitGameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Emitter.of(playerEntity, state));
                 if (playerEntity != null) {
-                    context.getStack().damage(1, playerEntity, (p) -> {
-                        p.sendToolBreakStatus(context.getHand());
-                    });
+                    context.getStack().damage(1, playerEntity, LivingEntity.getSlotForHand(context.getHand()));
                 }
             }
 
@@ -93,9 +92,7 @@ public abstract class ShovelItemMixin extends MiningToolItem {
                     world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(player, state));
 
                     if (!player.isCreative()) {
-                        stack.damage(1, player, p -> {
-                            p.sendToolBreakStatus(p.getActiveHand());
-                        });
+                        stack.damage(1, player, LivingEntity.getSlotForHand(player.getActiveHand()));
                     }
                 }
 
@@ -110,7 +107,7 @@ public abstract class ShovelItemMixin extends MiningToolItem {
         if (player.isSpectator())
             return null;
 
-        HitResult hit = player.raycast(PlayerEntity.getReachDistance(player.isCreative()), 0f, false);
+        HitResult hit = player.raycast(player.getAttributeValue(EntityAttributes.PLAYER_BLOCK_INTERACTION_RANGE), 0f, false);
         if (hit instanceof BlockHitResult blockHitResult) {
             BlockState state = world.getBlockState(blockHitResult.getBlockPos());
             if (PATH_STATES.containsKey(state.getBlock())) {
