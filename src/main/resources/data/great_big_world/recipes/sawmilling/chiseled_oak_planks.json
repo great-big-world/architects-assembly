@@ -4,5 +4,7 @@
   "ingredient": {
     "item": "minecraft:oak_planks"
   },
-  "result": "great_big_world:chiseled_oak_planks"
+  "result": {
+    "id": "great_big_world:chiseled_oak_planks"
+  }
 }

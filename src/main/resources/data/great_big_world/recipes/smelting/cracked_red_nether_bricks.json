@@ -6,5 +6,7 @@
   "ingredient": {
     "item": "minecraft:red_nether_bricks"
   },
-  "result": "great_big_world:cracked_red_nether_bricks"
+  "result": {
+    "id": "great_big_world:cracked_red_nether_bricks"
+  }
 }

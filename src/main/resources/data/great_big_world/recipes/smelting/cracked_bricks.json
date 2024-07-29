@@ -6,5 +6,7 @@
   "ingredient": {
     "item": "minecraft:bricks"
   },
-  "result": "great_big_world:cracked_bricks"
+  "result": {
+    "id": "great_big_world:cracked_bricks"
+  }
 }

@@ -6,5 +6,7 @@
   "ingredient": {
     "item": "minecraft:end_stone_bricks"
   },
-  "result": "great_big_world:cracked_end_stone_bricks"
+  "result": {
+    "id": "great_big_world:cracked_end_stone_bricks"
+  }
 }

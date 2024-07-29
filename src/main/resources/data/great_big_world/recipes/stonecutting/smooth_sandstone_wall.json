@@ -4,5 +4,7 @@
   "ingredient": {
     "item": "minecraft:smooth_sandstone"
   },
-  "result": "great_big_world:smooth_sandstone_wall"
+  "result": {
+    "id": "great_big_world:smooth_sandstone_wall"
+  }
 }

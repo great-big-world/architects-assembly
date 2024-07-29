@@ -4,5 +4,7 @@
   "ingredient": {
     "item": "minecraft:quartz_bricks"
   },
-  "result": "great_big_world:quartz_brick_wall"
+  "result": {
+    "id": "great_big_world:quartz_brick_wall"
+  }
 }

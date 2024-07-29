@@ -4,5 +4,7 @@
   "ingredient": {
     "item": "minecraft:dark_prismarine"
   },
-  "result": "great_big_world:dark_prismarine_wall"
+  "result": {
+    "id": "great_big_world:dark_prismarine_wall"
+  }
 }

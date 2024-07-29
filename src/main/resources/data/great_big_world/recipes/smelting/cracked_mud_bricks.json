@@ -6,5 +6,7 @@
   "ingredient": {
     "item": "minecraft:mud_bricks"
   },
-  "result": "great_big_world:cracked_mud_bricks"
+  "result": {
+    "id": "great_big_world:cracked_mud_bricks"
+  }
 }

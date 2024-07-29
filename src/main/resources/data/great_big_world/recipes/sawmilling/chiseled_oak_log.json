@@ -4,5 +4,7 @@
   "ingredient": {
     "item": "minecraft:oak_log"
   },
-  "result": "great_big_world:chiseled_oak_log"
+  "result": {
+    "id": "great_big_world:chiseled_oak_log"
+  }
 }

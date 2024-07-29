@@ -4,5 +4,7 @@
   "ingredient": {
     "item": "minecraft:bamboo_planks"
   },
-  "result": "minecraft:bamboo_mosaic"
+  "result": {
+    "id": "minecraft:bamboo_mosaic"
+  }
 }
