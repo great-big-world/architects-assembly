@@ -4,7 +4,6 @@ accessible class net/minecraft/client/gui/screen/recipebook/RecipeAlternativesWi
 accessible method net/minecraft/item/ItemUsageContext getHitResult ()Lnet/minecraft/util/hit/BlockHitResult;
 accessible method net/minecraft/recipe/CuttingRecipe$Serializer <init> (Lnet/minecraft/recipe/CuttingRecipe$RecipeFactory;)V
 
-accessible field net/minecraft/item/MiningToolItem miningSpeed F
 accessible field net/minecraft/block/Block cachedItem Lnet/minecraft/item/Item;
 accessible field net/minecraft/item/ItemPlacementContext placementPos Lnet/minecraft/util/math/BlockPos;
 accessible field net/minecraft/client/gui/DrawContext client Lnet/minecraft/client/MinecraftClient;
