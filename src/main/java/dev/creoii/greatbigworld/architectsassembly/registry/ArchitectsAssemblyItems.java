@@ -592,12 +592,17 @@ public final class ArchitectsAssemblyItems {
 
     // region Misc Blocks
     public static final Item SAWMILL = new BlockItem(ArchitectsAssemblyBlocks.SAWMILL, new CreoItemSettings());
+    public static final Item COPPER_PRESSURE_PLATE = new BlockItem(ArchitectsAssemblyBlocks.COPPER_PRESSURE_PLATE, new CreoItemSettings());
 
     private static void registerMiscBlocks() {
         Registry.register(Registries.ITEM, new Identifier(ArchitectsAssembly.NAMESPACE, "sawmill"), SAWMILL);
+        Registry.register(Registries.ITEM, new Identifier(ArchitectsAssembly.NAMESPACE, "copper_pressure_plate"), COPPER_PRESSURE_PLATE);
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(entries -> {
             entries.addAfter(Items.STONECUTTER, SAWMILL);
+        });
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.REDSTONE).register(entries -> {
+            entries.add(COPPER_PRESSURE_PLATE);
         });
     }
     // endregion

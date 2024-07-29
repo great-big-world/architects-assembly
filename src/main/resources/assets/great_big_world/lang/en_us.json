@@ -77,6 +77,7 @@
   "block.great_big_world.waxed_weathered_cut_copper_wall": "Waxed Weathered Cut Copper Wall",
   "block.great_big_world.oxidized_cut_copper_wall": "Oxidized Cut Copper Wall",
   "block.great_big_world.waxed_oxidized_cut_copper_wall": "Waxed Oxidized Cut Copper Wall",
+  "block.great_big_world.copper_pressure_plate": "Copper Pressure Plate",
 
   "item.great_big_world.brown_item_frame": "Brown Item Frame",
   "item.great_big_world.red_item_frame": "Red Item Frame",
@@ -128,6 +129,7 @@
   "item.great_big_world.light_gray_glass_shard": "Light Gray Glass Shard",
   "item.great_big_world.white_glass_shard": "White Glass Shard",
   "item.great_big_world.spawn_egg": "Spawn Egg",
+  "item.great_big_world.copper_pressure_plate": "Copper Pressure Plate",
 
   "item.hunger": "\uD83C\uDF57 %s",
   "item.armor": "\uD83D\uDEE1 %s",

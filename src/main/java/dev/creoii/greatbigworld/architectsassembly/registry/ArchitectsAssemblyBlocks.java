@@ -7,7 +7,6 @@ import dev.creoii.greatbigworld.architectsassembly.block.TorchBlock;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.block.*;
@@ -409,9 +408,11 @@ public final class ArchitectsAssemblyBlocks {
 
     // region Misc Blocks
     public static final Block SAWMILL = new SawmillBlock();
+    public static final Block COPPER_PRESSURE_PLATE = new PressurePlateBlock(BlockSetType.COPPER, AbstractBlock.Settings.copy(Blocks.COPPER_BLOCK));
 
     private static void registerMiscBlocks() {
         Registry.register(Registries.BLOCK, new Identifier(ArchitectsAssembly.NAMESPACE, "sawmill"), SAWMILL);
+        Registry.register(Registries.BLOCK, new Identifier(ArchitectsAssembly.NAMESPACE, "copper_pressure_plate"), COPPER_PRESSURE_PLATE);
     }
 
     private static void registerMiscBlocksClient() {
