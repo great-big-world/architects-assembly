@@ -2,7 +2,10 @@ package dev.creoii.greatbigworld.architectsassembly.mixin.block;
 
 import com.google.common.collect.ImmutableMap;
 import com.llamalad7.mixinextras.sugar.Local;
+import dev.creoii.greatbigworld.architectsassembly.block.VerticalSlabBlock;
 import dev.creoii.greatbigworld.architectsassembly.block.enums.FluidType;
+import dev.creoii.greatbigworld.architectsassembly.block.enums.VerticalSlabType;
+import dev.creoii.greatbigworld.architectsassembly.util.ArchitectsAssemblyTags;
 import dev.creoii.greatbigworld.architectsassembly.util.Fluidloggable;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.WallShape;
@@ -18,6 +21,7 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
@@ -94,5 +98,17 @@ public abstract class WallBlockMixin extends Block implements Waterloggable {
             instance.put(((BlockState) key).with(Fluidloggable.FLUIDLOGGED, fluidType), (VoxelShape) value);
         }
         return instance;
+    }
+
+    @Inject(method = "shouldConnectTo", at = @At("RETURN"), cancellable = true)
+    private void gbw$connectWallsToVerticalSlabs(BlockState state, boolean faceFullSquare, Direction side, CallbackInfoReturnable<Boolean> cir) {
+        if (state.isIn(ArchitectsAssemblyTags.VERTICAL_SLABS) && state.get(VerticalSlabBlock.TYPE).getDirection() != side)
+            cir.setReturnValue(true);
+    }
+
+    @Inject(method = "shouldUseTallShape", at = @At("HEAD"), cancellable = true)
+    private static void gbw$useTallShapeForVerticalSlabs(VoxelShape aboveShape, VoxelShape tallShape, CallbackInfoReturnable<Boolean> cir) {
+        if (VerticalSlabType.getShapes().contains(aboveShape))
+            cir.setReturnValue(true);
     }
 }

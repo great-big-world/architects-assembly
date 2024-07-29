@@ -6,6 +6,9 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 
+import java.util.Arrays;
+import java.util.List;
+
 public enum VerticalSlabType implements StringIdentifiable {
     NORTH(Direction.NORTH),
     SOUTH(Direction.SOUTH),
@@ -57,5 +60,9 @@ public enum VerticalSlabType implements StringIdentifiable {
                 return type;
 
         return null;
+    }
+
+    public static List<VoxelShape> getShapes() {
+        return Arrays.stream(values()).map(type -> type.shape).toList();
     }
 }
