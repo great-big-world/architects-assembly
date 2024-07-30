@@ -84,7 +84,7 @@ public class Variant {
                             Identifier id = Identifier.tryParse(pValue);
                             if (Registries.ITEM.containsId(id)) {
                                 variant.addItem(Registries.ITEM.get(id));
-                            } else ArchitectsAssembly.LOGGER.warn("Found unknown item id: '" + id + "' in a variant.");
+                            } else ArchitectsAssembly.LOGGER.warn("Found unknown item id: '{}' in a variant.", id);
                         }
                     }
                 });
