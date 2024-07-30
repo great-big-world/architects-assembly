@@ -28,11 +28,11 @@ import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 public class ArchitectsAssembly implements ModInitializer {
     public static final String NAMESPACE = "great_big_world";
@@ -106,12 +106,11 @@ public class ArchitectsAssembly implements ModInitializer {
             @Override
             public void reload(ResourceManager manager) {
                 Variant.VARIANTS.clear();
-                Map<Identifier, Resource> resourceMap = manager.findResources("variants", path -> path.getPath().endsWith(".json"));
-                for (Map.Entry<Identifier, Resource> entry : resourceMap.entrySet()) {
+                Map<Identifier, List<Resource>> resourceMap = manager.findAllResources("variants", path -> path.getPath().endsWith(".json"));
+                for (Map.Entry<Identifier, List<Resource>> entry : resourceMap.entrySet()) {
                     Identifier identifier = entry.getKey();
-                    Optional<Resource> optional = manager.getResource(identifier);
-                    if (optional.isPresent()) {
-                        try (InputStream stream = optional.get().getInputStream()) {
+                    for (Resource resource : entry.getValue()) {
+                        try (InputStream stream = resource.getInputStream()) {
                             String result = IOUtils.toString(stream, StandardCharsets.UTF_8);
                             Identifier identifier1 = new Identifier(identifier.getNamespace(), identifier.getPath().replace("variants/", "").replace(".json", ""));
                             Variant variant = Variant.GSON.fromJson(result, Variant.class).build(identifier1);
@@ -121,11 +120,11 @@ public class ArchitectsAssembly implements ModInitializer {
                                 continue;
                             }
 
-                            if (Variant.VARIANTS.containsKey(identifier.getPath())) {
-                                variant.copyTo(Variant.VARIANTS.get(identifier.getPath()));
-                            } else Variant.VARIANTS.put(identifier.getPath(), variant);
-                        } catch(Exception e) {
-                            e.printStackTrace();
+                            if (Variant.VARIANTS.containsKey(identifier1.getPath())) {
+                                variant.copyTo(Variant.VARIANTS.get(identifier1.getPath()));
+                            } else Variant.VARIANTS.put(identifier1.getPath(), variant);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
                         }
                     }
                 }
