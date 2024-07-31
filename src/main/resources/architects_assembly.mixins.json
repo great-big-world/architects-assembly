@@ -49,7 +49,6 @@
     "world.feature.GeodeFeatureMixin"
   ],
   "client": [
-    "client.recipebook.RecipeBookGroupMixin",
     "client.CreativeInventoryScreenMixin",
     "client.HeldItemRendererMixin",
     "client.ItemFrameEntityRendererMixin",
@@ -58,6 +57,7 @@
     "client.recipebook.AnimatedResultButtonMixin",
     "client.recipebook.RecipeAlternativesWidgetMixin",
     "client.recipebook.RecipeBookGhostSlotsMixin",
+    "client.recipebook.RecipeBookGroupMixin",
     "client.recipebook.RecipeBookWidgetMixin",
     "client.recipebook.RecipeGroupButtonWidgetMixin",
     "client.recipebook.RecipeResultCollectionMixin",

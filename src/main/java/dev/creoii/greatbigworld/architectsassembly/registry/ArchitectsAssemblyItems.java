@@ -173,9 +173,13 @@ public final class ArchitectsAssemblyItems {
     public static final Item CHISELED_LIGHT_GRAY_STAINED_GLASS_PANE = new BlockItem(ArchitectsAssemblyBlocks.CHISELED_LIGHT_GRAY_STAINED_GLASS_PANE, new CreoItemSettings());
     public static final Item CHISELED_WHITE_STAINED_GLASS = new BlockItem(ArchitectsAssemblyBlocks.CHISELED_WHITE_STAINED_GLASS, new CreoItemSettings());
     public static final Item CHISELED_WHITE_STAINED_GLASS_PANE = new BlockItem(ArchitectsAssemblyBlocks.CHISELED_WHITE_STAINED_GLASS_PANE, new CreoItemSettings());
+    public static final Item LAPIS_STAIRS = new BlockItem(ArchitectsAssemblyBlocks.LAPIS_STAIRS, new CreoItemSettings());
+    public static final Item LAPIS_SLAB = new SlabItem(ArchitectsAssemblyBlocks.LAPIS_SLAB, ArchitectsAssemblyBlocks.VERTICAL_LAPIS_SLAB, new CreoItemSettings());
+    public static final Item LAPIS_WALL = new BlockItem(ArchitectsAssemblyBlocks.LAPIS_WALL, new CreoItemSettings());
     public static final Item POLISHED_LAPIS_BLOCK = new BlockItem(ArchitectsAssemblyBlocks.POLISHED_LAPIS_BLOCK, new CreoItemSettings());
     public static final Item POLISHED_LAPIS_STAIRS = new BlockItem(ArchitectsAssemblyBlocks.POLISHED_LAPIS_STAIRS, new CreoItemSettings());
     public static final Item POLISHED_LAPIS_SLAB = new SlabItem(ArchitectsAssemblyBlocks.POLISHED_LAPIS_SLAB, ArchitectsAssemblyBlocks.VERTICAL_POLISHED_LAPIS_SLAB, new CreoItemSettings());
+    public static final Item POLISHED_LAPIS_WALL = new BlockItem(ArchitectsAssemblyBlocks.POLISHED_LAPIS_WALL, new CreoItemSettings());
     public static final Item CRACKED_BRICKS = new BlockItem(ArchitectsAssemblyBlocks.CRACKED_BRICKS, new CreoItemSettings());
     public static final Item MOSSY_BRICKS = new BlockItem(ArchitectsAssemblyBlocks.MOSSY_BRICKS, new CreoItemSettings());
     public static final Item MOSSY_BRICK_STAIRS = new BlockItem(ArchitectsAssemblyBlocks.MOSSY_BRICK_STAIRS, new CreoItemSettings());
@@ -232,9 +236,13 @@ public final class ArchitectsAssemblyItems {
         Registry.register(Registries.ITEM, new Identifier(ArchitectsAssembly.NAMESPACE, "chiseled_light_gray_stained_glass_pane"), CHISELED_LIGHT_GRAY_STAINED_GLASS_PANE);
         Registry.register(Registries.ITEM, new Identifier(ArchitectsAssembly.NAMESPACE, "chiseled_white_stained_glass"), CHISELED_WHITE_STAINED_GLASS);
         Registry.register(Registries.ITEM, new Identifier(ArchitectsAssembly.NAMESPACE, "chiseled_white_stained_glass_pane"), CHISELED_WHITE_STAINED_GLASS_PANE);
+        Registry.register(Registries.ITEM, new Identifier(ArchitectsAssembly.NAMESPACE, "lapis_stairs"), LAPIS_STAIRS);
+        Registry.register(Registries.ITEM, new Identifier(ArchitectsAssembly.NAMESPACE, "lapis_slab"), LAPIS_SLAB);
+        Registry.register(Registries.ITEM, new Identifier(ArchitectsAssembly.NAMESPACE, "lapis_wall"), LAPIS_WALL);
         Registry.register(Registries.ITEM, new Identifier(ArchitectsAssembly.NAMESPACE, "polished_lapis_block"), POLISHED_LAPIS_BLOCK);
         Registry.register(Registries.ITEM, new Identifier(ArchitectsAssembly.NAMESPACE, "polished_lapis_stairs"), POLISHED_LAPIS_STAIRS);
         Registry.register(Registries.ITEM, new Identifier(ArchitectsAssembly.NAMESPACE, "polished_lapis_slab"), POLISHED_LAPIS_SLAB);
+        Registry.register(Registries.ITEM, new Identifier(ArchitectsAssembly.NAMESPACE, "polished_lapis_wall"), POLISHED_LAPIS_WALL);
         Registry.register(Registries.ITEM, new Identifier(ArchitectsAssembly.NAMESPACE, "cracked_bricks"), CRACKED_BRICKS);
         Registry.register(Registries.ITEM, new Identifier(ArchitectsAssembly.NAMESPACE, "mossy_bricks"), MOSSY_BRICKS);
         Registry.register(Registries.ITEM, new Identifier(ArchitectsAssembly.NAMESPACE, "mossy_brick_stairs"), MOSSY_BRICK_STAIRS);
@@ -296,7 +304,7 @@ public final class ArchitectsAssemblyItems {
             entries.addAfter(WHITE_GLOW_ITEM_FRAME, SHATTERED_GLASS);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(entries -> {
-            entries.addAfter(Items.LAPIS_BLOCK, POLISHED_LAPIS_BLOCK, POLISHED_LAPIS_STAIRS, POLISHED_LAPIS_SLAB);
+            entries.addAfter(Items.LAPIS_BLOCK, LAPIS_STAIRS, LAPIS_SLAB, LAPIS_WALL, POLISHED_LAPIS_BLOCK, POLISHED_LAPIS_STAIRS, POLISHED_LAPIS_SLAB, POLISHED_LAPIS_WALL);
             entries.addAfter(Items.BRICKS, CRACKED_BRICKS);
             entries.addAfter(Items.BRICK_WALL, MOSSY_BRICKS, MOSSY_BRICK_STAIRS, MOSSY_BRICK_SLAB, MOSSY_BRICK_WALL);
             entries.addAfter(CUT_COPPER_SLAB, CUT_COPPER_WALL);

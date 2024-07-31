@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "type=north": {
+      "model": "great_big_world:block/vertical_lapis_slab", "y": 0, "uvlock": true
+    },
+    "type=south": {
+      "model": "great_big_world:block/vertical_lapis_slab", "y": 180, "uvlock": true
+    },
+    "type=east": {
+      "model": "great_big_world:block/vertical_lapis_slab", "y": 90, "uvlock": true
+    },
+    "type=west": {
+      "model": "great_big_world:block/vertical_lapis_slab", "y": 270, "uvlock": true
+    },
+    "type=double,facing=north": {
+      "model": "block/lapis_block",
+      "x": 90
+    },
+    "type=double,facing=south": {
+      "model": "block/lapis_block",
+      "x": 90
+    },
+    "type=double,facing=east": {
+      "model": "block/lapis_block",
+      "x": 90,
+      "y": 90
+    },
+    "type=double,facing=west": {
+      "model": "block/lapis_block",
+      "x": 90,
+      "y": 90
+    }
+  }
+}
