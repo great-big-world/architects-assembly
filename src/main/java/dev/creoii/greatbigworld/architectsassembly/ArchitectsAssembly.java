@@ -5,12 +5,9 @@ import com.google.common.collect.ImmutableMap;
 import dev.creoii.creoapi.api.event.misc.RecipeEvents;
 import dev.creoii.greatbigworld.architectsassembly.block.VerticalSlabBlock;
 import dev.creoii.greatbigworld.architectsassembly.registry.*;
-import dev.creoii.greatbigworld.architectsassembly.util.HotbarCycleHelper;
 import dev.creoii.greatbigworld.architectsassembly.variant.Variant;
 import dev.creoii.greatbigworld.architectsassembly.world.feature.MossifyVegetationPatchFeature;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.block.Block;
@@ -66,8 +63,6 @@ public class ArchitectsAssembly implements ModInitializer {
 
         Registry.register(Registries.FEATURE, new Identifier(NAMESPACE, "mossify_vegetation_patch"), new MossifyVegetationPatchFeature(VegetationPatchFeatureConfig.CODEC));
 
-        PayloadTypeRegistry.playC2S().register(HotbarCycleHelper.SyncInventory.PACKET_ID, HotbarCycleHelper.SyncInventory.PACKET_CODEC);
-
         FireBlock fireBlock = (FireBlock) Blocks.FIRE;
         fireBlock.burnChances.forEach((block, integer) -> {
             Block verticalSlab = VerticalSlabBlock.fromSlab(block);
@@ -80,16 +75,6 @@ public class ArchitectsAssembly implements ModInitializer {
             if (verticalSlab != null) {
                 fireBlock.spreadChances.put(verticalSlab, integer);
             }
-        });
-
-        ServerPlayNetworking.registerGlobalReceiver(HotbarCycleHelper.SyncInventory.PACKET_ID, (payload, context) -> {
-            /*int index = payload.index();
-            ItemStack stack = payload.stack();
-            context.player().getServer().execute(() -> {
-                for (int i = 0; i < PlayerInventory.MAIN_SIZE; ++i) {
-                    player.getInventory().main.set(index, stack);
-                }
-            });*/
         });
 
         RecipeEvents.LOAD_RECIPE.register((builder, recipeEntry) -> {
