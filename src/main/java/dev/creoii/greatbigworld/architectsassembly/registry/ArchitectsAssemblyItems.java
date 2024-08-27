@@ -301,7 +301,7 @@ public final class ArchitectsAssemblyItems {
             entries.addAfter(Items.WHITE_STAINED_GLASS_PANE, CHISELED_WHITE_STAINED_GLASS_PANE);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(entries -> {
-            entries.addAfter(WHITE_GLOW_ITEM_FRAME, SHATTERED_GLASS);
+            entries.addAfter(Items.TINTED_GLASS, SHATTERED_GLASS);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(entries -> {
             entries.addAfter(Items.LAPIS_BLOCK, LAPIS_STAIRS, LAPIS_SLAB, LAPIS_WALL, POLISHED_LAPIS_BLOCK, POLISHED_LAPIS_STAIRS, POLISHED_LAPIS_SLAB, POLISHED_LAPIS_WALL);
