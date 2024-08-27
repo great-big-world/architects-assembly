@@ -418,7 +418,7 @@ public final class ArchitectsAssemblyBlocks {
 
     // region Misc Blocks
     public static final Block SAWMILL = new SawmillBlock();
-    public static final Block COPPER_PRESSURE_PLATE = new PressurePlateBlock(BlockSetType.COPPER, AbstractBlock.Settings.copy(Blocks.COPPER_BLOCK));
+    public static final Block COPPER_PRESSURE_PLATE = new CopperPressurePlateBlock(BlockSetType.COPPER, AbstractBlock.Settings.copy(Blocks.COPPER_BLOCK));
 
     private static void registerMiscBlocks() {
         Registry.register(Registries.BLOCK, new Identifier(ArchitectsAssembly.NAMESPACE, "sawmill"), SAWMILL);
