@@ -27,6 +27,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.ColorHelper;
 
 import java.util.function.BiConsumer;
 
@@ -91,7 +92,7 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
             }
         });
 
-        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> tintIndex < 1 ? -1 : ((DyedItemFrameItem) stack.getItem()).getColor().getFireworkColor(),
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> tintIndex < 1 ? -1 : ColorHelper.Argb.fullAlpha(((DyedItemFrameItem) stack.getItem()).getColor().getMapColor().color),
                 ArchitectsAssemblyItems.BROWN_ITEM_FRAME, ArchitectsAssemblyItems.BROWN_GLOW_ITEM_FRAME,
                 ArchitectsAssemblyItems.RED_ITEM_FRAME, ArchitectsAssemblyItems.RED_GLOW_ITEM_FRAME,
                 ArchitectsAssemblyItems.ORANGE_ITEM_FRAME, ArchitectsAssemblyItems.ORANGE_GLOW_ITEM_FRAME,
@@ -130,15 +131,12 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
         if (dot2 < 0)
             return new Identifier("air");
 
-        String namespace = translationKey.substring(dot1, dot2);
         String path;
-
         if (dot3 <= 0)
             path = translationKey.substring(dot2 + 1);
-        else
-            path = translationKey.substring(dot2 + 1, dot3);
+        else path = translationKey.substring(dot2 + 1, dot3);
 
-        return new Identifier(namespace, path);
+        return new Identifier(translationKey.substring(dot1, dot2), path);
     }
 
     private static boolean renameItemForVariants(Item item, BiConsumer<String, String> consumer, String translationKey, String translated) {
