@@ -248,7 +248,7 @@ public final class ArchitectsAssemblyItems {
         Registry.register(Registries.ITEM, new Identifier(ArchitectsAssembly.NAMESPACE, "mossy_brick_stairs"), MOSSY_BRICK_STAIRS);
         Registry.register(Registries.ITEM, new Identifier(ArchitectsAssembly.NAMESPACE, "mossy_brick_slab"), MOSSY_BRICK_SLAB);
         Registry.register(Registries.ITEM, new Identifier(ArchitectsAssembly.NAMESPACE, "mossy_brick_wall"), MOSSY_BRICK_WALL);
-        Registry.register(Registries.ITEM, new Identifier("glass"), GLASS);
+        Registry.register(Registries.ITEM, new Identifier(ArchitectsAssembly.NAMESPACE, "glass"), GLASS);
         Registry.register(Registries.ITEM, new Identifier(ArchitectsAssembly.NAMESPACE, "shattered_glass"), SHATTERED_GLASS);
         Registry.register(Registries.ITEM, new Identifier(ArchitectsAssembly.NAMESPACE, "chiseled_oak_planks"), CHISELED_OAK_PLANKS);
         Registry.register(Registries.ITEM, new Identifier(ArchitectsAssembly.NAMESPACE, "chiseled_oak_log"), CHISELED_OAK_LOG);
