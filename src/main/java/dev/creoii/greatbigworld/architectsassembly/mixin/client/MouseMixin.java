@@ -19,8 +19,8 @@ public class MouseMixin {
     @Inject(method = "onMouseScroll", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerInventory;scrollInHotbar(D)V"), cancellable = true)
     private void gbw$scrollHotbar(long window, double horizontal, double vertical, CallbackInfo ci, @Local(ordinal = 2) int k) {
         if (ArchitectsAssemblyClient.shouldCycleHotbar()) {
-            for (int i = 0; i < 9; ++i) {
-                if (client.player != null && client.interactionManager != null && client.player.getInventory() != null) {
+            if (client.player != null && client.interactionManager != null && client.player.getInventory() != null) {
+                for (int i = 0; i < 9; ++i) {
                     client.interactionManager.clickSlot(client.player.playerScreenHandler.syncId, Math.signum(k) < 0d ? i + 9 : 27, i, SlotActionType.SWAP, client.player);
                     client.interactionManager.clickSlot(client.player.playerScreenHandler.syncId, i + 18, i, SlotActionType.SWAP, client.player);
                     client.interactionManager.clickSlot(client.player.playerScreenHandler.syncId, Math.signum(k) < 0d ? i + 27 : 9, i, SlotActionType.SWAP, client.player);
