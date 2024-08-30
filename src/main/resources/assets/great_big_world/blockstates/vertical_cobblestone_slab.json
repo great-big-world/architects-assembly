@@ -13,7 +13,7 @@
       "model": "great_big_world:block/vertical_cobblestone_slab", "y": 270, "uvlock": true
     },
     "type=double": {
-      "model": "block/stone"
+      "model": "block/cobblestone"
     }
   }
 }

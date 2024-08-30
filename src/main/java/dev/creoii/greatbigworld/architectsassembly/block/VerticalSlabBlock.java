@@ -10,7 +10,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.tag.FluidTags;
@@ -32,17 +31,10 @@ import org.jetbrains.annotations.Nullable;
 public class VerticalSlabBlock extends Block implements Fluidloggable {
     public static final EnumProperty<VerticalSlabType> TYPE = EnumProperty.of("type", VerticalSlabType.class);
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
-    @Nullable
-    private final Identifier slabItemIdOverride;
-
-    public VerticalSlabBlock(Settings settings, @Nullable Identifier slabItemIdOverride) {
-        super(settings.luminance(state -> state.get(FLUIDLOGGED) == FluidType.LAVA ? 15 : 0));
-        setDefaultState(getDefaultState().with(TYPE, VerticalSlabType.NORTH).with(FACING, Direction.NORTH).with(FLUIDLOGGED, FluidType.EMPTY));
-        this.slabItemIdOverride = slabItemIdOverride;
-    }
 
     public VerticalSlabBlock(Settings settings) {
-        this(settings, null);
+        super(settings.luminance(state -> state.get(FLUIDLOGGED) == FluidType.LAVA ? 15 : 0));
+        setDefaultState(getDefaultState().with(TYPE, VerticalSlabType.NORTH).with(FACING, Direction.NORTH).with(FLUIDLOGGED, FluidType.EMPTY));
     }
 
     @Nullable
@@ -83,23 +75,6 @@ public class VerticalSlabBlock extends Block implements Fluidloggable {
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(TYPE, FACING, FLUIDLOGGED);
-    }
-
-    @Override
-    public Item asItem() {
-        if (cachedItem == null) {
-            cachedItem = getSlabItem();
-        }
-
-        return cachedItem;
-    }
-
-    private Item getSlabItem() {
-        if (slabItemIdOverride != null) {
-            return Registries.ITEM.get(slabItemIdOverride);
-        }
-        Identifier id = Registries.BLOCK.getId(this);
-        return Registries.ITEM.get(new Identifier(id.getPath().replace("vertical_", "")));
     }
 
     @Override

@@ -72,18 +72,18 @@ public final class ArchitectsAssemblyBlocks {
     public static final Block CHISELED_WHITE_STAINED_GLASS_PANE = new PaneBlock(AbstractBlock.Settings.copy(Blocks.WHITE_STAINED_GLASS_PANE));
     public static final Block LAPIS_STAIRS = new StairsBlock(Blocks.LAPIS_BLOCK.getDefaultState(), AbstractBlock.Settings.copy(Blocks.LAPIS_BLOCK));
     public static final Block LAPIS_SLAB = new SlabBlock(AbstractBlock.Settings.copy(Blocks.LAPIS_BLOCK));
-    public static final Block VERTICAL_LAPIS_SLAB = new VerticalSlabBlock(AbstractBlock.Settings.copy(LAPIS_SLAB), new Identifier("great_big_world:lapis_slab"));
+    public static final Block VERTICAL_LAPIS_SLAB = new VerticalSlabBlock(AbstractBlock.Settings.copy(LAPIS_SLAB));
     public static final Block LAPIS_WALL = new WallBlock(AbstractBlock.Settings.copy(Blocks.LAPIS_BLOCK));
     public static final Block POLISHED_LAPIS_BLOCK = new Block(AbstractBlock.Settings.copy(Blocks.LAPIS_BLOCK));
     public static final Block POLISHED_LAPIS_STAIRS = new StairsBlock(POLISHED_LAPIS_BLOCK.getDefaultState(), AbstractBlock.Settings.copy(POLISHED_LAPIS_BLOCK));
     public static final Block POLISHED_LAPIS_SLAB = new SlabBlock(AbstractBlock.Settings.copy(POLISHED_LAPIS_BLOCK));
-    public static final Block VERTICAL_POLISHED_LAPIS_SLAB = new VerticalSlabBlock(AbstractBlock.Settings.copy(POLISHED_LAPIS_SLAB), new Identifier("great_big_world:polished_lapis_slab"));
+    public static final Block VERTICAL_POLISHED_LAPIS_SLAB = new VerticalSlabBlock(AbstractBlock.Settings.copy(POLISHED_LAPIS_SLAB));
     public static final Block POLISHED_LAPIS_WALL = new WallBlock(AbstractBlock.Settings.copy(POLISHED_LAPIS_BLOCK));
     public static final Block CRACKED_BRICKS = new Block(AbstractBlock.Settings.copy(Blocks.BRICKS));
     public static final Block MOSSY_BRICKS = new Block(AbstractBlock.Settings.copy(Blocks.BRICKS));
     public static final Block MOSSY_BRICK_STAIRS = new StairsBlock(MOSSY_BRICKS.getDefaultState(), AbstractBlock.Settings.copy(Blocks.BRICK_STAIRS));
     public static final Block MOSSY_BRICK_SLAB = new SlabBlock(AbstractBlock.Settings.copy(Blocks.BRICK_SLAB));
-    public static final Block VERTICAL_MOSSY_BRICK_SLAB = new VerticalSlabBlock(AbstractBlock.Settings.copy(MOSSY_BRICK_SLAB), new Identifier("great_big_world:mossy_brick_slab"));
+    public static final Block VERTICAL_MOSSY_BRICK_SLAB = new VerticalSlabBlock(AbstractBlock.Settings.copy(MOSSY_BRICK_SLAB));
     public static final Block MOSSY_BRICK_WALL = new WallBlock(AbstractBlock.Settings.copy(Blocks.BRICK_WALL));
     public static final Block GLASS = new GlassBlock(AbstractBlock.Settings.copy(Blocks.GLASS), SHATTERED_GLASS.getDefaultState());
     public static final Block CHISELED_OAK_PLANKS = new Block(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS));
@@ -355,7 +355,7 @@ public final class ArchitectsAssemblyBlocks {
     // region Missing Blocks
     public static final Block QUARTZ_BRICK_STAIRS = new StairsBlock(Blocks.QUARTZ_BLOCK.getDefaultState(), AbstractBlock.Settings.copy(Blocks.QUARTZ_BRICKS));
     public static final Block QUARTZ_BRICK_SLAB = new SlabBlock(AbstractBlock.Settings.copy(Blocks.QUARTZ_BRICKS));
-    public static final Block VERTICAL_QUARTZ_BRICK_SLAB = new VerticalSlabBlock(AbstractBlock.Settings.copy(QUARTZ_BRICK_SLAB), new Identifier("great_big_world:quartz_brick_slab"));
+    public static final Block VERTICAL_QUARTZ_BRICK_SLAB = new VerticalSlabBlock(AbstractBlock.Settings.copy(QUARTZ_BRICK_SLAB));
     public static final Block QUARTZ_BRICK_WALL = new WallBlock(AbstractBlock.Settings.copy(Blocks.QUARTZ_BRICKS).solid());
     public static final Block PRISMARINE_BRICK_WALL = new WallBlock(AbstractBlock.Settings.copy(Blocks.PRISMARINE_BRICKS).solid());
     public static final Block DARK_PRISMARINE_WALL = new WallBlock(AbstractBlock.Settings.copy(Blocks.DARK_PRISMARINE).solid());

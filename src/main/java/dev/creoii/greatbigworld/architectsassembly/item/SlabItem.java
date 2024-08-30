@@ -27,8 +27,7 @@ public class SlabItem extends BlockItem {
         super(slab, settings);
         if (verticalSlab instanceof VerticalSlabBlock)
             this.verticalSlab = (VerticalSlabBlock) verticalSlab;
-        else
-            this.verticalSlab = (VerticalSlabBlock) ArchitectsAssemblyBlocks.VERTICAL_OAK_SLAB;
+        else this.verticalSlab = (VerticalSlabBlock) ArchitectsAssemblyBlocks.VERTICAL_OAK_SLAB;
     }
 
     @Override
