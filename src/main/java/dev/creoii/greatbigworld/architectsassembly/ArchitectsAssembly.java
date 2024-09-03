@@ -84,7 +84,7 @@ public class ArchitectsAssembly implements ModInitializer {
             return toRemove == null || !toRemove.contains(recipeEntry.id());
         });
 
-        ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new SimpleSynchronousResourceReloadListener() {
+        ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(new SimpleSynchronousResourceReloadListener() {
             @Override
             public Identifier getFabricId() {
                 return new Identifier(ArchitectsAssembly.NAMESPACE, "variant");
