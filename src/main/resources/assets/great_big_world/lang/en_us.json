@@ -147,6 +147,9 @@
 
   "container.sawmill": "Sawmill",
 
+  "painting.great_big_world.red_ceiling.title": "The Red Ceiling",
+  "painting.great_big_world.red_ceiling.author": "William Eggleston",
+
   "gui.placement.switch_slab_placement": "Using %s placement",
   "gui.placement.switch_free_placement_on": "Using free placement",
   "gui.placement.switch_free_placement_off": "Using normal placement",
