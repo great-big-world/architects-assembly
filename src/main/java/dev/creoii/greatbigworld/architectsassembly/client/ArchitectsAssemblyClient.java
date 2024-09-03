@@ -6,6 +6,7 @@ import dev.creoii.greatbigworld.architectsassembly.item.DyedItemFrameItem;
 import dev.creoii.greatbigworld.architectsassembly.item.SlabItem;
 import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyBlocks;
 import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyItems;
+import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyParticleTypes;
 import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyScreens;
 import dev.creoii.greatbigworld.architectsassembly.variant.Variant;
 import dev.creoii.greatbigworld.architectsassembly.variant.VariantItem;
@@ -42,6 +43,7 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         ArchitectsAssemblyBlocks.registerClient();
+        ArchitectsAssemblyParticleTypes.registerClient();
         ArchitectsAssemblyScreens.registerClient();
 
         KeyBindingHelper.registerKeyBinding(EXPAND_TOOLTIPS);

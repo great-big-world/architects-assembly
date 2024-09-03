@@ -56,12 +56,14 @@ public class ArchitectsAssembly implements ModInitializer {
         ArchitectsAssemblyDataComponents.register();
         ArchitectsAssemblyBlocks.register();
         ArchitectsAssemblyItems.register();
+        ArchitectsAssemblyParticleTypes.register();
         ArchitectsAssemblySoundEvents.register();
         ArchitectsAssemblyScreens.register();
         ArchitectsAssemblyRecipes.register();
         ArchitectsAssemblyStats.register();
 
         Registry.register(Registries.FEATURE, new Identifier(NAMESPACE, "mossify_vegetation_patch"), new MossifyVegetationPatchFeature(VegetationPatchFeatureConfig.CODEC));
+
 
         FireBlock fireBlock = (FireBlock) Blocks.FIRE;
         fireBlock.burnChances.forEach((block, integer) -> {

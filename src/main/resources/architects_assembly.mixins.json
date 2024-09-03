@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "UseActionMixin",
+    "block.AbstractCandleBlockMixin",
     "block.AmethystClusterBlockMixin",
     "block.BarrierBlockMixin",
     "block.BlockAppendPropertiesMixin",
