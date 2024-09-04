@@ -22,7 +22,6 @@ import net.minecraft.util.math.MatrixUtil;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import org.joml.Matrix4f;
 
 import java.util.List;
 
@@ -39,19 +38,20 @@ public final class ItemRenderHelper {
         context.getMatrices().translate(x + 8, y + 8, 150 + (bakedModel.hasDepth() ? z : 0));
         try {
             boolean bl = !bakedModel.isSideLit();
-            context.getMatrices().multiplyPositionMatrix(new Matrix4f().scaling(1f, -1f, 1f));
-            context.getMatrices().scale(16f, 16f, 16f);
-            if (bl)
+            context.getMatrices().scale(16f, -16f, 16f);
+            if (bl) {
                 DiffuseLighting.disableGuiDepthLighting();
-            renderItemSilhouette(context.client.getItemRenderer(), stack, ModelTransformationMode.GUI, false, context.getMatrices(), context.getVertexConsumers(), 0, OverlayTexture.DEFAULT_UV, bakedModel);
+            }
+            renderItemSilhouette(context.client.getItemRenderer(), stack, ModelTransformationMode.GUI, false, context.getMatrices(), context.getVertexConsumers(), 0xf000f0, OverlayTexture.DEFAULT_UV, bakedModel);
             context.draw();
-            if (bl)
+            if (bl) {
                 DiffuseLighting.enableGuiDepthLighting();
+            }
         } catch (Throwable throwable) {
             CrashReport crashReport = CrashReport.create(throwable, "Rendering item");
             CrashReportSection crashReportSection = crashReport.addElement("Item being rendered");
             crashReportSection.add("Item Type", () -> String.valueOf(stack.getItem()));
-            crashReportSection.add("Item Damage", () -> String.valueOf(stack.getDamage()));
+            crashReportSection.add("Item Components", () -> String.valueOf(stack.getComponents()));
             crashReportSection.add("Item Foil", () -> String.valueOf(stack.hasGlint()));
             throw new CrashException(crashReport);
         }
@@ -59,78 +59,57 @@ public final class ItemRenderHelper {
     }
 
     public static void renderItemSilhouette(ItemRenderer itemRenderer, ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, BakedModel model) {
-        if (!stack.isEmpty()) {
-            matrices.push();
-
-            boolean bl = renderMode == ModelTransformationMode.GUI || renderMode == ModelTransformationMode.GROUND || renderMode == ModelTransformationMode.FIXED;
-            if (bl) {
-                if (stack.isOf(Items.TRIDENT)) {
-                    model = itemRenderer.getModels().getModelManager().getModel(TRIDENT);
-                } else if (stack.isOf(Items.SPYGLASS)) {
-                    model = itemRenderer.getModels().getModelManager().getModel(SPYGLASS);
-                }
+        if (stack.isEmpty()) {
+            return;
+        }
+        matrices.push();
+        boolean bl = renderMode == ModelTransformationMode.GUI || renderMode == ModelTransformationMode.GROUND || renderMode == ModelTransformationMode.FIXED;
+        if (bl) {
+            if (stack.isOf(Items.TRIDENT)) {
+                model = itemRenderer.getModels().getModelManager().getModel(TRIDENT);
+            } else if (stack.isOf(Items.SPYGLASS)) {
+                model = itemRenderer.getModels().getModelManager().getModel(SPYGLASS);
             }
-
-            model.getTransformation().getTransformation(renderMode).apply(leftHanded, matrices);
-            matrices.translate(-.5f, -.5f, -.5f);
-            if (!model.isBuiltin()) {
-                boolean bl2;
-                if (renderMode != ModelTransformationMode.GUI && !renderMode.isFirstPerson() && stack.getItem() instanceof BlockItem) {
-                    Block block = ((BlockItem)stack.getItem()).getBlock();
-                    bl2 = !(block instanceof TranslucentBlock) && !(block instanceof StainedGlassPaneBlock);
-                } else {
-                    bl2 = true;
+        }
+        model.getTransformation().getTransformation(renderMode).apply(leftHanded, matrices);
+        matrices.translate(-.5f, -.5f, -.5f);
+        if (model.isBuiltin() || stack.isOf(Items.TRIDENT) && !bl) {
+            itemRenderer.builtinModelItemRenderer.render(stack, renderMode, matrices, vertexConsumers, light, overlay);
+        } else {
+            VertexConsumer vertexConsumer;
+            Block block;
+            boolean bl22 = renderMode == ModelTransformationMode.GUI || renderMode.isFirstPerson() || !(stack.getItem() instanceof BlockItem) || !((block = ((BlockItem) stack.getItem()).getBlock()) instanceof TranslucentBlock) && !(block instanceof StainedGlassPaneBlock);
+            RenderLayer renderLayer = RenderLayers.getItemLayer(stack, bl22);
+            if (usesDynamicDisplay(stack) && stack.hasGlint()) {
+                MatrixStack.Entry entry = matrices.peek().copy();
+                if (renderMode == ModelTransformationMode.GUI) {
+                    MatrixUtil.scale(entry.getPositionMatrix(), .5f);
+                } else if (renderMode.isFirstPerson()) {
+                    MatrixUtil.scale(entry.getPositionMatrix(), .75f);
                 }
-
-                VertexConsumer vertexConsumer;
-                RenderLayer renderLayer = RenderLayers.getItemLayer(stack, bl2);
-                if (usesDynamicDisplay(stack) && stack.hasGlint()) {
-                    matrices.push();
-                    MatrixStack.Entry entry = matrices.peek();
-                    if (renderMode == ModelTransformationMode.GUI) {
-                        MatrixUtil.scale(entry.getPositionMatrix(), .5f);
-                    } else if (renderMode.isFirstPerson()) {
-                        MatrixUtil.scale(entry.getPositionMatrix(), .75f);
-                    }
-
-                    if (bl2) {
-                        vertexConsumer = ItemRenderer.getDirectDynamicDisplayGlintConsumer(vertexConsumers, renderLayer, entry);
-                    } else {
-                        vertexConsumer = ItemRenderer.getDynamicDisplayGlintConsumer(vertexConsumers, renderLayer, entry);
-                    }
-
-                    matrices.pop();
-                } else if (bl2) {
-                    vertexConsumer = ItemRenderer.getDirectItemGlintConsumer(vertexConsumers, renderLayer, true, stack.hasGlint());
-                } else {
-                    vertexConsumer = ItemRenderer.getItemGlintConsumer(vertexConsumers, renderLayer, true, stack.hasGlint());
-                }
-
-                renderBakedItemModelSilhouette(model, overlay, matrices, vertexConsumer);
+                vertexConsumer = bl22 ? ItemRenderer.getDirectDynamicDisplayGlintConsumer(vertexConsumers, renderLayer, entry) : ItemRenderer.getDynamicDisplayGlintConsumer(vertexConsumers, renderLayer, entry);
             } else {
-                itemRenderer.builtinModelItemRenderer.render(stack, renderMode, matrices, vertexConsumers, light, overlay);
+                vertexConsumer = bl22 ? ItemRenderer.getDirectItemGlintConsumer(vertexConsumers, renderLayer, true, stack.hasGlint()) : ItemRenderer.getItemGlintConsumer(vertexConsumers, renderLayer, true, stack.hasGlint());
             }
-
-            matrices.pop();
+            renderBakedItemModelSilhouette(model, overlay, matrices, vertexConsumer, light);
         }
+        matrices.pop();
     }
 
-    private static void renderBakedItemModelSilhouette(BakedModel model, int overlay, MatrixStack matrices, VertexConsumer vertices) {
+    private static void renderBakedItemModelSilhouette(BakedModel model, int overlay, MatrixStack matrices, VertexConsumer vertices, int light) {
         Random random = Random.create();
-        Direction[] directions = Direction.values();
-        for (Direction direction : directions) {
+        for (Direction direction : Direction.values()) {
             random.setSeed(42L);
-            renderBakedItemQuadsSilhouette(matrices, vertices, model.getQuads(null, direction, random), overlay);
+            renderBakedItemQuadsSilhouette(matrices, vertices, model.getQuads(null, direction, random), light, overlay);
         }
-
         random.setSeed(42L);
-        renderBakedItemQuadsSilhouette(matrices, vertices, model.getQuads(null, null, random), overlay);
+        renderBakedItemQuadsSilhouette(matrices, vertices, model.getQuads(null, null, random), light, overlay);
     }
 
-    private static void renderBakedItemQuadsSilhouette(MatrixStack matrices, VertexConsumer vertices, List<BakedQuad> quads, int overlay) {
+    private static void renderBakedItemQuadsSilhouette(MatrixStack matrices, VertexConsumer vertices, List<BakedQuad> quads, int light, int overlay) {
         MatrixStack.Entry entry = matrices.peek();
         for (BakedQuad bakedQuad : quads) {
-            vertices.quad(entry, bakedQuad, 0, 0, 0, 0, overlay, 0);
+            vertices.quad(entry, bakedQuad, 0f, 0f, 0f, 255f, light, overlay);
         }
     }
 

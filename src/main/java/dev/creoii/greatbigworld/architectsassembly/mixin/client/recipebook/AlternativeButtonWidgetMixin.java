@@ -24,8 +24,7 @@ public class AlternativeButtonWidgetMixin implements RecipeResultCollectionView 
     private void gbw$blackoutItemTexture(DrawContext instance, ItemStack item, int x, int y) {
         if (((UnknownRecipes) gbw$results).gbw$getUnknownRecipes().contains(recipe))
             ItemRenderHelper.drawItemSilhouette(instance, null, instance.client.world, item, x, y, 0, 0);
-        else
-            instance.drawItem(item, x, y);
+        else instance.drawItem(item, x, y);
     }
 
     @Override

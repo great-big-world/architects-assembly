@@ -299,6 +299,18 @@ public final class ArchitectsAssemblyItems {
             entries.addAfter(Items.LIGHT_GRAY_STAINED_GLASS_PANE, CHISELED_LIGHT_GRAY_STAINED_GLASS_PANE);
             entries.addAfter(Items.WHITE_STAINED_GLASS, CHISELED_WHITE_STAINED_GLASS);
             entries.addAfter(Items.WHITE_STAINED_GLASS_PANE, CHISELED_WHITE_STAINED_GLASS_PANE);
+            entries.getDisplayStacks().replaceAll(stack -> {
+                if (stack.isOf(Items.GLASS)) {
+                    return GLASS.getDefaultStack();
+                }
+                return stack;
+            });
+            entries.getSearchTabStacks().replaceAll(stack -> {
+                if (stack.isOf(Items.GLASS)) {
+                    return GLASS.getDefaultStack();
+                }
+                return stack;
+            });
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(entries -> {
             entries.addAfter(Items.TINTED_GLASS, SHATTERED_GLASS);
