@@ -391,6 +391,7 @@ public final class ArchitectsAssemblyBlocks {
         Registry.register(Registries.BLOCK, new Identifier(ArchitectsAssembly.NAMESPACE, "cracked_end_stone_bricks"), CRACKED_END_STONE_BRICKS);
     }
 
+    @Environment(EnvType.CLIENT)
     private static void registerMissingBlocksClient() {
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), POTTED_SHORT_GRASS);
     }
@@ -425,6 +426,7 @@ public final class ArchitectsAssemblyBlocks {
         Registry.register(Registries.BLOCK, new Identifier(ArchitectsAssembly.NAMESPACE, "copper_pressure_plate"), COPPER_PRESSURE_PLATE);
     }
 
+    @Environment(EnvType.CLIENT)
     private static void registerMiscBlocksClient() {
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(),
                 SAWMILL

@@ -29,7 +29,7 @@ public class SawmillScreen extends HandledScreen<SawmillScreenHandler> {
     public SawmillScreen(SawmillScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
         handler.setContentsChangedListener(this::onInventoryChange);
-        --this.titleY;
+        --titleY;
     }
 
     @Override
