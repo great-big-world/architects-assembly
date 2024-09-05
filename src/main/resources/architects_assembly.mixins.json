@@ -62,7 +62,7 @@
     "client.recipebook.RecipeBookWidgetMixin",
     "client.recipebook.RecipeGroupButtonWidgetMixin",
     "client.recipebook.RecipeResultCollectionMixin",
-    "entity.player.ClientPlayerEntityMixin"
+    "client.ClientPlayerEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1,

@@ -1,4 +1,4 @@
-package dev.creoii.greatbigworld.architectsassembly.mixin.entity.player;
+package dev.creoii.greatbigworld.architectsassembly.mixin.client;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
