@@ -1,6 +1,5 @@
 package dev.creoii.greatbigworld.architectsassembly.mixin.block;
 
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import dev.creoii.greatbigworld.architectsassembly.block.VerticalSlabBlock;
 import dev.creoii.greatbigworld.architectsassembly.block.enums.FluidType;
@@ -68,14 +67,14 @@ public abstract class WallBlockMixin extends Block implements Waterloggable {
         return Fluidloggable.defaultGetBucketFillSound();
     }
 
-    @ModifyReturnValue(method = "getOutlineShape", at = @At("RETURN"))
-    private VoxelShape gbw$fixOutlineShape(VoxelShape original, @Local(argsOnly = true) BlockState state) {
-        return shapeMap.get(state.with(Fluidloggable.FLUIDLOGGED, FluidType.EMPTY));
+    @Inject(method = "getOutlineShape", at = @At("RETURN"), cancellable = true)
+    private void gbw$fixOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context, CallbackInfoReturnable<VoxelShape> cir) {
+        cir.setReturnValue(shapeMap.get(state.with(Fluidloggable.FLUIDLOGGED, FluidType.EMPTY)));
     }
 
-    @ModifyReturnValue(method = "getCollisionShape", at = @At("RETURN"))
-    private VoxelShape gbw$fixCollisionShape(VoxelShape original, @Local(argsOnly = true) BlockState state) {
-        return collisionShapeMap.get(state.with(Fluidloggable.FLUIDLOGGED, FluidType.EMPTY));
+    @Inject(method = "getCollisionShape", at = @At("RETURN"), cancellable = true)
+    private void gbw$fixCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context, CallbackInfoReturnable<VoxelShape> cir) {
+        cir.setReturnValue(collisionShapeMap.get(state.with(Fluidloggable.FLUIDLOGGED, FluidType.EMPTY)));
     }
 
     @Inject(method = "<init>", at = @At("TAIL"))
