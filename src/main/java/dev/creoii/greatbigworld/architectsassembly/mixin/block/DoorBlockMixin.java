@@ -1,6 +1,7 @@
 package dev.creoii.greatbigworld.architectsassembly.mixin.block;
 
 import dev.creoii.greatbigworld.architectsassembly.util.Fluidloggable;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DoorBlock;
 import net.minecraft.block.enums.DoubleBlockHalf;
@@ -44,7 +45,7 @@ public class DoorBlockMixin {
 
     @Inject(method = "onPlaced", at = @At("HEAD"), cancellable = true)
     private void gbw$fixDoorPlacementForWater(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack, CallbackInfo ci) {
-        world.setBlockState(pos.up(), state.with(HALF, DoubleBlockHalf.UPPER).with(Fluidloggable.FLUIDLOGGED, Fluidloggable.FLUIDS.get(world.getFluidState(pos.up()).getFluid())), 3);
+        world.setBlockState(pos.up(), state.with(HALF, DoubleBlockHalf.UPPER).with(Fluidloggable.FLUIDLOGGED, Fluidloggable.FLUIDS.get(world.getFluidState(pos.up()).getFluid())), Block.NOTIFY_ALL);
         ci.cancel();
     }
 }
