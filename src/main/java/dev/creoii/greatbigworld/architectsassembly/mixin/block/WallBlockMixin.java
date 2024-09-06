@@ -1,5 +1,6 @@
 package dev.creoii.greatbigworld.architectsassembly.mixin.block;
 
+import com.google.common.collect.ImmutableMap;
 import com.llamalad7.mixinextras.sugar.Local;
 import dev.creoii.greatbigworld.architectsassembly.block.VerticalSlabBlock;
 import dev.creoii.greatbigworld.architectsassembly.block.enums.FluidType;
@@ -32,7 +33,6 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.Map;
 import java.util.Optional;
 
 @Mixin(WallBlock.class)
@@ -44,8 +44,6 @@ public abstract class WallBlockMixin extends Block implements Waterloggable {
     @Shadow @Final public static EnumProperty<WallShape> EAST_SHAPE;
     @Shadow @Final public static EnumProperty<WallShape> SOUTH_SHAPE;
     @Shadow @Final public static BooleanProperty WATERLOGGED;
-    @Shadow @Final private Map<BlockState, VoxelShape> shapeMap;
-    @Shadow @Final private Map<BlockState, VoxelShape> collisionShapeMap;
 
     public WallBlockMixin(Settings settings) {
         super(settings);
@@ -65,16 +63,6 @@ public abstract class WallBlockMixin extends Block implements Waterloggable {
 
     public Optional<SoundEvent> getBucketFillSound() {
         return Fluidloggable.defaultGetBucketFillSound();
-    }
-
-    @Inject(method = "getOutlineShape", at = @At("RETURN"), cancellable = true)
-    private void gbw$fixOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context, CallbackInfoReturnable<VoxelShape> cir) {
-        cir.setReturnValue(shapeMap.get(state.with(Fluidloggable.FLUIDLOGGED, FluidType.EMPTY)));
-    }
-
-    @Inject(method = "getCollisionShape", at = @At("RETURN"), cancellable = true)
-    private void gbw$fixCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context, CallbackInfoReturnable<VoxelShape> cir) {
-        cir.setReturnValue(collisionShapeMap.get(state.with(Fluidloggable.FLUIDLOGGED, FluidType.EMPTY)));
     }
 
     @Inject(method = "<init>", at = @At("TAIL"))
@@ -102,6 +90,14 @@ public abstract class WallBlockMixin extends Block implements Waterloggable {
         if (state.get(Fluidloggable.FLUIDLOGGED).getFluid() instanceof FlowableFluid flowableFluid) {
             cir.setReturnValue(flowableFluid.getStill(false));
         }
+    }
+
+    @Redirect(method = "getShapeMap", at = @At(value = "INVOKE", target = "Lcom/google/common/collect/ImmutableMap$Builder;put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/google/common/collect/ImmutableMap$Builder;"))
+    private <K, V> ImmutableMap.Builder<BlockState, VoxelShape> gbw$fixWallShapeMap(ImmutableMap.Builder<BlockState, VoxelShape> instance, K key, V value) {
+        for (FluidType fluidType : FluidType.values()) {
+            instance.put(((BlockState) key).with(Fluidloggable.FLUIDLOGGED, fluidType), (VoxelShape) value);
+        }
+        return instance;
     }
 
     @Inject(method = "shouldConnectTo", at = @At("RETURN"), cancellable = true)
