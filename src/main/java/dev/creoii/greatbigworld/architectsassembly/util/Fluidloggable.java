@@ -31,7 +31,7 @@ public interface Fluidloggable extends FluidDrainable, FluidFillable {
             .build();
 
     default boolean canFillWithFluid(@Nullable PlayerEntity player, BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
-        return defaultCanFillWithFluid(player, world, pos, state, fluid);
+        return defaultCanFillWithFluid(state);
     }
 
     default boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
@@ -39,14 +39,14 @@ public interface Fluidloggable extends FluidDrainable, FluidFillable {
     }
 
     default ItemStack tryDrainFluid(@Nullable PlayerEntity player, WorldAccess world, BlockPos pos, BlockState state) {
-        return defaultTryDrainFluid(player, world, pos, state);
+        return defaultTryDrainFluid(world, pos, state);
     }
 
     default Optional<SoundEvent> getBucketFillSound() {
         return defaultGetBucketFillSound();
     }
 
-    static boolean defaultCanFillWithFluid(@Nullable PlayerEntity player, BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
+    static boolean defaultCanFillWithFluid(BlockState state) {
         return state.get(FLUIDLOGGED) == FluidType.EMPTY;
     }
 
@@ -58,7 +58,7 @@ public interface Fluidloggable extends FluidDrainable, FluidFillable {
         return true;
     }
 
-    static ItemStack defaultTryDrainFluid(@Nullable PlayerEntity player, WorldAccess world, BlockPos pos, BlockState state) {
+    static ItemStack defaultTryDrainFluid(WorldAccess world, BlockPos pos, BlockState state) {
         FluidType fluidType = state.get(FLUIDLOGGED);
         if (fluidType != FluidType.EMPTY) {
             world.setBlockState(pos, state.with(FLUIDLOGGED, FluidType.EMPTY), 3);

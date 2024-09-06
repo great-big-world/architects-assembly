@@ -17,6 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class FenceGateBlockMixin {
     @Shadow @Final public static BooleanProperty OPEN;
 
+    @SuppressWarnings("deprecation")
     @Inject(method = "canPathfindThrough", at = @At("HEAD"), cancellable = true)
     private void gbw$fixNavigationForWaterGate(BlockState state, NavigationType type, CallbackInfoReturnable<Boolean> cir) {
         if (type == NavigationType.WATER) {

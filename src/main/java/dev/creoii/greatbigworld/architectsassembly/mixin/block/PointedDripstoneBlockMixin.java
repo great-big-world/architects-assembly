@@ -42,7 +42,7 @@ public abstract class PointedDripstoneBlockMixin extends Block implements Waterl
     }
 
     public boolean canFillWithFluid(@Nullable PlayerEntity player, BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
-        return Fluidloggable.defaultCanFillWithFluid(player, world, pos, state, fluid);
+        return Fluidloggable.defaultCanFillWithFluid(state);
     }
 
     public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
@@ -50,7 +50,7 @@ public abstract class PointedDripstoneBlockMixin extends Block implements Waterl
     }
 
     public ItemStack tryDrainFluid(@Nullable PlayerEntity player, WorldAccess world, BlockPos pos, BlockState state) {
-        return Fluidloggable.defaultTryDrainFluid(player, world, pos, state);
+        return Fluidloggable.defaultTryDrainFluid(world, pos, state);
     }
 
     public Optional<SoundEvent> getBucketFillSound() {
