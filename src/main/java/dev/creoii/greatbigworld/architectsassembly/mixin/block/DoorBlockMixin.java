@@ -1,5 +1,6 @@
 package dev.creoii.greatbigworld.architectsassembly.mixin.block;
 
+import dev.creoii.greatbigworld.architectsassembly.block.enums.FluidType;
 import dev.creoii.greatbigworld.architectsassembly.util.Fluidloggable;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -39,6 +40,11 @@ public class DoorBlockMixin {
         BlockState returnState = cir.getReturnValue();
         if (returnState.isAir() || !returnState.getProperties().contains(Fluidloggable.FLUIDLOGGED))
             return;
+
+        FluidType fluidType = state.get(Fluidloggable.FLUIDLOGGED);
+        if (fluidType != FluidType.EMPTY) {
+            world.scheduleFluidTick(pos, fluidType.getFluid(), fluidType.getFluid().getTickRate(world));
+        }
 
         cir.setReturnValue(returnState.with(Fluidloggable.FLUIDLOGGED, Fluidloggable.FLUIDS.get(world.getFluidState(pos).getFluid())));
     }
