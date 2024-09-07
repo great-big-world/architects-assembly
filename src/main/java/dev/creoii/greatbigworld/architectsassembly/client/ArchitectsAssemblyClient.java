@@ -61,7 +61,7 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
             if (langCode == null || !langCode.equals("en_us"))
                 return true;
 
-            if ((translationKey.startsWith("item.") && (translationKey.contains("_pottery_sherd") || translationKey.contains("_pottery_shard"))) || translationKey.contains("_spawn_egg")) {
+            if ((translationKey.startsWith("item.") && ((translationKey.contains("_pottery_sherd") || translationKey.contains("_pottery_shard"))) || translationKey.contains("_spawn_egg"))) {
                 consumer.accept(translationKey, translated.substring(translated.indexOf(" ") + 1));
                 return false;
             }
@@ -134,8 +134,7 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
             return new Identifier("air");
 
         String path;
-        if (dot3 <= 0)
-            path = translationKey.substring(dot2 + 1);
+        if (dot3 <= 0) path = translationKey.substring(dot2 + 1);
         else path = translationKey.substring(dot2 + 1, dot3);
 
         return new Identifier(translationKey.substring(dot1, dot2), path);

@@ -207,5 +207,10 @@
   "variant.item.raw": "Raw",
   "variant.item.baked": "Baked",
   "variant.item.dried": "Dried",
-  "variant.item.enchanted": "Enchanted"
+  "variant.item.enchanted": "Enchanted",
+
+  "entity.minecraft.chicken.variant": "Chicken",
+  "entity.minecraft.cod.variant": "Cod",
+  "entity.minecraft.salmon.variant": "Salmon",
+  "entity.minecraft.rabbit.variant": "Rabbit"
 }
