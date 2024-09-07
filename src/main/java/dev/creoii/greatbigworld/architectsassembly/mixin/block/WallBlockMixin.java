@@ -19,7 +19,6 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
-import net.minecraft.state.property.Property;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
@@ -80,9 +79,12 @@ public abstract class WallBlockMixin extends Block implements Waterloggable {
         cir.setReturnValue(cir.getReturnValue().with(WATERLOGGED, false).with(Fluidloggable.FLUIDLOGGED, Fluidloggable.FLUIDS.get(fluidState.getFluid())));
     }
 
-    @Redirect(method = "getStateForNeighborUpdate", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;get(Lnet/minecraft/state/property/Property;)Ljava/lang/Comparable;"))
-    private Comparable<?> gbw$fixFluidloggableStateForNeighborUpdate(BlockState instance, Property<?> property) {
-        return instance.get(Fluidloggable.FLUIDLOGGED) != FluidType.EMPTY;
+    @Inject(method = "getStateForNeighborUpdate", at = @At("HEAD"))
+    private void gbw$fixFluidloggableStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos, CallbackInfoReturnable<BlockState> cir) {
+        FluidType fluidType = state.get(Fluidloggable.FLUIDLOGGED);
+        if (fluidType != FluidType.EMPTY) {
+            world.scheduleFluidTick(pos, fluidType.getFluid(), fluidType.getFluid().getTickRate(world));
+        }
     }
 
     @Inject(method = "getFluidState", at = @At("RETURN"), cancellable = true)
