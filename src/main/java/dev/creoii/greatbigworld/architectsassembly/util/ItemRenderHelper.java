@@ -76,10 +76,14 @@ public final class ItemRenderHelper {
         if (model.isBuiltin() || stack.isOf(Items.TRIDENT) && !bl) {
             itemRenderer.builtinModelItemRenderer.render(stack, renderMode, matrices, vertexConsumers, light, overlay);
         } else {
+            boolean bl2;
+            if (renderMode != ModelTransformationMode.GUI && !renderMode.isFirstPerson() && stack.getItem() instanceof BlockItem) {
+                Block block = ((BlockItem)stack.getItem()).getBlock();
+                bl2 = !(block instanceof TranslucentBlock) && !(block instanceof StainedGlassPaneBlock);
+            } else bl2 = true;
+
             VertexConsumer vertexConsumer;
-            Block block;
-            boolean bl22 = renderMode == ModelTransformationMode.GUI || renderMode.isFirstPerson() || !(stack.getItem() instanceof BlockItem) || !((block = ((BlockItem) stack.getItem()).getBlock()) instanceof TranslucentBlock) && !(block instanceof StainedGlassPaneBlock);
-            RenderLayer renderLayer = RenderLayers.getItemLayer(stack, bl22);
+            RenderLayer renderLayer = RenderLayers.getItemLayer(stack, bl2);
             if (usesDynamicDisplay(stack) && stack.hasGlint()) {
                 MatrixStack.Entry entry = matrices.peek().copy();
                 if (renderMode == ModelTransformationMode.GUI) {
@@ -87,9 +91,16 @@ public final class ItemRenderHelper {
                 } else if (renderMode.isFirstPerson()) {
                     MatrixUtil.scale(entry.getPositionMatrix(), .75f);
                 }
-                vertexConsumer = bl22 ? ItemRenderer.getDirectDynamicDisplayGlintConsumer(vertexConsumers, renderLayer, entry) : ItemRenderer.getDynamicDisplayGlintConsumer(vertexConsumers, renderLayer, entry);
+
+                if (bl2) {
+                    vertexConsumer = ItemRenderer.getDirectDynamicDisplayGlintConsumer(vertexConsumers, renderLayer, entry);
+                } else {
+                    vertexConsumer = ItemRenderer.getDynamicDisplayGlintConsumer(vertexConsumers, renderLayer, entry);
+                }
+            } else if (bl2) {
+                vertexConsumer = ItemRenderer.getDirectItemGlintConsumer(vertexConsumers, renderLayer, true, stack.hasGlint());
             } else {
-                vertexConsumer = bl22 ? ItemRenderer.getDirectItemGlintConsumer(vertexConsumers, renderLayer, true, stack.hasGlint()) : ItemRenderer.getItemGlintConsumer(vertexConsumers, renderLayer, true, stack.hasGlint());
+                vertexConsumer = ItemRenderer.getItemGlintConsumer(vertexConsumers, renderLayer, true, stack.hasGlint());
             }
             renderBakedItemModelSilhouette(model, overlay, matrices, vertexConsumer, light);
         }
@@ -109,7 +120,7 @@ public final class ItemRenderHelper {
     private static void renderBakedItemQuadsSilhouette(MatrixStack matrices, VertexConsumer vertices, List<BakedQuad> quads, int light, int overlay) {
         MatrixStack.Entry entry = matrices.peek();
         for (BakedQuad bakedQuad : quads) {
-            vertices.quad(entry, bakedQuad, 0f, 0f, 0f, 255f, light, overlay);
+            vertices.quad(entry, bakedQuad, 0f, 0f, 0f, 1f, light, overlay);
         }
     }
 
