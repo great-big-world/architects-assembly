@@ -20,16 +20,15 @@ public class RecipeBookWidgetMixin {
 
     @Inject(method = "refreshResults", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/recipebook/RecipeBookResults;setResults(Ljava/util/List;Z)V"))
     private void gbw$filterUnknownRecipesOnSearch(boolean resetCurrentPage, CallbackInfo ci, @Local(ordinal = 1) List<RecipeResultCollection> list2) {
-        if (searchField != null && searchField.getText().isEmpty())
-            return;
-
-        list2.forEach(recipeResultCollection -> {
-            recipeResultCollection.getAllRecipes().removeIf(recipeEntry -> {
-                return ((UnknownRecipes) recipeResultCollection).gbw$getUnknownRecipes().contains(recipeEntry);
+        if (searchField != null && !searchField.getText().isEmpty()) {
+            list2.forEach(recipeResultCollection -> {
+                recipeResultCollection.getAllRecipes().removeIf(recipeEntry -> {
+                    return ((UnknownRecipes) recipeResultCollection).gbw$getUnknownRecipes().contains(recipeEntry);
+                });
             });
-        });
-        list2.removeIf(recipeResultCollection -> {
-            return recipeResultCollection.getAllRecipes().isEmpty();
-        });
+            list2.removeIf(recipeResultCollection -> {
+                return recipeResultCollection.getAllRecipes().isEmpty();
+            });
+        }
     }
 }

@@ -153,6 +153,7 @@
   "gui.placement.switch_slab_placement": "Using %s placement",
   "gui.placement.switch_free_placement_on": "Using free placement",
   "gui.placement.switch_free_placement_off": "Using normal placement",
+  "gui.recipebook.unknownRecipe": "???",
 
   "key.great_big_world.expand_tooltips": "Expand Tooltips",
   "key.great_big_world.cycle_hotbar": "Cycle Hotbar",

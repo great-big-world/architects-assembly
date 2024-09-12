@@ -60,7 +60,6 @@
     "client.recipebook.RecipeBookGhostSlotsMixin",
     "client.recipebook.RecipeBookGroupMixin",
     "client.recipebook.RecipeBookWidgetMixin",
-    "client.recipebook.RecipeGroupButtonWidgetMixin",
     "client.recipebook.RecipeResultCollectionMixin",
     "client.ClientPlayerEntityMixin"
   ],
