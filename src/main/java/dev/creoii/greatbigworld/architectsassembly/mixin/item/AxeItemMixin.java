@@ -66,7 +66,7 @@ public abstract class AxeItemMixin extends MiningToolItem {
     public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
         int i = getMaxUseTime(stack) - remainingUseTicks;
 
-        if (i > 5 && i % 4 == 0) {
+        if (i > 4 && i % 4 == 0) {
             BlockHitResult blockHitResult;
             if (user instanceof PlayerEntity player && (blockHitResult = canPlayerStrip(world, player)) != null) {
                 BlockPos pos = blockHitResult.getBlockPos();
@@ -83,7 +83,8 @@ public abstract class AxeItemMixin extends MiningToolItem {
                         stack.damage(1, player, LivingEntity.getSlotForHand(player.getActiveHand()));
                     }
 
-                    player.swingHand(player.getActiveHand());
+                    if (world.isClient)
+                        player.swingHand(player.getActiveHand());
                 }
             }
         }

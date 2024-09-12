@@ -68,7 +68,6 @@ public abstract class ShovelItemMixin extends MiningToolItem {
                     context.getStack().damage(1, playerEntity, LivingEntity.getSlotForHand(context.getHand()));
                 }
             }
-
             cir.setReturnValue(ActionResult.success(world.isClient));
         }
         cir.setReturnValue(ActionResult.PASS);
@@ -78,7 +77,7 @@ public abstract class ShovelItemMixin extends MiningToolItem {
     public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
         int i = getMaxUseTime(stack) - remainingUseTicks;
 
-        if (i > 5 && i % 4 == 0) {
+        if (i > 4 && i % 4 == 0) {
             BlockHitResult blockHitResult;
             if (user instanceof PlayerEntity player && (blockHitResult = canPlayerPath(world, player)) != null) {
                 BlockPos pos = blockHitResult.getBlockPos();
@@ -87,16 +86,15 @@ public abstract class ShovelItemMixin extends MiningToolItem {
                 if (player instanceof ServerPlayerEntity serverPlayer)
                     Criteria.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, stack);
 
-                if (!world.isClient) {
-                    world.setBlockState(pos, PATH_STATES.get(state.getBlock()), 11);
-                    world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(player, state));
+                world.setBlockState(pos, PATH_STATES.get(state.getBlock()), 11);
+                world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(player, state));
 
-                    if (!player.isCreative()) {
-                        stack.damage(1, player, LivingEntity.getSlotForHand(player.getActiveHand()));
-                    }
+                if (!player.isCreative()) {
+                    stack.damage(1, player, LivingEntity.getSlotForHand(player.getActiveHand()));
                 }
 
-                player.swingHand(player.getActiveHand());
+                if (world.isClient)
+                    player.swingHand(player.getActiveHand());
             }
         }
     }
