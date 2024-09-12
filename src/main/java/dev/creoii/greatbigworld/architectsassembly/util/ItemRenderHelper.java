@@ -1,19 +1,28 @@
 package dev.creoii.greatbigworld.architectsassembly.util;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.StainedGlassPaneBlock;
-import net.minecraft.block.TranslucentBlock;
+import net.minecraft.block.*;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.*;
+import net.minecraft.client.render.block.entity.*;
+import net.minecraft.client.render.entity.model.TridentEntityModel;
+import net.minecraft.client.render.item.BuiltinModelItemRenderer;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.client.render.model.BakedQuad;
+import net.minecraft.client.render.model.ModelLoader;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.ModelIdentifier;
+import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.BannerPatternsComponent;
+import net.minecraft.component.type.ProfileComponent;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.*;
 import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.util.DyeColor;
 import net.minecraft.util.crash.CrashException;
 import net.minecraft.util.crash.CrashReport;
 import net.minecraft.util.crash.CrashReportSection;
@@ -24,6 +33,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Objects;
 
 public final class ItemRenderHelper {
     private static final ModelIdentifier TRIDENT = ModelIdentifier.ofVanilla("trident", "inventory");
@@ -74,7 +84,7 @@ public final class ItemRenderHelper {
         model.getTransformation().getTransformation(renderMode).apply(leftHanded, matrices);
         matrices.translate(-.5f, -.5f, -.5f);
         if (model.isBuiltin() || stack.isOf(Items.TRIDENT) && !bl) {
-            itemRenderer.builtinModelItemRenderer.render(stack, renderMode, matrices, vertexConsumers, light, overlay);
+            renderBuiltInModelSilhouette(itemRenderer.builtinModelItemRenderer, stack, matrices, vertexConsumers, light, overlay);
         } else {
             boolean bl2;
             if (renderMode != ModelTransformationMode.GUI && !renderMode.isFirstPerson() && stack.getItem() instanceof BlockItem) {
@@ -105,6 +115,103 @@ public final class ItemRenderHelper {
             renderBakedItemModelSilhouette(model, overlay, matrices, vertexConsumer, light);
         }
         matrices.pop();
+    }
+
+    private static void renderBuiltInModelSilhouette(BuiltinModelItemRenderer itemRenderer, ItemStack stack, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+        Item item = stack.getItem();
+        if (item instanceof BlockItem) {
+            Block block = ((BlockItem)item).getBlock();
+            if (block instanceof AbstractSkullBlock abstractSkullBlock) {
+                ProfileComponent profileComponent = stack.get(DataComponentTypes.PROFILE);
+                if (profileComponent != null && !profileComponent.isCompleted()) {
+                    stack.remove(DataComponentTypes.PROFILE);
+                    profileComponent.getFuture().thenAcceptAsync(profileComponentx -> stack.set(DataComponentTypes.PROFILE, profileComponentx), MinecraftClient.getInstance());
+                    profileComponent = null;
+                }
+
+                SkullBlockEntityModel skullBlockEntityModel = itemRenderer.skullModels.get(abstractSkullBlock.getSkullType());
+                RenderLayer renderLayer = SkullBlockEntityRenderer.getRenderLayer(abstractSkullBlock.getSkullType(), profileComponent);
+                renderSkullSilhouette(matrices, vertexConsumers, light, skullBlockEntityModel, renderLayer);
+            } else {
+                BlockState blockState = block.getDefaultState();
+                BlockEntity blockEntity;
+                if (block instanceof AbstractBannerBlock bannerBlock) {
+                    itemRenderer.renderBanner.readFrom(stack, bannerBlock.getColor());
+                    blockEntity = itemRenderer.renderBanner;
+                } else if (block instanceof BedBlock bedBlock) {
+                    itemRenderer.renderBed.setColor(bedBlock.getColor());
+                    blockEntity = itemRenderer.renderBed;
+                } else if (blockState.isOf(Blocks.CONDUIT)) {
+                    blockEntity = itemRenderer.renderConduit;
+                } else if (blockState.isOf(Blocks.CHEST)) {
+                    blockEntity = itemRenderer.renderChestNormal;
+                } else if (blockState.isOf(Blocks.ENDER_CHEST)) {
+                    blockEntity = itemRenderer.renderChestEnder;
+                } else if (blockState.isOf(Blocks.TRAPPED_CHEST)) {
+                    blockEntity = itemRenderer.renderChestTrapped;
+                } else if (blockState.isOf(Blocks.DECORATED_POT)) {
+                    itemRenderer.renderDecoratedPot.readFrom(stack);
+                    blockEntity = itemRenderer.renderDecoratedPot;
+                } else {
+                    if (!(block instanceof ShulkerBoxBlock)) {
+                        return;
+                    }
+
+                    DyeColor dyeColor = ShulkerBoxBlock.getColor(item);
+                    if (dyeColor == null) {
+                        blockEntity = BuiltinModelItemRenderer.RENDER_SHULKER_BOX;
+                    } else {
+                        blockEntity = BuiltinModelItemRenderer.RENDER_SHULKER_BOX_DYED[dyeColor.getId()];
+                    }
+                }
+
+                renderEntitySilhouette(itemRenderer.blockEntityRenderDispatcher, blockEntity, matrices, vertexConsumers, overlay);
+            }
+        } else {
+            if (stack.isOf(Items.SHIELD)) {
+                BannerPatternsComponent bannerPatternsComponent = stack.getOrDefault(DataComponentTypes.BANNER_PATTERNS, BannerPatternsComponent.DEFAULT);
+                DyeColor dyeColor2 = stack.get(DataComponentTypes.BASE_COLOR);
+                boolean bl = !bannerPatternsComponent.layers().isEmpty() || dyeColor2 != null;
+                matrices.push();
+                matrices.scale(1f, -1f, -1f);
+                SpriteIdentifier spriteIdentifier = bl ? ModelLoader.SHIELD_BASE : ModelLoader.SHIELD_BASE_NO_PATTERN;
+                VertexConsumer vertexConsumer = spriteIdentifier.getSprite().getTextureSpecificVertexConsumer(ItemRenderer.getDirectItemGlintConsumer(vertexConsumers, itemRenderer.modelShield.getLayer(spriteIdentifier.getAtlasId()), true, stack.hasGlint()));
+                itemRenderer.modelShield.getHandle().render(matrices, vertexConsumer, light, overlay, 0f, 0f, 0f, 1f);
+                if (bl) {
+                    BannerBlockEntityRenderer.renderCanvas(matrices, vertexConsumers, light, overlay, itemRenderer.modelShield.getPlate(), spriteIdentifier, false, Objects.requireNonNullElse(dyeColor2, DyeColor.WHITE), bannerPatternsComponent, stack.hasGlint());
+                } else {
+                    itemRenderer.modelShield.getPlate().render(matrices, vertexConsumer, light, overlay, 0f, 0f, 0f, 1f);
+                }
+
+                matrices.pop();
+            } else if (stack.isOf(Items.TRIDENT)) {
+                matrices.push();
+                matrices.scale(1f, -1f, -1f);
+                VertexConsumer vertexConsumer2 = ItemRenderer.getDirectItemGlintConsumer(vertexConsumers, itemRenderer.modelTrident.getLayer(TridentEntityModel.TEXTURE), false, stack.hasGlint());
+                itemRenderer.modelTrident.render(matrices, vertexConsumer2, light, overlay, 0f, 0f, 0f, 1f);
+                matrices.pop();
+            }
+        }
+    }
+
+    private static void renderSkullSilhouette(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, SkullBlockEntityModel model, RenderLayer renderLayer) {
+        matrices.push();
+        matrices.translate(.5f, 0f, .5f);
+
+        matrices.scale(-1f, -1f, 1f);
+        VertexConsumer vertexConsumer = vertexConsumers.getBuffer(renderLayer);
+        model.setHeadRotation(0f, 180f, 0f);
+        model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 0f, 0f, 0f, 1f);
+        matrices.pop();
+    }
+
+    public static <E extends BlockEntity> void renderEntitySilhouette(BlockEntityRenderDispatcher dispatcher, E entity, MatrixStack matrix, VertexConsumerProvider vertexConsumerProvider, int overlay) {
+        BlockEntityRenderer<E> blockEntityRenderer = dispatcher.get(entity);
+        if (blockEntityRenderer != null) {
+            BlockEntityRenderDispatcher.runReported(entity, () -> {
+                blockEntityRenderer.render(entity, 0f, matrix, vertexConsumerProvider, 0, overlay);
+            });
+        }
     }
 
     private static void renderBakedItemModelSilhouette(BakedModel model, int overlay, MatrixStack matrices, VertexConsumer vertices, int light) {

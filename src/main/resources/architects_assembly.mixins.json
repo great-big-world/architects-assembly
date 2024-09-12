@@ -49,6 +49,7 @@
     "world.feature.GeodeFeatureMixin"
   ],
   "client": [
+    "client.ClientPlayerEntityMixin",
     "client.CreativeInventoryScreenMixin",
     "client.HeldItemRendererMixin",
     "client.ItemFrameEntityRendererMixin",
@@ -60,8 +61,7 @@
     "client.recipebook.RecipeBookGhostSlotsMixin",
     "client.recipebook.RecipeBookGroupMixin",
     "client.recipebook.RecipeBookWidgetMixin",
-    "client.recipebook.RecipeResultCollectionMixin",
-    "client.ClientPlayerEntityMixin"
+    "client.recipebook.RecipeResultCollectionMixin"
   ],
   "injectors": {
     "defaultRequire": 1,

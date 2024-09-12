@@ -31,7 +31,7 @@ public abstract class AnimatedResultButtonMixin {
 
     @Inject(method = "getTooltip", at = @At("HEAD"), cancellable = true)
     private void gbw$applyUnknownTooltips(CallbackInfoReturnable<List<Text>> cir) {
-        if (getResults().isEmpty()) {
+        if (!getResults().isEmpty()) {
             if (((UnknownRecipes) resultCollection).gbw$getUnknownRecipes().contains(currentRecipe())) {
                 cir.setReturnValue(List.of(UNKNOWN_RECIPE));
             }
@@ -53,6 +53,7 @@ public abstract class AnimatedResultButtonMixin {
             instance.drawItemWithoutEntity(stack, x, y);
             return;
         }
+
         if (((UnknownRecipes) resultCollection).gbw$getUnknownRecipes().contains(currentRecipe()))
             ItemRenderHelper.drawItemSilhouette(instance, null, instance.client.world, stack, x, y, 0, 0);
         else instance.drawItemWithoutEntity(stack, x, y);
