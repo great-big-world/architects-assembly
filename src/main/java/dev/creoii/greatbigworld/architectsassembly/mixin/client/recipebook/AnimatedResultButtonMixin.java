@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.sugar.Local;
 import dev.creoii.greatbigworld.architectsassembly.util.ItemRenderHelper;
 import dev.creoii.greatbigworld.architectsassembly.util.UnknownRecipes;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
 import net.minecraft.client.gui.screen.recipebook.AnimatedResultButton;
 import net.minecraft.client.gui.screen.recipebook.RecipeResultCollection;
 import net.minecraft.item.ItemStack;
@@ -24,14 +25,13 @@ import java.util.List;
 public abstract class AnimatedResultButtonMixin {
     @Shadow private RecipeResultCollection resultCollection;
     @Shadow protected abstract List<RecipeEntry<?>> getResults();
-    @Shadow private int currentResultIndex;
     @Shadow public abstract RecipeEntry<?> currentRecipe();
 
     @Unique private static final Text UNKNOWN_RECIPE = Text.translatable("gui.recipebook.unknownRecipe");
 
     @Inject(method = "getTooltip", at = @At("HEAD"), cancellable = true)
     private void gbw$applyUnknownTooltips(CallbackInfoReturnable<List<Text>> cir) {
-        if (currentResultIndex < getResults().size()) {
+        if (getResults().isEmpty()) {
             if (((UnknownRecipes) resultCollection).gbw$getUnknownRecipes().contains(currentRecipe())) {
                 cir.setReturnValue(List.of(UNKNOWN_RECIPE));
             }
@@ -69,5 +69,11 @@ public abstract class AnimatedResultButtonMixin {
     private void gbw$nullCurrentRecipe(CallbackInfoReturnable<RecipeEntry<?>> cir) {
         if (getResults().isEmpty())
             cir.setReturnValue(null);
+    }
+
+    @Inject(method = "appendClickableNarrations", at = @At("HEAD"), cancellable = true)
+    private void gbw$cancelNarrationIfEmpty(NarrationMessageBuilder builder, CallbackInfo ci) {
+        if (getResults().isEmpty())
+            ci.cancel();
     }
 }
