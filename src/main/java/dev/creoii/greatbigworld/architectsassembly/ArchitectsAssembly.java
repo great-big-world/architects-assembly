@@ -1,8 +1,6 @@
 package dev.creoii.greatbigworld.architectsassembly;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import dev.creoii.creoapi.api.event.misc.RecipeEvents;
+import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.architectsassembly.block.VerticalSlabBlock;
 import dev.creoii.greatbigworld.architectsassembly.registry.*;
 import dev.creoii.greatbigworld.architectsassembly.variant.Variant;
@@ -13,7 +11,6 @@ import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FireBlock;
-import net.minecraft.recipe.RecipeType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.resource.Resource;
@@ -32,23 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ArchitectsAssembly implements ModInitializer {
-    public static final String NAMESPACE = "great_big_world";
     public static final Logger LOGGER = LogManager.getLogger(ArchitectsAssembly.class);
-    private final Map<RecipeType<?>, List<Identifier>> RECIPES_TO_REMOVE = new ImmutableMap.Builder<RecipeType<?>, List<Identifier>>()
-            .put(RecipeType.CRAFTING, new ImmutableList.Builder<Identifier>()
-                    .add(new Identifier("chiseled_deepslate"))
-                    .add(new Identifier("chiseled_nether_bricks"))
-                    .add(new Identifier("chiseled_polished_blackstone"))
-                    .add(new Identifier("chiseled_quartz_block"))
-                    .add(new Identifier("chiseled_red_sandstone"))
-                    .add(new Identifier("chiseled_sandstone"))
-                    .add(new Identifier("chiseled_stone_bricks"))
-                    .add(new Identifier("purpur_pillar"))
-                    .add(new Identifier("quartz_pillar"))
-                    .add(new Identifier("deepslate_tiles"))
-                    .add(new Identifier("bamboo_mosaic"))
-                    .build())
-            .build();
 
     @Override
     @SuppressWarnings("deprecation")
@@ -63,7 +44,7 @@ public class ArchitectsAssembly implements ModInitializer {
         ArchitectsAssemblyRecipes.register();
         ArchitectsAssemblyStats.register();
 
-        Registry.register(Registries.FEATURE, new Identifier(NAMESPACE, "mossify_vegetation_patch"), new MossifyVegetationPatchFeature(VegetationPatchFeatureConfig.CODEC));
+        Registry.register(Registries.FEATURE, new Identifier(GreatBigWorld.NAMESPACE, "mossify_vegetation_patch"), new MossifyVegetationPatchFeature(VegetationPatchFeatureConfig.CODEC));
 
         FireBlock fireBlock = (FireBlock) Blocks.FIRE;
         fireBlock.burnChances.forEach((block, integer) -> {
@@ -79,15 +60,10 @@ public class ArchitectsAssembly implements ModInitializer {
             }
         });
 
-        RecipeEvents.LOAD_RECIPE.register((builder, recipeEntry) -> {
-            List<Identifier> toRemove = RECIPES_TO_REMOVE.get(recipeEntry.value().getType());
-            return toRemove == null || !toRemove.contains(recipeEntry.id());
-        });
-
         ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(new SimpleSynchronousResourceReloadListener() {
             @Override
             public Identifier getFabricId() {
-                return new Identifier(ArchitectsAssembly.NAMESPACE, "variant");
+                return new Identifier(GreatBigWorld.NAMESPACE, "variant");
             }
 
             @Override

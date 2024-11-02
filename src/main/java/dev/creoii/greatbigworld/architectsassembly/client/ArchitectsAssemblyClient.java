@@ -1,6 +1,6 @@
 package dev.creoii.greatbigworld.architectsassembly.client;
 
-import dev.creoii.creoapi.api.event.misc.LanguageEvents;
+import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.architectsassembly.ArchitectsAssembly;
 import dev.creoii.greatbigworld.architectsassembly.item.DyedItemFrameItem;
 import dev.creoii.greatbigworld.architectsassembly.item.SlabItem;
@@ -34,9 +34,9 @@ import java.util.function.BiConsumer;
 
 public class ArchitectsAssemblyClient implements ClientModInitializer {
     public static final MinecraftClient CLIENT = MinecraftClient.getInstance();
-    public static final KeyBinding EXPAND_TOOLTIPS = new KeyBinding("key." + ArchitectsAssembly.NAMESPACE + ".expand_tooltips", InputUtil.GLFW_KEY_LEFT_CONTROL, KeyBinding.INVENTORY_CATEGORY);
-    public static final KeyBinding CYCLE_HOTBAR = new KeyBinding("key." + ArchitectsAssembly.NAMESPACE + ".cycle_hotbar", InputUtil.GLFW_KEY_LEFT_CONTROL, KeyBinding.INVENTORY_CATEGORY);
-    private static final Identifier CYCLE_HOTBAR_ARROW_TEXTURE = new Identifier(ArchitectsAssembly.NAMESPACE, "hud/cycle_hotbar_arrow");
+    public static final KeyBinding EXPAND_TOOLTIPS = new KeyBinding("key." + GreatBigWorld.NAMESPACE + ".expand_tooltips", InputUtil.GLFW_KEY_LEFT_CONTROL, KeyBinding.INVENTORY_CATEGORY);
+    public static final KeyBinding CYCLE_HOTBAR = new KeyBinding("key." + GreatBigWorld.NAMESPACE + ".cycle_hotbar", InputUtil.GLFW_KEY_LEFT_CONTROL, KeyBinding.INVENTORY_CATEGORY);
+    private static final Identifier CYCLE_HOTBAR_ARROW_TEXTURE = new Identifier(GreatBigWorld.NAMESPACE, "hud/cycle_hotbar_arrow");
     private static boolean shouldExpandTooltips = false;
     private static boolean shouldCycleHotbar = false;
 
@@ -49,7 +49,7 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
         KeyBindingHelper.registerKeyBinding(EXPAND_TOOLTIPS);
         KeyBindingHelper.registerKeyBinding(CYCLE_HOTBAR);
 
-        Identifier id = new Identifier(ArchitectsAssembly.NAMESPACE, "placement");
+        Identifier id = new Identifier(GreatBigWorld.NAMESPACE, "placement");
         ModelPredicateProviderRegistry.register(id, (stack, world, entity, seed) -> {
             if (stack.isIn(ItemTags.SLABS)) {
                 return SlabItem.getPlacement(entity);
@@ -57,7 +57,7 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
             return 0f;
         });
 
-        LanguageEvents.LOAD_TRANSLATION.register((langCode, consumer, translationKey, translated) -> {
+        /*LanguageEvents.LOAD_TRANSLATION.register((langCode, consumer, translationKey, translated) -> {
             if (langCode == null || !langCode.equals("en_us"))
                 return true;
 
@@ -68,7 +68,7 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
 
             Item item = Registries.ITEM.get(toId(translationKey));
             return renameItemForVariants(item, consumer, translationKey, translated);
-        });
+        });*/
 
         ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
             MinecraftClient.getInstance().getLanguageManager().reload(client.getResourceManager());

@@ -2,8 +2,6 @@ package dev.creoii.greatbigworld.architectsassembly.mixin.item;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
-import dev.creoii.creoapi.api.item.CreoDataComponentTypes;
-import dev.creoii.creoapi.api.item.CreoFoodComponent;
 import dev.creoii.greatbigworld.architectsassembly.client.ArchitectsAssemblyClient;
 import dev.creoii.greatbigworld.architectsassembly.variant.Variant;
 import dev.creoii.greatbigworld.architectsassembly.variant.VariantItem;

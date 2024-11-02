@@ -4,6 +4,7 @@
   "package": "dev.creoii.greatbigworld.architectsassembly.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "RecipeManagerMixin",
     "UseActionMixin",
     "block.AbstractCandleBlockMixin",
     "block.AmethystClusterBlockMixin",

@@ -1,5 +1,6 @@
 package dev.creoii.greatbigworld.architectsassembly.registry;
 
+import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.architectsassembly.ArchitectsAssembly;
 import dev.creoii.greatbigworld.architectsassembly.recipe.SawmillingRecipe;
 import net.minecraft.recipe.CuttingRecipe;
@@ -19,8 +20,8 @@ public class ArchitectsAssemblyRecipes {
     public static final RecipeSerializer<SawmillingRecipe> SAWMLLING_SERIALIZER = new CuttingRecipe.Serializer<>(SawmillingRecipe::new);
 
     public static void register() {
-        Registry.register(Registries.RECIPE_TYPE, new Identifier(ArchitectsAssembly.NAMESPACE, "sawmilling"), SAWMILLING);
+        Registry.register(Registries.RECIPE_TYPE, new Identifier(GreatBigWorld.NAMESPACE, "sawmilling"), SAWMILLING);
 
-        Registry.register(Registries.RECIPE_SERIALIZER, new Identifier(ArchitectsAssembly.NAMESPACE, "sawmilling"), SAWMLLING_SERIALIZER);
+        Registry.register(Registries.RECIPE_SERIALIZER, new Identifier(GreatBigWorld.NAMESPACE, "sawmilling"), SAWMLLING_SERIALIZER);
     }
 }

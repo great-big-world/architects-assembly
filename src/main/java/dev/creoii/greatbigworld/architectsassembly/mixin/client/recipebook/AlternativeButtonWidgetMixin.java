@@ -21,10 +21,10 @@ public class AlternativeButtonWidgetMixin implements RecipeResultCollectionView 
     @Shadow @Final RecipeEntry<?> recipe;
 
     @Redirect(method = "renderWidget", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawItem(Lnet/minecraft/item/ItemStack;II)V", remap = false))
-    private void gbw$blackoutItemTexture(DrawContext instance, ItemStack item, int x, int y) {
+    private void gbw$blackoutItemTexture(DrawContext instance, ItemStack stack, int x, int y) {
         if (((UnknownRecipes) gbw$results).gbw$getUnknownRecipes().contains(recipe))
-            ItemRenderHelper.drawItemSilhouette(instance, null, instance.client.world, item, x, y, 0, 0);
-        else instance.drawItem(item, x, y);
+            ItemRenderHelper.drawItemSilhouette(instance, null, instance.client.world, stack, x, y, 0, 0);
+        else instance.drawItem(stack, x, y);
     }
 
     @Override

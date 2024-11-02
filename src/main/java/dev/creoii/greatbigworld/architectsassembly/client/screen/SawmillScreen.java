@@ -1,5 +1,6 @@
 package dev.creoii.greatbigworld.architectsassembly.client.screen;
 
+import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.architectsassembly.ArchitectsAssembly;
 import dev.creoii.greatbigworld.architectsassembly.recipe.SawmillingRecipe;
 import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblySoundEvents;
@@ -20,7 +21,7 @@ import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public class SawmillScreen extends HandledScreen<SawmillScreenHandler> {
-    private static final Identifier TEXTURE = new Identifier(ArchitectsAssembly.NAMESPACE, "textures/gui/container/sawmill.png");
+    private static final Identifier TEXTURE = new Identifier(GreatBigWorld.NAMESPACE, "textures/gui/container/sawmill.png");
     private float scrollAmount;
     private boolean mouseClicked;
     private int scrollOffset;

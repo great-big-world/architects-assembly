@@ -1,5 +1,6 @@
 package dev.creoii.greatbigworld.architectsassembly.registry;
 
+import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.architectsassembly.ArchitectsAssembly;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -8,7 +9,7 @@ import net.minecraft.stat.Stats;
 import net.minecraft.util.Identifier;
 
 public class ArchitectsAssemblyStats {
-    public static Identifier INTERACT_WITH_SAWMILL = new Identifier(ArchitectsAssembly.NAMESPACE, "interact_with_sawmill");
+    public static Identifier INTERACT_WITH_SAWMILL = new Identifier(GreatBigWorld.NAMESPACE, "interact_with_sawmill");
 
     public static void register() {
         Registry.register(Registries.CUSTOM_STAT, INTERACT_WITH_SAWMILL, INTERACT_WITH_SAWMILL);

@@ -1,5 +1,6 @@
 package dev.creoii.greatbigworld.architectsassembly.block;
 
+import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.architectsassembly.ArchitectsAssembly;
 import dev.creoii.greatbigworld.architectsassembly.block.enums.VerticalSlabType;
 import dev.creoii.greatbigworld.architectsassembly.block.enums.FluidType;
@@ -41,7 +42,7 @@ public class VerticalSlabBlock extends Block implements Fluidloggable {
     public static Block fromSlab(Block block) {
         if (block instanceof SlabBlock) {
             String path = Registries.BLOCK.getId(block).getPath();
-            Block verticalSlab = Registries.BLOCK.get(new Identifier(ArchitectsAssembly.NAMESPACE, "vertical_" + path));
+            Block verticalSlab = Registries.BLOCK.get(new Identifier(GreatBigWorld.NAMESPACE, "vertical_" + path));
             return verticalSlab == Blocks.AIR ? null : verticalSlab;
         }
         return null;

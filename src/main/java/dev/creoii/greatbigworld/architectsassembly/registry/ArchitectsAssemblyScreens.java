@@ -1,5 +1,6 @@
 package dev.creoii.greatbigworld.architectsassembly.registry;
 
+import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.architectsassembly.ArchitectsAssembly;
 import dev.creoii.greatbigworld.architectsassembly.client.screen.SawmillScreen;
 import dev.creoii.greatbigworld.architectsassembly.client.screen.SawmillScreenHandler;
@@ -14,7 +15,7 @@ public class ArchitectsAssemblyScreens {
     public static final ScreenHandlerType<SawmillScreenHandler> SAWMILL = new ScreenHandlerType<>(SawmillScreenHandler::new, FeatureFlags.VANILLA_FEATURES);
 
     public static void register() {
-        Registry.register(Registries.SCREEN_HANDLER, new Identifier(ArchitectsAssembly.NAMESPACE, "sawmill"), SAWMILL);
+        Registry.register(Registries.SCREEN_HANDLER, new Identifier(GreatBigWorld.NAMESPACE, "sawmill"), SAWMILL);
     }
 
     public static void registerClient() {
