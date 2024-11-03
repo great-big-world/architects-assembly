@@ -283,6 +283,9 @@ public final class ArchitectsAssemblyBlocks {
     public static final Block VERTICAL_DEEPSLATE_TILE_SLAB = new VerticalSlabBlock(AbstractBlock.Settings.copy(Blocks.DEEPSLATE_TILE_SLAB));
     public static final Block VERTICAL_DEEPSLATE_BRICK_SLAB = new VerticalSlabBlock(AbstractBlock.Settings.copy(Blocks.DEEPSLATE_BRICK_SLAB));
     public static final Block VERTICAL_MOSSY_COBBLESTONE_SLAB = new VerticalSlabBlock(AbstractBlock.Settings.copy(Blocks.MOSSY_COBBLESTONE_SLAB));
+    public static final Block VERTICAL_TUFF_SLAB = new VerticalSlabBlock(AbstractBlock.Settings.copy(Blocks.TUFF));
+    public static final Block VERTICAL_TUFF_BRICK_SLAB = new VerticalSlabBlock(AbstractBlock.Settings.copy(Blocks.TUFF_BRICKS));
+    public static final Block VERTICAL_POLISHED_TUFF_SLAB = new VerticalSlabBlock(AbstractBlock.Settings.copy(Blocks.POLISHED_TUFF));
 
     private static void registerVerticalSlabs() {
         Registry.register(Registries.BLOCK, Identifier.of(GreatBigWorld.NAMESPACE, "vertical_oak_slab"), VERTICAL_OAK_SLAB);
@@ -342,6 +345,9 @@ public final class ArchitectsAssemblyBlocks {
         Registry.register(Registries.BLOCK, Identifier.of(GreatBigWorld.NAMESPACE, "vertical_deepslate_tile_slab"), VERTICAL_DEEPSLATE_TILE_SLAB);
         Registry.register(Registries.BLOCK, Identifier.of(GreatBigWorld.NAMESPACE, "vertical_deepslate_brick_slab"), VERTICAL_DEEPSLATE_BRICK_SLAB);
         Registry.register(Registries.BLOCK, Identifier.of(GreatBigWorld.NAMESPACE, "vertical_mossy_cobblestone_slab"), VERTICAL_MOSSY_COBBLESTONE_SLAB);
+        Registry.register(Registries.BLOCK, Identifier.of(GreatBigWorld.NAMESPACE, "vertical_tuff_slab"), VERTICAL_TUFF_SLAB);
+        Registry.register(Registries.BLOCK, Identifier.of(GreatBigWorld.NAMESPACE, "vertical_tuff_brick_slab"), VERTICAL_TUFF_BRICK_SLAB);
+        Registry.register(Registries.BLOCK, Identifier.of(GreatBigWorld.NAMESPACE, "vertical_polished_tuff_slab"), VERTICAL_POLISHED_TUFF_SLAB);
 
         OxidizableBlocksRegistry.registerOxidizableBlockPair(VERTICAL_CUT_COPPER_SLAB, VERTICAL_EXPOSED_CUT_COPPER_SLAB);
         OxidizableBlocksRegistry.registerOxidizableBlockPair(VERTICAL_EXPOSED_CUT_COPPER_SLAB, VERTICAL_WEATHERED_CUT_COPPER_SLAB);

@@ -389,6 +389,9 @@ public final class ArchitectsAssemblyItems {
     public static final Item DEEPSLATE_TILE_SLAB = new SlabItem(Blocks.DEEPSLATE_TILE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_DEEPSLATE_TILE_SLAB, new Item.Settings());
     public static final Item DEEPSLATE_BRICK_SLAB = new SlabItem(Blocks.DEEPSLATE_BRICK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_DEEPSLATE_BRICK_SLAB, new Item.Settings());
     public static final Item MOSSY_COBBLESTONE_SLAB = new SlabItem(Blocks.MOSSY_COBBLESTONE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_MOSSY_COBBLESTONE_SLAB, new Item.Settings());
+    public static final Item TUFF_SLAB = new SlabItem(Blocks.TUFF_SLAB, ArchitectsAssemblyBlocks.VERTICAL_TUFF_SLAB, new Item.Settings());
+    public static final Item TUFF_BRICK_SLAB = new SlabItem(Blocks.TUFF_BRICK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_TUFF_BRICK_SLAB, new Item.Settings());
+    public static final Item POLISHED_TUFF_SLAB = new SlabItem(Blocks.POLISHED_TUFF_SLAB, ArchitectsAssemblyBlocks.VERTICAL_POLISHED_TUFF_SLAB, new Item.Settings());
 
     private static void registerVerticalSlabs() {
         Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "oak_slab"), OAK_SLAB);
@@ -448,6 +451,9 @@ public final class ArchitectsAssemblyItems {
         Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "deepslate_tile_slab"), DEEPSLATE_TILE_SLAB);
         Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "deepslate_brick_slab"), DEEPSLATE_BRICK_SLAB);
         Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "mossy_cobblestone_slab"), MOSSY_COBBLESTONE_SLAB);
+        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "tuff_slab"), TUFF_SLAB);
+        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "tuff_brick_slab"), TUFF_BRICK_SLAB);
+        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "polished_tuff_slab"), POLISHED_TUFF_SLAB);
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(entries -> {
             replaceVanillaSlabs(entries.getDisplayStacks());
@@ -513,6 +519,9 @@ public final class ArchitectsAssemblyItems {
             .put(Items.WAXED_EXPOSED_CUT_COPPER_SLAB, WAXED_EXPOSED_CUT_COPPER_SLAB)
             .put(Items.WAXED_WEATHERED_CUT_COPPER_SLAB, WAXED_WEATHERED_CUT_COPPER_SLAB)
             .put(Items.WAXED_OXIDIZED_CUT_COPPER_SLAB, WAXED_OXIDIZED_CUT_COPPER_SLAB)
+            .put(Items.TUFF_SLAB, TUFF_SLAB)
+            .put(Items.TUFF_BRICK_SLAB, TUFF_BRICK_SLAB)
+            .put(Items.POLISHED_TUFF_SLAB, POLISHED_TUFF_SLAB)
             .build();
 
     private static void replaceVanillaSlabs(List<ItemStack> stacks) {

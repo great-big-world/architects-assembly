@@ -1,0 +1,11 @@
+{
+  "parent": "block/tuff_slab",
+  "overrides": [
+    {
+      "predicate": {
+        "great_big_world:placement": 1
+      },
+      "model": "great_big_world:item/vertical_tuff_slab"
+    }
+  ]
+}

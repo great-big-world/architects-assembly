@@ -1,4 +1,4 @@
-package dev.creoii.greatbigworld.architectsassembly.mixin.entity.player;
+package dev.creoii.greatbigworld.architectsassembly.mixin.entity;
 
 import dev.creoii.greatbigworld.architectsassembly.item.SlabItem;
 import dev.creoii.greatbigworld.architectsassembly.util.FreePlacer;

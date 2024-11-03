@@ -108,7 +108,7 @@ public final class ItemRenderHelper {
             } else {
                 vertexConsumer = ItemRenderer.getItemGlintConsumer(vertexConsumers, renderLayer, true, stack.hasGlint());
             }
-            renderBakedItemModelSilhouette(model, overlay, matrices, vertexConsumer, light);
+            renderBakedItemModelSilhouette(model, overlay, matrices, vertexConsumer);
         }
         matrices.pop();
     }
@@ -127,7 +127,7 @@ public final class ItemRenderHelper {
 
                 SkullBlockEntityModel skullBlockEntityModel = itemRenderer.skullModels.get(abstractSkullBlock.getSkullType());
                 RenderLayer renderLayer = SkullBlockEntityRenderer.getRenderLayer(abstractSkullBlock.getSkullType(), profileComponent);
-                renderSkullSilhouette(matrices, vertexConsumers, light, skullBlockEntityModel, renderLayer);
+                renderSkullSilhouette(matrices, vertexConsumers, skullBlockEntityModel, renderLayer);
             } else {
                 BlockState blockState = block.getDefaultState();
                 BlockEntity blockEntity;
@@ -172,11 +172,11 @@ public final class ItemRenderHelper {
                 matrices.scale(1f, -1f, -1f);
                 SpriteIdentifier spriteIdentifier = bl ? ModelLoader.SHIELD_BASE : ModelLoader.SHIELD_BASE_NO_PATTERN;
                 VertexConsumer vertexConsumer = spriteIdentifier.getSprite().getTextureSpecificVertexConsumer(ItemRenderer.getDirectItemGlintConsumer(vertexConsumers, itemRenderer.modelShield.getLayer(spriteIdentifier.getAtlasId()), true, stack.hasGlint()));
-                itemRenderer.modelShield.getHandle().render(matrices, vertexConsumer, 0, overlay);
+                itemRenderer.modelShield.getHandle().render(matrices, vertexConsumer, 0, overlay, 0);
                 if (bl) {
                     BannerBlockEntityRenderer.renderCanvas(matrices, vertexConsumers, 0, overlay, itemRenderer.modelShield.getPlate(), spriteIdentifier, false, Objects.requireNonNullElse(dyeColor2, DyeColor.WHITE), bannerPatternsComponent, stack.hasGlint());
                 } else {
-                    itemRenderer.modelShield.getPlate().render(matrices, vertexConsumer, 0, overlay);
+                    itemRenderer.modelShield.getPlate().render(matrices, vertexConsumer, 0, overlay, 0);
                 }
 
                 matrices.pop();
@@ -184,20 +184,20 @@ public final class ItemRenderHelper {
                 matrices.push();
                 matrices.scale(1f, -1f, -1f);
                 VertexConsumer vertexConsumer2 = ItemRenderer.getDirectItemGlintConsumer(vertexConsumers, itemRenderer.modelTrident.getLayer(TridentEntityModel.TEXTURE), false, stack.hasGlint());
-                itemRenderer.modelTrident.render(matrices, vertexConsumer2, 0, overlay);
+                itemRenderer.modelTrident.render(matrices, vertexConsumer2, 0, overlay, 0);
                 matrices.pop();
             }
         }
     }
 
-    private static void renderSkullSilhouette(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, SkullBlockEntityModel model, RenderLayer renderLayer) {
+    private static void renderSkullSilhouette(MatrixStack matrices, VertexConsumerProvider vertexConsumers, SkullBlockEntityModel model, RenderLayer renderLayer) {
         matrices.push();
         matrices.translate(.5f, 0f, .5f);
 
         matrices.scale(-1f, -1f, 1f);
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(renderLayer);
         model.setHeadRotation(0f, 180f, 0f);
-        model.render(matrices, vertexConsumer, 0, OverlayTexture.DEFAULT_UV);
+        model.render(matrices, vertexConsumer, 0, OverlayTexture.DEFAULT_UV, 0);
         matrices.pop();
     }
 
@@ -210,20 +210,20 @@ public final class ItemRenderHelper {
         }
     }
 
-    private static void renderBakedItemModelSilhouette(BakedModel model, int overlay, MatrixStack matrices, VertexConsumer vertices, int light) {
+    private static void renderBakedItemModelSilhouette(BakedModel model, int overlay, MatrixStack matrices, VertexConsumer vertices) {
         Random random = Random.create();
         for (Direction direction : Direction.values()) {
             random.setSeed(42L);
-            renderBakedItemQuadsSilhouette(matrices, vertices, model.getQuads(null, direction, random), light, overlay);
+            renderBakedItemQuadsSilhouette(matrices, vertices, model.getQuads(null, direction, random), overlay);
         }
         random.setSeed(42L);
-        renderBakedItemQuadsSilhouette(matrices, vertices, model.getQuads(null, null, random), light, overlay);
+        renderBakedItemQuadsSilhouette(matrices, vertices, model.getQuads(null, null, random), overlay);
     }
 
-    private static void renderBakedItemQuadsSilhouette(MatrixStack matrices, VertexConsumer vertices, List<BakedQuad> quads, int light, int overlay) {
+    private static void renderBakedItemQuadsSilhouette(MatrixStack matrices, VertexConsumer vertices, List<BakedQuad> quads, int overlay) {
         MatrixStack.Entry entry = matrices.peek();
         for (BakedQuad bakedQuad : quads) {
-            vertices.quad(entry, bakedQuad, 0f, 0f, 0f, 1f, light, overlay);
+            vertices.quad(entry, bakedQuad, 0f, 0f, 0f, 1f, 0, overlay);
         }
     }
 
