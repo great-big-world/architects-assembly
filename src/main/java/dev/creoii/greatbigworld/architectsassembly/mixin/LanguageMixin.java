@@ -1,0 +1,91 @@
+package dev.creoii.greatbigworld.architectsassembly.mixin;
+
+import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
+import dev.creoii.greatbigworld.architectsassembly.util.LocaleAwareLanguage;
+import dev.creoii.greatbigworld.architectsassembly.variant.Variant;
+import dev.creoii.greatbigworld.architectsassembly.variant.VariantItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.Items;
+import net.minecraft.registry.Registries;
+import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.Language;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+
+import java.util.function.BiConsumer;
+
+@Mixin(Language.class)
+public class LanguageMixin implements LocaleAwareLanguage {
+    @Unique
+    private String gbw$langCode;
+
+    @WrapWithCondition(method = "load(Ljava/io/InputStream;Ljava/util/function/BiConsumer;)V", at = @At(value = "INVOKE", target = "Ljava/util/function/BiConsumer;accept(Ljava/lang/Object;Ljava/lang/Object;)V"))
+    private static boolean gbw$applyTranslationLoadEvent(BiConsumer<String, String> entryConsumer, Object key, Object value) {
+        String langCode = Language.getInstance() == null ? Language.DEFAULT_LANGUAGE : ((LocaleAwareLanguage) Language.getInstance()).gbw$getLangCode();
+        if (langCode == null || !langCode.equals("en_us"))
+            return true;
+
+        String translationKey = (String) key;
+        String translated = (String) value;
+
+        if ((translationKey.startsWith("item.") && ((translationKey.contains("_pottery_sherd") || translationKey.contains("_pottery_shard"))) || translationKey.contains("_spawn_egg"))) {
+            entryConsumer.accept(translationKey, translated.substring(translated.indexOf(" ") + 1));
+            return false;
+        }
+
+        Item item = Registries.ITEM.get(toId(translationKey));
+        return renameItemForVariants(item, entryConsumer, translationKey, translated);
+    }
+
+    @Override
+    public String gbw$getLangCode() {
+        return gbw$langCode;
+    }
+
+    public void gbw$setLangCode(String langCode) {
+        gbw$langCode = langCode;
+    }
+
+    @Unique
+    private static Identifier toId(String translationKey) {
+        translationKey = translationKey.toLowerCase();
+
+        int dot1 = translationKey.indexOf('.') + 1;
+        int dot2 = translationKey.indexOf('.', dot1);
+        int dot3 = translationKey.indexOf('.', dot2 + 1);
+
+        if (dot2 < 0)
+            return Identifier.of("air");
+
+        String path;
+        if (dot3 <= 0) path = translationKey.substring(dot2 + 1);
+        else path = translationKey.substring(dot2 + 1, dot3);
+
+        return Identifier.of(translationKey.substring(dot1, dot2), path);
+    }
+
+    @Unique
+    private static boolean renameItemForVariants(Item item, BiConsumer<String, String> consumer, String translationKey, String translated) {
+        if (item == Items.AIR)
+            return true;
+        if (item instanceof VariantItem variantItem) {
+            for (Variant variant : Variant.VARIANTS.values()) {
+                if (variant.getItems().contains(item) || variant.isStackInTags(item.getDefaultStack())) {
+                    variantItem.gbw$addVariant(variant);
+                }
+            }
+
+            if (!variantItem.gbw$getVariants().isEmpty()) {
+                String variantKey = translationKey.endsWith(".variant") ? translationKey : translationKey + ".variant";
+                String translated1 = Text.translatable(variantKey).getString();
+                if (!translated1.equals(translated)) {
+                    consumer.accept(translationKey, translated1);
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}

@@ -4,6 +4,7 @@
   "package": "dev.creoii.greatbigworld.architectsassembly.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "LanguageMixin",
     "RecipeManagerMixin",
     "UseActionMixin",
     "block.AbstractCandleBlockMixin",
@@ -50,6 +51,7 @@
     "world.feature.GeodeFeatureMixin"
   ],
   "client": [
+    "TranslationStorageMixin",
     "client.ClientPlayerEntityMixin",
     "client.CreativeInventoryScreenMixin",
     "client.HeldItemRendererMixin",

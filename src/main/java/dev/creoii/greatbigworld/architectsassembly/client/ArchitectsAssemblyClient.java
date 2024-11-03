@@ -7,8 +7,6 @@ import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyBl
 import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyItems;
 import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyParticleTypes;
 import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyScreens;
-import dev.creoii.greatbigworld.architectsassembly.variant.Variant;
-import dev.creoii.greatbigworld.architectsassembly.variant.VariantItem;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
@@ -20,15 +18,10 @@ import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
 import net.minecraft.registry.tag.ItemTags;
-import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
 import net.minecraft.world.biome.GrassColors;
-
-import java.util.function.BiConsumer;
 
 public class ArchitectsAssemblyClient implements ClientModInitializer {
     public static final MinecraftClient CLIENT = MinecraftClient.getInstance();
@@ -54,19 +47,6 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
             }
             return 0f;
         });
-
-        /*LanguageEvents.LOAD_TRANSLATION.register((langCode, consumer, translationKey, translated) -> {
-            if (langCode == null || !langCode.equals("en_us"))
-                return true;
-
-            if ((translationKey.startsWith("item.") && ((translationKey.contains("_pottery_sherd") || translationKey.contains("_pottery_shard"))) || translationKey.contains("_spawn_egg"))) {
-                consumer.accept(translationKey, translated.substring(translated.indexOf(" ") + 1));
-                return false;
-            }
-
-            Item item = Registries.ITEM.get(toId(translationKey));
-            return renameItemForVariants(item, consumer, translationKey, translated);
-        });*/
 
         ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
             MinecraftClient.getInstance().getLanguageManager().reload(client.getResourceManager());
@@ -119,44 +99,5 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
 
     public static boolean shouldCycleHotbar() {
         return shouldCycleHotbar;
-    }
-
-    private static Identifier toId(String translationKey) {
-        translationKey = translationKey.toLowerCase();
-
-        int dot1 = translationKey.indexOf('.') + 1;
-        int dot2 = translationKey.indexOf('.', dot1);
-        int dot3 = translationKey.indexOf('.', dot2 + 1);
-
-        if (dot2 < 0)
-            return Identifier.of("air");
-
-        String path;
-        if (dot3 <= 0) path = translationKey.substring(dot2 + 1);
-        else path = translationKey.substring(dot2 + 1, dot3);
-
-        return Identifier.of(translationKey.substring(dot1, dot2), path);
-    }
-
-    private static boolean renameItemForVariants(Item item, BiConsumer<String, String> consumer, String translationKey, String translated) {
-        if (item == Items.AIR)
-            return true;
-        if (item instanceof VariantItem variantItem) {
-            for (Variant variant : Variant.VARIANTS.values()) {
-                if (variant.getItems().contains(item) || variant.isStackInTags(item.getDefaultStack())) {
-                    variantItem.gbw$addVariant(variant);
-                }
-            }
-
-            if (!variantItem.gbw$getVariants().isEmpty()) {
-                String variantKey = translationKey.endsWith(".variant") ? translationKey : translationKey + ".variant";
-                String translated1 = Text.translatable(variantKey).getString();
-                if (!translated1.equals(translated)) {
-                    consumer.accept(translationKey, translated1);
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 }
