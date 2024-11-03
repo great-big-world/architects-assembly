@@ -102,11 +102,7 @@ public final class ItemRenderHelper {
                     MatrixUtil.scale(entry.getPositionMatrix(), .75f);
                 }
 
-                if (bl2) {
-                    vertexConsumer = ItemRenderer.getDirectDynamicDisplayGlintConsumer(vertexConsumers, renderLayer, entry);
-                } else {
-                    vertexConsumer = ItemRenderer.getDynamicDisplayGlintConsumer(vertexConsumers, renderLayer, entry);
-                }
+                vertexConsumer = ItemRenderer.getDynamicDisplayGlintConsumer(vertexConsumers, renderLayer, entry);
             } else if (bl2) {
                 vertexConsumer = ItemRenderer.getDirectItemGlintConsumer(vertexConsumers, renderLayer, true, stack.hasGlint());
             } else {
@@ -176,11 +172,11 @@ public final class ItemRenderHelper {
                 matrices.scale(1f, -1f, -1f);
                 SpriteIdentifier spriteIdentifier = bl ? ModelLoader.SHIELD_BASE : ModelLoader.SHIELD_BASE_NO_PATTERN;
                 VertexConsumer vertexConsumer = spriteIdentifier.getSprite().getTextureSpecificVertexConsumer(ItemRenderer.getDirectItemGlintConsumer(vertexConsumers, itemRenderer.modelShield.getLayer(spriteIdentifier.getAtlasId()), true, stack.hasGlint()));
-                itemRenderer.modelShield.getHandle().render(matrices, vertexConsumer, light, overlay, 0f, 0f, 0f, 1f);
+                itemRenderer.modelShield.getHandle().render(matrices, vertexConsumer, 0, overlay);
                 if (bl) {
-                    BannerBlockEntityRenderer.renderCanvas(matrices, vertexConsumers, light, overlay, itemRenderer.modelShield.getPlate(), spriteIdentifier, false, Objects.requireNonNullElse(dyeColor2, DyeColor.WHITE), bannerPatternsComponent, stack.hasGlint());
+                    BannerBlockEntityRenderer.renderCanvas(matrices, vertexConsumers, 0, overlay, itemRenderer.modelShield.getPlate(), spriteIdentifier, false, Objects.requireNonNullElse(dyeColor2, DyeColor.WHITE), bannerPatternsComponent, stack.hasGlint());
                 } else {
-                    itemRenderer.modelShield.getPlate().render(matrices, vertexConsumer, light, overlay, 0f, 0f, 0f, 1f);
+                    itemRenderer.modelShield.getPlate().render(matrices, vertexConsumer, 0, overlay);
                 }
 
                 matrices.pop();
@@ -188,7 +184,7 @@ public final class ItemRenderHelper {
                 matrices.push();
                 matrices.scale(1f, -1f, -1f);
                 VertexConsumer vertexConsumer2 = ItemRenderer.getDirectItemGlintConsumer(vertexConsumers, itemRenderer.modelTrident.getLayer(TridentEntityModel.TEXTURE), false, stack.hasGlint());
-                itemRenderer.modelTrident.render(matrices, vertexConsumer2, light, overlay, 0f, 0f, 0f, 1f);
+                itemRenderer.modelTrident.render(matrices, vertexConsumer2, 0, overlay);
                 matrices.pop();
             }
         }
@@ -201,7 +197,7 @@ public final class ItemRenderHelper {
         matrices.scale(-1f, -1f, 1f);
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(renderLayer);
         model.setHeadRotation(0f, 180f, 0f);
-        model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 0f, 0f, 0f, 1f);
+        model.render(matrices, vertexConsumer, 0, OverlayTexture.DEFAULT_UV);
         matrices.pop();
     }
 

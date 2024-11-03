@@ -2,10 +2,10 @@ package dev.creoii.greatbigworld.architectsassembly.recipe;
 
 import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyBlocks;
 import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyRecipes;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.CuttingRecipe;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.recipe.input.SingleStackRecipeInput;
 import net.minecraft.world.World;
 
 public class SawmillingRecipe extends CuttingRecipe {
@@ -14,8 +14,8 @@ public class SawmillingRecipe extends CuttingRecipe {
     }
 
     @Override
-    public boolean matches(Inventory inventory, World world) {
-        return ingredient.test(inventory.getStack(0));
+    public boolean matches(SingleStackRecipeInput input, World world) {
+        return ingredient.test(input.getStackInSlot(0));
     }
 
     @Override

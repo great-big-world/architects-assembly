@@ -14,7 +14,7 @@ public final class ArchitectsAssemblyParticleTypes {
     public static final SimpleParticleType SMALL_SOUL_FIRE_FLAME = FabricParticleTypes.simple();
 
     public static void register() {
-        Registry.register(Registries.PARTICLE_TYPE, new Identifier(GreatBigWorld.NAMESPACE, "small_soul_fire_flame"), SMALL_SOUL_FIRE_FLAME);
+        Registry.register(Registries.PARTICLE_TYPE, Identifier.of(GreatBigWorld.NAMESPACE, "small_soul_fire_flame"), SMALL_SOUL_FIRE_FLAME);
     }
 
     public static void registerClient() {

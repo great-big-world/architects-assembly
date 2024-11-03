@@ -1,7 +1,6 @@
 package dev.creoii.greatbigworld.architectsassembly.client;
 
 import dev.creoii.greatbigworld.GreatBigWorld;
-import dev.creoii.greatbigworld.architectsassembly.ArchitectsAssembly;
 import dev.creoii.greatbigworld.architectsassembly.item.DyedItemFrameItem;
 import dev.creoii.greatbigworld.architectsassembly.item.SlabItem;
 import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyBlocks;
@@ -18,17 +17,16 @@ import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.color.world.BiomeColors;
-import net.minecraft.client.color.world.GrassColors;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
-import net.minecraft.registry.Registries;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
+import net.minecraft.world.biome.GrassColors;
 
 import java.util.function.BiConsumer;
 
@@ -36,7 +34,7 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
     public static final MinecraftClient CLIENT = MinecraftClient.getInstance();
     public static final KeyBinding EXPAND_TOOLTIPS = new KeyBinding("key." + GreatBigWorld.NAMESPACE + ".expand_tooltips", InputUtil.GLFW_KEY_LEFT_CONTROL, KeyBinding.INVENTORY_CATEGORY);
     public static final KeyBinding CYCLE_HOTBAR = new KeyBinding("key." + GreatBigWorld.NAMESPACE + ".cycle_hotbar", InputUtil.GLFW_KEY_LEFT_CONTROL, KeyBinding.INVENTORY_CATEGORY);
-    private static final Identifier CYCLE_HOTBAR_ARROW_TEXTURE = new Identifier(GreatBigWorld.NAMESPACE, "hud/cycle_hotbar_arrow");
+    private static final Identifier CYCLE_HOTBAR_ARROW_TEXTURE = Identifier.of(GreatBigWorld.NAMESPACE, "hud/cycle_hotbar_arrow");
     private static boolean shouldExpandTooltips = false;
     private static boolean shouldCycleHotbar = false;
 
@@ -49,7 +47,7 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
         KeyBindingHelper.registerKeyBinding(EXPAND_TOOLTIPS);
         KeyBindingHelper.registerKeyBinding(CYCLE_HOTBAR);
 
-        Identifier id = new Identifier(GreatBigWorld.NAMESPACE, "placement");
+        Identifier id = Identifier.of(GreatBigWorld.NAMESPACE, "placement");
         ModelPredicateProviderRegistry.register(id, (stack, world, entity, seed) -> {
             if (stack.isIn(ItemTags.SLABS)) {
                 return SlabItem.getPlacement(entity);
@@ -131,13 +129,13 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
         int dot3 = translationKey.indexOf('.', dot2 + 1);
 
         if (dot2 < 0)
-            return new Identifier("air");
+            return Identifier.of("air");
 
         String path;
         if (dot3 <= 0) path = translationKey.substring(dot2 + 1);
         else path = translationKey.substring(dot2 + 1, dot3);
 
-        return new Identifier(translationKey.substring(dot1, dot2), path);
+        return Identifier.of(translationKey.substring(dot1, dot2), path);
     }
 
     private static boolean renameItemForVariants(Item item, BiConsumer<String, String> consumer, String translationKey, String translated) {

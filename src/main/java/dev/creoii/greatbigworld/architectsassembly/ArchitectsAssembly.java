@@ -34,17 +34,15 @@ public class ArchitectsAssembly implements ModInitializer {
     @Override
     @SuppressWarnings("deprecation")
     public void onInitialize() {
-        ArchitectsAssemblyDataComponents.register();
         ArchitectsAssemblyBlocks.register();
         ArchitectsAssemblyItems.register();
         ArchitectsAssemblyParticleTypes.register();
         ArchitectsAssemblySoundEvents.register();
         ArchitectsAssemblyScreens.register();
-        ArchitectsAssemblyPaintings.register();
         ArchitectsAssemblyRecipes.register();
         ArchitectsAssemblyStats.register();
 
-        Registry.register(Registries.FEATURE, new Identifier(GreatBigWorld.NAMESPACE, "mossify_vegetation_patch"), new MossifyVegetationPatchFeature(VegetationPatchFeatureConfig.CODEC));
+        Registry.register(Registries.FEATURE, Identifier.of(GreatBigWorld.NAMESPACE, "mossify_vegetation_patch"), new MossifyVegetationPatchFeature(VegetationPatchFeatureConfig.CODEC));
 
         FireBlock fireBlock = (FireBlock) Blocks.FIRE;
         fireBlock.burnChances.forEach((block, integer) -> {
@@ -63,7 +61,7 @@ public class ArchitectsAssembly implements ModInitializer {
         ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(new SimpleSynchronousResourceReloadListener() {
             @Override
             public Identifier getFabricId() {
-                return new Identifier(GreatBigWorld.NAMESPACE, "variant");
+                return Identifier.of(GreatBigWorld.NAMESPACE, "variant");
             }
 
             @Override
@@ -75,7 +73,7 @@ public class ArchitectsAssembly implements ModInitializer {
                     for (Resource resource : entry.getValue()) {
                         try (InputStream stream = resource.getInputStream()) {
                             String result = IOUtils.toString(stream, StandardCharsets.UTF_8);
-                            Identifier identifier1 = new Identifier(identifier.getNamespace(), identifier.getPath().replace("variants/", "").replace(".json", ""));
+                            Identifier identifier1 = Identifier.of(identifier.getNamespace(), identifier.getPath().replace("variants/", "").replace(".json", ""));
                             Variant variant = Variant.GSON.fromJson(result, Variant.class).build(identifier1);
 
                             if (variant.getItems().isEmpty() && variant.getItemTags().isEmpty()) {

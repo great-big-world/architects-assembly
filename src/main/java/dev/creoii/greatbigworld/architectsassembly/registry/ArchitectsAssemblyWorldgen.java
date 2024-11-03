@@ -8,5 +8,5 @@ import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 
 public final class ArchitectsAssemblyWorldgen {
-    public static final RegistryKey<ConfiguredFeature<?, ?>> MOSSIFY_PATCH_BONEMEAL = RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE, new Identifier(GreatBigWorld.NAMESPACE, "mossify_patch_bonemeal"));
+    public static final RegistryKey<ConfiguredFeature<?, ?>> MOSSIFY_PATCH_BONEMEAL = RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE, Identifier.of(GreatBigWorld.NAMESPACE, "mossify_patch_bonemeal"));
 }

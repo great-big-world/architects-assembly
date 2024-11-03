@@ -16,17 +16,17 @@ import java.util.List;
 public class RecipeManagerMixin {
     @Unique
     private final List<Identifier> RECIPES_TO_REMOVE = new ImmutableList.Builder<Identifier>()
-            .add(new Identifier("chiseled_deepslate"))
-            .add(new Identifier("chiseled_nether_bricks"))
-            .add(new Identifier("chiseled_polished_blackstone"))
-            .add(new Identifier("chiseled_quartz_block"))
-            .add(new Identifier("chiseled_red_sandstone"))
-            .add(new Identifier("chiseled_sandstone"))
-            .add(new Identifier("chiseled_stone_bricks"))
-            .add(new Identifier("purpur_pillar"))
-            .add(new Identifier("quartz_pillar"))
-            .add(new Identifier("deepslate_tiles"))
-            .add(new Identifier("bamboo_mosaic"))
+            .add(Identifier.of("chiseled_deepslate"))
+            .add(Identifier.of("chiseled_nether_bricks"))
+            .add(Identifier.of("chiseled_polished_blackstone"))
+            .add(Identifier.of("chiseled_quartz_block"))
+            .add(Identifier.of("chiseled_red_sandstone"))
+            .add(Identifier.of("chiseled_sandstone"))
+            .add(Identifier.of("chiseled_stone_bricks"))
+            .add(Identifier.of("purpur_pillar"))
+            .add(Identifier.of("quartz_pillar"))
+            .add(Identifier.of("deepslate_tiles"))
+            .add(Identifier.of("bamboo_mosaic"))
             .build();
 
     @Redirect(method = "apply(Ljava/util/Map;Lnet/minecraft/resource/ResourceManager;Lnet/minecraft/util/profiler/Profiler;)V", at = @At(value = "INVOKE", target = "Lcom/google/common/collect/ImmutableMap$Builder;put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/google/common/collect/ImmutableMap$Builder;"))

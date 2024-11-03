@@ -21,7 +21,7 @@ import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public class SawmillScreen extends HandledScreen<SawmillScreenHandler> {
-    private static final Identifier TEXTURE = new Identifier(GreatBigWorld.NAMESPACE, "textures/gui/container/sawmill.png");
+    private static final Identifier TEXTURE = Identifier.of(GreatBigWorld.NAMESPACE, "textures/gui/container/sawmill.png");
     private float scrollAmount;
     private boolean mouseClicked;
     private int scrollOffset;

@@ -20,8 +20,8 @@ public class ArchitectsAssemblyRecipes {
     public static final RecipeSerializer<SawmillingRecipe> SAWMLLING_SERIALIZER = new CuttingRecipe.Serializer<>(SawmillingRecipe::new);
 
     public static void register() {
-        Registry.register(Registries.RECIPE_TYPE, new Identifier(GreatBigWorld.NAMESPACE, "sawmilling"), SAWMILLING);
+        Registry.register(Registries.RECIPE_TYPE, Identifier.of(GreatBigWorld.NAMESPACE, "sawmilling"), SAWMILLING);
 
-        Registry.register(Registries.RECIPE_SERIALIZER, new Identifier(GreatBigWorld.NAMESPACE, "sawmilling"), SAWMLLING_SERIALIZER);
+        Registry.register(Registries.RECIPE_SERIALIZER, Identifier.of(GreatBigWorld.NAMESPACE, "sawmilling"), SAWMLLING_SERIALIZER);
     }
 }

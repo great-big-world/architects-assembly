@@ -14,6 +14,8 @@ import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.RecipeEntry;
+import net.minecraft.recipe.RecipeType;
+import net.minecraft.recipe.input.SingleStackRecipeInput;
 import net.minecraft.screen.Property;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
@@ -35,7 +37,7 @@ public class SawmillScreenHandler extends ScreenHandler {
     final Slot inputSlot;
     final Slot outputSlot;
     Runnable contentsChangedListener = () -> {};
-    public final Inventory input = new SimpleInventory(1){
+    public final Inventory input = new SimpleInventory(1) {
         @Override
         public void markDirty() {
             super.markDirty();
@@ -143,14 +145,14 @@ public class SawmillScreenHandler extends ScreenHandler {
         this.selectedRecipe.set(-1);
         this.outputSlot.setStackNoCallbacks(ItemStack.EMPTY);
         if (!stack.isEmpty()) {
-            this.availableRecipes = this.world.getRecipeManager().getAllMatches(ArchitectsAssemblyRecipes.SAWMILLING, input, this.world);
+            this.availableRecipes = this.world.getRecipeManager().getAllMatches(ArchitectsAssemblyRecipes.SAWMILLING, createRecipeInput(input), this.world);
         }
     }
 
     void populateResult() {
         if (!this.availableRecipes.isEmpty() && this.isInBounds(this.selectedRecipe.get())) {
             RecipeEntry<SawmillingRecipe> sawmillingRecipe = this.availableRecipes.get(this.selectedRecipe.get());
-            ItemStack itemStack = sawmillingRecipe.value().craft(this.input, this.world.getRegistryManager());
+            ItemStack itemStack = sawmillingRecipe.value().craft(createRecipeInput(this.input), this.world.getRegistryManager());
             if (itemStack.isItemEnabled(this.world.getEnabledFeatures())) {
                 this.output.setLastRecipe(sawmillingRecipe);
                 this.outputSlot.setStackNoCallbacks(itemStack);
@@ -191,7 +193,7 @@ public class SawmillScreenHandler extends ScreenHandler {
                     return ItemStack.EMPTY;
                 }
                 slot2.onQuickTransfer(itemStack2, itemStack);
-            } else if (slot == 0 ? !this.insertItem(itemStack2, 2, 38, false) : (this.world.getRecipeManager().getFirstMatch(ArchitectsAssemblyRecipes.SAWMILLING, new SimpleInventory(itemStack2), this.world).isPresent() ? !this.insertItem(itemStack2, 0, 1, false) : (slot >= 2 && slot < 29 ? !this.insertItem(itemStack2, 29, 38, false) : slot >= 29 && slot < 38 && !this.insertItem(itemStack2, 2, 29, false)))) {
+            } else if (slot == 0 ? !this.insertItem(itemStack2, 2, 38, false) : (this.world.getRecipeManager().getFirstMatch(ArchitectsAssemblyRecipes.SAWMILLING, createRecipeInput(new SimpleInventory(itemStack2)), this.world).isPresent() ? !this.insertItem(itemStack2, 0, 1, false) : (slot >= 2 && slot < 29 ? !this.insertItem(itemStack2, 29, 38, false) : slot >= 29 && slot < 38 && !this.insertItem(itemStack2, 2, 29, false)))) {
                 return ItemStack.EMPTY;
             }
             if (itemStack2.isEmpty()) {
@@ -212,5 +214,9 @@ public class SawmillScreenHandler extends ScreenHandler {
         super.onClosed(player);
         this.output.removeStack(1);
         this.context.run((world, pos) -> this.dropInventory(player, this.input));
+    }
+
+    private static SingleStackRecipeInput createRecipeInput(Inventory inventory) {
+        return new SingleStackRecipeInput(inventory.getStack(0));
     }
 }

@@ -2,6 +2,7 @@ package dev.creoii.greatbigworld.architectsassembly.mixin.client;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import dev.creoii.greatbigworld.architectsassembly.util.ExtendedItemFrame;
+import dev.creoii.greatbigworld.util.ColorHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.block.BlockModelRenderer;
@@ -35,8 +36,8 @@ public class ItemFrameEntityRendererMixin<T extends ItemFrameEntity> {
     private void gbw$tintDyedItemFrame(BlockModelRenderer instance, MatrixStack.Entry entry, VertexConsumer vertexConsumer, BlockState state, BakedModel bakedModel, float red, float green, float blue, int light, int overlay, @Local T itemFrameEntity, @Local ModelIdentifier modelIdentifier) {
         DyeColor color;
         if (itemFrameEntity instanceof ExtendedItemFrame extendedItemFrame && (color = extendedItemFrame.gbw$getColor()) != null) {
-            float[] colorComponents = color.getColorComponents();
-            instance.render(entry, vertexConsumer, state, bakedModel, colorComponents[0], colorComponents[1], colorComponents[2], light, overlay);
+            int mapColor = color.getMapColor().color;
+            instance.render(entry, vertexConsumer, state, bakedModel, ColorHelper.red(mapColor), ColorHelper.green(mapColor), ColorHelper.blue(mapColor), light, overlay);
         } else {
             instance.render(entry, vertexConsumer, state, bakedModel, 1f, 1f, 1f, light, overlay);
         }

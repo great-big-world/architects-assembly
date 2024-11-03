@@ -42,7 +42,7 @@ public class VerticalSlabBlock extends Block implements Fluidloggable {
     public static Block fromSlab(Block block) {
         if (block instanceof SlabBlock) {
             String path = Registries.BLOCK.getId(block).getPath();
-            Block verticalSlab = Registries.BLOCK.get(new Identifier(GreatBigWorld.NAMESPACE, "vertical_" + path));
+            Block verticalSlab = Registries.BLOCK.get(Identifier.of(GreatBigWorld.NAMESPACE, "vertical_" + path));
             return verticalSlab == Blocks.AIR ? null : verticalSlab;
         }
         return null;

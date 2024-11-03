@@ -1,10 +1,10 @@
 package dev.creoii.greatbigworld.architectsassembly.mixin.item;
 
-import net.minecraft.client.item.TooltipType;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SpawnEggItem;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import org.spongepowered.asm.mixin.Final;
