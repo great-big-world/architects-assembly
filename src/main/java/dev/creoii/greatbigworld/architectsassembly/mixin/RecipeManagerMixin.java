@@ -15,7 +15,7 @@ import java.util.List;
 @Mixin(RecipeManager.class)
 public class RecipeManagerMixin {
     @Unique
-    private final List<Identifier> RECIPES_TO_REMOVE = new ImmutableList.Builder<Identifier>()
+    private final List<Identifier> CRAFTING_RECIPES_TO_REMOVE = new ImmutableList.Builder<Identifier>()
             .add(Identifier.of("chiseled_deepslate"))
             .add(Identifier.of("chiseled_nether_bricks"))
             .add(Identifier.of("chiseled_polished_blackstone"))
@@ -23,6 +23,8 @@ public class RecipeManagerMixin {
             .add(Identifier.of("chiseled_red_sandstone"))
             .add(Identifier.of("chiseled_sandstone"))
             .add(Identifier.of("chiseled_stone_bricks"))
+            .add(Identifier.of("chiseled_tuff"))
+            .add(Identifier.of("chiseled_copper"))
             .add(Identifier.of("purpur_pillar"))
             .add(Identifier.of("quartz_pillar"))
             .add(Identifier.of("deepslate_tiles"))
@@ -32,7 +34,7 @@ public class RecipeManagerMixin {
     @Redirect(method = "apply(Ljava/util/Map;Lnet/minecraft/resource/ResourceManager;Lnet/minecraft/util/profiler/Profiler;)V", at = @At(value = "INVOKE", target = "Lcom/google/common/collect/ImmutableMap$Builder;put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/google/common/collect/ImmutableMap$Builder;"))
     private <K, V> ImmutableMap.Builder<K, V> gbw$removeRecipes(ImmutableMap.Builder<K, V> instance, K key, V value) {
         RecipeEntry<?> recipeEntry = (RecipeEntry<?>) value;
-        if (RECIPES_TO_REMOVE.contains(recipeEntry.id())) {
+        if (CRAFTING_RECIPES_TO_REMOVE.contains(recipeEntry.id())) {
             return instance;
         }
         return instance.put(key, value);
