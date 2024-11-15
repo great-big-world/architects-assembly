@@ -2,7 +2,6 @@ package dev.creoii.greatbigworld.architectsassembly.mixin.client;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import dev.creoii.greatbigworld.architectsassembly.util.ExtendedItemFrame;
-import dev.creoii.greatbigworld.util.ColorHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.block.BlockModelRenderer;
@@ -14,6 +13,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.decoration.ItemFrameEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DyeColor;
+import net.minecraft.util.math.ColorHelper;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -33,11 +33,10 @@ public class ItemFrameEntityRendererMixin<T extends ItemFrameEntity> {
     }
 
     @Redirect(method = "render(Lnet/minecraft/entity/decoration/ItemFrameEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/block/BlockModelRenderer;render(Lnet/minecraft/client/util/math/MatrixStack$Entry;Lnet/minecraft/client/render/VertexConsumer;Lnet/minecraft/block/BlockState;Lnet/minecraft/client/render/model/BakedModel;FFFII)V"))
-    private void gbw$tintDyedItemFrame(BlockModelRenderer instance, MatrixStack.Entry entry, VertexConsumer vertexConsumer, BlockState state, BakedModel bakedModel, float red, float green, float blue, int light, int overlay, @Local T itemFrameEntity, @Local ModelIdentifier modelIdentifier) {
+    private void gbw$tintDyedItemFrame(BlockModelRenderer instance, MatrixStack.Entry entry, VertexConsumer vertexConsumer, BlockState state, BakedModel bakedModel, float red, float green, float blue, int light, int overlay, @Local(argsOnly = true) T itemFrameEntity, @Local ModelIdentifier modelIdentifier) {
         DyeColor color;
         if (itemFrameEntity instanceof ExtendedItemFrame extendedItemFrame && (color = extendedItemFrame.gbw$getColor()) != null) {
-            int mapColor = color.getMapColor().color;
-            instance.render(entry, vertexConsumer, state, bakedModel, ColorHelper.red(mapColor), ColorHelper.green(mapColor), ColorHelper.blue(mapColor), light, overlay);
+            instance.render(entry, vertexConsumer, state, bakedModel, ColorHelper.Argb.getRed(color.getEntityColor()) / 255f, ColorHelper.Argb.getGreen(color.getEntityColor()) / 255f, ColorHelper.Argb.getBlue(color.getEntityColor()) / 255f, light, overlay);
         } else {
             instance.render(entry, vertexConsumer, state, bakedModel, 1f, 1f, 1f, light, overlay);
         }

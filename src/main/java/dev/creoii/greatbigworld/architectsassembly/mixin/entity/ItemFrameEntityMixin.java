@@ -116,8 +116,10 @@ public abstract class ItemFrameEntityMixin extends AbstractDecorationEntity impl
             if (gbw$isWaxed()) {
                 if (itemStack.isIn(ItemTags.AXES) && player.shouldCancelInteraction()) {
                     cir.setReturnValue(unwax((ItemFrameEntity) (Object) this, player, itemStack));
-                    return;
+                } else {
+                    cir.setReturnValue(ActionResult.PASS);
                 }
+                return;
             } else if (!gbw$isWaxed()) {
                 if (player.shouldCancelInteraction()) {
                     if (itemStack.isOf(Items.HONEYCOMB)) {
