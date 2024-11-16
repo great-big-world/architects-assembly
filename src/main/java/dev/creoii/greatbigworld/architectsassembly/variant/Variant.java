@@ -13,9 +13,6 @@ import net.minecraft.util.JsonHelper;
 import java.lang.reflect.Type;
 import java.util.*;
 
-/**
- * Minecart/Boat with [block], Spawn Eggs
- */
 public class Variant {
     public static final Gson GSON = new GsonBuilder().setPrettyPrinting().registerTypeAdapter(Variant.class, new Serializer()).create();
     public static final Map<String, Variant> VARIANTS = new HashMap<>();

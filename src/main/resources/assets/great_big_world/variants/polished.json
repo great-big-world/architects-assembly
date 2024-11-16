@@ -15,6 +15,7 @@
     "minecraft:polished_deepslate_wall",
     "minecraft:polished_tuff",
     "minecraft:polished_tuff_slab",
+    "great_big_world:polished_tuff_slab",
     "minecraft:polished_tuff_stairs",
     "minecraft:polished_tuff_wall",
     "minecraft:polished_basalt",
@@ -34,6 +35,10 @@
     "great_big_world:polished_lapis_stairs",
     "great_big_world:polished_lapis_slab",
     "great_big_world:polished_lapis_wall",
+    "great_big_world:polished_lapis_bricks",
+    "great_big_world:polished_lapis_brick_stairs",
+    "great_big_world:polished_lapis_brick_slab",
+    "great_big_world:polished_lapis_brick_wall",
     "great_big_world:polished_granite_wall",
     "great_big_world:polished_diorite_wall",
     "great_big_world:polished_andesite_wall"

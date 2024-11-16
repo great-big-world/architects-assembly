@@ -2,7 +2,6 @@ package dev.creoii.greatbigworld.architectsassembly.registry;
 
 import com.google.common.collect.ImmutableMap;
 import dev.creoii.greatbigworld.GreatBigWorld;
-import dev.creoii.greatbigworld.architectsassembly.ArchitectsAssembly;
 import dev.creoii.greatbigworld.architectsassembly.item.DyedItemFrameItem;
 import dev.creoii.greatbigworld.architectsassembly.item.SlabItem;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -180,6 +179,10 @@ public final class ArchitectsAssemblyItems {
     public static final Item POLISHED_LAPIS_STAIRS = new BlockItem(ArchitectsAssemblyBlocks.POLISHED_LAPIS_STAIRS, new Item.Settings());
     public static final Item POLISHED_LAPIS_SLAB = new SlabItem(ArchitectsAssemblyBlocks.POLISHED_LAPIS_SLAB, ArchitectsAssemblyBlocks.VERTICAL_POLISHED_LAPIS_SLAB, new Item.Settings());
     public static final Item POLISHED_LAPIS_WALL = new BlockItem(ArchitectsAssemblyBlocks.POLISHED_LAPIS_WALL, new Item.Settings());
+    public static final Item POLISHED_LAPIS_BRICKS = new BlockItem(ArchitectsAssemblyBlocks.POLISHED_LAPIS_BRICKS, new Item.Settings());
+    public static final Item POLISHED_LAPIS_BRICK_STAIRS = new BlockItem(ArchitectsAssemblyBlocks.POLISHED_LAPIS_BRICK_STAIRS, new Item.Settings());
+    public static final Item POLISHED_LAPIS_BRICK_SLAB = new SlabItem(ArchitectsAssemblyBlocks.POLISHED_LAPIS_BRICK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_POLISHED_LAPIS_BRICK_SLAB, new Item.Settings());
+    public static final Item POLISHED_LAPIS_BRICK_WALL = new BlockItem(ArchitectsAssemblyBlocks.POLISHED_LAPIS_BRICK_WALL, new Item.Settings());
     public static final Item CRACKED_BRICKS = new BlockItem(ArchitectsAssemblyBlocks.CRACKED_BRICKS, new Item.Settings());
     public static final Item MOSSY_BRICKS = new BlockItem(ArchitectsAssemblyBlocks.MOSSY_BRICKS, new Item.Settings());
     public static final Item MOSSY_BRICK_STAIRS = new BlockItem(ArchitectsAssemblyBlocks.MOSSY_BRICK_STAIRS, new Item.Settings());
@@ -243,6 +246,10 @@ public final class ArchitectsAssemblyItems {
         Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "polished_lapis_stairs"), POLISHED_LAPIS_STAIRS);
         Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "polished_lapis_slab"), POLISHED_LAPIS_SLAB);
         Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "polished_lapis_wall"), POLISHED_LAPIS_WALL);
+        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "polished_lapis_bricks"), POLISHED_LAPIS_BRICKS);
+        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "polished_lapis_brick_stairs"), POLISHED_LAPIS_BRICK_STAIRS);
+        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "polished_lapis_brick_slab"), POLISHED_LAPIS_BRICK_SLAB);
+        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "polished_lapis_brick_wall"), POLISHED_LAPIS_BRICK_WALL);
         Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "cracked_bricks"), CRACKED_BRICKS);
         Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "mossy_bricks"), MOSSY_BRICKS);
         Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "mossy_brick_stairs"), MOSSY_BRICK_STAIRS);
@@ -316,7 +323,7 @@ public final class ArchitectsAssemblyItems {
             entries.addAfter(Items.TINTED_GLASS, SHATTERED_GLASS);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(entries -> {
-            entries.addAfter(Items.LAPIS_BLOCK, LAPIS_STAIRS, LAPIS_SLAB, LAPIS_WALL, POLISHED_LAPIS_BLOCK, POLISHED_LAPIS_STAIRS, POLISHED_LAPIS_SLAB, POLISHED_LAPIS_WALL);
+            entries.addAfter(Items.LAPIS_BLOCK, LAPIS_STAIRS, LAPIS_SLAB, LAPIS_WALL, POLISHED_LAPIS_BLOCK, POLISHED_LAPIS_STAIRS, POLISHED_LAPIS_SLAB, POLISHED_LAPIS_WALL, POLISHED_LAPIS_BRICKS, POLISHED_LAPIS_BRICK_STAIRS, POLISHED_LAPIS_BRICK_SLAB, POLISHED_LAPIS_BRICK_WALL);
             entries.addAfter(Items.BRICKS, CRACKED_BRICKS);
             entries.addAfter(Items.BRICK_WALL, MOSSY_BRICKS, MOSSY_BRICK_STAIRS, MOSSY_BRICK_SLAB, MOSSY_BRICK_WALL);
             entries.addAfter(CUT_COPPER_SLAB, CUT_COPPER_WALL);

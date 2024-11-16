@@ -1,7 +1,6 @@
 package dev.creoii.greatbigworld.architectsassembly.registry;
 
 import dev.creoii.greatbigworld.GreatBigWorld;
-import dev.creoii.greatbigworld.architectsassembly.ArchitectsAssembly;
 import dev.creoii.greatbigworld.architectsassembly.block.*;
 import dev.creoii.greatbigworld.architectsassembly.block.RedstoneLampBlock;
 import dev.creoii.greatbigworld.architectsassembly.block.TorchBlock;
@@ -80,6 +79,11 @@ public final class ArchitectsAssemblyBlocks {
     public static final Block POLISHED_LAPIS_SLAB = new SlabBlock(AbstractBlock.Settings.copy(POLISHED_LAPIS_BLOCK));
     public static final Block VERTICAL_POLISHED_LAPIS_SLAB = new VerticalSlabBlock(AbstractBlock.Settings.copy(POLISHED_LAPIS_SLAB));
     public static final Block POLISHED_LAPIS_WALL = new WallBlock(AbstractBlock.Settings.copy(POLISHED_LAPIS_BLOCK));
+    public static final Block POLISHED_LAPIS_BRICKS = new Block(AbstractBlock.Settings.copy(POLISHED_LAPIS_BLOCK));
+    public static final Block POLISHED_LAPIS_BRICK_STAIRS = new StairsBlock(POLISHED_LAPIS_BRICKS.getDefaultState(), AbstractBlock.Settings.copy(POLISHED_LAPIS_BRICKS));
+    public static final Block POLISHED_LAPIS_BRICK_SLAB = new SlabBlock(AbstractBlock.Settings.copy(POLISHED_LAPIS_BRICKS));
+    public static final Block VERTICAL_POLISHED_LAPIS_BRICK_SLAB = new VerticalSlabBlock(AbstractBlock.Settings.copy(POLISHED_LAPIS_BRICK_SLAB));
+    public static final Block POLISHED_LAPIS_BRICK_WALL = new WallBlock(AbstractBlock.Settings.copy(POLISHED_LAPIS_BRICKS));
     public static final Block CRACKED_BRICKS = new Block(AbstractBlock.Settings.copy(Blocks.BRICKS));
     public static final Block MOSSY_BRICKS = new Block(AbstractBlock.Settings.copy(Blocks.BRICKS));
     public static final Block MOSSY_BRICK_STAIRS = new StairsBlock(MOSSY_BRICKS.getDefaultState(), AbstractBlock.Settings.copy(Blocks.BRICK_STAIRS));
@@ -145,6 +149,11 @@ public final class ArchitectsAssemblyBlocks {
         Registry.register(Registries.BLOCK, Identifier.of(GreatBigWorld.NAMESPACE, "polished_lapis_slab"), POLISHED_LAPIS_SLAB);
         Registry.register(Registries.BLOCK, Identifier.of(GreatBigWorld.NAMESPACE, "vertical_polished_lapis_slab"), VERTICAL_POLISHED_LAPIS_SLAB);
         Registry.register(Registries.BLOCK, Identifier.of(GreatBigWorld.NAMESPACE, "polished_lapis_wall"), POLISHED_LAPIS_WALL);
+        Registry.register(Registries.BLOCK, Identifier.of(GreatBigWorld.NAMESPACE, "polished_lapis_bricks"), POLISHED_LAPIS_BRICKS);
+        Registry.register(Registries.BLOCK, Identifier.of(GreatBigWorld.NAMESPACE, "polished_lapis_brick_stairs"), POLISHED_LAPIS_BRICK_STAIRS);
+        Registry.register(Registries.BLOCK, Identifier.of(GreatBigWorld.NAMESPACE, "polished_lapis_brick_slab"), POLISHED_LAPIS_BRICK_SLAB);
+        Registry.register(Registries.BLOCK, Identifier.of(GreatBigWorld.NAMESPACE, "vertical_polished_lapis_brick_slab"), VERTICAL_POLISHED_LAPIS_BRICK_SLAB);
+        Registry.register(Registries.BLOCK, Identifier.of(GreatBigWorld.NAMESPACE, "polished_lapis_brick_wall"), POLISHED_LAPIS_BRICK_WALL);
         Registry.register(Registries.BLOCK, Identifier.of(GreatBigWorld.NAMESPACE, "cracked_bricks"), CRACKED_BRICKS);
         Registry.register(Registries.BLOCK, Identifier.of(GreatBigWorld.NAMESPACE, "mossy_bricks"), MOSSY_BRICKS);
         Registry.register(Registries.BLOCK, Identifier.of(GreatBigWorld.NAMESPACE, "mossy_brick_stairs"), MOSSY_BRICK_STAIRS);

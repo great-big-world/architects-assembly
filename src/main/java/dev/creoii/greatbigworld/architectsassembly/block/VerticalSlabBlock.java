@@ -1,7 +1,6 @@
 package dev.creoii.greatbigworld.architectsassembly.block;
 
 import dev.creoii.greatbigworld.GreatBigWorld;
-import dev.creoii.greatbigworld.architectsassembly.ArchitectsAssembly;
 import dev.creoii.greatbigworld.architectsassembly.block.enums.VerticalSlabType;
 import dev.creoii.greatbigworld.architectsassembly.block.enums.FluidType;
 import dev.creoii.greatbigworld.architectsassembly.util.Fluidloggable;
