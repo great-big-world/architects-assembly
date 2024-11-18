@@ -54,6 +54,24 @@ public enum VerticalSlabType implements StringIdentifiable {
         return shape;
     }
 
+    public VerticalSlabType getOpposite() {
+        return switch (this) {
+            case NORTH -> SOUTH;
+            case SOUTH -> NORTH;
+            case WEST -> EAST;
+            case EAST -> WEST;
+            case DOUBLE -> DOUBLE;
+        };
+    }
+
+    public List<Direction> getPerpendiculars() {
+        return switch (this) {
+            case NORTH, SOUTH -> List.of(Direction.WEST, Direction.EAST);
+            case WEST, EAST -> List.of(Direction.NORTH, Direction.SOUTH);
+            case DOUBLE -> List.of();
+        };
+    }
+
     public static VerticalSlabType fromDirection(Direction direction) {
         for (VerticalSlabType type : VerticalSlabType.values())
             if (direction == type.direction)

@@ -2,6 +2,7 @@
   "values": [
     "minecraft:bamboo_mosaic",
     "minecraft:bamboo_mosaic_stairs",
-    "minecraft:bamboo_mosaic_slab"
+    "minecraft:bamboo_mosaic_slab",
+    "great_big_world:bamboo_mosaic_slab"
   ]
 }
