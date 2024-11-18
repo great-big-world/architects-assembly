@@ -5,7 +5,7 @@
       "predicate": {
         "great_big_world:placement": 1
       },
-      "model": "great_big_world:item/vertical_oxidized_cut_copper_slab"
+      "model": "great_big_world:block/vertical_oxidized_cut_copper_slab"
     }
   ]
 }
