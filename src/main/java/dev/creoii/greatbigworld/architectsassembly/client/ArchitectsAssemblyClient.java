@@ -53,6 +53,9 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
         });
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            if (client.player != null && client.player.isSpectator())
+                return;
+
             EXPAND_TOOLTIPS.setPressed(client.currentScreen != null && InputUtil.isKeyPressed(client.getWindow().getHandle(), EXPAND_TOOLTIPS.boundKey.getCode()));
             CYCLE_HOTBAR.setPressed(client.currentScreen == null && InputUtil.isKeyPressed(client.getWindow().getHandle(), CYCLE_HOTBAR.boundKey.getCode()));
 
