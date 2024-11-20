@@ -1,12 +1,15 @@
 package dev.creoii.greatbigworld.architectsassembly.mixin.block;
 
 import com.google.common.collect.ImmutableMap;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import dev.creoii.greatbigworld.architectsassembly.block.VerticalSlabBlock;
 import dev.creoii.greatbigworld.architectsassembly.block.enums.FluidType;
 import dev.creoii.greatbigworld.architectsassembly.block.enums.VerticalSlabType;
 import dev.creoii.greatbigworld.architectsassembly.util.ArchitectsAssemblyTags;
 import dev.creoii.greatbigworld.architectsassembly.util.Fluidloggable;
+import dev.creoii.greatbigworld.floraandfauna.util.SnowyHelper;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.WallShape;
 import net.minecraft.entity.player.PlayerEntity;
@@ -22,6 +25,7 @@ import net.minecraft.state.property.EnumProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
@@ -32,6 +36,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.Map;
 import java.util.Optional;
 
 @Mixin(WallBlock.class)
@@ -74,9 +79,20 @@ public abstract class WallBlockMixin extends Block implements Waterloggable {
         builder.add(Fluidloggable.FLUIDLOGGED);
     }
 
+    @WrapOperation(method = "getCollisionShape", at = @At(value = "INVOKE", target = "Ljava/util/Map;get(Ljava/lang/Object;)Ljava/lang/Object;"))
+    private <V> V gbw$modifyCollisionState(Map<BlockState, VoxelShape> instance, Object object, Operation<V> original) {
+        BlockState state = (BlockState) object;
+        return original.call(instance, state.with(WATERLOGGED, false).with(SnowyHelper.SNOW_LAYERS, Math.max(0, state.get(SnowyHelper.SNOW_LAYERS) - 1)));
+    }
+
     @Inject(method = "getPlacementState", at = @At("RETURN"), cancellable = true)
     private void gbw$fixFluidloggablePlacementState(ItemPlacementContext ctx, CallbackInfoReturnable<BlockState> cir, @Local FluidState fluidState) {
-        cir.setReturnValue(cir.getReturnValue().with(WATERLOGGED, false).with(Fluidloggable.FLUIDLOGGED, Fluidloggable.FLUIDS.get(fluidState.getFluid())));
+        BlockState state = ctx.getWorld().getBlockState(ctx.getBlockPos());
+        if (state.isOf(Blocks.SNOW)) {
+            cir.setReturnValue(cir.getReturnValue().with(WATERLOGGED, false).with(Fluidloggable.FLUIDLOGGED, Fluidloggable.FLUIDS.get(fluidState.getFluid())).with(SnowyHelper.SNOW_LAYERS, state.get(SnowBlock.LAYERS)));
+        } else {
+            cir.setReturnValue(cir.getReturnValue().with(WATERLOGGED, false).with(Fluidloggable.FLUIDLOGGED, Fluidloggable.FLUIDS.get(fluidState.getFluid())));
+        }
     }
 
     @Inject(method = "getStateForNeighborUpdate", at = @At("HEAD"))
@@ -97,7 +113,12 @@ public abstract class WallBlockMixin extends Block implements Waterloggable {
     @Redirect(method = "getShapeMap", at = @At(value = "INVOKE", target = "Lcom/google/common/collect/ImmutableMap$Builder;put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/google/common/collect/ImmutableMap$Builder;"))
     private <K, V> ImmutableMap.Builder<BlockState, VoxelShape> gbw$fixWallShapeMap(ImmutableMap.Builder<BlockState, VoxelShape> instance, K key, V value) {
         for (FluidType fluidType : FluidType.values()) {
-            instance.put(((BlockState) key).with(Fluidloggable.FLUIDLOGGED, fluidType), (VoxelShape) value);
+            for (int i : SnowyHelper.SNOW_LAYERS.getValues()) {
+                BlockState state = ((BlockState) key).with(SnowyHelper.SNOW_LAYERS, i).with(Fluidloggable.FLUIDLOGGED, fluidType);
+                if (SnowyHelper.isSnowy(state)) {
+                    instance.put(state, VoxelShapes.union((VoxelShape) value, SnowyHelper.getSnowShape(state)));
+                } else instance.put(state, (VoxelShape) value);
+            }
         }
         return instance;
     }
