@@ -4,6 +4,7 @@ accessible class net/minecraft/client/gui/screen/recipebook/RecipeAlternativesWi
 accessible method net/minecraft/item/ItemUsageContext getHitResult ()Lnet/minecraft/util/hit/BlockHitResult;
 accessible method net/minecraft/recipe/CuttingRecipe$Serializer <init> (Lnet/minecraft/recipe/CuttingRecipe$RecipeFactory;)V
 accessible method net/minecraft/client/render/block/entity/BlockEntityRenderDispatcher runReported (Lnet/minecraft/block/entity/BlockEntity;Ljava/lang/Runnable;)V
+accessible method net/minecraft/state/StateManager addFieldToMapCodec (Lcom/mojang/serialization/MapCodec;Ljava/util/function/Supplier;Ljava/lang/String;Lnet/minecraft/state/property/Property;)Lcom/mojang/serialization/MapCodec;
 
 accessible field net/minecraft/block/Block cachedItem Lnet/minecraft/item/Item;
 accessible field net/minecraft/item/ItemPlacementContext placementPos Lnet/minecraft/util/math/BlockPos;
@@ -27,3 +28,5 @@ accessible field net/minecraft/client/render/item/BuiltinModelItemRenderer rende
 accessible field net/minecraft/client/render/item/BuiltinModelItemRenderer blockEntityRenderDispatcher Lnet/minecraft/client/render/block/entity/BlockEntityRenderDispatcher;
 accessible field net/minecraft/client/render/item/BuiltinModelItemRenderer RENDER_SHULKER_BOX Lnet/minecraft/block/entity/ShulkerBoxBlockEntity;
 accessible field net/minecraft/client/render/item/BuiltinModelItemRenderer RENDER_SHULKER_BOX_DYED [Lnet/minecraft/block/entity/ShulkerBoxBlockEntity;
+
+accessible field net/minecraft/state/State withTable Lcom/google/common/collect/Table;

@@ -6,6 +6,7 @@
   "mixins": [
     "LanguageMixin",
     "RecipeManagerMixin",
+    "StateManagerMixin",
     "UseActionMixin",
     "block.AbstractCandleBlockMixin",
     "block.AmethystClusterBlockMixin",
@@ -15,6 +16,8 @@
     "block.BlockForceFluidloggableMixin",
     "block.BlockGetFluidStateMixin",
     "block.BlockGetPlacementStateMixin",
+    "block.BlockMixin",
+    "block.BlocksMixin",
     "block.BrewingStandBlockMixin",
     "block.ChainBlockMixin",
     "block.DoorBlockMixin",

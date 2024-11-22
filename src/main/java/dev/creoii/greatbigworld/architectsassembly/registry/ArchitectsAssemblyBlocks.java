@@ -4,6 +4,8 @@ import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.architectsassembly.block.*;
 import dev.creoii.greatbigworld.architectsassembly.block.RedstoneLampBlock;
 import dev.creoii.greatbigworld.architectsassembly.block.TorchBlock;
+import dev.creoii.greatbigworld.architectsassembly.block.WallBlock;
+import dev.creoii.greatbigworld.architectsassembly.util.state.ConsolidatedStateManagers;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -73,23 +75,23 @@ public final class ArchitectsAssemblyBlocks {
     public static final Block LAPIS_STAIRS = new StairsBlock(Blocks.LAPIS_BLOCK.getDefaultState(), AbstractBlock.Settings.copy(Blocks.LAPIS_BLOCK));
     public static final Block LAPIS_SLAB = new SlabBlock(AbstractBlock.Settings.copy(Blocks.LAPIS_BLOCK));
     public static final Block VERTICAL_LAPIS_SLAB = new VerticalSlabBlock(AbstractBlock.Settings.copy(LAPIS_SLAB));
-    public static final Block LAPIS_WALL = new WallBlock(AbstractBlock.Settings.copy(Blocks.LAPIS_BLOCK));
+    public static final Block LAPIS_WALL = new WallBlock(AbstractBlock.Settings.copyShallow(Blocks.LAPIS_BLOCK).solid());
     public static final Block POLISHED_LAPIS_BLOCK = new Block(AbstractBlock.Settings.copy(Blocks.LAPIS_BLOCK));
     public static final Block POLISHED_LAPIS_STAIRS = new StairsBlock(POLISHED_LAPIS_BLOCK.getDefaultState(), AbstractBlock.Settings.copy(POLISHED_LAPIS_BLOCK));
     public static final Block POLISHED_LAPIS_SLAB = new SlabBlock(AbstractBlock.Settings.copy(POLISHED_LAPIS_BLOCK));
     public static final Block VERTICAL_POLISHED_LAPIS_SLAB = new VerticalSlabBlock(AbstractBlock.Settings.copy(POLISHED_LAPIS_SLAB));
-    public static final Block POLISHED_LAPIS_WALL = new WallBlock(AbstractBlock.Settings.copy(POLISHED_LAPIS_BLOCK));
+    public static final Block POLISHED_LAPIS_WALL = new WallBlock(AbstractBlock.Settings.copyShallow(POLISHED_LAPIS_BLOCK).solid());
     public static final Block POLISHED_LAPIS_BRICKS = new Block(AbstractBlock.Settings.copy(POLISHED_LAPIS_BLOCK));
     public static final Block POLISHED_LAPIS_BRICK_STAIRS = new StairsBlock(POLISHED_LAPIS_BRICKS.getDefaultState(), AbstractBlock.Settings.copy(POLISHED_LAPIS_BRICKS));
     public static final Block POLISHED_LAPIS_BRICK_SLAB = new SlabBlock(AbstractBlock.Settings.copy(POLISHED_LAPIS_BRICKS));
     public static final Block VERTICAL_POLISHED_LAPIS_BRICK_SLAB = new VerticalSlabBlock(AbstractBlock.Settings.copy(POLISHED_LAPIS_BRICK_SLAB));
-    public static final Block POLISHED_LAPIS_BRICK_WALL = new WallBlock(AbstractBlock.Settings.copy(POLISHED_LAPIS_BRICKS));
+    public static final Block POLISHED_LAPIS_BRICK_WALL = new WallBlock(AbstractBlock.Settings.copyShallow(POLISHED_LAPIS_BRICKS).solid());
     public static final Block CRACKED_BRICKS = new Block(AbstractBlock.Settings.copy(Blocks.BRICKS));
     public static final Block MOSSY_BRICKS = new Block(AbstractBlock.Settings.copy(Blocks.BRICKS));
     public static final Block MOSSY_BRICK_STAIRS = new StairsBlock(MOSSY_BRICKS.getDefaultState(), AbstractBlock.Settings.copy(Blocks.BRICK_STAIRS));
     public static final Block MOSSY_BRICK_SLAB = new SlabBlock(AbstractBlock.Settings.copy(Blocks.BRICK_SLAB));
     public static final Block VERTICAL_MOSSY_BRICK_SLAB = new VerticalSlabBlock(AbstractBlock.Settings.copy(MOSSY_BRICK_SLAB));
-    public static final Block MOSSY_BRICK_WALL = new WallBlock(AbstractBlock.Settings.copy(Blocks.BRICK_WALL));
+    public static final Block MOSSY_BRICK_WALL = new WallBlock(AbstractBlock.Settings.copyShallow(Blocks.BRICKS).solid());
     public static final Block GLASS = new GlassBlock(AbstractBlock.Settings.copy(Blocks.GLASS), SHATTERED_GLASS.getDefaultState());
     public static final Block CHISELED_OAK_PLANKS = new Block(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS));
     public static final Block CHISELED_OAK_LOG = new PillarBlock(AbstractBlock.Settings.copy(Blocks.OAK_LOG));
@@ -187,6 +189,8 @@ public final class ArchitectsAssemblyBlocks {
         OxidizableBlocksRegistry.registerOxidizableBlockPair(CUT_COPPER_WALL, EXPOSED_CUT_COPPER_WALL);
         OxidizableBlocksRegistry.registerOxidizableBlockPair(EXPOSED_CUT_COPPER_WALL, WEATHERED_CUT_COPPER_WALL);
         OxidizableBlocksRegistry.registerOxidizableBlockPair(WEATHERED_CUT_COPPER_WALL, OXIDIZED_CUT_COPPER_WALL);
+
+        //ConsolidatedStateManagers.WALL_MANAGER.addBlocks(LAPIS_WALL, POLISHED_LAPIS_WALL, POLISHED_LAPIS_BRICK_WALL, MOSSY_BRICK_WALL, CUT_COPPER_WALL, EXPOSED_CUT_COPPER_WALL, WEATHERED_CUT_COPPER_WALL, OXIDIZED_CUT_COPPER_WALL);
     }
 
     @Environment(EnvType.CLIENT)
@@ -405,6 +409,8 @@ public final class ArchitectsAssemblyBlocks {
         Registry.register(Registries.BLOCK, Identifier.of(GreatBigWorld.NAMESPACE, "cracked_quartz_bricks"), CRACKED_QUARTZ_BRICKS);
         Registry.register(Registries.BLOCK, Identifier.of(GreatBigWorld.NAMESPACE, "cracked_red_nether_bricks"), CRACKED_RED_NETHER_BRICKS);
         Registry.register(Registries.BLOCK, Identifier.of(GreatBigWorld.NAMESPACE, "cracked_end_stone_bricks"), CRACKED_END_STONE_BRICKS);
+
+        //ConsolidatedStateManagers.WALL_MANAGER.addBlocks(QUARTZ_BRICK_WALL, PRISMARINE_BRICK_WALL, DARK_PRISMARINE_WALL, SMOOTH_SANDSTONE_WALL, SMOOTH_RED_SANDSTONE_WALL, POLISHED_GRANITE_WALL, POLISHED_ANDESITE_WALL, POLISHED_DIORITE_WALL, PURPUR_WALL);
     }
 
     @Environment(EnvType.CLIENT)
