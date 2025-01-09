@@ -4,7 +4,6 @@ accessible class net/minecraft/client/gui/screen/recipebook/RecipeAlternativesWi
 accessible method net/minecraft/item/ItemUsageContext getHitResult ()Lnet/minecraft/util/hit/BlockHitResult;
 accessible method net/minecraft/recipe/CuttingRecipe$Serializer <init> (Lnet/minecraft/recipe/CuttingRecipe$RecipeFactory;)V
 accessible method net/minecraft/client/render/block/entity/BlockEntityRenderDispatcher runReported (Lnet/minecraft/block/entity/BlockEntity;Ljava/lang/Runnable;)V
-accessible method net/minecraft/state/StateManager addFieldToMapCodec (Lcom/mojang/serialization/MapCodec;Ljava/util/function/Supplier;Ljava/lang/String;Lnet/minecraft/state/property/Property;)Lcom/mojang/serialization/MapCodec;
 
 accessible field net/minecraft/block/Block cachedItem Lnet/minecraft/item/Item;
 accessible field net/minecraft/item/ItemPlacementContext placementPos Lnet/minecraft/util/math/BlockPos;
@@ -14,6 +13,8 @@ accessible field net/minecraft/client/option/KeyBinding boundKey Lnet/minecraft/
 accessible field net/minecraft/client/render/item/ItemRenderer builtinModelItemRenderer Lnet/minecraft/client/render/item/BuiltinModelItemRenderer;
 accessible field net/minecraft/block/FireBlock burnChances Lit/unimi/dsi/fastutil/objects/Object2IntMap;
 accessible field net/minecraft/block/FireBlock spreadChances Lit/unimi/dsi/fastutil/objects/Object2IntMap;
+accessible field net/minecraft/state/StateManager owner Ljava/lang/Object;
+mutable field net/minecraft/state/StateManager owner Ljava/lang/Object;
 
 accessible field net/minecraft/client/render/item/BuiltinModelItemRenderer renderBanner Lnet/minecraft/block/entity/BannerBlockEntity;
 accessible field net/minecraft/client/render/item/BuiltinModelItemRenderer renderBed Lnet/minecraft/block/entity/BedBlockEntity;
@@ -28,5 +29,3 @@ accessible field net/minecraft/client/render/item/BuiltinModelItemRenderer rende
 accessible field net/minecraft/client/render/item/BuiltinModelItemRenderer blockEntityRenderDispatcher Lnet/minecraft/client/render/block/entity/BlockEntityRenderDispatcher;
 accessible field net/minecraft/client/render/item/BuiltinModelItemRenderer RENDER_SHULKER_BOX Lnet/minecraft/block/entity/ShulkerBoxBlockEntity;
 accessible field net/minecraft/client/render/item/BuiltinModelItemRenderer RENDER_SHULKER_BOX_DYED [Lnet/minecraft/block/entity/ShulkerBoxBlockEntity;
-
-accessible field net/minecraft/state/State withTable Lcom/google/common/collect/Table;

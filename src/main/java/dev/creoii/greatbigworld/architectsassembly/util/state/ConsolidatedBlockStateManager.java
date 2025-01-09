@@ -1,24 +1,37 @@
 package dev.creoii.greatbigworld.architectsassembly.util.state;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.mojang.serialization.Decoder;
+import com.mojang.serialization.Encoder;
+import com.mojang.serialization.MapCodec;
+import it.unimi.dsi.fastutil.objects.Reference2ObjectArrayMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.*;
-import net.minecraft.util.StringIdentifiable;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Map;
+import java.util.function.Supplier;
 
 public class ConsolidatedBlockStateManager {
     private final Class<?> blockClass;
-    private final StateManager<Block, BlockState> stateManager;
+    private final Supplier<Block> registerBlock;
+    private StateManager<Block, BlockState> stateManager;
     private final List<Block> blocks;
+    private final Map<Block, BlockState> cachedDefaultStates;
 
-    protected ConsolidatedBlockStateManager(Class<?> blockClass, StateManager<Block, BlockState> stateManager) {
+    protected ConsolidatedBlockStateManager(Class<?> blockClass, Supplier<Block> registerBlock) {
         this.blockClass = blockClass;
-        this.stateManager = stateManager;
+        this.registerBlock = registerBlock;
         this.blocks = Lists.newArrayList();
+        this.cachedDefaultStates = Maps.newHashMap();
+    }
+
+    public void init() {
+        stateManager = registerBlock.get().getStateManager();
     }
 
     public StateManager<Block, BlockState> getStateManager() {
@@ -26,8 +39,9 @@ public class ConsolidatedBlockStateManager {
     }
 
     public void addBlock(Block block) {
-        if (block.getClass() == blockClass)
+        if (block.getClass().isAssignableFrom(blockClass)) {
             blocks.add(block);
+        }
     }
 
     public void addBlocks(Block... blocks) {
@@ -36,40 +50,38 @@ public class ConsolidatedBlockStateManager {
         }
     }
 
-    public BlockState getDefaultState() {
+    public BlockState getTemplateState() {
         return stateManager.getDefaultState();
+    }
+
+    private BlockState createDefaultState(Block block) {
+        return new BlockState(block, new Reference2ObjectArrayMap<>(), MapCodec.of(Encoder.empty(), Decoder.unit(block::getDefaultState)));
     }
 
     @Nullable
     public BlockState getDefaultState(Block block) {
-        if (blocks.contains(block)) {
-            BlockState templateState = stateManager.getDefaultState();
-            BlockState defaultState = block.getDefaultState();
-            for (Property<?> property : templateState.getProperties()) {
-                if (property instanceof BooleanProperty booleanProperty) {
-                    defaultState = copyBooleanProperty(defaultState, templateState, booleanProperty);
-                } else if (property instanceof IntProperty intProperty) {
-                    defaultState = copyIntProperty(defaultState, templateState, intProperty);
-                } else if (property instanceof DirectionProperty directionProperty) {
-                    defaultState = copyEnumProperty(defaultState, templateState, directionProperty);
-                } else if (property instanceof EnumProperty<?> enumProperty) {
-                    defaultState = copyEnumProperty(defaultState, templateState, enumProperty);
-                }
-            }
-            return defaultState;
+        if (cachedDefaultStates.containsKey(block)) {
+            System.out.println("get cached state for " + block.getTranslationKey());
+            return cachedDefaultStates.get(block);
+        } else if (blocks.contains(block)) {
+            System.out.println("get default state for " + block.getTranslationKey());
+            BlockState templateState = createDefaultState(block);
+            return cachedDefaultStates.put(block, copyPropertiesToBlock(block, templateState));
         }
         return null;
     }
 
-    private BlockState copyBooleanProperty(BlockState to, BlockState from, BooleanProperty property) {
-        return to.with(property, from.get(property));
+    public static BlockState copyPropertiesToBlock(Block to, BlockState from) {
+        BlockState copy = to.getDefaultState();
+        for (Property<?> property : from.getProperties()) {
+            copy = copyProperty(copy, from, property);
+        }
+        return copy;
     }
 
-    private BlockState copyIntProperty(BlockState to, BlockState from, IntProperty property) {
-        return to.with(property, from.get(property));
-    }
-
-    private <T extends Enum<T> & StringIdentifiable> BlockState copyEnumProperty(BlockState to, BlockState from, EnumProperty<T> property) {
-        return to.with(property, from.get(property));
+    private static <T extends Comparable<T>> BlockState copyProperty(BlockState to, BlockState from, Property<T> property) {
+        if (to.contains(property))
+            return to.with(property, from.get(property));
+        return to;
     }
 }

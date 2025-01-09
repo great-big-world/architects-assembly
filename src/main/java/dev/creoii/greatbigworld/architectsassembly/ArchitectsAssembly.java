@@ -3,6 +3,7 @@ package dev.creoii.greatbigworld.architectsassembly;
 import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.architectsassembly.block.VerticalSlabBlock;
 import dev.creoii.greatbigworld.architectsassembly.registry.*;
+import dev.creoii.greatbigworld.architectsassembly.util.state.ConsolidatedStateManagers;
 import dev.creoii.greatbigworld.architectsassembly.variant.Variant;
 import dev.creoii.greatbigworld.architectsassembly.world.feature.MossifyVegetationPatchFeature;
 import net.fabricmc.api.ModInitializer;
@@ -31,9 +32,13 @@ import java.util.Map;
 public class ArchitectsAssembly implements ModInitializer {
     public static final Logger LOGGER = LogManager.getLogger(ArchitectsAssembly.class);
 
+    public static ConsolidatedStateManagers CONSOLIDATED_STATE_MANAGERS;
+
     @Override
     @SuppressWarnings("deprecation")
     public void onInitialize() {
+        CONSOLIDATED_STATE_MANAGERS.getWallManager().init();
+
         ArchitectsAssemblyBlocks.register();
         ArchitectsAssemblyItems.register();
         ArchitectsAssemblyParticleTypes.register();

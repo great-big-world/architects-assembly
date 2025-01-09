@@ -2,11 +2,11 @@ package dev.creoii.greatbigworld.architectsassembly.block;
 
 import com.google.common.collect.*;
 import com.mojang.serialization.MapCodec;
+import dev.creoii.greatbigworld.architectsassembly.ArchitectsAssembly;
 import dev.creoii.greatbigworld.architectsassembly.block.enums.FluidType;
 import dev.creoii.greatbigworld.architectsassembly.block.enums.VerticalSlabType;
 import dev.creoii.greatbigworld.architectsassembly.util.ArchitectsAssemblyTags;
 import dev.creoii.greatbigworld.architectsassembly.util.Fluidloggable;
-import dev.creoii.greatbigworld.architectsassembly.util.state.ConsolidatedStateManagers;
 import dev.creoii.greatbigworld.block.OverlayState;
 import dev.creoii.greatbigworld.floraandfauna.season.Season;
 import dev.creoii.greatbigworld.floraandfauna.season.SeasonManager;
@@ -58,42 +58,26 @@ public class WallBlock extends Block implements Fluidloggable, OverlayState {
 
     public static Map<BlockState, VoxelShape> SHAPE_MAP = null;
     public static Map<BlockState, VoxelShape> COLLISION_SHAPE_MAP = null;
-    private final boolean template;
 
     public MapCodec<WallBlock> getCodec() {
         return CODEC;
     }
 
     public WallBlock(AbstractBlock.Settings settings) {
-        this(settings, false);
-    }
-
-    public WallBlock(AbstractBlock.Settings settings, boolean template) {
         super(settings);
-        this.template = template;
-        if (!template) {
-            if (SHAPE_MAP == null) {
-                SHAPE_MAP = createShapeMap(4.0F, 3.0F, 16.0F, 0.0F, 14.0F, 16.0F);
-            }
-            if (COLLISION_SHAPE_MAP == null) {
-                COLLISION_SHAPE_MAP = createShapeMap(4.0F, 3.0F, 24.0F, 0.0F, 24.0F, 24.0F);
-            }
-            ConsolidatedStateManagers.WALL_MANAGER.addBlock(this);
-            setDefaultState(ConsolidatedStateManagers.WALL_MANAGER.getDefaultState(this));
-        } else {
-            setDefaultState(getStateManager().getDefaultState().with(UP, true).with(EAST_SHAPE, WallShape.NONE).with(WEST_SHAPE, WallShape.NONE).with(NORTH_SHAPE, WallShape.NONE).with(SOUTH_SHAPE, WallShape.NONE).with(SnowyHelper.SNOW_LAYERS, 0).with(Fluidloggable.FLUIDLOGGED, FluidType.EMPTY));
+        if (SHAPE_MAP == null) {
+            SHAPE_MAP = createShapeMap(4f, 3.0F, 16.0F, 0.0F, 14.0F, 16.0F);
         }
-    }
-
-    public boolean isTemplate() {
-        return template;
+        if (COLLISION_SHAPE_MAP == null) {
+            COLLISION_SHAPE_MAP = createShapeMap(4f, 3.0F, 24.0F, 0.0F, 24.0F, 24.0F);
+        }
+        ArchitectsAssembly.CONSOLIDATED_STATE_MANAGERS.getWallManager().addBlock(this);
+        setDefaultState(ArchitectsAssembly.CONSOLIDATED_STATE_MANAGERS.getWallManager().getDefaultState(this));
     }
 
     @Override
     public StateManager<Block, BlockState> getStateManager() {
-        if (template) {
-            return super.getStateManager();
-        } else return ConsolidatedStateManagers.WALL_MANAGER.getStateManager();
+        return ArchitectsAssembly.CONSOLIDATED_STATE_MANAGERS.getWallManager().getStateManager();
     }
 
     private static VoxelShape getVoxelShape(VoxelShape base, WallShape wallShape, VoxelShape tall, VoxelShape low) {
@@ -136,7 +120,7 @@ public class WallBlock extends Block implements Fluidloggable, OverlayState {
 
                             for (FluidType fluidType : FluidType.values()) {
                                 for (int s : SnowyHelper.SNOW_LAYERS.getValues()) {
-                                    BlockState state = ConsolidatedStateManagers.WALL_MANAGER.getDefaultState().with(UP, boolean_).with(EAST_SHAPE, wallShape).with(WEST_SHAPE, wallShape3).with(NORTH_SHAPE, wallShape2).with(SOUTH_SHAPE, wallShape4).with(SnowyHelper.SNOW_LAYERS, s).with(Fluidloggable.FLUIDLOGGED, fluidType);
+                                    BlockState state = ArchitectsAssembly.CONSOLIDATED_STATE_MANAGERS.getWallManager().getTemplateState().with(UP, boolean_).with(EAST_SHAPE, wallShape).with(WEST_SHAPE, wallShape3).with(NORTH_SHAPE, wallShape2).with(SOUTH_SHAPE, wallShape4).with(SnowyHelper.SNOW_LAYERS, s).with(Fluidloggable.FLUIDLOGGED, fluidType);
                                     if (SnowyHelper.isSnowy(state)) {
                                         builder.put(state, VoxelShapes.union(voxelShape10, SnowyHelper.getSnowShape(state)));
                                     } else builder.put(state, voxelShape10);
@@ -152,11 +136,11 @@ public class WallBlock extends Block implements Fluidloggable, OverlayState {
     }
 
     protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return SHAPE_MAP.get(ConsolidatedStateManagers.WALL_MANAGER.getDefaultState().with(UP, state.get(UP)).with(EAST_SHAPE, state.get(EAST_SHAPE)).with(NORTH_SHAPE, state.get(NORTH_SHAPE)).with(SOUTH_SHAPE, state.get(SOUTH_SHAPE)).with(WEST_SHAPE, state.get(WEST_SHAPE)));
+        return SHAPE_MAP.get(ArchitectsAssembly.CONSOLIDATED_STATE_MANAGERS.getWallManager().getTemplateState().with(UP, state.get(UP)).with(EAST_SHAPE, state.get(EAST_SHAPE)).with(NORTH_SHAPE, state.get(NORTH_SHAPE)).with(SOUTH_SHAPE, state.get(SOUTH_SHAPE)).with(WEST_SHAPE, state.get(WEST_SHAPE)));
     }
 
     protected VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return COLLISION_SHAPE_MAP.get(ConsolidatedStateManagers.WALL_MANAGER.getDefaultState().with(UP, state.get(UP)).with(EAST_SHAPE, state.get(EAST_SHAPE)).with(NORTH_SHAPE, state.get(NORTH_SHAPE)).with(SOUTH_SHAPE, state.get(SOUTH_SHAPE)).with(WEST_SHAPE, state.get(WEST_SHAPE)).with(SnowyHelper.SNOW_LAYERS, Math.max(0, state.get(SnowyHelper.SNOW_LAYERS) - 1)));
+        return COLLISION_SHAPE_MAP.get(ArchitectsAssembly.CONSOLIDATED_STATE_MANAGERS.getWallManager().getTemplateState().with(UP, state.get(UP)).with(EAST_SHAPE, state.get(EAST_SHAPE)).with(NORTH_SHAPE, state.get(NORTH_SHAPE)).with(SOUTH_SHAPE, state.get(SOUTH_SHAPE)).with(WEST_SHAPE, state.get(WEST_SHAPE)).with(SnowyHelper.SNOW_LAYERS, Math.max(0, state.get(SnowyHelper.SNOW_LAYERS) - 1)));
     }
 
     @Override
@@ -207,7 +191,7 @@ public class WallBlock extends Block implements Fluidloggable, OverlayState {
         boolean bl2 = shouldConnectTo(blockState2, blockState2.isSideSolidFullSquare(worldView, blockPos3, Direction.WEST), Direction.WEST);
         boolean bl3 = shouldConnectTo(blockState3, blockState3.isSideSolidFullSquare(worldView, blockPos4, Direction.NORTH), Direction.NORTH);
         boolean bl4 = shouldConnectTo(blockState4, blockState4.isSideSolidFullSquare(worldView, blockPos5, Direction.EAST), Direction.EAST);
-        BlockState blockState7 = getStateWith(worldView, ConsolidatedStateManagers.WALL_MANAGER.getDefaultState(this), blockPos6, blockState5, bl, bl2, bl3, bl4);
+        BlockState blockState7 = getStateWith(worldView, ArchitectsAssembly.CONSOLIDATED_STATE_MANAGERS.getWallManager().getDefaultState(this), blockPos6, blockState5, bl, bl2, bl3, bl4);
         if (state.isOf(Blocks.SNOW)) {
             return blockState7.with(Fluidloggable.FLUIDLOGGED, Fluidloggable.FLUIDS.get(fluidState.getFluid())).with(SnowyHelper.SNOW_LAYERS, state.get(SnowBlock.LAYERS));
         } else {
@@ -259,19 +243,19 @@ public class WallBlock extends Block implements Fluidloggable, OverlayState {
 
     private BlockState getStateWith(WorldView world, BlockState state, BlockPos pos, BlockState aboveState, boolean north, boolean east, boolean south, boolean west) {
         VoxelShape voxelShape = aboveState.getCollisionShape(world, pos).getFace(Direction.DOWN);
-        BlockState blockState = this.getStateWith(state, north, east, south, west, voxelShape);
-        return (BlockState)blockState.with(UP, this.shouldHavePost(blockState, aboveState, voxelShape));
+        BlockState blockState = getStateWith(state, north, east, south, west, voxelShape);
+        return blockState.with(UP, shouldHavePost(blockState, aboveState, voxelShape));
     }
 
     private boolean shouldHavePost(BlockState state, BlockState aboveState, VoxelShape aboveShape) {
-        boolean bl = aboveState.getBlock() instanceof WallBlock && (Boolean)aboveState.get(UP);
+        boolean bl = aboveState.getBlock() instanceof WallBlock && aboveState.get(UP);
         if (bl) {
             return true;
         } else {
-            WallShape wallShape = (WallShape)state.get(NORTH_SHAPE);
-            WallShape wallShape2 = (WallShape)state.get(SOUTH_SHAPE);
-            WallShape wallShape3 = (WallShape)state.get(EAST_SHAPE);
-            WallShape wallShape4 = (WallShape)state.get(WEST_SHAPE);
+            WallShape wallShape = state.get(NORTH_SHAPE);
+            WallShape wallShape2 = state.get(SOUTH_SHAPE);
+            WallShape wallShape3 = state.get(EAST_SHAPE);
+            WallShape wallShape4 = state.get(WEST_SHAPE);
             boolean bl2 = wallShape2 == WallShape.NONE;
             boolean bl3 = wallShape4 == WallShape.NONE;
             boolean bl4 = wallShape3 == WallShape.NONE;
@@ -291,7 +275,7 @@ public class WallBlock extends Block implements Fluidloggable, OverlayState {
     }
 
     private BlockState getStateWith(BlockState state, boolean north, boolean east, boolean south, boolean west, VoxelShape aboveShape) {
-        return (BlockState)((BlockState)((BlockState)((BlockState)state.with(NORTH_SHAPE, this.getWallShape(north, aboveShape, TALL_NORTH_SHAPE))).with(EAST_SHAPE, this.getWallShape(east, aboveShape, TALL_EAST_SHAPE))).with(SOUTH_SHAPE, this.getWallShape(south, aboveShape, TALL_SOUTH_SHAPE))).with(WEST_SHAPE, this.getWallShape(west, aboveShape, TALL_WEST_SHAPE));
+        return state.with(NORTH_SHAPE, getWallShape(north, aboveShape, TALL_NORTH_SHAPE)).with(EAST_SHAPE, getWallShape(east, aboveShape, TALL_EAST_SHAPE)).with(SOUTH_SHAPE, getWallShape(south, aboveShape, TALL_SOUTH_SHAPE)).with(WEST_SHAPE, getWallShape(west, aboveShape, TALL_WEST_SHAPE));
     }
 
     private WallShape getWallShape(boolean connected, VoxelShape aboveShape, VoxelShape tallShape) {
