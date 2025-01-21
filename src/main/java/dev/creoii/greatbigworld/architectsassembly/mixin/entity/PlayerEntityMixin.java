@@ -3,23 +3,36 @@ package dev.creoii.greatbigworld.architectsassembly.mixin.entity;
 import dev.creoii.greatbigworld.architectsassembly.item.SlabItem;
 import dev.creoii.greatbigworld.architectsassembly.util.FreePlacer;
 import dev.creoii.greatbigworld.architectsassembly.util.SlabPlacer;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerEntity.class)
-public class PlayerEntityMixin implements SlabPlacer, FreePlacer {
-    @Unique private SlabItem.SlabPlacement gbw$slabPlacementType = SlabItem.SlabPlacement.VERTICAL;
+public abstract class PlayerEntityMixin extends LivingEntity implements SlabPlacer, FreePlacer {
+    @Unique private static final TrackedData<String> SLAB_PLACEMENT_TYPE = DataTracker.registerData(PlayerEntity.class, TrackedDataHandlerRegistry.STRING);
     @Unique private boolean gbw$freePlacing = false;
+
+    protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
+        super(entityType, world);
+    }
 
     @Override
     public SlabItem.SlabPlacement gbw$getSlabPlacementState() {
-        return gbw$slabPlacementType;
+        return SlabItem.SlabPlacement.valueOf(dataTracker.get(SLAB_PLACEMENT_TYPE));
     }
 
     @Override
     public void gbw$setSlabPlacementState(SlabItem.SlabPlacement slabPlacementState) {
-        this.gbw$slabPlacementType = slabPlacementState;
+        dataTracker.set(SLAB_PLACEMENT_TYPE, slabPlacementState.name());
     }
 
     @Override
@@ -30,5 +43,10 @@ public class PlayerEntityMixin implements SlabPlacer, FreePlacer {
     @Override
     public void gbw$setFreePlacement(boolean freePlacement) {
         gbw$freePlacing = freePlacement;
+    }
+
+    @Inject(method = "initDataTracker", at = @At("TAIL"))
+    private void gbw$initCustomPlacerDataTracker(DataTracker.Builder builder, CallbackInfo ci) {
+        builder.add(SLAB_PLACEMENT_TYPE, "VERTICAL");
     }
 }

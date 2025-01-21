@@ -79,20 +79,15 @@ public abstract class WallBlockMixin extends Block implements Waterloggable {
         builder.add(Fluidloggable.FLUIDLOGGED);
     }
 
-    @WrapOperation(method = "getCollisionShape", at = @At(value = "INVOKE", target = "Ljava/util/Map;get(Ljava/lang/Object;)Ljava/lang/Object;"))
+    /*@WrapOperation(method = "getCollisionShape", at = @At(value = "INVOKE", target = "Ljava/util/Map;get(Ljava/lang/Object;)Ljava/lang/Object;"))
     private <V> V gbw$modifyCollisionState(Map<BlockState, VoxelShape> instance, Object object, Operation<V> original) {
         BlockState state = (BlockState) object;
         return original.call(instance, state.with(WATERLOGGED, false).with(SnowyHelper.SNOW_LAYERS, Math.max(0, state.get(SnowyHelper.SNOW_LAYERS) - 1)));
-    }
+    }*/
 
     @Inject(method = "getPlacementState", at = @At("RETURN"), cancellable = true)
     private void gbw$fixFluidloggablePlacementState(ItemPlacementContext ctx, CallbackInfoReturnable<BlockState> cir, @Local FluidState fluidState) {
-        BlockState state = ctx.getWorld().getBlockState(ctx.getBlockPos());
-        if (state.isOf(Blocks.SNOW)) {
-            cir.setReturnValue(cir.getReturnValue().with(WATERLOGGED, false).with(Fluidloggable.FLUIDLOGGED, Fluidloggable.FLUIDS.get(fluidState.getFluid())).with(SnowyHelper.SNOW_LAYERS, state.get(SnowBlock.LAYERS)));
-        } else {
-            cir.setReturnValue(cir.getReturnValue().with(WATERLOGGED, false).with(Fluidloggable.FLUIDLOGGED, Fluidloggable.FLUIDS.get(fluidState.getFluid())));
-        }
+        cir.setReturnValue(cir.getReturnValue().with(WATERLOGGED, false).with(Fluidloggable.FLUIDLOGGED, Fluidloggable.FLUIDS.get(fluidState.getFluid())));
     }
 
     @Inject(method = "getStateForNeighborUpdate", at = @At("HEAD"))
@@ -113,12 +108,7 @@ public abstract class WallBlockMixin extends Block implements Waterloggable {
     @Redirect(method = "getShapeMap", at = @At(value = "INVOKE", target = "Lcom/google/common/collect/ImmutableMap$Builder;put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/google/common/collect/ImmutableMap$Builder;"))
     private <K, V> ImmutableMap.Builder<BlockState, VoxelShape> gbw$fixWallShapeMap(ImmutableMap.Builder<BlockState, VoxelShape> instance, K key, V value) {
         for (FluidType fluidType : FluidType.values()) {
-            for (int i : SnowyHelper.SNOW_LAYERS.getValues()) {
-                BlockState state = ((BlockState) key).with(SnowyHelper.SNOW_LAYERS, i).with(Fluidloggable.FLUIDLOGGED, fluidType);
-                if (SnowyHelper.isSnowy(state)) {
-                    instance.put(state, VoxelShapes.union((VoxelShape) value, SnowyHelper.getSnowShape(state)));
-                } else instance.put(state, (VoxelShape) value);
-            }
+            instance.put(((BlockState) key).with(Fluidloggable.FLUIDLOGGED, fluidType), (VoxelShape) value);
         }
         return instance;
     }
