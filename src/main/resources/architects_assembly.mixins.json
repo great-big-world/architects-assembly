@@ -62,7 +62,7 @@
     "client.recipebook.AnimatedResultButtonMixin",
     "client.recipebook.RecipeAlternativesWidgetMixin",
     "client.recipebook.RecipeBookGhostSlotsMixin",
-    "client.recipebook.RecipeBookGroupMixin",
+    "client.RecipeBookGroupMixin",
     "client.recipebook.RecipeBookWidgetMixin",
     "client.recipebook.RecipeResultCollectionMixin"
   ],

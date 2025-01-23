@@ -26,7 +26,6 @@ public abstract class AnimatedResultButtonMixin {
     @Shadow private RecipeResultCollection resultCollection;
     @Shadow protected abstract List<RecipeEntry<?>> getResults();
     @Shadow public abstract RecipeEntry<?> currentRecipe();
-
     @Unique private static final Text UNKNOWN_RECIPE = Text.translatable("gui.recipebook.unknownRecipe");
 
     @Inject(method = "getTooltip", at = @At("HEAD"), cancellable = true)
