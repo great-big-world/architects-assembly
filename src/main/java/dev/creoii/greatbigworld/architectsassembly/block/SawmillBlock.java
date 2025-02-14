@@ -2,6 +2,7 @@ package dev.creoii.greatbigworld.architectsassembly.block;
 
 import dev.creoii.greatbigworld.architectsassembly.client.screen.SawmillScreenHandler;
 import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyStats;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.StonecutterBlock;
@@ -20,8 +21,8 @@ import org.jetbrains.annotations.Nullable;
 public class SawmillBlock extends StonecutterBlock {
     private static final Text TITLE = Text.translatable("container.sawmill");
 
-    public SawmillBlock() {
-        super(Settings.copy(Blocks.STONECUTTER).strength(2f).sounds(BlockSoundGroup.WOOD));
+    public SawmillBlock(AbstractBlock.Settings settings) {
+        super(settings);
     }
 
     @Override
