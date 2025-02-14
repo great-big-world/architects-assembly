@@ -1,8 +1,7 @@
 package dev.creoii.greatbigworld.architectsassembly.mixin.client;
 
-import net.minecraft.client.recipebook.RecipeBookGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.client.recipebook.RecipeBookType;
+import net.minecraft.recipe.book.RecipeBookCategory;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,24 +15,24 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-@Mixin(RecipeBookGroup.class)
+@Mixin(RecipeBookType.class)
 public class RecipeBookGroupMixin {
     @SuppressWarnings("InvokerTarget")
     @Invoker("<init>")
-    private static RecipeBookGroup create(String internalName, int internalId, ItemStack... entries) {
+    private static RecipeBookType create(String internalName, int internalId, RecipeBookCategory... categories) {
         throw new AssertionError();
     }
 
-    @Shadow @Final @Mutable private static RecipeBookGroup[] field_1805;
+    @Shadow @Final @Mutable private static RecipeBookType[] field_25767;
 
-    @Inject(method = "<clinit>", at = @At(value = "FIELD", opcode = Opcodes.PUTSTATIC, target = "Lnet/minecraft/client/recipebook/RecipeBookGroup;field_1805:[Lnet/minecraft/client/recipebook/RecipeBookGroup;", shift = At.Shift.AFTER))
+    @Inject(method = "<clinit>", at = @At(value = "FIELD", opcode = Opcodes.PUTSTATIC, target = "Lnet/minecraft/client/recipebook/RecipeBookType;field_54842:[Lnet/minecraft/client/recipebook/RecipeBookType;", shift = At.Shift.AFTER))
     private static void addCustomRecipeBookGroup(CallbackInfo ci) {
-        ArrayList<RecipeBookGroup> values = new ArrayList<>(Arrays.asList(field_1805));
+        ArrayList<RecipeBookType> values = new ArrayList<>(Arrays.asList(field_25767));
         int last = values.size();
 
-        RecipeBookGroup sawmill = create("GBW_SAWMILL", last, new ItemStack(Items.OAK_PLANKS));
+        RecipeBookType sawmill = create("GBW_SAWMILL", last, new RecipeBookCategory());
         values.add(sawmill);
 
-        field_1805 = values.toArray(new RecipeBookGroup[0]);
+        field_25767 = values.toArray(new RecipeBookType[0]);
     }
 }

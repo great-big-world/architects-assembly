@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.architectsassembly.item.DyedItemFrameItem;
 import dev.creoii.greatbigworld.architectsassembly.item.SlabItem;
+import dev.creoii.greatbigworld.util.RegistryHelper;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
@@ -542,38 +543,38 @@ public final class ArchitectsAssemblyItems {
     // endregion
 
     // region Missing Blocks
-    public static final Item QUARTZ_BRICK_STAIRS = new BlockItem(ArchitectsAssemblyBlocks.QUARTZ_BRICK_STAIRS, new Item.Settings());
-    public static final Item QUARTZ_BRICK_SLAB = new SlabItem(ArchitectsAssemblyBlocks.QUARTZ_BRICK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_QUARTZ_BRICK_SLAB, new Item.Settings());
-    public static final Item QUARTZ_BRICK_WALL = new BlockItem(ArchitectsAssemblyBlocks.QUARTZ_BRICK_WALL, new Item.Settings());
-    public static final Item PRISMARINE_BRICK_WALL = new BlockItem(ArchitectsAssemblyBlocks.PRISMARINE_BRICK_WALL, new Item.Settings());
-    public static final Item DARK_PRISMARINE_WALL = new BlockItem(ArchitectsAssemblyBlocks.DARK_PRISMARINE_WALL, new Item.Settings());
-    public static final Item SMOOTH_SANDSTONE_WALL = new BlockItem(ArchitectsAssemblyBlocks.SMOOTH_SANDSTONE_WALL, new Item.Settings());
-    public static final Item SMOOTH_RED_SANDSTONE_WALL = new BlockItem(ArchitectsAssemblyBlocks.SMOOTH_RED_SANDSTONE_WALL, new Item.Settings());
-    public static final Item POLISHED_GRANITE_WALL = new BlockItem(ArchitectsAssemblyBlocks.POLISHED_GRANITE_WALL, new Item.Settings());
-    public static final Item POLISHED_ANDESITE_WALL = new BlockItem(ArchitectsAssemblyBlocks.POLISHED_ANDESITE_WALL, new Item.Settings());
-    public static final Item POLISHED_DIORITE_WALL = new BlockItem(ArchitectsAssemblyBlocks.POLISHED_DIORITE_WALL, new Item.Settings());
-    public static final Item PURPUR_WALL = new BlockItem(ArchitectsAssemblyBlocks.PURPUR_WALL, new Item.Settings());
-    public static final Item CRACKED_MUD_BRICKS = new BlockItem(ArchitectsAssemblyBlocks.CRACKED_MUD_BRICKS, new Item.Settings());
-    public static final Item CRACKED_QUARTZ_BRICKS = new BlockItem(ArchitectsAssemblyBlocks.CRACKED_QUARTZ_BRICKS, new Item.Settings());
-    public static final Item CRACKED_RED_NETHER_BRICKS = new BlockItem(ArchitectsAssemblyBlocks.CRACKED_RED_NETHER_BRICKS, new Item.Settings());
-    public static final Item CRACKED_END_STONE_BRICKS = new BlockItem(ArchitectsAssemblyBlocks.CRACKED_END_STONE_BRICKS, new Item.Settings());
+    public static Item QUARTZ_BRICK_STAIRS;
+    public static Item QUARTZ_BRICK_SLAB;
+    public static Item QUARTZ_BRICK_WALL;
+    public static Item PRISMARINE_BRICK_WALL;
+    public static Item DARK_PRISMARINE_WALL;
+    public static Item SMOOTH_SANDSTONE_WALL;
+    public static Item SMOOTH_RED_SANDSTONE_WALL;
+    public static Item POLISHED_GRANITE_WALL;
+    public static Item POLISHED_ANDESITE_WALL;
+    public static Item POLISHED_DIORITE_WALL;
+    public static Item PURPUR_WALL;
+    public static Item CRACKED_MUD_BRICKS;
+    public static Item CRACKED_QUARTZ_BRICKS;
+    public static Item CRACKED_RED_NETHER_BRICKS;
+    public static Item CRACKED_END_STONE_BRICKS;
 
     private static void registerMissingBlocks() {
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "quartz_brick_stairs"), QUARTZ_BRICK_STAIRS);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "quartz_brick_slab"), QUARTZ_BRICK_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "quartz_brick_wall"), QUARTZ_BRICK_WALL);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "prismarine_brick_wall"), PRISMARINE_BRICK_WALL);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "dark_prismarine_wall"), DARK_PRISMARINE_WALL);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "smooth_sandstone_wall"), SMOOTH_SANDSTONE_WALL);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "smooth_red_sandstone_wall"), SMOOTH_RED_SANDSTONE_WALL);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "polished_granite_wall"), POLISHED_GRANITE_WALL);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "polished_andesite_wall"), POLISHED_ANDESITE_WALL);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "polished_diorite_wall"), POLISHED_DIORITE_WALL);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "purpur_wall"), PURPUR_WALL);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "cracked_mud_bricks"), CRACKED_MUD_BRICKS);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "cracked_quartz_bricks"), CRACKED_QUARTZ_BRICKS);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "cracked_red_nether_bricks"), CRACKED_RED_NETHER_BRICKS);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "cracked_end_stone_bricks"), CRACKED_END_STONE_BRICKS);
+        QUARTZ_BRICK_STAIRS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "quartz_brick_stairs"), ArchitectsAssemblyBlocks.QUARTZ_BRICK_STAIRS, new Item.Settings());
+        QUARTZ_BRICK_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "quartz_brick_slab"), settings -> new SlabItem(ArchitectsAssemblyBlocks.QUARTZ_BRICK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_QUARTZ_BRICK_SLAB, settings), new Item.Settings());
+        QUARTZ_BRICK_WALL = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "quartz_brick_wall"), ArchitectsAssemblyBlocks.QUARTZ_BRICK_WALL, new Item.Settings());
+        PRISMARINE_BRICK_WALL = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "prismarine_brick_wall"), ArchitectsAssemblyBlocks.PRISMARINE_BRICK_WALL, new Item.Settings());
+        DARK_PRISMARINE_WALL = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "dark_prismarine_wall"), ArchitectsAssemblyBlocks.DARK_PRISMARINE_WALL, new Item.Settings());
+        SMOOTH_SANDSTONE_WALL = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "smooth_sandstone_wall"), ArchitectsAssemblyBlocks.SMOOTH_SANDSTONE_WALL, new Item.Settings());
+        SMOOTH_RED_SANDSTONE_WALL = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "smooth_red_sandstone_wall"), ArchitectsAssemblyBlocks.SMOOTH_RED_SANDSTONE_WALL, new Item.Settings());
+        POLISHED_GRANITE_WALL = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "polished_granite_wall"), ArchitectsAssemblyBlocks.POLISHED_GRANITE_WALL, new Item.Settings());
+        POLISHED_ANDESITE_WALL = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "polished_andesite_wall"), ArchitectsAssemblyBlocks.POLISHED_ANDESITE_WALL, new Item.Settings());
+        POLISHED_DIORITE_WALL = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "polished_diorite_wall"), ArchitectsAssemblyBlocks.POLISHED_DIORITE_WALL, new Item.Settings());
+        PURPUR_WALL = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "purpur_wall"), ArchitectsAssemblyBlocks.PURPUR_WALL, new Item.Settings());
+        CRACKED_MUD_BRICKS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_mud_bricks"), ArchitectsAssemblyBlocks.CRACKED_MUD_BRICKS, new Item.Settings());
+        CRACKED_QUARTZ_BRICKS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_quartz_bricks"), ArchitectsAssemblyBlocks.CRACKED_QUARTZ_BRICKS, new Item.Settings());
+        CRACKED_RED_NETHER_BRICKS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_red_nether_bricks"), ArchitectsAssemblyBlocks.CRACKED_RED_NETHER_BRICKS, new Item.Settings());
+        CRACKED_END_STONE_BRICKS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_end_stone_bricks"), ArchitectsAssemblyBlocks.CRACKED_END_STONE_BRICKS, new Item.Settings());
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(entries -> {
             entries.addAfter(Items.QUARTZ_BRICKS, QUARTZ_BRICK_STAIRS, QUARTZ_BRICK_SLAB, QUARTZ_BRICK_WALL);
@@ -594,14 +595,12 @@ public final class ArchitectsAssemblyItems {
     // endregion
 
     // region Improved Blocks
-    public static final Item TORCH = new BlockItem(ArchitectsAssemblyBlocks.TORCH, new Item.Settings());
-    public static final Item SOUL_TORCH = new BlockItem(ArchitectsAssemblyBlocks.SOUL_TORCH, new Item.Settings());
-    public static final Item REDSTONE_LAMP = new BlockItem(ArchitectsAssemblyBlocks.REDSTONE_LAMP, new Item.Settings());
+    public static Item TORCH;
+    public static Item SOUL_TORCH;
 
     private static void registerImprovedBlocks() {
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "torch"), TORCH);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "soul_torch"), SOUL_TORCH);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "redstone_lamp"), REDSTONE_LAMP);
+        TORCH = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "torch"), ArchitectsAssemblyBlocks.TORCH, new Item.Settings());
+        SOUL_TORCH = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "soul_torch"), ArchitectsAssemblyBlocks.SOUL_TORCH, new Item.Settings());
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(entries -> {
             replaceImprovedBlocks(entries.getDisplayStacks());
@@ -619,20 +618,18 @@ public final class ArchitectsAssemblyItems {
                 return TORCH.getDefaultStack();
             if (stack.isOf(Items.SOUL_TORCH))
                 return SOUL_TORCH.getDefaultStack();
-            if (stack.isOf(Items.REDSTONE_LAMP))
-                return REDSTONE_LAMP.getDefaultStack();
             return stack;
         });
     }
     // endregion
 
     // region Misc Blocks
-    public static final Item SAWMILL = new BlockItem(ArchitectsAssemblyBlocks.SAWMILL, new Item.Settings());
-    public static final Item COPPER_PRESSURE_PLATE = new BlockItem(ArchitectsAssemblyBlocks.COPPER_PRESSURE_PLATE, new Item.Settings());
+    public static Item SAWMILL;
+    public static Item COPPER_PRESSURE_PLATE;
 
     private static void registerMiscBlocks() {
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "sawmill"), SAWMILL);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "copper_pressure_plate"), COPPER_PRESSURE_PLATE);
+        SAWMILL = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "sawmill"), ArchitectsAssemblyBlocks.SAWMILL, new Item.Settings());
+        COPPER_PRESSURE_PLATE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "copper_pressure_plate"), ArchitectsAssemblyBlocks.COPPER_PRESSURE_PLATE, new Item.Settings());
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(entries -> {
             entries.addAfter(Items.STONECUTTER, SAWMILL);

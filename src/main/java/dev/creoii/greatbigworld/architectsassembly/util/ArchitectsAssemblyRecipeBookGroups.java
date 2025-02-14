@@ -1,7 +1,7 @@
 package dev.creoii.greatbigworld.architectsassembly.util;
 
-import net.minecraft.client.recipebook.RecipeBookGroup;
+import net.minecraft.client.recipebook.RecipeBookType;
 
 public final class ArchitectsAssemblyRecipeBookGroups {
-    public static RecipeBookGroup SAWMILL = RecipeBookGroup.valueOf("SAWMILL");
+    public static RecipeBookType SAWMILL = RecipeBookType.valueOf("SAWMILL");
 }
