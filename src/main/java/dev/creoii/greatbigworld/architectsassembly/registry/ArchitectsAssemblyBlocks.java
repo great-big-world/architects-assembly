@@ -2,7 +2,6 @@ package dev.creoii.greatbigworld.architectsassembly.registry;
 
 import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.architectsassembly.block.*;
-import dev.creoii.greatbigworld.architectsassembly.block.RedstoneLampBlock;
 import dev.creoii.greatbigworld.architectsassembly.block.TorchBlock;
 import dev.creoii.greatbigworld.util.RegistryHelper;
 import net.fabricmc.api.EnvType;
@@ -13,8 +12,6 @@ import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.block.*;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 
@@ -470,11 +467,9 @@ public final class ArchitectsAssemblyBlocks {
 
     // region Misc Blocks
     public static Block SAWMILL;
-    public static Block COPPER_PRESSURE_PLATE;
 
     private static void registerMiscBlocks() {
         SAWMILL = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "sawmill"), SawmillBlock::new, AbstractBlock.Settings.copy(Blocks.STONECUTTER).strength(2f).sounds(BlockSoundGroup.WOOD));
-        COPPER_PRESSURE_PLATE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "copper_pressure_plate"), settings -> new CopperPressurePlateBlock(BlockSetType.COPPER, settings), AbstractBlock.Settings.copy(Blocks.COPPER_BLOCK));
     }
 
     @Environment(EnvType.CLIENT)

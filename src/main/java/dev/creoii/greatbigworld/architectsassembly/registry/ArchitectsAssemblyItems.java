@@ -9,7 +9,6 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.*;
-import net.minecraft.registry.*;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 
@@ -666,17 +665,12 @@ public final class ArchitectsAssemblyItems {
 
     // region Misc Blocks
     public static Item SAWMILL;
-    public static Item COPPER_PRESSURE_PLATE;
 
     private static void registerMiscBlocks() {
         SAWMILL = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "sawmill"), ArchitectsAssemblyBlocks.SAWMILL);
-        COPPER_PRESSURE_PLATE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "copper_pressure_plate"), ArchitectsAssemblyBlocks.COPPER_PRESSURE_PLATE);
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(entries -> {
             entries.addAfter(Items.STONECUTTER, SAWMILL);
-        });
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.REDSTONE).register(entries -> {
-            entries.add(COPPER_PRESSURE_PLATE);
         });
     }
     // endregion
