@@ -1,7 +1,6 @@
 package dev.creoii.greatbigworld.architectsassembly.registry;
 
 import dev.creoii.greatbigworld.GreatBigWorld;
-import dev.creoii.greatbigworld.architectsassembly.ArchitectsAssembly;
 import dev.creoii.greatbigworld.architectsassembly.client.screen.SawmillScreen;
 import dev.creoii.greatbigworld.architectsassembly.client.screen.SawmillScreenHandler;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;

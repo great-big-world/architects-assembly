@@ -1,7 +1,6 @@
 package dev.creoii.greatbigworld.architectsassembly.registry;
 
 import dev.creoii.greatbigworld.GreatBigWorld;
-import dev.creoii.greatbigworld.architectsassembly.ArchitectsAssembly;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;

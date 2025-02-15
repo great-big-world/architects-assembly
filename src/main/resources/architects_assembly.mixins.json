@@ -52,6 +52,7 @@
   "client": [
     "TranslationStorageMixin",
     "client.BlockStatesLoaderMixin",
+    "client.BooleanPropertiesMixin",
     "client.ClientPlayerEntityMixin",
     "client.CreativeInventoryScreenMixin",
     "client.HeldItemRendererMixin",

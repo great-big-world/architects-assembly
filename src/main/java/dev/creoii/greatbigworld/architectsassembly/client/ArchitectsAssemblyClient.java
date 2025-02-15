@@ -2,7 +2,6 @@ package dev.creoii.greatbigworld.architectsassembly.client;
 
 import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.architectsassembly.item.DyedItemFrameItem;
-import dev.creoii.greatbigworld.architectsassembly.item.SlabItem;
 import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyBlocks;
 import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyItems;
 import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyParticleTypes;
@@ -15,10 +14,9 @@ import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.color.world.BiomeColors;
-import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.util.InputUtil;
-import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
 import net.minecraft.world.biome.GrassColors;
@@ -39,14 +37,6 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
 
         KeyBindingHelper.registerKeyBinding(EXPAND_TOOLTIPS);
         KeyBindingHelper.registerKeyBinding(CYCLE_HOTBAR);
-
-        Identifier id = Identifier.of(GreatBigWorld.NAMESPACE, "placement");
-        ModelPredicateProviderRegistry.register(id, (stack, world, entity, seed) -> {
-            if (stack.isIn(ItemTags.SLABS)) {
-                return SlabItem.getPlacement(entity);
-            }
-            return 0f;
-        });
 
         ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
             MinecraftClient.getInstance().getLanguageManager().reload(client.getResourceManager());
@@ -70,12 +60,12 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
 
                 drawContext.getMatrices().push();
                 drawContext.getMatrices().translate(0f, 0f, -90f);
-                drawContext.drawGuiTexture(CYCLE_HOTBAR_ARROW_TEXTURE, x, y, 9, 14);
+                drawContext.drawGuiTexture(RenderLayer::getGuiTextured, CYCLE_HOTBAR_ARROW_TEXTURE, x, y, 9, 14);
                 drawContext.getMatrices().pop();
             }
         });
 
-        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> tintIndex < 1 ? -1 : ColorHelper.Argb.fullAlpha(((DyedItemFrameItem) stack.getItem()).getColor().getMapColor().color),
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> tintIndex < 1 ? -1 : ColorHelper.fullAlpha(((DyedItemFrameItem) stack.getItem()).getColor().getMapColor().color),
                 ArchitectsAssemblyItems.BROWN_ITEM_FRAME, ArchitectsAssemblyItems.BROWN_GLOW_ITEM_FRAME,
                 ArchitectsAssemblyItems.RED_ITEM_FRAME, ArchitectsAssemblyItems.RED_GLOW_ITEM_FRAME,
                 ArchitectsAssemblyItems.ORANGE_ITEM_FRAME, ArchitectsAssemblyItems.ORANGE_GLOW_ITEM_FRAME,

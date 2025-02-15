@@ -5,7 +5,6 @@ import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyBl
 import dev.creoii.greatbigworld.architectsassembly.util.SlabPlacer;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -61,17 +60,6 @@ public class SlabItem extends BlockItem {
                 ((ServerPlayerEntity) user).sendMessageToClient(Text.translatable("gui.placement.switch_slab_placement", Text.translatable(currentState.getTranslationKey())), true);
         }
         return super.use(world, user, hand);
-    }
-
-    public static float getPlacement(LivingEntity living) {
-        if (living == null)
-            return 0f;
-
-        if (living instanceof SlabPlacer slabPlacer) {
-            return slabPlacer.gbw$getSlabPlacementState().equals(SlabPlacement.VERTICAL) ? 0f : 1f;
-        }
-
-        return 0f;
     }
 
     public enum SlabPlacement {
