@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "dyed_glow_item_frames",
   "ingredients": [
-    {
-      "item": "minecraft:glow_item_frame"
-    },
-    {
-      "item": "minecraft:cyan_dye"
-    }
+    "minecraft:glow_item_frame",
+    "minecraft:cyan_dye"
   ],
   "result": {
     "id": "great_big_world:cyan_glow_item_frame"

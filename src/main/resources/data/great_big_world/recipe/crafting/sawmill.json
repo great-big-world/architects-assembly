@@ -5,12 +5,8 @@
     "###"
   ],
   "key": {
-    "#": {
-      "tag": "minecraft:planks"
-    },
-    "I": {
-      "item": "minecraft:iron_ingot"
-    }
+    "#": "#minecraft:planks",
+    "I": "minecraft:iron_ingot"
   },
   "result": {
     "id": "great_big_world:sawmill"

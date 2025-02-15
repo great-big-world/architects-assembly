@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "dyed_glow_item_frames",
   "ingredients": [
-    {
-      "item": "minecraft:glow_item_frame"
-    },
-    {
-      "item": "minecraft:magenta_dye"
-    }
+    "minecraft:glow_item_frame",
+    "minecraft:magenta_dye"
   ],
   "result": {
     "id": "great_big_world:magenta_glow_item_frame"

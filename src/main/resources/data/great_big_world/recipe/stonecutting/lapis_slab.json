@@ -1,9 +1,7 @@
 {
   "type": "minecraft:stonecutting",
   "count": 2,
-  "ingredient": {
-    "item": "minecraft:lapis_block"
-  },
+  "ingredient": "minecraft:lapis_block",
   "result": {
     "id": "great_big_world:lapis_slab"
   }

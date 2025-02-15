@@ -1,9 +1,7 @@
 {
   "type": "great_big_world:sawmilling",
   "count": 1,
-  "ingredient": {
-    "item": "minecraft:oak_planks"
-  },
+  "ingredient": "minecraft:oak_planks",
   "result": {
     "id": "great_big_world:chiseled_oak_planks"
   }

@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:item_frame"
-    },
-    {
-      "item": "minecraft:glow_ink_sac"
-    },
-    {
-      "item": "minecraft:white_dye"
-    }
+    "minecraft:item_frame",
+    "minecraft:glow_ink_sac",
+    "minecraft:white_dye"
   ],
   "result": {
     "id": "great_big_world:white_glow_item_frame"

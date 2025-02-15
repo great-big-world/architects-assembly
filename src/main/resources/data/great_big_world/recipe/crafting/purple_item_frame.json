@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "dyed_item_frames",
   "ingredients": [
-    {
-      "item": "minecraft:item_frame"
-    },
-    {
-      "item": "minecraft:purple_dye"
-    }
+    "minecraft:item_frame",
+    "minecraft:purple_dye"
   ],
   "result": {
     "id": "great_big_world:purple_item_frame"

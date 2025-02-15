@@ -7,9 +7,7 @@
     "##"
   ],
   "key": {
-    "#": {
-      "item": "minecraft:brown_stained_glass"
-    }
+    "#": "minecraft:brown_stained_glass"
   },
   "result": {
     "id": "great_big_world:chiseled_brown_stained_glass",

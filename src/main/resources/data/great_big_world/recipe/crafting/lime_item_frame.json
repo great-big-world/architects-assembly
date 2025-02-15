@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "dyed_item_frames",
   "ingredients": [
-    {
-      "item": "minecraft:item_frame"
-    },
-    {
-      "item": "minecraft:lime_dye"
-    }
+    "minecraft:item_frame",
+    "minecraft:lime_dye"
   ],
   "result": {
     "id": "great_big_world:lime_item_frame"

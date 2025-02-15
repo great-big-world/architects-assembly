@@ -3,9 +3,7 @@
   "category": "blocks",
   "cookingtime": 200,
   "experience": 0.1,
-  "ingredient": {
-    "item": "minecraft:quartz_bricks"
-  },
+  "ingredient": "minecraft:quartz_bricks",
   "result": {
     "id": "great_big_world:cracked_quartz_bricks"
   }

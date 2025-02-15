@@ -10,7 +10,7 @@
       "model": "great_big_world:block/vertical_pale_oak_slab", "y": 90, "uvlock": true
     },
     "type=west": {
-      "model": "great_big_world:block/vertical_opale_ak_slab", "y": 270, "uvlock": true
+      "model": "great_big_world:block/vertical_pale_oak_slab", "y": 270, "uvlock": true
     },
     "type=double": {
       "model": "block/pale_oak_planks"

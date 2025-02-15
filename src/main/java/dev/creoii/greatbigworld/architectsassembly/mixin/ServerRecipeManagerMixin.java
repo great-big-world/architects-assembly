@@ -1,6 +1,7 @@
 package dev.creoii.greatbigworld.architectsassembly.mixin;
 
 import com.google.common.collect.ImmutableList;
+import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import com.llamalad7.mixinextras.sugar.Local;
 import dev.creoii.greatbigworld.architectsassembly.recipe.SawmillingRecipe;
 import dev.creoii.greatbigworld.architectsassembly.util.SawmillingRecipeManager;
@@ -18,6 +19,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -31,7 +33,7 @@ public abstract class ServerRecipeManagerMixin implements SawmillingRecipeManage
     }
 
     @Unique
-    private final List<Identifier> CRAFTING_RECIPES_TO_REMOVE = new ImmutableList.Builder<Identifier>()
+    private static final List<Identifier> CRAFTING_RECIPES_TO_REMOVE = new ImmutableList.Builder<Identifier>()
             .add(Identifier.of("chiseled_deepslate"))
             .add(Identifier.of("chiseled_nether_bricks"))
             .add(Identifier.of("chiseled_polished_blackstone"))
@@ -56,14 +58,13 @@ public abstract class ServerRecipeManagerMixin implements SawmillingRecipeManage
 
     @Redirect(method = "initialize", at = @At(value = "INVOKE", target = "Ljava/util/Collection;forEach(Ljava/util/function/Consumer;)V"))
     private void gbw$manageRecipes(Collection<RecipeEntry<?>> instance, Consumer<RecipeEntry<?>> consumer, @Local(argsOnly = true) FeatureSet features, @Local(ordinal = 0) List<CuttingRecipeDisplay.GroupEntry<StonecuttingRecipe>> list, @Local(ordinal = 1) List<ServerRecipeManager.PropertySetBuilder> list2) {
+        preSawmillingRecipes = new ArrayList<>();
         instance.forEach(recipe -> {
             Recipe<?> recipe2 = recipe.value();
             if (!recipe2.isIgnoredInRecipeBook() && recipe2.getIngredientPlacement().hasNoPlacement()) {
                 LOGGER.warn("Recipe {} can't be placed due to empty ingredients and will be ignored", recipe.id().getValue());
             } else {
-                list2.forEach((builder) -> {
-                    builder.accept(recipe2);
-                });
+                list2.forEach(builder -> builder.accept(recipe2));
                 if (recipe2 instanceof StonecuttingRecipe stonecuttingRecipe) {
                     RecipeEntry<StonecuttingRecipe> recipeEntry = (RecipeEntry<StonecuttingRecipe>) recipe;
                     if (isEnabled(features, stonecuttingRecipe.ingredient()) && stonecuttingRecipe.createResultDisplay().isEnabled(features)) {
@@ -82,5 +83,10 @@ public abstract class ServerRecipeManagerMixin implements SawmillingRecipeManage
     @Inject(method = "initialize", at = @At("TAIL"))
     private void gbw$setSawmillingRecipes(FeatureSet features, CallbackInfo ci) {
         sawmillingRecipes = new CuttingRecipeDisplay.Grouping<>(preSawmillingRecipes);
+    }
+
+    @WrapWithCondition(method = "collectServerRecipes", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z"))
+    private static <E> boolean gbw$removeRecipes(List<ServerRecipeManager.ServerRecipe> instance, E e, @Local RecipeEntry<?> recipeEntry, @Local RecipeDisplayEntry recipeDisplayEntry) {
+        return !CRAFTING_RECIPES_TO_REMOVE.contains(recipeEntry.id().getValue()) && recipeEntry.value().getType() == RecipeType.CRAFTING;
     }
 }

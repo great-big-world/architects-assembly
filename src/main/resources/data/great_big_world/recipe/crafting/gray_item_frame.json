@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "dyed_item_frames",
   "ingredients": [
-    {
-      "item": "minecraft:item_frame"
-    },
-    {
-      "item": "minecraft:gray_dye"
-    }
+    "minecraft:item_frame",
+    "minecraft:gray_dye"
   ],
   "result": {
     "id": "great_big_world:gray_item_frame"

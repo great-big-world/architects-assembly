@@ -1,9 +1,7 @@
 {
   "type": "minecraft:stonecutting",
   "count": 1,
-  "ingredient": {
-    "item": "minecraft:prismarine_bricks"
-  },
+  "ingredient": "minecraft:prismarine_bricks",
   "result": {
     "id": "great_big_world:prismarine_brick_wall"
   }

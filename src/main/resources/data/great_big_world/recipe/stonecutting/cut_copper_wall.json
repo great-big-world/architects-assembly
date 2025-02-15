@@ -1,9 +1,7 @@
 {
   "type": "minecraft:stonecutting",
   "count": 1,
-  "ingredient": {
-    "item": "minecraft:cut_copper"
-  },
+  "ingredient": "minecraft:cut_copper",
   "result": {
     "id": "great_big_world:cut_copper_wall"
   }
