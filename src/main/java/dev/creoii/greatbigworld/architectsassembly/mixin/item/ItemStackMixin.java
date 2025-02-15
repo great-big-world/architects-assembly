@@ -43,7 +43,7 @@ public class ItemStackMixin {
             list.add(Text.literal(StringUtils.capitalize(variant)).formatted(Formatting.GRAY));
         }
 
-        if (stack.getItem() instanceof VariantItem variantItem && player != null && !ItemStack.areEqual(stack, Raid.getOminousBanner(player.getRegistryManager().createRegistryLookup().getOrThrow(RegistryKeys.BANNER_PATTERN)))) {
+        if (stack.getItem() instanceof VariantItem variantItem && player != null && !ItemStack.areEqual(stack, Raid.createOminousBanner(player.getRegistryManager().getOrThrow(RegistryKeys.BANNER_PATTERN)))) {
             for (Variant variant : Variant.VARIANTS.values()) {
                 if (variant.getItems().contains(variantItem) || variant.isStackInTags(stack))
                     variantItem.gbw$addVariant(variant);

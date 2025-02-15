@@ -10,6 +10,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.hit.BlockHitResult;
@@ -31,7 +32,10 @@ public class ShatteredGlassBlock extends TransparentBlock {
             world.playSound(player, pos, ArchitectsAssemblySoundEvents.BLOCK_GLASS_REPAIR, SoundCategory.BLOCKS, 1f, 1f);
             if (!player.isCreative())
                 stack.decrement(1);
-            return ActionResult.success(world.isClient);
+
+            if (!world.isClient)
+                return ActionResult.SUCCESS_SERVER;
+            return ActionResult.SUCCESS;
         }
         return super.onUse(state, world, pos, player, hit);
     }
@@ -40,7 +44,7 @@ public class ShatteredGlassBlock extends TransparentBlock {
     public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
         if (!world.isClient) {
             BlockPos pos = hit.getBlockPos();
-            if (projectile.canModifyAt(world, pos) && projectile.canBreakBlocks(world) && projectile.getVelocity().length() > .4d) {
+            if (projectile.canModifyAt((ServerWorld) world, pos) && projectile.canBreakBlocks((ServerWorld) world) && projectile.getVelocity().length() > .4d) {
                 world.breakBlock(pos, true, projectile);
             }
         }

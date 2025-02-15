@@ -18,21 +18,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MouseMixin {
     @Shadow @Final private MinecraftClient client;
 
-    @Inject(method = "onMouseScroll", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerInventory;scrollInHotbar(D)V"), cancellable = true)
-    private void gbw$scrollHotbar(long window, double horizontal, double vertical, CallbackInfo ci, @Local(ordinal = 2) int k) {
-        if (ArchitectsAssemblyClient.shouldCycleHotbar()) {
-            if (client.player != null && client.interactionManager != null && client.player.getInventory() != null) {
-                double scrollDelta = Math.signum(k);
-                for (int i = 0; i < 9; ++i) {
-                    client.interactionManager.clickSlot(client.player.playerScreenHandler.syncId, cycle(i, scrollDelta > 0d ? -27 : 27), i, SlotActionType.SWAP, client.player);
-                    client.interactionManager.clickSlot(client.player.playerScreenHandler.syncId, cycle(i, scrollDelta > 0d ? -18 : 18), i, SlotActionType.SWAP, client.player);
-                    client.interactionManager.clickSlot(client.player.playerScreenHandler.syncId, cycle(i, scrollDelta > 0d ? -9 : 9), i, SlotActionType.SWAP, client.player);
-                }
-            }
-            ci.cancel();
-        }
-    }
-
     @Unique
     private static int cycle(int index, int amount) {
         int cycled = index + amount;
@@ -48,5 +33,20 @@ public class MouseMixin {
         }
 
         return cycled;
+    }
+
+    @Inject(method = "onMouseScroll", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerInventory;setSelectedSlot(I)V"), cancellable = true)
+    private void gbw$scrollHotbar(long window, double horizontal, double vertical, CallbackInfo ci, @Local int i) {
+        if (ArchitectsAssemblyClient.shouldCycleHotbar()) {
+            if (client.player != null && client.interactionManager != null && client.player.getInventory() != null) {
+                double scrollDelta = Math.signum(i);
+                for (int j = 0; j < 9; ++j) {
+                    client.interactionManager.clickSlot(client.player.playerScreenHandler.syncId, cycle(j, scrollDelta > 0d ? -27 : 27), j, SlotActionType.SWAP, client.player);
+                    client.interactionManager.clickSlot(client.player.playerScreenHandler.syncId, cycle(j, scrollDelta > 0d ? -18 : 18), j, SlotActionType.SWAP, client.player);
+                    client.interactionManager.clickSlot(client.player.playerScreenHandler.syncId, cycle(j, scrollDelta > 0d ? -9 : 9), j, SlotActionType.SWAP, client.player);
+                }
+            }
+            ci.cancel();
+        }
     }
 }

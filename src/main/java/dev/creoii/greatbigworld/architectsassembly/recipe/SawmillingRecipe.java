@@ -7,6 +7,7 @@ import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.SingleStackRecipe;
 import net.minecraft.recipe.book.RecipeBookCategory;
+import net.minecraft.recipe.display.SlotDisplay;
 import net.minecraft.recipe.input.SingleStackRecipeInput;
 import net.minecraft.world.World;
 
@@ -38,5 +39,9 @@ public class SawmillingRecipe extends SingleStackRecipe {
     @Override
     public boolean isIgnoredInRecipeBook() {
         return true;
+    }
+
+    public SlotDisplay createResultDisplay() {
+        return new SlotDisplay.StackSlotDisplay(result());
     }
 }

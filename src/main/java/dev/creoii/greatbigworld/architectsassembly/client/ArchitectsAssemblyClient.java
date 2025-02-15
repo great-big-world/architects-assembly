@@ -1,9 +1,7 @@
 package dev.creoii.greatbigworld.architectsassembly.client;
 
 import dev.creoii.greatbigworld.GreatBigWorld;
-import dev.creoii.greatbigworld.architectsassembly.item.DyedItemFrameItem;
 import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyBlocks;
-import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyItems;
 import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyParticleTypes;
 import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyScreens;
 import net.fabricmc.api.ClientModInitializer;
@@ -18,7 +16,6 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.ColorHelper;
 import net.minecraft.world.biome.GrassColors;
 
 public class ArchitectsAssemblyClient implements ClientModInitializer {
@@ -65,24 +62,6 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
             }
         });
 
-        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> tintIndex < 1 ? -1 : ColorHelper.fullAlpha(((DyedItemFrameItem) stack.getItem()).getColor().getMapColor().color),
-                ArchitectsAssemblyItems.BROWN_ITEM_FRAME, ArchitectsAssemblyItems.BROWN_GLOW_ITEM_FRAME,
-                ArchitectsAssemblyItems.RED_ITEM_FRAME, ArchitectsAssemblyItems.RED_GLOW_ITEM_FRAME,
-                ArchitectsAssemblyItems.ORANGE_ITEM_FRAME, ArchitectsAssemblyItems.ORANGE_GLOW_ITEM_FRAME,
-                ArchitectsAssemblyItems.YELLOW_ITEM_FRAME, ArchitectsAssemblyItems.YELLOW_GLOW_ITEM_FRAME,
-                ArchitectsAssemblyItems.LIME_ITEM_FRAME, ArchitectsAssemblyItems.LIME_GLOW_ITEM_FRAME,
-                ArchitectsAssemblyItems.GREEN_ITEM_FRAME, ArchitectsAssemblyItems.GREEN_GLOW_ITEM_FRAME,
-                ArchitectsAssemblyItems.CYAN_ITEM_FRAME, ArchitectsAssemblyItems.CYAN_GLOW_ITEM_FRAME,
-                ArchitectsAssemblyItems.BLUE_ITEM_FRAME, ArchitectsAssemblyItems.BLUE_GLOW_ITEM_FRAME,
-                ArchitectsAssemblyItems.LIGHT_BLUE_ITEM_FRAME, ArchitectsAssemblyItems.LIGHT_BLUE_GLOW_ITEM_FRAME,
-                ArchitectsAssemblyItems.PINK_ITEM_FRAME, ArchitectsAssemblyItems.PINK_GLOW_ITEM_FRAME,
-                ArchitectsAssemblyItems.MAGENTA_ITEM_FRAME, ArchitectsAssemblyItems.MAGENTA_GLOW_ITEM_FRAME,
-                ArchitectsAssemblyItems.PURPLE_ITEM_FRAME, ArchitectsAssemblyItems.PURPLE_GLOW_ITEM_FRAME,
-                ArchitectsAssemblyItems.BLACK_ITEM_FRAME, ArchitectsAssemblyItems.BLACK_GLOW_ITEM_FRAME,
-                ArchitectsAssemblyItems.GRAY_ITEM_FRAME, ArchitectsAssemblyItems.GRAY_GLOW_ITEM_FRAME,
-                ArchitectsAssemblyItems.LIGHT_GRAY_ITEM_FRAME, ArchitectsAssemblyItems.LIGHT_GRAY_GLOW_ITEM_FRAME,
-                ArchitectsAssemblyItems.WHITE_ITEM_FRAME, ArchitectsAssemblyItems.WHITE_GLOW_ITEM_FRAME
-        );
         ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> tintIndex > 0 ? -1 : world != null && pos != null ? BiomeColors.getGrassColor(world, pos) : GrassColors.getDefaultColor(), ArchitectsAssemblyBlocks.POTTED_SHORT_GRASS);
     }
 

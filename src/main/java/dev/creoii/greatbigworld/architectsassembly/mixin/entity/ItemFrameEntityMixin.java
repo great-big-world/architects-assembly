@@ -90,7 +90,10 @@ public abstract class ItemFrameEntityMixin extends AbstractDecorationEntity impl
                 if (!player.isCreative()) {
                     itemStack.decrement(1);
                 }
-                cir.setReturnValue(ActionResult.success(getWorld().isClient));
+
+                if (!getWorld().isClient)
+                    cir.setReturnValue(ActionResult.SUCCESS_SERVER);
+                else cir.setReturnValue(ActionResult.SUCCESS);
                 return;
             }
             cir.setReturnValue(ActionResult.PASS);
@@ -131,7 +134,10 @@ public abstract class ItemFrameEntityMixin extends AbstractDecorationEntity impl
                         if (!player.isCreative()) {
                             itemStack.decrement(1);
                         }
-                        cir.setReturnValue(ActionResult.success(getWorld().isClient));
+
+                        if (!getWorld().isClient)
+                            cir.setReturnValue(ActionResult.SUCCESS_SERVER);
+                        else cir.setReturnValue(ActionResult.SUCCESS);
                     }
                 } else {
                     playSound(getRotateItemSound(), 1f, 1f);
@@ -139,12 +145,21 @@ public abstract class ItemFrameEntityMixin extends AbstractDecorationEntity impl
                         setRotation(getRotation() - 1);
                     } else setRotation(getRotation() + 1);
                     emitGameEvent(GameEvent.BLOCK_CHANGE, player);
-                    cir.setReturnValue(ActionResult.success(getWorld().isClient));
+
+                    if (!getWorld().isClient)
+                        cir.setReturnValue(ActionResult.SUCCESS_SERVER);
+                    else cir.setReturnValue(ActionResult.SUCCESS);
                 }
                 return;
             }
         }
-        cir.setReturnValue(!bl && !bl2 ? ActionResult.PASS : ActionResult.success(getWorld().isClient));
+        if (!bl && !bl2) {
+            cir.setReturnValue(ActionResult.PASS);
+        } else {
+            if (!getWorld().isClient) {
+                cir.setReturnValue(ActionResult.SUCCESS_SERVER);
+            } else cir.setReturnValue(ActionResult.SUCCESS);
+        }
     }
 
     @Unique
@@ -155,7 +170,9 @@ public abstract class ItemFrameEntityMixin extends AbstractDecorationEntity impl
         if (!player.getAbilities().creativeMode) {
             itemStack.decrement(1);
         }
-        return ActionResult.success(itemFrame.getWorld().isClient);
+        if (!itemFrame.getWorld().isClient) {
+            return ActionResult.SUCCESS_SERVER;
+        } else return ActionResult.SUCCESS;
     }
 
     @Unique
@@ -166,7 +183,9 @@ public abstract class ItemFrameEntityMixin extends AbstractDecorationEntity impl
         if (!player.getAbilities().creativeMode) {
             itemStack.decrement(1);
         }
-        return ActionResult.success(itemFrame.getWorld().isClient);
+        if (!itemFrame.getWorld().isClient) {
+            return ActionResult.SUCCESS_SERVER;
+        } else return ActionResult.SUCCESS;
     }
 
     @Nullable

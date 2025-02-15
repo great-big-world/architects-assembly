@@ -20,8 +20,8 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
+import net.minecraft.world.tick.ScheduledTickView;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
@@ -159,7 +159,6 @@ public class TorchBlock extends AbstractTorchBlock {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public boolean canReplace(BlockState state, ItemPlacementContext context) {
         if (state.get(NORTH) || state.get(SOUTH) || state.get(EAST) || state.get(WEST) || state.get(UP))
             return context.getStack().isOf(asItem());
@@ -167,7 +166,7 @@ public class TorchBlock extends AbstractTorchBlock {
     }
 
     @Override
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+    protected BlockState getStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random) {
         BlockState updated = state;
 
         if (state.get(NORTH) && direction == Direction.SOUTH && !sideCoversSmallSquare(world, pos.offset(direction), direction.getOpposite()))

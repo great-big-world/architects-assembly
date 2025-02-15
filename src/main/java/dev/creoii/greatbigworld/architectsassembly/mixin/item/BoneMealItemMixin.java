@@ -22,7 +22,7 @@ public class BoneMealItemMixin {
     private static void gbw$fertilizeMossifiables(ItemStack stack, World world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
         if (MossifyVegetationPatchFeature.MOSSY_CONVERSIONS.containsKey(world.getBlockState(pos).getBlock()) && isNextToMoss(world, pos)) {
             world.getRegistryManager().getOptional(RegistryKeys.CONFIGURED_FEATURE).flatMap(key -> {
-                return key.getEntry(ArchitectsAssemblyWorldgen.MOSSIFY_PATCH_BONEMEAL);
+                return key.getOptional(ArchitectsAssemblyWorldgen.MOSSIFY_PATCH_BONEMEAL);
             }).ifPresent(entry -> {
                 ServerWorld serverWorld = (ServerWorld) world;
                 entry.value().generate(serverWorld, serverWorld.getChunkManager().getChunkGenerator(), world.getRandom(), pos.up());

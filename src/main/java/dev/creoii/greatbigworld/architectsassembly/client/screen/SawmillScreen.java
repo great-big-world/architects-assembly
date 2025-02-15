@@ -1,7 +1,6 @@
 package dev.creoii.greatbigworld.architectsassembly.client.screen;
 
 import dev.creoii.greatbigworld.GreatBigWorld;
-import dev.creoii.greatbigworld.architectsassembly.ArchitectsAssembly;
 import dev.creoii.greatbigworld.architectsassembly.recipe.SawmillingRecipe;
 import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblySoundEvents;
 import net.fabricmc.api.EnvType;
@@ -9,12 +8,19 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
+import net.minecraft.client.gui.screen.ingame.StonecutterScreen;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.recipe.RecipeEntry;
-import net.minecraft.sound.SoundEvents;
+import net.minecraft.recipe.StonecuttingRecipe;
+import net.minecraft.recipe.display.CuttingRecipeDisplay;
+import net.minecraft.recipe.display.SlotDisplay;
+import net.minecraft.recipe.display.SlotDisplayContexts;
+import net.minecraft.screen.StonecutterScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.context.ContextParameterMap;
 import net.minecraft.util.math.MathHelper;
 
 import java.util.List;
@@ -43,9 +49,9 @@ public class SawmillScreen extends HandledScreen<SawmillScreenHandler> {
     protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
         int i = this.x;
         int j = this.y;
-        context.drawTexture(TEXTURE, i, j, 0, 0, this.backgroundWidth, this.backgroundHeight);
+        context.drawTexture(RenderLayer::getGuiTextured, TEXTURE, i, j, 0, 0, this.backgroundWidth, this.backgroundHeight, 256, 256);
         int k = (int)(41.0f * this.scrollAmount);
-        context.drawTexture(TEXTURE, i + 119, j + 15 + k, 176 + (this.shouldScroll() ? 0 : 12), 0, 12, 15);
+        context.drawTexture(RenderLayer::getGuiTextured, TEXTURE, i + 119, j + 15 + k, 176 + (this.shouldScroll() ? 0 : 12), 0, 12, 15, 256, 256);
         int l = this.x + 52;
         int m = this.y + 14;
         int n = this.scrollOffset + 12;
@@ -60,14 +66,17 @@ public class SawmillScreen extends HandledScreen<SawmillScreenHandler> {
             int i = this.x + 52;
             int j = this.y + 14;
             int k = this.scrollOffset + 12;
-            List<RecipeEntry<SawmillingRecipe>> list = this.handler.getAvailableRecipes();
-            for (int l = this.scrollOffset; l < k && l < this.handler.getAvailableRecipeCount(); ++l) {
+            CuttingRecipeDisplay.Grouping<SawmillingRecipe> grouping = this.handler.getAvailableRecipes();
+
+            for(int l = this.scrollOffset; l < k && l < grouping.size(); ++l) {
                 int m = l - this.scrollOffset;
                 int n = i + m % 4 * 16;
                 int o = j + m / 4 * 18 + 2;
-                if (x < n || x >= n + 16 || y < o || y >= o + 18)
-                    continue;
-                context.drawItemTooltip(textRenderer, list.get(l).value().getResult(client.world.getRegistryManager()), x, y);
+                if (x >= n && x < n + 16 && y >= o && y < o + 18) {
+                    ContextParameterMap contextParameterMap = SlotDisplayContexts.createParameters(this.client.world);
+                    SlotDisplay slotDisplay = ((CuttingRecipeDisplay.GroupEntry)grouping.entries().get(l)).recipe().optionDisplay();
+                    context.drawItemTooltip(this.textRenderer, slotDisplay.getFirst(contextParameterMap), x, y);
+                }
             }
         }
     }
@@ -84,18 +93,21 @@ public class SawmillScreen extends HandledScreen<SawmillScreenHandler> {
             } else if (mouseX >= k && mouseY >= m && mouseX < k + 16 && mouseY < m + 18) {
                 n += 36;
             }
-            context.drawTexture(TEXTURE, k, m - 1, 0, n, 16, 18);
+            context.drawTexture(RenderLayer::getGuiTextured, TEXTURE, k, m - 1, 0, n, 16, 18, 256, 256);
         }
     }
 
     private void renderRecipeIcons(DrawContext context, int x, int y, int scrollOffset) {
-        List<RecipeEntry<SawmillingRecipe>> list = handler.getAvailableRecipes();
-        for (int i = this.scrollOffset; i < scrollOffset && i < handler.getAvailableRecipeCount(); ++i) {
+        CuttingRecipeDisplay.Grouping<SawmillingRecipe> grouping = this.handler.getAvailableRecipes();
+        ContextParameterMap contextParameterMap = SlotDisplayContexts.createParameters(this.client.world);
+
+        for(int i = this.scrollOffset; i < scrollOffset && i < grouping.size(); ++i) {
             int j = i - this.scrollOffset;
             int k = x + j % 4 * 16;
             int l = j / 4;
             int m = y + l * 18 + 2;
-            context.drawItem(list.get(i).value().getResult(client.world.getRegistryManager()), k, m);
+            SlotDisplay slotDisplay = grouping.entries().get(i).recipe().optionDisplay();
+            context.drawItem(slotDisplay.getFirst(contextParameterMap), k, m);
         }
     }
 
