@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "great_big_world:item/white_glass_shard"
+  "model": {
+    "type": "minecraft:model",
+    "model": "great_big_world:item/white_glass_shard"
   }
 }

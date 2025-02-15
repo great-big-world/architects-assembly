@@ -1,11 +1,14 @@
 {
-  "parent": "block/mud_brick_slab",
-  "overrides": [
-    {
-      "predicate": {
-        "great_big_world:placement": 1
-      },
+  "model": {
+    "type": "minecraft:condition",
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "minecraft:block/mud_brick_slab"
+    },
+    "on_true": {
+      "type": "minecraft:model",
       "model": "great_big_world:block/vertical_mud_brick_slab"
-    }
-  ]
+    },
+    "property": "great_big_world:slab_placement"
+  }
 }

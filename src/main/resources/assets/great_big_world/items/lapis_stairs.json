@@ -1,3 +1,6 @@
 {
-  "parent": "great_big_world:block/lapis_stairs"
+  "model": {
+    "type": "minecraft:model",
+    "model": "great_big_world:block/lapis_stairs"
+  }
 }

@@ -1,3 +1,6 @@
 {
-  "parent": "minecraft:item/soul_torch"
+  "model": {
+    "type": "minecraft:model",
+    "model": "minecraft:item/soul_torch"
+  }
 }

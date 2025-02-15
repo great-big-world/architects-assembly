@@ -3,11 +3,11 @@
     "type": "minecraft:condition",
     "on_false": {
       "type": "minecraft:model",
-      "model": "minecraft:block/spruce_slab"
+      "model": "minecraft:block/pale_oak_slab"
     },
     "on_true": {
       "type": "minecraft:model",
-      "model": "great_big_world:block/vertical_spruce_slab"
+      "model": "great_big_world:block/vertical_pale_oak_slab"
     },
     "property": "great_big_world:slab_placement"
   }
