@@ -17,6 +17,7 @@
     "great_big_world:chiseled_gray_stained_glass_pane",
     "great_big_world:gray_item_frame",
     "great_big_world:gray_glow_item_frame",
-    "great_big_world:gray_glass_shard"
+    "great_big_world:gray_glass_shard",
+    "great_big_world:gray_stained_shattered_glass"
   ]
 }
