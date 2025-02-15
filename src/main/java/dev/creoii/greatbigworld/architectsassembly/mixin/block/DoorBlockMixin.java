@@ -12,8 +12,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
+import net.minecraft.world.tick.ScheduledTickView;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -36,14 +39,14 @@ public class DoorBlockMixin {
     }
 
     @Inject(method = "getStateForNeighborUpdate", at = @At("RETURN"), cancellable = true)
-    private void gbw$fixDoorNeighborUpdateForWater(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos, CallbackInfoReturnable<BlockState> cir) {
+    private void gbw$fixDoorNeighborUpdateForWater(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random, CallbackInfoReturnable<BlockState> cir) {
         BlockState returnState = cir.getReturnValue();
         if (returnState.isAir() || !returnState.getProperties().contains(Fluidloggable.FLUIDLOGGED))
             return;
 
         FluidType fluidType = state.get(Fluidloggable.FLUIDLOGGED);
         if (fluidType != FluidType.EMPTY) {
-            world.scheduleFluidTick(pos, fluidType.getFluid(), fluidType.getFluid().getTickRate(world));
+            tickView.scheduleFluidTick(pos, fluidType.getFluid(), fluidType.getFluid().getTickRate(world));
         }
 
         cir.setReturnValue(returnState.with(Fluidloggable.FLUIDLOGGED, Fluidloggable.FLUIDS.get(world.getFluidState(pos).getFluid())));

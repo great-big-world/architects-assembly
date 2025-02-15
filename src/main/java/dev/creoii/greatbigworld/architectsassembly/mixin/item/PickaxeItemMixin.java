@@ -28,22 +28,23 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
 import java.util.Map;
+import java.util.function.Supplier;
 
 @Mixin(PickaxeItem.class)
 public abstract class PickaxeItemMixin extends MiningToolItem {
     @Unique
-    private static final Map<Block, Block> CRACKED_BLOCKS = new ImmutableMap.Builder<Block, Block>()
-            .put(Blocks.STONE_BRICKS, Blocks.CRACKED_STONE_BRICKS)
-            .put(Blocks.INFESTED_STONE_BRICKS, Blocks.INFESTED_CRACKED_STONE_BRICKS)
-            .put(Blocks.DEEPSLATE_BRICKS, Blocks.CRACKED_DEEPSLATE_BRICKS)
-            .put(Blocks.DEEPSLATE_TILES, Blocks.CRACKED_DEEPSLATE_TILES)
-            .put(Blocks.POLISHED_BLACKSTONE_BRICKS, Blocks.CRACKED_POLISHED_BLACKSTONE_BRICKS)
-            .put(Blocks.NETHER_BRICKS, Blocks.CRACKED_NETHER_BRICKS)
-            .put(Blocks.BRICKS, ArchitectsAssemblyBlocks.CRACKED_BRICKS)
-            .put(Blocks.MUD_BRICKS, ArchitectsAssemblyBlocks.CRACKED_MUD_BRICKS)
-            .put(Blocks.QUARTZ_BRICKS, ArchitectsAssemblyBlocks.CRACKED_QUARTZ_BRICKS)
-            .put(Blocks.RED_NETHER_BRICKS, ArchitectsAssemblyBlocks.CRACKED_RED_NETHER_BRICKS)
-            .put(Blocks.END_STONE_BRICKS, ArchitectsAssemblyBlocks.CRACKED_END_STONE_BRICKS)
+    private static final Map<Block, Supplier<Block>> CRACKED_BLOCKS = new ImmutableMap.Builder<Block, Supplier<Block>>()
+            .put(Blocks.STONE_BRICKS, () -> Blocks.CRACKED_STONE_BRICKS)
+            .put(Blocks.INFESTED_STONE_BRICKS, () -> Blocks.INFESTED_CRACKED_STONE_BRICKS)
+            .put(Blocks.DEEPSLATE_BRICKS, () -> Blocks.CRACKED_DEEPSLATE_BRICKS)
+            .put(Blocks.DEEPSLATE_TILES, () -> Blocks.CRACKED_DEEPSLATE_TILES)
+            .put(Blocks.POLISHED_BLACKSTONE_BRICKS, () -> Blocks.CRACKED_POLISHED_BLACKSTONE_BRICKS)
+            .put(Blocks.NETHER_BRICKS, () -> Blocks.CRACKED_NETHER_BRICKS)
+            .put(Blocks.BRICKS, () -> ArchitectsAssemblyBlocks.CRACKED_BRICKS)
+            .put(Blocks.MUD_BRICKS, () -> ArchitectsAssemblyBlocks.CRACKED_MUD_BRICKS)
+            .put(Blocks.QUARTZ_BRICKS, () -> ArchitectsAssemblyBlocks.CRACKED_QUARTZ_BRICKS)
+            .put(Blocks.RED_NETHER_BRICKS, () -> ArchitectsAssemblyBlocks.CRACKED_RED_NETHER_BRICKS)
+            .put(Blocks.END_STONE_BRICKS, () -> ArchitectsAssemblyBlocks.CRACKED_END_STONE_BRICKS)
             .build();
 
     public PickaxeItemMixin(ToolMaterial material, TagKey<Block> effectiveBlocks, float attackDamage, float attackSpeed, Settings settings) {
@@ -80,7 +81,7 @@ public abstract class PickaxeItemMixin extends MiningToolItem {
                 if (player instanceof ServerPlayerEntity serverPlayer)
                     Criteria.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, stack);
 
-                BlockState cracked = CRACKED_BLOCKS.get(state.getBlock()).getStateWithProperties(state);
+                BlockState cracked = CRACKED_BLOCKS.get(state.getBlock()).get().getStateWithProperties(state);
                 world.playSound(player, pos, ArchitectsAssemblySoundEvents.ITEM_PICKAXE_CRACK, SoundCategory.BLOCKS, 1f, 1f);
                 world.setBlockState(pos, cracked, 11);
                 world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(player, cracked));

@@ -7,8 +7,6 @@ import net.minecraft.block.CakeBlock;
 import net.minecraft.block.DoorBlock;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.registry.tag.FluidTags;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.BlockView;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

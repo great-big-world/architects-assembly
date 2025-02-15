@@ -15,6 +15,7 @@ import net.minecraft.util.Identifier;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 
 public final class ArchitectsAssemblyItems {
     public static void register() {
@@ -143,38 +144,55 @@ public final class ArchitectsAssemblyItems {
     // region Decorative Blocks
     public static Item CHISELED_GLASS;
     public static Item CHISELED_GLASS_PANE;
+    public static Item SHATTERED_GLASS;
     public static Item CHISELED_BROWN_STAINED_GLASS;
     public static Item CHISELED_BROWN_STAINED_GLASS_PANE;
+    public static Item BROWN_STAINED_SHATTERED_GLASS;
     public static Item CHISELED_RED_STAINED_GLASS;
     public static Item CHISELED_RED_STAINED_GLASS_PANE;
+    public static Item RED_STAINED_SHATTERED_GLASS;
     public static Item CHISELED_ORANGE_STAINED_GLASS;
     public static Item CHISELED_ORANGE_STAINED_GLASS_PANE;
+    public static Item ORANGE_STAINED_SHATTERED_GLASS;
     public static Item CHISELED_YELLOW_STAINED_GLASS;
     public static Item CHISELED_YELLOW_STAINED_GLASS_PANE;
+    public static Item YELLOW_STAINED_SHATTERED_GLASS;
     public static Item CHISELED_LIME_STAINED_GLASS;
     public static Item CHISELED_LIME_STAINED_GLASS_PANE;
+    public static Item LIME_STAINED_SHATTERED_GLASS;
     public static Item CHISELED_GREEN_STAINED_GLASS;
     public static Item CHISELED_GREEN_STAINED_GLASS_PANE;
+    public static Item GREEN_STAINED_SHATTERED_GLASS;
     public static Item CHISELED_CYAN_STAINED_GLASS;
     public static Item CHISELED_CYAN_STAINED_GLASS_PANE;
+    public static Item CYAN_STAINED_SHATTERED_GLASS;
     public static Item CHISELED_BLUE_STAINED_GLASS;
     public static Item CHISELED_BLUE_STAINED_GLASS_PANE;
+    public static Item BLUE_STAINED_SHATTERED_GLASS;
     public static Item CHISELED_LIGHT_BLUE_STAINED_GLASS;
     public static Item CHISELED_LIGHT_BLUE_STAINED_GLASS_PANE;
+    public static Item LIGHT_BLUE_STAINED_SHATTERED_GLASS;
     public static Item CHISELED_PINK_STAINED_GLASS;
     public static Item CHISELED_PINK_STAINED_GLASS_PANE;
+    public static Item PINK_STAINED_SHATTERED_GLASS;
     public static Item CHISELED_MAGENTA_STAINED_GLASS;
     public static Item CHISELED_MAGENTA_STAINED_GLASS_PANE;
+    public static Item MAGENTA_STAINED_SHATTERED_GLASS;
     public static Item CHISELED_PURPLE_STAINED_GLASS;
     public static Item CHISELED_PURPLE_STAINED_GLASS_PANE;
+    public static Item PURPLE_STAINED_SHATTERED_GLASS;
     public static Item CHISELED_BLACK_STAINED_GLASS;
     public static Item CHISELED_BLACK_STAINED_GLASS_PANE;
+    public static Item BLACK_STAINED_SHATTERED_GLASS;
     public static Item CHISELED_GRAY_STAINED_GLASS;
     public static Item CHISELED_GRAY_STAINED_GLASS_PANE;
+    public static Item GRAY_STAINED_SHATTERED_GLASS;
     public static Item CHISELED_LIGHT_GRAY_STAINED_GLASS;
     public static Item CHISELED_LIGHT_GRAY_STAINED_GLASS_PANE;
+    public static Item LIGHT_GRAY_STAINED_SHATTERED_GLASS;
     public static Item CHISELED_WHITE_STAINED_GLASS;
     public static Item CHISELED_WHITE_STAINED_GLASS_PANE;
+    public static Item WHITE_STAINED_SHATTERED_GLASS;
     public static Item LAPIS_STAIRS;
     public static Item LAPIS_SLAB;
     public static Item LAPIS_WALL;
@@ -192,7 +210,6 @@ public final class ArchitectsAssemblyItems {
     public static Item MOSSY_BRICK_SLAB;
     public static Item MOSSY_BRICK_WALL;
     public static Item GLASS;
-    public static Item SHATTERED_GLASS;
     public static Item CHISELED_OAK_PLANKS;
     public static Item CHISELED_OAK_LOG;
     public static Item CHISELED_OAK_WOOD;
@@ -209,39 +226,56 @@ public final class ArchitectsAssemblyItems {
 
     private static void registerDecorativeBlocks() {
         CHISELED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_glass"), ArchitectsAssemblyBlocks.CHISELED_GLASS);
-        CHISELED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_glass"), ArchitectsAssemblyBlocks.CHISELED_GLASS_PANE);
+        CHISELED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_GLASS_PANE);
+        SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "shattered_glass"), ArchitectsAssemblyBlocks.SHATTERED_GLASS);
         CHISELED_BROWN_STAINED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_brown_stained_glass"), ArchitectsAssemblyBlocks.CHISELED_BROWN_STAINED_GLASS);
         CHISELED_BROWN_STAINED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_brown_stained_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_BROWN_STAINED_GLASS_PANE);
+        BROWN_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "brown_stained_shattered_glass"), ArchitectsAssemblyBlocks.BROWN_STAINED_SHATTERED_GLASS);
         CHISELED_RED_STAINED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_red_stained_glass"), ArchitectsAssemblyBlocks.CHISELED_RED_STAINED_GLASS);
         CHISELED_RED_STAINED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_red_stained_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_RED_STAINED_GLASS_PANE);
+        RED_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "red_stained_shattered_glass"), ArchitectsAssemblyBlocks.RED_STAINED_SHATTERED_GLASS);
         CHISELED_ORANGE_STAINED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_orange_stained_glass"), ArchitectsAssemblyBlocks.CHISELED_ORANGE_STAINED_GLASS);
         CHISELED_ORANGE_STAINED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_orange_stained_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_ORANGE_STAINED_GLASS_PANE);
+        ORANGE_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "orange_stained_shattered_glass"), ArchitectsAssemblyBlocks.ORANGE_STAINED_SHATTERED_GLASS);
         CHISELED_YELLOW_STAINED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_yellow_stained_glass"), ArchitectsAssemblyBlocks.CHISELED_YELLOW_STAINED_GLASS);
         CHISELED_YELLOW_STAINED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_yellow_stained_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_YELLOW_STAINED_GLASS_PANE);
+        YELLOW_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "yellow_stained_shattered_glass"), ArchitectsAssemblyBlocks.YELLOW_STAINED_SHATTERED_GLASS);
         CHISELED_LIME_STAINED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_lime_stained_glass"), ArchitectsAssemblyBlocks.CHISELED_LIME_STAINED_GLASS);
         CHISELED_LIME_STAINED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_lime_stained_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_LIME_STAINED_GLASS_PANE);
+        LIME_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "lime_stained_shattered_glass"), ArchitectsAssemblyBlocks.LIME_STAINED_SHATTERED_GLASS);
         CHISELED_GREEN_STAINED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_green_stained_glass"), ArchitectsAssemblyBlocks.CHISELED_GREEN_STAINED_GLASS);
         CHISELED_GREEN_STAINED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_green_stained_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_GREEN_STAINED_GLASS_PANE);
+        GREEN_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "green_stained_shattered_glass"), ArchitectsAssemblyBlocks.GREEN_STAINED_SHATTERED_GLASS);
         CHISELED_CYAN_STAINED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_cyan_stained_glass"), ArchitectsAssemblyBlocks.CHISELED_CYAN_STAINED_GLASS);
         CHISELED_CYAN_STAINED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_cyan_stained_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_CYAN_STAINED_GLASS_PANE);
+        CYAN_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "cyan_stained_shattered_glass"), ArchitectsAssemblyBlocks.CYAN_STAINED_SHATTERED_GLASS);
         CHISELED_BLUE_STAINED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_blue_stained_glass"), ArchitectsAssemblyBlocks.CHISELED_BLUE_STAINED_GLASS);
         CHISELED_BLUE_STAINED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_blue_stained_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_BLUE_STAINED_GLASS_PANE);
+        BLUE_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "blue_stained_shattered_glass"), ArchitectsAssemblyBlocks.BLUE_STAINED_SHATTERED_GLASS);
         CHISELED_LIGHT_BLUE_STAINED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_light_blue_stained_glass"), ArchitectsAssemblyBlocks.CHISELED_LIGHT_BLUE_STAINED_GLASS);
         CHISELED_LIGHT_BLUE_STAINED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_light_blue_stained_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_LIGHT_BLUE_STAINED_GLASS_PANE);
+        LIGHT_BLUE_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "light_blue_stained_shattered_glass"), ArchitectsAssemblyBlocks.LIGHT_BLUE_STAINED_SHATTERED_GLASS);
         CHISELED_PINK_STAINED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_pink_stained_glass"), ArchitectsAssemblyBlocks.CHISELED_PINK_STAINED_GLASS);
         CHISELED_PINK_STAINED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_pink_stained_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_PINK_STAINED_GLASS_PANE);
+        PINK_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "pink_stained_shattered_glass"), ArchitectsAssemblyBlocks.PINK_STAINED_SHATTERED_GLASS);
         CHISELED_MAGENTA_STAINED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_magenta_stained_glass"), ArchitectsAssemblyBlocks.CHISELED_MAGENTA_STAINED_GLASS);
         CHISELED_MAGENTA_STAINED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_magenta_stained_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_MAGENTA_STAINED_GLASS_PANE);
+        MAGENTA_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "magenta_stained_shattered_glass"), ArchitectsAssemblyBlocks.MAGENTA_STAINED_SHATTERED_GLASS);
         CHISELED_PURPLE_STAINED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_purple_stained_glass"), ArchitectsAssemblyBlocks.CHISELED_PURPLE_STAINED_GLASS);
         CHISELED_PURPLE_STAINED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_purple_stained_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_PURPLE_STAINED_GLASS_PANE);
+        PURPLE_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "purple_stained_shattered_glass"), ArchitectsAssemblyBlocks.PURPLE_STAINED_SHATTERED_GLASS);
         CHISELED_BLACK_STAINED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_black_stained_glass"), ArchitectsAssemblyBlocks.CHISELED_BLACK_STAINED_GLASS);
         CHISELED_BLACK_STAINED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_black_stained_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_BLACK_STAINED_GLASS_PANE);
+        BLACK_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "black_stained_shattered_glass"), ArchitectsAssemblyBlocks.BLACK_STAINED_SHATTERED_GLASS);
         CHISELED_GRAY_STAINED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_gray_stained_glass"), ArchitectsAssemblyBlocks.CHISELED_GRAY_STAINED_GLASS);
         CHISELED_GRAY_STAINED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_gray_stained_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_GRAY_STAINED_GLASS_PANE);
+        GRAY_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "gray_stained_shattered_glass"), ArchitectsAssemblyBlocks.GRAY_STAINED_SHATTERED_GLASS);
         CHISELED_LIGHT_GRAY_STAINED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_light_gray_stained_glass"), ArchitectsAssemblyBlocks.CHISELED_LIGHT_GRAY_STAINED_GLASS);
         CHISELED_LIGHT_GRAY_STAINED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_light_gray_stained_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_LIGHT_GRAY_STAINED_GLASS_PANE);
+        LIGHT_GRAY_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "light_gray_stained_shattered_glass"), ArchitectsAssemblyBlocks.LIGHT_GRAY_STAINED_SHATTERED_GLASS);
         CHISELED_WHITE_STAINED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_white_stained_glass"), ArchitectsAssemblyBlocks.CHISELED_WHITE_STAINED_GLASS);
         CHISELED_WHITE_STAINED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_white_stained_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_WHITE_STAINED_GLASS_PANE);
+        WHITE_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "white_stained_shattered_glass"), ArchitectsAssemblyBlocks.WHITE_STAINED_SHATTERED_GLASS);
         LAPIS_STAIRS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "lapis_stairs"), ArchitectsAssemblyBlocks.LAPIS_STAIRS);
         LAPIS_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "lapis_slab"), settings -> new SlabItem(ArchitectsAssemblyBlocks.LAPIS_SLAB, ArchitectsAssemblyBlocks.VERTICAL_LAPIS_SLAB, settings));
         LAPIS_WALL = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "lapis_wall"), ArchitectsAssemblyBlocks.LAPIS_WALL);
@@ -274,40 +308,40 @@ public final class ArchitectsAssemblyItems {
         WAXED_OXIDIZED_CUT_COPPER_WALL = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "waxed_oxidized_cut_copper_wall"), ArchitectsAssemblyBlocks.WAXED_OXIDIZED_CUT_COPPER_WALL);
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COLORED_BLOCKS).register(entries -> {
-            entries.addAfter(Items.GLASS, CHISELED_GLASS, SHATTERED_GLASS);
-            entries.addAfter(Items.GLASS_PANE, CHISELED_GLASS_PANE);
+            entries.addAfter(Items.GLASS, CHISELED_GLASS);
+            entries.addAfter(Items.GLASS_PANE, CHISELED_GLASS_PANE, SHATTERED_GLASS);
             entries.addAfter(Items.BROWN_STAINED_GLASS, CHISELED_BROWN_STAINED_GLASS);
-            entries.addAfter(Items.BROWN_STAINED_GLASS_PANE, CHISELED_BROWN_STAINED_GLASS_PANE);
+            entries.addAfter(Items.BROWN_STAINED_GLASS_PANE, CHISELED_BROWN_STAINED_GLASS_PANE, BROWN_STAINED_SHATTERED_GLASS);
             entries.addAfter(Items.RED_STAINED_GLASS, CHISELED_RED_STAINED_GLASS);
-            entries.addAfter(Items.RED_STAINED_GLASS_PANE, CHISELED_RED_STAINED_GLASS_PANE);
+            entries.addAfter(Items.RED_STAINED_GLASS_PANE, CHISELED_RED_STAINED_GLASS_PANE, RED_STAINED_SHATTERED_GLASS);
             entries.addAfter(Items.ORANGE_STAINED_GLASS, CHISELED_ORANGE_STAINED_GLASS);
-            entries.addAfter(Items.ORANGE_STAINED_GLASS_PANE, CHISELED_ORANGE_STAINED_GLASS_PANE);
+            entries.addAfter(Items.ORANGE_STAINED_GLASS_PANE, CHISELED_ORANGE_STAINED_GLASS_PANE, ORANGE_STAINED_SHATTERED_GLASS);
             entries.addAfter(Items.YELLOW_STAINED_GLASS, CHISELED_YELLOW_STAINED_GLASS);
-            entries.addAfter(Items.YELLOW_STAINED_GLASS_PANE, CHISELED_YELLOW_STAINED_GLASS_PANE);
+            entries.addAfter(Items.YELLOW_STAINED_GLASS_PANE, CHISELED_YELLOW_STAINED_GLASS_PANE, YELLOW_STAINED_SHATTERED_GLASS);
             entries.addAfter(Items.LIME_STAINED_GLASS, CHISELED_LIME_STAINED_GLASS);
-            entries.addAfter(Items.LIME_STAINED_GLASS_PANE, CHISELED_LIME_STAINED_GLASS_PANE);
+            entries.addAfter(Items.LIME_STAINED_GLASS_PANE, CHISELED_LIME_STAINED_GLASS_PANE, LIME_STAINED_SHATTERED_GLASS);
             entries.addAfter(Items.GREEN_STAINED_GLASS, CHISELED_GREEN_STAINED_GLASS);
-            entries.addAfter(Items.GREEN_STAINED_GLASS_PANE, CHISELED_GREEN_STAINED_GLASS_PANE);
+            entries.addAfter(Items.GREEN_STAINED_GLASS_PANE, CHISELED_GREEN_STAINED_GLASS_PANE, GREEN_STAINED_SHATTERED_GLASS);
             entries.addAfter(Items.CYAN_STAINED_GLASS, CHISELED_CYAN_STAINED_GLASS);
-            entries.addAfter(Items.CYAN_STAINED_GLASS_PANE, CHISELED_CYAN_STAINED_GLASS_PANE);
+            entries.addAfter(Items.CYAN_STAINED_GLASS_PANE, CHISELED_CYAN_STAINED_GLASS_PANE, CYAN_STAINED_SHATTERED_GLASS);
             entries.addAfter(Items.BLUE_STAINED_GLASS, CHISELED_BLUE_STAINED_GLASS);
-            entries.addAfter(Items.BLUE_STAINED_GLASS_PANE, CHISELED_BLUE_STAINED_GLASS_PANE);
+            entries.addAfter(Items.BLUE_STAINED_GLASS_PANE, CHISELED_BLUE_STAINED_GLASS_PANE, BLUE_STAINED_SHATTERED_GLASS);
             entries.addAfter(Items.LIGHT_BLUE_STAINED_GLASS, CHISELED_LIGHT_BLUE_STAINED_GLASS);
-            entries.addAfter(Items.LIGHT_BLUE_STAINED_GLASS_PANE, CHISELED_LIGHT_BLUE_STAINED_GLASS_PANE);
+            entries.addAfter(Items.LIGHT_BLUE_STAINED_GLASS_PANE, CHISELED_LIGHT_BLUE_STAINED_GLASS_PANE, LIGHT_BLUE_STAINED_SHATTERED_GLASS);
             entries.addAfter(Items.PINK_STAINED_GLASS, CHISELED_PINK_STAINED_GLASS);
-            entries.addAfter(Items.PINK_STAINED_GLASS_PANE, CHISELED_PINK_STAINED_GLASS_PANE);
+            entries.addAfter(Items.PINK_STAINED_GLASS_PANE, CHISELED_PINK_STAINED_GLASS_PANE, PINK_STAINED_SHATTERED_GLASS);
             entries.addAfter(Items.MAGENTA_STAINED_GLASS, CHISELED_MAGENTA_STAINED_GLASS);
-            entries.addAfter(Items.MAGENTA_STAINED_GLASS_PANE, CHISELED_MAGENTA_STAINED_GLASS_PANE);
+            entries.addAfter(Items.MAGENTA_STAINED_GLASS_PANE, CHISELED_MAGENTA_STAINED_GLASS_PANE, MAGENTA_STAINED_SHATTERED_GLASS);
             entries.addAfter(Items.PURPLE_STAINED_GLASS, CHISELED_PURPLE_STAINED_GLASS);
-            entries.addAfter(Items.PURPLE_STAINED_GLASS_PANE, CHISELED_PURPLE_STAINED_GLASS_PANE);
+            entries.addAfter(Items.PURPLE_STAINED_GLASS_PANE, CHISELED_PURPLE_STAINED_GLASS_PANE, PURPLE_STAINED_SHATTERED_GLASS);
             entries.addAfter(Items.BLACK_STAINED_GLASS, CHISELED_BLACK_STAINED_GLASS);
-            entries.addAfter(Items.BLACK_STAINED_GLASS_PANE, CHISELED_BLACK_STAINED_GLASS_PANE);
+            entries.addAfter(Items.BLACK_STAINED_GLASS_PANE, CHISELED_BLACK_STAINED_GLASS_PANE, BLACK_STAINED_SHATTERED_GLASS);
             entries.addAfter(Items.GRAY_STAINED_GLASS, CHISELED_GRAY_STAINED_GLASS);
-            entries.addAfter(Items.GRAY_STAINED_GLASS_PANE, CHISELED_GRAY_STAINED_GLASS_PANE);
+            entries.addAfter(Items.GRAY_STAINED_GLASS_PANE, CHISELED_GRAY_STAINED_GLASS_PANE, GRAY_STAINED_SHATTERED_GLASS);
             entries.addAfter(Items.LIGHT_GRAY_STAINED_GLASS, CHISELED_LIGHT_GRAY_STAINED_GLASS);
-            entries.addAfter(Items.LIGHT_GRAY_STAINED_GLASS_PANE, CHISELED_LIGHT_GRAY_STAINED_GLASS_PANE);
+            entries.addAfter(Items.LIGHT_GRAY_STAINED_GLASS_PANE, CHISELED_LIGHT_GRAY_STAINED_GLASS_PANE, LIGHT_GRAY_STAINED_SHATTERED_GLASS);
             entries.addAfter(Items.WHITE_STAINED_GLASS, CHISELED_WHITE_STAINED_GLASS);
-            entries.addAfter(Items.WHITE_STAINED_GLASS_PANE, CHISELED_WHITE_STAINED_GLASS_PANE);
+            entries.addAfter(Items.WHITE_STAINED_GLASS_PANE, CHISELED_WHITE_STAINED_GLASS_PANE, WHITE_STAINED_SHATTERED_GLASS);
             entries.getDisplayStacks().replaceAll(stack -> {
                 if (stack.isOf(Items.GLASS)) {
                     return GLASS.getDefaultStack();
@@ -341,128 +375,132 @@ public final class ArchitectsAssemblyItems {
     // endregion
 
     // region Vertical Slabs
-    public static final Item OAK_SLAB = new SlabItem(Blocks.OAK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_OAK_SLAB, new Item.Settings());
-    public static final Item SPRUCE_SLAB = new SlabItem(Blocks.SPRUCE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_SPRUCE_SLAB, new Item.Settings());
-    public static final Item BIRCH_SLAB = new SlabItem(Blocks.BIRCH_SLAB, ArchitectsAssemblyBlocks.VERTICAL_BIRCH_SLAB, new Item.Settings());
-    public static final Item JUNGLE_SLAB = new SlabItem(Blocks.JUNGLE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_JUNGLE_SLAB, new Item.Settings());
-    public static final Item DARK_OAK_SLAB = new SlabItem(Blocks.DARK_OAK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_DARK_OAK_SLAB, new Item.Settings());
-    public static final Item ACACIA_SLAB = new SlabItem(Blocks.ACACIA_SLAB, ArchitectsAssemblyBlocks.VERTICAL_ACACIA_SLAB, new Item.Settings());
-    public static final Item MANGROVE_SLAB = new SlabItem(Blocks.MANGROVE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_MANGROVE_SLAB, new Item.Settings());
-    public static final Item CHERRY_SLAB = new SlabItem(Blocks.CHERRY_SLAB, ArchitectsAssemblyBlocks.VERTICAL_CHERRY_SLAB, new Item.Settings());
-    public static final Item BAMBOO_SLAB = new SlabItem(Blocks.BAMBOO_SLAB, ArchitectsAssemblyBlocks.VERTICAL_BAMBOO_SLAB, new Item.Settings());
-    public static final Item BAMBOO_MOSAIC_SLAB = new SlabItem(Blocks.BAMBOO_MOSAIC_SLAB, ArchitectsAssemblyBlocks.VERTICAL_BAMBOO_MOSAIC_SLAB, new Item.Settings());
-    public static final Item CRIMSON_SLAB = new SlabItem(Blocks.CRIMSON_SLAB, ArchitectsAssemblyBlocks.VERTICAL_CRIMSON_SLAB, new Item.Settings());
-    public static final Item WARPED_SLAB = new SlabItem(Blocks.WARPED_SLAB, ArchitectsAssemblyBlocks.VERTICAL_WARPED_SLAB, new Item.Settings());
-    public static final Item STONE_SLAB = new SlabItem(Blocks.STONE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_STONE_SLAB, new Item.Settings());
-    public static final Item SMOOTH_STONE_SLAB = new SlabItem(Blocks.SMOOTH_STONE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_SMOOTH_STONE_SLAB, new Item.Settings());
-    public static final Item SANDSTONE_SLAB = new SlabItem(Blocks.SANDSTONE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_SANDSTONE_SLAB, new Item.Settings());
-    public static final Item CUT_SANDSTONE_SLAB = new SlabItem(Blocks.CUT_SANDSTONE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_CUT_SANDSTONE_SLAB, new Item.Settings());
-    public static final Item PETRIFIED_OAK_SLAB = new SlabItem(Blocks.PETRIFIED_OAK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_PETRIFIED_OAK_SLAB, new Item.Settings());
-    public static final Item COBBLESTONE_SLAB = new SlabItem(Blocks.COBBLESTONE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_COBBLESTONE_SLAB, new Item.Settings());
-    public static final Item BRICK_SLAB = new SlabItem(Blocks.BRICK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_BRICK_SLAB, new Item.Settings());
-    public static final Item STONE_BRICK_SLAB = new SlabItem(Blocks.STONE_BRICK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_STONE_BRICK_SLAB, new Item.Settings());
-    public static final Item MUD_BRICK_SLAB = new SlabItem(Blocks.MUD_BRICK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_MUD_BRICK_SLAB, new Item.Settings());
-    public static final Item NETHER_BRICK_SLAB = new SlabItem(Blocks.NETHER_BRICK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_NETHER_BRICK_SLAB, new Item.Settings());
-    public static final Item QUARTZ_SLAB = new SlabItem(Blocks.QUARTZ_SLAB, ArchitectsAssemblyBlocks.VERTICAL_QUARTZ_SLAB, new Item.Settings());
-    public static final Item RED_SANDSTONE_SLAB = new SlabItem(Blocks.RED_SANDSTONE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_RED_SANDSTONE_SLAB, new Item.Settings());
-    public static final Item CUT_RED_SANDSTONE_SLAB = new SlabItem(Blocks.CUT_RED_SANDSTONE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_CUT_RED_SANDSTONE_SLAB, new Item.Settings());
-    public static final Item PURPUR_SLAB = new SlabItem(Blocks.PURPUR_SLAB, ArchitectsAssemblyBlocks.VERTICAL_PURPUR_SLAB, new Item.Settings());
-    public static final Item PRISMARINE_SLAB = new SlabItem(Blocks.PRISMARINE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_PRISMARINE_SLAB, new Item.Settings());
-    public static final Item PRISMARINE_BRICK_SLAB = new SlabItem(Blocks.PRISMARINE_BRICK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_PRISMARINE_BRICK_SLAB, new Item.Settings());
-    public static final Item DARK_PRISMARINE_SLAB = new SlabItem(Blocks.DARK_PRISMARINE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_DARK_PRISMARINE_SLAB, new Item.Settings());
-    public static final Item GRANITE_SLAB = new SlabItem(Blocks.GRANITE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_GRANITE_SLAB, new Item.Settings());
-    public static final Item POLISHED_GRANITE_SLAB = new SlabItem(Blocks.POLISHED_GRANITE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_POLISHED_GRANITE_SLAB, new Item.Settings());
-    public static final Item ANDESITE_SLAB = new SlabItem(Blocks.ANDESITE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_ANDESITE_SLAB, new Item.Settings());
-    public static final Item POLISHED_ANDESITE_SLAB = new SlabItem(Blocks.POLISHED_ANDESITE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_POLISHED_ANDESITE_SLAB, new Item.Settings());
-    public static final Item DIORITE_SLAB = new SlabItem(Blocks.DIORITE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_DIORITE_SLAB, new Item.Settings());
-    public static final Item POLISHED_DIORITE_SLAB = new SlabItem(Blocks.POLISHED_DIORITE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_POLISHED_DIORITE_SLAB, new Item.Settings());
-    public static final Item SMOOTH_SANDSTONE_SLAB = new SlabItem(Blocks.SMOOTH_SANDSTONE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_SMOOTH_SANDSTONE_SLAB, new Item.Settings());
-    public static final Item SMOOTH_QUARTZ_SLAB = new SlabItem(Blocks.SMOOTH_QUARTZ_SLAB, ArchitectsAssemblyBlocks.VERTICAL_SMOOTH_QUARTZ_SLAB, new Item.Settings());
-    public static final Item SMOOTH_RED_SANDSTONE_SLAB = new SlabItem(Blocks.SMOOTH_RED_SANDSTONE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_SMOOTH_RED_SANDSTONE_SLAB, new Item.Settings());
-    public static final Item MOSSY_STONE_BRICK_SLAB = new SlabItem(Blocks.MOSSY_STONE_BRICK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_MOSSY_STONE_BRICK_SLAB, new Item.Settings());
-    public static final Item END_STONE_BRICK_SLAB = new SlabItem(Blocks.END_STONE_BRICK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_END_STONE_BRICK_SLAB, new Item.Settings());
-    public static final Item RED_NETHER_BRICK_SLAB = new SlabItem(Blocks.RED_NETHER_BRICK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_RED_NETHER_BRICK_SLAB, new Item.Settings());
-    public static final Item BLACKSTONE_SLAB = new SlabItem(Blocks.BLACKSTONE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_BLACKSTONE_SLAB, new Item.Settings());
-    public static final Item POLISHED_BLACKSTONE_SLAB = new SlabItem(Blocks.POLISHED_BLACKSTONE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_POLISHED_BLACKSTONE_SLAB, new Item.Settings());
-    public static final Item POLISHED_BLACKSTONE_BRICK_SLAB = new SlabItem(Blocks.POLISHED_BLACKSTONE_BRICK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_POLISHED_BLACKSTONE_BRICK_SLAB, new Item.Settings());
-    public static final Item OXIDIZED_CUT_COPPER_SLAB = new SlabItem(Blocks.OXIDIZED_CUT_COPPER_SLAB, ArchitectsAssemblyBlocks.VERTICAL_OXIDIZED_CUT_COPPER_SLAB, new Item.Settings());
-    public static final Item WEATHERED_CUT_COPPER_SLAB = new SlabItem(Blocks.WEATHERED_CUT_COPPER_SLAB, ArchitectsAssemblyBlocks.VERTICAL_WEATHERED_CUT_COPPER_SLAB, new Item.Settings());
-    public static final Item EXPOSED_CUT_COPPER_SLAB = new SlabItem(Blocks.EXPOSED_CUT_COPPER_SLAB, ArchitectsAssemblyBlocks.VERTICAL_EXPOSED_CUT_COPPER_SLAB, new Item.Settings());
-    public static final Item CUT_COPPER_SLAB = new SlabItem(Blocks.CUT_COPPER_SLAB, ArchitectsAssemblyBlocks.VERTICAL_CUT_COPPER_SLAB, new Item.Settings());
-    public static final Item WAXED_OXIDIZED_CUT_COPPER_SLAB = new SlabItem(Blocks.WAXED_OXIDIZED_CUT_COPPER_SLAB, ArchitectsAssemblyBlocks.VERTICAL_WAXED_OXIDIZED_CUT_COPPER_SLAB, new Item.Settings());
-    public static final Item WAXED_WEATHERED_CUT_COPPER_SLAB = new SlabItem(Blocks.WAXED_WEATHERED_CUT_COPPER_SLAB, ArchitectsAssemblyBlocks.VERTICAL_WAXED_WEATHERED_CUT_COPPER_SLAB, new Item.Settings());
-    public static final Item WAXED_EXPOSED_CUT_COPPER_SLAB = new SlabItem(Blocks.WAXED_EXPOSED_CUT_COPPER_SLAB, ArchitectsAssemblyBlocks.VERTICAL_WAXED_EXPOSED_CUT_COPPER_SLAB, new Item.Settings());
-    public static final Item WAXED_CUT_COPPER_SLAB = new SlabItem(Blocks.WAXED_CUT_COPPER_SLAB, ArchitectsAssemblyBlocks.VERTICAL_WAXED_CUT_COPPER_SLAB, new Item.Settings());
-    public static final Item COBBLED_DEEPSLATE_SLAB = new SlabItem(Blocks.COBBLED_DEEPSLATE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_COBBLED_DEEPSLATE_SLAB, new Item.Settings());
-    public static final Item POLISHED_DEEPSLATE_SLAB = new SlabItem(Blocks.POLISHED_DEEPSLATE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_POLISHED_DEEPSLATE_SLAB, new Item.Settings());
-    public static final Item DEEPSLATE_TILE_SLAB = new SlabItem(Blocks.DEEPSLATE_TILE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_DEEPSLATE_TILE_SLAB, new Item.Settings());
-    public static final Item DEEPSLATE_BRICK_SLAB = new SlabItem(Blocks.DEEPSLATE_BRICK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_DEEPSLATE_BRICK_SLAB, new Item.Settings());
-    public static final Item MOSSY_COBBLESTONE_SLAB = new SlabItem(Blocks.MOSSY_COBBLESTONE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_MOSSY_COBBLESTONE_SLAB, new Item.Settings());
-    public static final Item TUFF_SLAB = new SlabItem(Blocks.TUFF_SLAB, ArchitectsAssemblyBlocks.VERTICAL_TUFF_SLAB, new Item.Settings());
-    public static final Item TUFF_BRICK_SLAB = new SlabItem(Blocks.TUFF_BRICK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_TUFF_BRICK_SLAB, new Item.Settings());
-    public static final Item POLISHED_TUFF_SLAB = new SlabItem(Blocks.POLISHED_TUFF_SLAB, ArchitectsAssemblyBlocks.VERTICAL_POLISHED_TUFF_SLAB, new Item.Settings());
+    public static Item OAK_SLAB;
+    public static Item SPRUCE_SLAB;
+    public static Item BIRCH_SLAB;
+    public static Item JUNGLE_SLAB;
+    public static Item DARK_OAK_SLAB;
+    public static Item ACACIA_SLAB;
+    public static Item MANGROVE_SLAB;
+    public static Item CHERRY_SLAB;
+    public static Item PALE_OAK_SLAB;
+    public static Item BAMBOO_SLAB;
+    public static Item BAMBOO_MOSAIC_SLAB;
+    public static Item CRIMSON_SLAB;
+    public static Item WARPED_SLAB;
+    public static Item STONE_SLAB;
+    public static Item SMOOTH_STONE_SLAB;
+    public static Item SANDSTONE_SLAB;
+    public static Item CUT_SANDSTONE_SLAB;
+    public static Item PETRIFIED_OAK_SLAB;
+    public static Item COBBLESTONE_SLAB;
+    public static Item BRICK_SLAB;
+    public static Item STONE_BRICK_SLAB;
+    public static Item MUD_BRICK_SLAB;
+    public static Item NETHER_BRICK_SLAB;
+    public static Item QUARTZ_SLAB;
+    public static Item RED_SANDSTONE_SLAB;
+    public static Item CUT_RED_SANDSTONE_SLAB;
+    public static Item PURPUR_SLAB;
+    public static Item PRISMARINE_SLAB;
+    public static Item PRISMARINE_BRICK_SLAB;
+    public static Item DARK_PRISMARINE_SLAB;
+    public static Item GRANITE_SLAB;
+    public static Item POLISHED_GRANITE_SLAB;
+    public static Item ANDESITE_SLAB;
+    public static Item POLISHED_ANDESITE_SLAB;
+    public static Item DIORITE_SLAB;
+    public static Item POLISHED_DIORITE_SLAB;
+    public static Item SMOOTH_SANDSTONE_SLAB;
+    public static Item SMOOTH_QUARTZ_SLAB;
+    public static Item SMOOTH_RED_SANDSTONE_SLAB;
+    public static Item MOSSY_STONE_BRICK_SLAB;
+    public static Item END_STONE_BRICK_SLAB;
+    public static Item RED_NETHER_BRICK_SLAB;
+    public static Item BLACKSTONE_SLAB;
+    public static Item POLISHED_BLACKSTONE_SLAB;
+    public static Item POLISHED_BLACKSTONE_BRICK_SLAB;
+    public static Item OXIDIZED_CUT_COPPER_SLAB;
+    public static Item WEATHERED_CUT_COPPER_SLAB;
+    public static Item EXPOSED_CUT_COPPER_SLAB;
+    public static Item CUT_COPPER_SLAB;
+    public static Item WAXED_OXIDIZED_CUT_COPPER_SLAB;
+    public static Item WAXED_WEATHERED_CUT_COPPER_SLAB;
+    public static Item WAXED_EXPOSED_CUT_COPPER_SLAB;
+    public static Item WAXED_CUT_COPPER_SLAB;
+    public static Item COBBLED_DEEPSLATE_SLAB;
+    public static Item POLISHED_DEEPSLATE_SLAB;
+    public static Item DEEPSLATE_TILE_SLAB;
+    public static Item DEEPSLATE_BRICK_SLAB;
+    public static Item MOSSY_COBBLESTONE_SLAB;
+    public static Item TUFF_SLAB;
+    public static Item TUFF_BRICK_SLAB;
+    public static Item POLISHED_TUFF_SLAB;
+    public static Item RESIN_BRICK_SLAB;
 
     private static void registerVerticalSlabs() {
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "oak_slab"), OAK_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "spruce_slab"), SPRUCE_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "birch_slab"), BIRCH_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "jungle_slab"), JUNGLE_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "dark_oak_slab"), DARK_OAK_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "acacia_slab"), ACACIA_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "mangrove_slab"), MANGROVE_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "cherry_slab"), CHERRY_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "bamboo_slab"), BAMBOO_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "bamboo_mosaic_slab"), BAMBOO_MOSAIC_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "crimson_slab"), CRIMSON_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "warped_slab"), WARPED_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "stone_slab"), STONE_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "smooth_stone_slab"), SMOOTH_STONE_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "sandstone_slab"), SANDSTONE_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "cut_sandstone_slab"), CUT_SANDSTONE_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "petrified_oak_slab"), PETRIFIED_OAK_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "cobblestone_slab"), COBBLESTONE_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "brick_slab"), BRICK_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "stone_brick_slab"), STONE_BRICK_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "mud_brick_slab"), MUD_BRICK_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "nether_brick_slab"), NETHER_BRICK_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "quartz_slab"), QUARTZ_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "red_sandstone_slab"), RED_SANDSTONE_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "cut_red_sandstone_slab"), CUT_RED_SANDSTONE_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "purpur_slab"), PURPUR_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "prismarine_slab"), PRISMARINE_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "prismarine_brick_slab"), PRISMARINE_BRICK_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "dark_prismarine_slab"), DARK_PRISMARINE_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "granite_slab"), GRANITE_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "polished_granite_slab"), POLISHED_GRANITE_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "andesite_slab"), ANDESITE_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "polished_andesite_slab"), POLISHED_ANDESITE_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "diorite_slab"), DIORITE_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "polished_diorite_slab"), POLISHED_DIORITE_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "smooth_sandstone_slab"), SMOOTH_SANDSTONE_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "smooth_quartz_slab"), SMOOTH_QUARTZ_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "smooth_red_sandstone_slab"), SMOOTH_RED_SANDSTONE_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "mossy_stone_brick_slab"), MOSSY_STONE_BRICK_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "end_stone_brick_slab"), END_STONE_BRICK_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "red_nether_brick_slab"), RED_NETHER_BRICK_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "blackstone_slab"), BLACKSTONE_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "polished_blackstone_slab"), POLISHED_BLACKSTONE_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "polished_blackstone_brick_slab"), POLISHED_BLACKSTONE_BRICK_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "oxidized_cut_copper_slab"), OXIDIZED_CUT_COPPER_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "weathered_cut_copper_slab"), WEATHERED_CUT_COPPER_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "exposed_cut_copper_slab"), EXPOSED_CUT_COPPER_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "cut_copper_slab"), CUT_COPPER_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "waxed_oxidized_cut_copper_slab"), WAXED_OXIDIZED_CUT_COPPER_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "waxed_weathered_cut_copper_slab"), WAXED_WEATHERED_CUT_COPPER_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "waxed_exposed_cut_copper_slab"), WAXED_EXPOSED_CUT_COPPER_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "waxed_cut_copper_slab"), WAXED_CUT_COPPER_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "cobbled_deepslate_slab"), COBBLED_DEEPSLATE_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "polished_deepslate_slab"), POLISHED_DEEPSLATE_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "deepslate_tile_slab"), DEEPSLATE_TILE_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "deepslate_brick_slab"), DEEPSLATE_BRICK_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "mossy_cobblestone_slab"), MOSSY_COBBLESTONE_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "tuff_slab"), TUFF_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "tuff_brick_slab"), TUFF_BRICK_SLAB);
-        Registry.register(Registries.ITEM, Identifier.of(GreatBigWorld.NAMESPACE, "polished_tuff_slab"), POLISHED_TUFF_SLAB);
+        OAK_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "oak_slab"), settings -> new SlabItem(Blocks.OAK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_OAK_SLAB, settings));
+        SPRUCE_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "spruce_slab"), settings -> new SlabItem(Blocks.SPRUCE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_SPRUCE_SLAB, settings));
+        BIRCH_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "birch_slab"), settings -> new SlabItem(Blocks.BIRCH_SLAB, ArchitectsAssemblyBlocks.VERTICAL_BIRCH_SLAB, settings));
+        JUNGLE_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "jungle_slab"), settings -> new SlabItem(Blocks.JUNGLE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_JUNGLE_SLAB, settings));
+        DARK_OAK_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "dark_oak_slab"), settings -> new SlabItem(Blocks.DARK_OAK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_DARK_OAK_SLAB, settings));
+        ACACIA_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "acacia_slab"), settings -> new SlabItem(Blocks.ACACIA_SLAB, ArchitectsAssemblyBlocks.VERTICAL_ACACIA_SLAB, settings));
+        MANGROVE_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "mangrove_slab"), settings -> new SlabItem(Blocks.MANGROVE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_MANGROVE_SLAB, settings));
+        CHERRY_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "cherry_slab"), settings -> new SlabItem(Blocks.CHERRY_SLAB, ArchitectsAssemblyBlocks.VERTICAL_CHERRY_SLAB, settings));
+        PALE_OAK_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "pale_oak_slab"), settings -> new SlabItem(Blocks.PALE_OAK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_PALE_OAK_SLAB, settings));
+        BAMBOO_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "bamboo_slab"), settings -> new SlabItem(Blocks.BAMBOO_SLAB, ArchitectsAssemblyBlocks.VERTICAL_BAMBOO_SLAB, settings));
+        BAMBOO_MOSAIC_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "bamboo_mosaic_slab"), settings -> new SlabItem(Blocks.BAMBOO_MOSAIC_SLAB, ArchitectsAssemblyBlocks.VERTICAL_BAMBOO_MOSAIC_SLAB, settings));
+        CRIMSON_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "crimson_slab"), settings -> new SlabItem(Blocks.CRIMSON_SLAB, ArchitectsAssemblyBlocks.VERTICAL_CRIMSON_SLAB, settings));
+        WARPED_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "warped_slab"), settings -> new SlabItem(Blocks.WARPED_SLAB, ArchitectsAssemblyBlocks.VERTICAL_WARPED_SLAB, settings));
+        STONE_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "stone_slab"), settings -> new SlabItem(Blocks.STONE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_STONE_SLAB, settings));
+        SMOOTH_STONE_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "smooth_stone_slab"), settings -> new SlabItem(Blocks.SMOOTH_STONE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_SMOOTH_STONE_SLAB, settings));
+        SANDSTONE_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "sandstone_slab"), settings -> new SlabItem(Blocks.SANDSTONE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_SANDSTONE_SLAB, settings));
+        CUT_SANDSTONE_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "cut_sandstone_slab"), settings -> new SlabItem(Blocks.PRISMARINE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_PRISMARINE_SLAB, settings));
+        PETRIFIED_OAK_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "petrified_oak_slab"), settings -> new SlabItem(Blocks.CUT_SANDSTONE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_CUT_SANDSTONE_SLAB, settings));
+        COBBLESTONE_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "cobblestone_slab"), settings -> new SlabItem(Blocks.COBBLESTONE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_COBBLESTONE_SLAB, settings));
+        BRICK_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "brick_slab"), settings -> new SlabItem(Blocks.BRICK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_BRICK_SLAB, settings));
+        STONE_BRICK_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "stone_brick_slab"), settings -> new SlabItem(Blocks.STONE_BRICK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_STONE_BRICK_SLAB, settings));
+        MUD_BRICK_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "mud_brick_slab"), settings -> new SlabItem(Blocks.MUD_BRICK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_MUD_BRICK_SLAB, settings));
+        NETHER_BRICK_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "nether_brick_slab"), settings -> new SlabItem(Blocks.NETHER_BRICK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_NETHER_BRICK_SLAB, settings));
+        QUARTZ_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "quartz_slab"), settings -> new SlabItem(Blocks.QUARTZ_SLAB, ArchitectsAssemblyBlocks.VERTICAL_QUARTZ_SLAB, settings));
+        RED_SANDSTONE_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "red_sandstone_slab"), settings -> new SlabItem(Blocks.RED_SANDSTONE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_RED_SANDSTONE_SLAB, settings));
+        CUT_RED_SANDSTONE_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "cut_red_sandstone_slab"), settings -> new SlabItem(Blocks.CUT_RED_SANDSTONE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_CUT_RED_SANDSTONE_SLAB, settings));
+        PURPUR_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "purpur_slab"), settings -> new SlabItem(Blocks.PURPUR_SLAB, ArchitectsAssemblyBlocks.VERTICAL_PURPUR_SLAB, settings));
+        PRISMARINE_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "prismarine_slab"), settings -> new SlabItem(Blocks.PRISMARINE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_PRISMARINE_SLAB, settings));
+        PRISMARINE_BRICK_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "prismarine_brick_slab"), settings -> new SlabItem(Blocks.PRISMARINE_BRICK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_PRISMARINE_BRICK_SLAB, settings));
+        DARK_PRISMARINE_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "dark_prismarine_slab"), settings -> new SlabItem(Blocks.DARK_PRISMARINE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_DARK_PRISMARINE_SLAB, settings));
+        GRANITE_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "granite_slab"), settings -> new SlabItem(Blocks.GRANITE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_GRANITE_SLAB, settings));
+        POLISHED_GRANITE_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "polished_granite_slab"), settings -> new SlabItem(Blocks.POLISHED_GRANITE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_POLISHED_GRANITE_SLAB, settings));
+        ANDESITE_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "andesite_slab"), settings -> new SlabItem(Blocks.ANDESITE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_ANDESITE_SLAB, settings));
+        POLISHED_ANDESITE_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "polished_andesite_slab"), settings -> new SlabItem(Blocks.POLISHED_ANDESITE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_POLISHED_ANDESITE_SLAB, settings));
+        DIORITE_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "diorite_slab"), settings -> new SlabItem(Blocks.DIORITE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_DIORITE_SLAB, settings));
+        POLISHED_DIORITE_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "polished_diorite_slab"), settings -> new SlabItem(Blocks.POLISHED_DIORITE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_POLISHED_DIORITE_SLAB, settings));
+        SMOOTH_SANDSTONE_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "smooth_sandstone_slab"), settings -> new SlabItem(Blocks.SMOOTH_SANDSTONE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_SMOOTH_SANDSTONE_SLAB, settings));
+        SMOOTH_QUARTZ_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "smooth_quartz_slab"), settings -> new SlabItem(Blocks.SMOOTH_QUARTZ_SLAB, ArchitectsAssemblyBlocks.VERTICAL_SMOOTH_QUARTZ_SLAB, settings));
+        SMOOTH_RED_SANDSTONE_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "smooth_red_sandstone_slab"), settings -> new SlabItem(Blocks.SMOOTH_RED_SANDSTONE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_SMOOTH_RED_SANDSTONE_SLAB, settings));
+        MOSSY_STONE_BRICK_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "mossy_stone_brick_slab"), settings -> new SlabItem(Blocks.MOSSY_STONE_BRICK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_MOSSY_STONE_BRICK_SLAB, settings));
+        END_STONE_BRICK_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "end_stone_brick_slab"), settings -> new SlabItem(Blocks.END_STONE_BRICK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_END_STONE_BRICK_SLAB, settings));
+        RED_NETHER_BRICK_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "red_nether_brick_slab"), settings -> new SlabItem(Blocks.RED_NETHER_BRICK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_RED_NETHER_BRICK_SLAB, settings));
+        BLACKSTONE_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "blackstone_slab"), settings -> new SlabItem(Blocks.BLACKSTONE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_BLACKSTONE_SLAB, settings));
+        POLISHED_BLACKSTONE_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "polished_blackstone_slab"), settings -> new SlabItem(Blocks.POLISHED_BLACKSTONE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_POLISHED_BLACKSTONE_SLAB, settings));
+        POLISHED_BLACKSTONE_BRICK_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "polished_blackstone_brick_slab"), settings -> new SlabItem(Blocks.POLISHED_BLACKSTONE_BRICK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_POLISHED_BLACKSTONE_BRICK_SLAB, settings));
+        OXIDIZED_CUT_COPPER_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "oxidized_cut_copper_slab"), settings -> new SlabItem(Blocks.OXIDIZED_CUT_COPPER_SLAB, ArchitectsAssemblyBlocks.VERTICAL_OXIDIZED_CUT_COPPER_SLAB, settings));
+        WEATHERED_CUT_COPPER_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "weathered_cut_copper_slab"), settings -> new SlabItem(Blocks.WEATHERED_CUT_COPPER_SLAB, ArchitectsAssemblyBlocks.VERTICAL_WEATHERED_CUT_COPPER_SLAB, settings));
+        EXPOSED_CUT_COPPER_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "exposed_cut_copper_slab"), settings -> new SlabItem(Blocks.EXPOSED_CUT_COPPER_SLAB, ArchitectsAssemblyBlocks.VERTICAL_EXPOSED_CUT_COPPER_SLAB, settings));
+        CUT_COPPER_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "cut_copper_slab"), settings -> new SlabItem(Blocks.CUT_COPPER_SLAB, ArchitectsAssemblyBlocks.VERTICAL_CUT_COPPER_SLAB, settings));
+        WAXED_OXIDIZED_CUT_COPPER_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "waxed_oxidized_cut_copper_slab"), settings -> new SlabItem(Blocks.WAXED_OXIDIZED_CUT_COPPER_SLAB, ArchitectsAssemblyBlocks.VERTICAL_WAXED_OXIDIZED_CUT_COPPER_SLAB, settings));
+        WAXED_WEATHERED_CUT_COPPER_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "waxed_weathered_cut_copper_slab"), settings -> new SlabItem(Blocks.WAXED_WEATHERED_CUT_COPPER_SLAB, ArchitectsAssemblyBlocks.VERTICAL_WAXED_WEATHERED_CUT_COPPER_SLAB, settings));
+        WAXED_EXPOSED_CUT_COPPER_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "waxed_exposed_cut_copper_slab"), settings -> new SlabItem(Blocks.WAXED_EXPOSED_CUT_COPPER_SLAB, ArchitectsAssemblyBlocks.VERTICAL_WAXED_EXPOSED_CUT_COPPER_SLAB, settings));
+        WAXED_CUT_COPPER_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "waxed_cut_copper_slab"), settings -> new SlabItem(Blocks.WAXED_CUT_COPPER_SLAB, ArchitectsAssemblyBlocks.VERTICAL_WAXED_CUT_COPPER_SLAB, settings));
+        COBBLED_DEEPSLATE_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "cobbled_deepslate_slab"), settings -> new SlabItem(Blocks.COBBLED_DEEPSLATE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_COBBLED_DEEPSLATE_SLAB, settings));
+        POLISHED_DEEPSLATE_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "polished_deepslate_slab"), settings -> new SlabItem(Blocks.POLISHED_DEEPSLATE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_POLISHED_DEEPSLATE_SLAB, settings));
+        DEEPSLATE_TILE_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "deepslate_tile_slab"), settings -> new SlabItem(Blocks.DEEPSLATE_TILE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_DEEPSLATE_TILE_SLAB, settings));
+        DEEPSLATE_BRICK_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "deepslate_brick_slab"), settings -> new SlabItem(Blocks.DEEPSLATE_BRICK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_DEEPSLATE_BRICK_SLAB, settings));
+        MOSSY_COBBLESTONE_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "mossy_cobblestone_slab"), settings -> new SlabItem(Blocks.MOSSY_COBBLESTONE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_MOSSY_COBBLESTONE_SLAB, settings));
+        TUFF_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "tuff_slab"), settings -> new SlabItem(Blocks.TUFF_SLAB, ArchitectsAssemblyBlocks.VERTICAL_TUFF_SLAB, settings));
+        TUFF_BRICK_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "tuff_brick_slab"), settings -> new SlabItem(Blocks.TUFF_BRICK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_TUFF_BRICK_SLAB, settings));
+        POLISHED_TUFF_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "polished_tuff_slab"), settings -> new SlabItem(Blocks.POLISHED_TUFF_SLAB, ArchitectsAssemblyBlocks.VERTICAL_POLISHED_TUFF_SLAB, settings));
+        RESIN_BRICK_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "resin_brick_slab"), settings -> new SlabItem(Blocks.RESIN_BRICK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_RESIN_BRICK_SLAB, settings));
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(entries -> {
             replaceVanillaSlabs(entries.getDisplayStacks());
@@ -470,74 +508,76 @@ public final class ArchitectsAssemblyItems {
         });
     }
 
-    private static final Map<Item, Item> SLABS = new ImmutableMap.Builder<Item, Item>()
-            .put(Items.OAK_SLAB, OAK_SLAB)
-            .put(Items.SPRUCE_SLAB, SPRUCE_SLAB)
-            .put(Items.BIRCH_SLAB, BIRCH_SLAB)
-            .put(Items.JUNGLE_SLAB, JUNGLE_SLAB)
-            .put(Items.ACACIA_SLAB, ACACIA_SLAB)
-            .put(Items.DARK_OAK_SLAB, DARK_OAK_SLAB)
-            .put(Items.MANGROVE_SLAB, MANGROVE_SLAB)
-            .put(Items.CHERRY_SLAB, CHERRY_SLAB)
-            .put(Items.BAMBOO_SLAB, BAMBOO_SLAB)
-            .put(Items.BAMBOO_MOSAIC_SLAB, BAMBOO_MOSAIC_SLAB)
-            .put(Items.CRIMSON_SLAB, CRIMSON_SLAB)
-            .put(Items.WARPED_SLAB, WARPED_SLAB)
-            .put(Items.STONE_SLAB, STONE_SLAB)
-            .put(Items.SMOOTH_STONE_SLAB, SMOOTH_STONE_SLAB)
-            .put(Items.SANDSTONE_SLAB, SANDSTONE_SLAB)
-            .put(Items.CUT_SANDSTONE_SLAB, CUT_SANDSTONE_SLAB)
-            .put(Items.RED_SANDSTONE_SLAB, RED_SANDSTONE_SLAB)
-            .put(Items.CUT_RED_SANDSTONE_SLAB, CUT_RED_SANDSTONE_SLAB)
-            .put(Items.PETRIFIED_OAK_SLAB, PETRIFIED_OAK_SLAB)
-            .put(Items.STONE_BRICK_SLAB, STONE_BRICK_SLAB)
-            .put(Items.BRICK_SLAB, BRICK_SLAB)
-            .put(Items.MUD_BRICK_SLAB, MUD_BRICK_SLAB)
-            .put(Items.NETHER_BRICK_SLAB, NETHER_BRICK_SLAB)
-            .put(Items.RED_NETHER_BRICK_SLAB, RED_NETHER_BRICK_SLAB)
-            .put(Items.END_STONE_BRICK_SLAB, END_STONE_BRICK_SLAB)
-            .put(Items.QUARTZ_SLAB, QUARTZ_SLAB)
-            .put(Items.PURPUR_SLAB, PURPUR_SLAB)
-            .put(Items.PRISMARINE_SLAB, PRISMARINE_SLAB)
-            .put(Items.PRISMARINE_BRICK_SLAB, PRISMARINE_BRICK_SLAB)
-            .put(Items.DARK_PRISMARINE_SLAB, DARK_PRISMARINE_SLAB)
-            .put(Items.GRANITE_SLAB, GRANITE_SLAB)
-            .put(Items.POLISHED_GRANITE_SLAB, POLISHED_GRANITE_SLAB)
-            .put(Items.DIORITE_SLAB, DIORITE_SLAB)
-            .put(Items.POLISHED_DIORITE_SLAB, POLISHED_DIORITE_SLAB)
-            .put(Items.ANDESITE_SLAB, ANDESITE_SLAB)
-            .put(Items.POLISHED_ANDESITE_SLAB, POLISHED_ANDESITE_SLAB)
-            .put(Items.SMOOTH_SANDSTONE_SLAB, SMOOTH_SANDSTONE_SLAB)
-            .put(Items.SMOOTH_RED_SANDSTONE_SLAB, SMOOTH_RED_SANDSTONE_SLAB)
-            .put(Items.SMOOTH_QUARTZ_SLAB, SMOOTH_QUARTZ_SLAB)
-            .put(Items.MOSSY_STONE_BRICK_SLAB, MOSSY_STONE_BRICK_SLAB)
-            .put(Items.MOSSY_COBBLESTONE_SLAB, MOSSY_COBBLESTONE_SLAB)
-            .put(Items.COBBLESTONE_SLAB, COBBLESTONE_SLAB)
-            .put(Items.BLACKSTONE_SLAB, BLACKSTONE_SLAB)
-            .put(Items.POLISHED_BLACKSTONE_SLAB, POLISHED_BLACKSTONE_SLAB)
-            .put(Items.POLISHED_BLACKSTONE_BRICK_SLAB, POLISHED_BLACKSTONE_BRICK_SLAB)
-            .put(Items.COBBLED_DEEPSLATE_SLAB, COBBLED_DEEPSLATE_SLAB)
-            .put(Items.POLISHED_DEEPSLATE_SLAB, POLISHED_DEEPSLATE_SLAB)
-            .put(Items.DEEPSLATE_BRICK_SLAB, DEEPSLATE_BRICK_SLAB)
-            .put(Items.DEEPSLATE_TILE_SLAB, DEEPSLATE_TILE_SLAB)
-            .put(Items.CUT_COPPER_SLAB, CUT_COPPER_SLAB)
-            .put(Items.EXPOSED_CUT_COPPER_SLAB, EXPOSED_CUT_COPPER_SLAB)
-            .put(Items.WEATHERED_CUT_COPPER_SLAB, WEATHERED_CUT_COPPER_SLAB)
-            .put(Items.OXIDIZED_CUT_COPPER_SLAB, OXIDIZED_CUT_COPPER_SLAB)
-            .put(Items.WAXED_CUT_COPPER_SLAB, WAXED_CUT_COPPER_SLAB)
-            .put(Items.WAXED_EXPOSED_CUT_COPPER_SLAB, WAXED_EXPOSED_CUT_COPPER_SLAB)
-            .put(Items.WAXED_WEATHERED_CUT_COPPER_SLAB, WAXED_WEATHERED_CUT_COPPER_SLAB)
-            .put(Items.WAXED_OXIDIZED_CUT_COPPER_SLAB, WAXED_OXIDIZED_CUT_COPPER_SLAB)
-            .put(Items.TUFF_SLAB, TUFF_SLAB)
-            .put(Items.TUFF_BRICK_SLAB, TUFF_BRICK_SLAB)
-            .put(Items.POLISHED_TUFF_SLAB, POLISHED_TUFF_SLAB)
+    private static final Map<Item, Supplier<Item>> SLABS = new ImmutableMap.Builder<Item, Supplier<Item>>()
+            .put(Items.OAK_SLAB, () -> OAK_SLAB)
+            .put(Items.SPRUCE_SLAB, () -> SPRUCE_SLAB)
+            .put(Items.BIRCH_SLAB, () -> BIRCH_SLAB)
+            .put(Items.JUNGLE_SLAB, () -> JUNGLE_SLAB)
+            .put(Items.ACACIA_SLAB, () -> ACACIA_SLAB)
+            .put(Items.DARK_OAK_SLAB, () -> DARK_OAK_SLAB)
+            .put(Items.MANGROVE_SLAB, () -> MANGROVE_SLAB)
+            .put(Items.CHERRY_SLAB, () -> CHERRY_SLAB)
+            .put(Items.PALE_OAK_SLAB, () -> PALE_OAK_SLAB)
+            .put(Items.BAMBOO_SLAB, () -> BAMBOO_SLAB)
+            .put(Items.BAMBOO_MOSAIC_SLAB, () -> BAMBOO_MOSAIC_SLAB)
+            .put(Items.CRIMSON_SLAB, () -> CRIMSON_SLAB)
+            .put(Items.WARPED_SLAB, () -> WARPED_SLAB)
+            .put(Items.STONE_SLAB, () -> STONE_SLAB)
+            .put(Items.SMOOTH_STONE_SLAB, () -> SMOOTH_STONE_SLAB)
+            .put(Items.SANDSTONE_SLAB, () -> SANDSTONE_SLAB)
+            .put(Items.CUT_SANDSTONE_SLAB, () -> CUT_SANDSTONE_SLAB)
+            .put(Items.RED_SANDSTONE_SLAB, () -> RED_SANDSTONE_SLAB)
+            .put(Items.CUT_RED_SANDSTONE_SLAB, () -> CUT_RED_SANDSTONE_SLAB)
+            .put(Items.PETRIFIED_OAK_SLAB, () -> PETRIFIED_OAK_SLAB)
+            .put(Items.STONE_BRICK_SLAB, () -> STONE_BRICK_SLAB)
+            .put(Items.BRICK_SLAB, () -> BRICK_SLAB)
+            .put(Items.MUD_BRICK_SLAB, () -> MUD_BRICK_SLAB)
+            .put(Items.NETHER_BRICK_SLAB, () -> NETHER_BRICK_SLAB)
+            .put(Items.RED_NETHER_BRICK_SLAB, () -> RED_NETHER_BRICK_SLAB)
+            .put(Items.END_STONE_BRICK_SLAB, () -> END_STONE_BRICK_SLAB)
+            .put(Items.QUARTZ_SLAB, () -> QUARTZ_SLAB)
+            .put(Items.PURPUR_SLAB, () -> PURPUR_SLAB)
+            .put(Items.PRISMARINE_SLAB, () -> PRISMARINE_SLAB)
+            .put(Items.PRISMARINE_BRICK_SLAB, () -> PRISMARINE_BRICK_SLAB)
+            .put(Items.DARK_PRISMARINE_SLAB, () -> DARK_PRISMARINE_SLAB)
+            .put(Items.GRANITE_SLAB, () -> GRANITE_SLAB)
+            .put(Items.POLISHED_GRANITE_SLAB, () -> POLISHED_GRANITE_SLAB)
+            .put(Items.DIORITE_SLAB, () -> DIORITE_SLAB)
+            .put(Items.POLISHED_DIORITE_SLAB, () -> POLISHED_DIORITE_SLAB)
+            .put(Items.ANDESITE_SLAB, () -> ANDESITE_SLAB)
+            .put(Items.POLISHED_ANDESITE_SLAB, () -> POLISHED_ANDESITE_SLAB)
+            .put(Items.SMOOTH_SANDSTONE_SLAB, () -> SMOOTH_SANDSTONE_SLAB)
+            .put(Items.SMOOTH_RED_SANDSTONE_SLAB, () -> SMOOTH_RED_SANDSTONE_SLAB)
+            .put(Items.SMOOTH_QUARTZ_SLAB, () -> SMOOTH_QUARTZ_SLAB)
+            .put(Items.MOSSY_STONE_BRICK_SLAB, () -> MOSSY_STONE_BRICK_SLAB)
+            .put(Items.MOSSY_COBBLESTONE_SLAB, () -> MOSSY_COBBLESTONE_SLAB)
+            .put(Items.COBBLESTONE_SLAB, () -> COBBLESTONE_SLAB)
+            .put(Items.BLACKSTONE_SLAB, () -> BLACKSTONE_SLAB)
+            .put(Items.POLISHED_BLACKSTONE_SLAB, () -> POLISHED_BLACKSTONE_SLAB)
+            .put(Items.POLISHED_BLACKSTONE_BRICK_SLAB, () -> POLISHED_BLACKSTONE_BRICK_SLAB)
+            .put(Items.COBBLED_DEEPSLATE_SLAB, () -> COBBLED_DEEPSLATE_SLAB)
+            .put(Items.POLISHED_DEEPSLATE_SLAB, () -> POLISHED_DEEPSLATE_SLAB)
+            .put(Items.DEEPSLATE_BRICK_SLAB, () -> DEEPSLATE_BRICK_SLAB)
+            .put(Items.DEEPSLATE_TILE_SLAB, () -> DEEPSLATE_TILE_SLAB)
+            .put(Items.CUT_COPPER_SLAB, () -> CUT_COPPER_SLAB)
+            .put(Items.EXPOSED_CUT_COPPER_SLAB, () -> EXPOSED_CUT_COPPER_SLAB)
+            .put(Items.WEATHERED_CUT_COPPER_SLAB, () -> WEATHERED_CUT_COPPER_SLAB)
+            .put(Items.OXIDIZED_CUT_COPPER_SLAB, () -> OXIDIZED_CUT_COPPER_SLAB)
+            .put(Items.WAXED_CUT_COPPER_SLAB, () -> WAXED_CUT_COPPER_SLAB)
+            .put(Items.WAXED_EXPOSED_CUT_COPPER_SLAB, () -> WAXED_EXPOSED_CUT_COPPER_SLAB)
+            .put(Items.WAXED_WEATHERED_CUT_COPPER_SLAB, () -> WAXED_WEATHERED_CUT_COPPER_SLAB)
+            .put(Items.WAXED_OXIDIZED_CUT_COPPER_SLAB, () -> WAXED_OXIDIZED_CUT_COPPER_SLAB)
+            .put(Items.TUFF_SLAB, () -> TUFF_SLAB)
+            .put(Items.TUFF_BRICK_SLAB, () -> TUFF_BRICK_SLAB)
+            .put(Items.POLISHED_TUFF_SLAB, () -> POLISHED_TUFF_SLAB)
+            .put(Items.RESIN_BRICK_SLAB, () -> RESIN_BRICK_SLAB)
             .build();
 
     private static void replaceVanillaSlabs(List<ItemStack> stacks) {
         stacks.replaceAll(stack -> {
             Item item = stack.getItem();
             if (SLABS.containsKey(item))
-                return SLABS.get(item).getDefaultStack();
+                return SLABS.get(item).get().getDefaultStack();
             return stack;
         });
     }
