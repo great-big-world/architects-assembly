@@ -7,6 +7,7 @@
     "LanguageMixin",
     "ServerRecipeManagerMixin",
     "UseActionMixin",
+    "block.AbstractBlockStateMixin",
     "block.AbstractCandleBlockMixin",
     "block.AmethystClusterBlockMixin",
     "block.BarrierBlockMixin",
