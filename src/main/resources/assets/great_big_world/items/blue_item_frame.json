@@ -1,7 +1,25 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "item/item_frame",
-    "layer1": "great_big_world:item/dyed_item_frame_overlay"
+  "model": {
+    "type": "minecraft:composite",
+    "models": [
+      {
+        "type": "minecraft:model",
+        "model": "item/item_frame"
+      },
+      {
+        "type": "minecraft:model",
+        "model": "great_big_world:item/blue_item_frame",
+        "tints": [
+          {
+            "type": "minecraft:constant",
+            "value": 0
+          },
+          {
+            "type": "minecraft:dye",
+            "default": 3361970
+          }
+        ]
+      }
+    ]
   }
 }

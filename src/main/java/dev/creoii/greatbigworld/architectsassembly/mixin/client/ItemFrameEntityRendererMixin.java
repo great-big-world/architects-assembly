@@ -18,6 +18,7 @@ import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ItemFrameEntityRenderer.class)
@@ -39,6 +40,14 @@ public class ItemFrameEntityRendererMixin<T extends ItemFrameEntity> {
             instance.render(entry, vertexConsumer, state, bakedModel, ColorHelper.getRed(color.getEntityColor()) / 255f, ColorHelper.getGreen(color.getEntityColor()) / 255f, ColorHelper.getBlue(color.getEntityColor()) / 255f, light, overlay);
         } else {
             instance.render(entry, vertexConsumer, state, bakedModel, 1f, 1f, 1f, light, overlay);
+        }
+    }
+
+    @Inject(method = "updateRenderState(Lnet/minecraft/entity/decoration/ItemFrameEntity;Lnet/minecraft/client/render/entity/state/ItemFrameEntityRenderState;F)V", at = @At("TAIL"))
+    private void gbw$fixItemFrameRenderState(T itemFrameEntity, ItemFrameEntityRenderState itemFrameEntityRenderState, float f, CallbackInfo ci) {
+        if (itemFrameEntity instanceof ExtendedItemFrame extendedItemFrame && itemFrameEntityRenderState instanceof ExtendedItemFrame extendedItemFrame1) {
+            extendedItemFrame1.gbw$setColor(extendedItemFrame.gbw$getColor());
+            extendedItemFrame1.gbw$setWaxed(extendedItemFrame.gbw$isWaxed());
         }
     }
 }

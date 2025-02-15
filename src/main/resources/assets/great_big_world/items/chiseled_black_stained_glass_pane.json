@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "great_big_world:block/chiseled_black_stained_glass"
+  "model": {
+    "type": "minecraft:model",
+    "model": "great_big_world:item/chiseled_black_stained_glass_pane"
   }
 }
