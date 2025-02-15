@@ -1,6 +1,6 @@
 package dev.creoii.greatbigworld.architectsassembly.mixin;
 
-import net.minecraft.util.UseAction;
+import net.minecraft.item.consume.UseAction;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
@@ -13,7 +13,7 @@ import java.util.Arrays;
 @Mixin(UseAction.class)
 public class UseActionMixin {
     @Invoker("<init>")
-    private static UseAction init(String name, int id) {
+    private static UseAction init(String internalName, int internalId, int id, final String name) {
         throw new AssertionError();
     }
 
@@ -23,7 +23,7 @@ public class UseActionMixin {
         ArrayList<UseAction> values = new ArrayList<>(Arrays.asList(field_8948));
         int last = values.size();
 
-        values.add(init("TOOL", last));
+        values.add(init("TOOL", last, 100, "tool"));
 
         field_8948 = values.toArray(new UseAction[0]);
     }

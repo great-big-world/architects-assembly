@@ -1,15 +1,12 @@
 package dev.creoii.greatbigworld.architectsassembly.mixin.block;
 
 import com.google.common.collect.ImmutableMap;
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import dev.creoii.greatbigworld.architectsassembly.block.VerticalSlabBlock;
 import dev.creoii.greatbigworld.architectsassembly.block.enums.FluidType;
 import dev.creoii.greatbigworld.architectsassembly.block.enums.VerticalSlabType;
 import dev.creoii.greatbigworld.architectsassembly.util.ArchitectsAssemblyTags;
 import dev.creoii.greatbigworld.architectsassembly.util.Fluidloggable;
-import dev.creoii.greatbigworld.floraandfauna.util.SnowyHelper;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.WallShape;
 import net.minecraft.entity.player.PlayerEntity;
@@ -24,10 +21,12 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
+import net.minecraft.world.tick.ScheduledTickView;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
@@ -36,7 +35,6 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.Map;
 import java.util.Optional;
 
 @Mixin(WallBlock.class)
@@ -91,10 +89,10 @@ public abstract class WallBlockMixin extends Block implements Waterloggable {
     }
 
     @Inject(method = "getStateForNeighborUpdate", at = @At("HEAD"))
-    private void gbw$fixFluidloggableStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos, CallbackInfoReturnable<BlockState> cir) {
+    private void gbw$fixFluidloggableStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random, CallbackInfoReturnable<BlockState> cir) {
         FluidType fluidType = state.get(Fluidloggable.FLUIDLOGGED);
         if (fluidType != FluidType.EMPTY) {
-            world.scheduleFluidTick(pos, fluidType.getFluid(), fluidType.getFluid().getTickRate(world));
+            tickView.scheduleFluidTick(pos, fluidType.getFluid(), fluidType.getFluid().getTickRate(world));
         }
     }
 

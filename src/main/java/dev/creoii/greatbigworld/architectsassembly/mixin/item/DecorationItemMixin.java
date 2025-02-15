@@ -9,6 +9,7 @@ import net.minecraft.item.DecorationItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
@@ -23,13 +24,13 @@ import java.util.List;
 
 @Mixin(DecorationItem.class)
 public class DecorationItemMixin {
-    @Inject(method = "method_48959", at = @At("HEAD"))
-    private static void gbw$improvePaintingTooltip(List<Text> list, RegistryKey<PaintingVariant> key, CallbackInfo ci) {
-        MutableText mutableText = Text.empty();
+    @Inject(method = "method_48960", at = @At("HEAD"))
+    private static void gbw$improvePaintingTooltip(List list, RegistryEntry<PaintingVariant> variant, CallbackInfo ci) {
+        /*MutableText mutableText = Text.empty();
         mutableText.append(Text.translatable(key.getValue().toTranslationKey("painting", "title")));
         mutableText.append(" - ");
         mutableText.append(Text.translatable(key.getValue().toTranslationKey("painting", "author")));
-        list.add(mutableText.formatted(Formatting.GRAY));
+        list.add(mutableText.formatted(Formatting.GRAY));*/
     }
 
     @Inject(method = "useOnBlock", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;spawnEntity(Lnet/minecraft/entity/Entity;)Z"))

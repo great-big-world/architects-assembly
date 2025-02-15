@@ -13,8 +13,8 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -48,7 +48,7 @@ public class SlabItem extends BlockItem {
     }
 
     @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+    public ActionResult use(World world, PlayerEntity user, Hand hand) {
         if (user.shouldCancelInteraction() && user instanceof SlabPlacer slabPlacer) {
             SlabPlacement currentState = slabPlacer.gbw$getSlabPlacementState();
             if (currentState == SlabPlacement.NORMAL) {

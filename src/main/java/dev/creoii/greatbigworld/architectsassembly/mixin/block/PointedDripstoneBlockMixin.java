@@ -13,7 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.math.BlockPos;
@@ -34,7 +33,7 @@ import java.util.Optional;
 @Implements(@Interface(iface = Fluidloggable.class, prefix = "fluidloggable$"))
 public abstract class PointedDripstoneBlockMixin extends Block implements Waterloggable {
     @Shadow @Final public static BooleanProperty WATERLOGGED;
-    @Shadow @Final public static DirectionProperty VERTICAL_DIRECTION;
+    @Shadow @Final public static EnumProperty<Direction> VERTICAL_DIRECTION;
     @Shadow @Final public static EnumProperty<Thickness> THICKNESS;
 
     public PointedDripstoneBlockMixin(Settings settings) {

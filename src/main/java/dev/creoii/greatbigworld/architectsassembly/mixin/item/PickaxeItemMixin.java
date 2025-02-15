@@ -12,12 +12,12 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
+import net.minecraft.item.consume.UseAction;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.UseAction;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
@@ -46,29 +46,30 @@ public abstract class PickaxeItemMixin extends MiningToolItem {
             .put(Blocks.END_STONE_BRICKS, ArchitectsAssemblyBlocks.CRACKED_END_STONE_BRICKS)
             .build();
 
-    public PickaxeItemMixin(ToolMaterial material, TagKey<Block> effectiveBlocks, Settings settings) {
-        super(material, effectiveBlocks, settings);
+    public PickaxeItemMixin(ToolMaterial material, TagKey<Block> effectiveBlocks, float attackDamage, float attackSpeed, Settings settings) {
+        super(material, effectiveBlocks, attackDamage, attackSpeed, settings);
     }
 
     public UseAction getUseAction(ItemStack stack) {
         return ArchitectsAssemblyUseActions.TOOL;
     }
 
-    public int getMaxUseTime(ItemStack stack) {
+    @Override
+    public int getMaxUseTime(ItemStack stack, LivingEntity user) {
         return 72000;
     }
 
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        ItemStack stack = user.getStackInHand(hand);
+    @Override
+    public ActionResult use(World world, PlayerEntity user, Hand hand) {
         if (canPlayerCrack(world, user) != null) {
             user.setCurrentHand(hand);
         }
-        return TypedActionResult.pass(stack);
+        return ActionResult.PASS;
     }
 
     @Override
     public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
-        int i = getMaxUseTime(stack) - remainingUseTicks;
+        int i = getMaxUseTime(stack, user) - remainingUseTicks;
 
         if (i > 4 && i % 4 == 0) {
             BlockHitResult blockHitResult;
@@ -100,7 +101,7 @@ public abstract class PickaxeItemMixin extends MiningToolItem {
         if (player.isSpectator())
             return null;
 
-        HitResult hit = player.raycast(player.getAttributeValue(EntityAttributes.PLAYER_BLOCK_INTERACTION_RANGE), 0f, false);
+        HitResult hit = player.raycast(player.getAttributeValue(EntityAttributes.BLOCK_INTERACTION_RANGE), 0f, false);
         if (hit instanceof BlockHitResult blockHitResult) {
             Block block = world.getBlockState(blockHitResult.getBlockPos()).getBlock();
             if (CRACKED_BLOCKS.containsKey(block)) {

@@ -16,23 +16,23 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 @Mixin(RecipeBookType.class)
-public class RecipeBookGroupMixin {
+public class RecipeBookTypeMixin {
     @SuppressWarnings("InvokerTarget")
     @Invoker("<init>")
     private static RecipeBookType create(String internalName, int internalId, RecipeBookCategory... categories) {
         throw new AssertionError();
     }
 
-    @Shadow @Final @Mutable private static RecipeBookType[] field_25767;
+    @Shadow @Final @Mutable private static RecipeBookType[] field_54842;
 
     @Inject(method = "<clinit>", at = @At(value = "FIELD", opcode = Opcodes.PUTSTATIC, target = "Lnet/minecraft/client/recipebook/RecipeBookType;field_54842:[Lnet/minecraft/client/recipebook/RecipeBookType;", shift = At.Shift.AFTER))
     private static void addCustomRecipeBookGroup(CallbackInfo ci) {
-        ArrayList<RecipeBookType> values = new ArrayList<>(Arrays.asList(field_25767));
+        ArrayList<RecipeBookType> values = new ArrayList<>(Arrays.asList(field_54842));
         int last = values.size();
 
         RecipeBookType sawmill = create("GBW_SAWMILL", last, new RecipeBookCategory());
         values.add(sawmill);
 
-        field_25767 = values.toArray(new RecipeBookType[0]);
+        field_54842 = values.toArray(new RecipeBookType[0]);
     }
 }

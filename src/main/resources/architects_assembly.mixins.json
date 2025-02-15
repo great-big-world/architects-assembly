@@ -34,7 +34,6 @@
     "entity.ItemFrameEntityMixin",
     "entity.PlayerEntityMixin",
     "item.AxeItemMixin",
-    "item.BlockItemMixin",
     "item.BoneMealItemMixin",
     "item.BucketItemMixin",
     "item.DecorationItemMixin",
@@ -52,19 +51,15 @@
   ],
   "client": [
     "TranslationStorageMixin",
+    "client.BlockStatesLoaderMixin",
     "client.ClientPlayerEntityMixin",
     "client.CreativeInventoryScreenMixin",
     "client.HeldItemRendererMixin",
     "client.ItemFrameEntityRendererMixin",
+    "client.ItemFrameEntityRenderStateMixin",
     "client.ModelLoaderMixin",
     "client.MouseMixin",
-    "client.recipebook.AlternativeButtonWidgetMixin",
-    "client.recipebook.AnimatedResultButtonMixin",
-    "client.recipebook.RecipeAlternativesWidgetMixin",
-    "client.recipebook.RecipeBookGhostSlotsMixin",
-    "client.RecipeBookGroupMixin",
-    "client.recipebook.RecipeBookWidgetMixin",
-    "client.recipebook.RecipeResultCollectionMixin"
+    "client.RecipeBookTypeMixin"
   ],
   "injectors": {
     "defaultRequire": 1,

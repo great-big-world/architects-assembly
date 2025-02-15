@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -31,7 +31,7 @@ import java.util.Optional;
 @Mixin(AmethystClusterBlock.class)
 @Implements(@Interface(iface = Fluidloggable.class, prefix = "fluidloggable$"))
 public abstract class AmethystClusterBlockMixin extends AmethystBlock implements Waterloggable {
-    @Shadow @Final public static DirectionProperty FACING;
+    @Shadow @Final public static EnumProperty<Direction> FACING;
     @Shadow @Final public static BooleanProperty WATERLOGGED;
 
     public AmethystClusterBlockMixin(Settings settings) {

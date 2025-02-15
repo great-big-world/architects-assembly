@@ -10,12 +10,11 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
+import net.minecraft.item.consume.UseAction;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.UseAction;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
@@ -36,24 +35,25 @@ import java.util.Map;
 public abstract class ShovelItemMixin extends MiningToolItem {
     @Shadow @Final protected static Map<Block, BlockState> PATH_STATES;
 
-    public ShovelItemMixin(ToolMaterial material, TagKey<Block> effectiveBlocks, Settings settings) {
-        super(material, effectiveBlocks, settings);
+    public ShovelItemMixin(ToolMaterial material, TagKey<Block> effectiveBlocks, float attackDamage, float attackSpeed, Settings settings) {
+        super(material, effectiveBlocks, attackDamage, attackSpeed, settings);
     }
 
     public UseAction getUseAction(ItemStack stack) {
         return ArchitectsAssemblyUseActions.TOOL;
     }
 
-    public int getMaxUseTime(ItemStack stack) {
+    @Override
+    public int getMaxUseTime(ItemStack stack, LivingEntity user) {
         return 72000;
     }
 
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        ItemStack stack = user.getStackInHand(hand);
+    @Override
+    public ActionResult use(World world, PlayerEntity user, Hand hand) {
         if (canPlayerPath(world, user) != null) {
             user.setCurrentHand(hand);
         }
-        return TypedActionResult.pass(stack);
+        return ActionResult.PASS;
     }
 
     @Inject(method = "useOnBlock", at = @At(value = "INVOKE", target = "Ljava/util/Map;get(Ljava/lang/Object;)Ljava/lang/Object;", shift = At.Shift.BY, by = 2), cancellable = true)
@@ -67,15 +67,16 @@ public abstract class ShovelItemMixin extends MiningToolItem {
                 if (playerEntity != null) {
                     context.getStack().damage(1, playerEntity, LivingEntity.getSlotForHand(context.getHand()));
                 }
+                cir.setReturnValue(ActionResult.SUCCESS_SERVER);
             }
-            cir.setReturnValue(ActionResult.success(world.isClient));
+            cir.setReturnValue(ActionResult.SUCCESS);
         }
         cir.setReturnValue(ActionResult.PASS);
     }
 
     @Override
     public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
-        int i = getMaxUseTime(stack) - remainingUseTicks;
+        int i = getMaxUseTime(stack, user) - remainingUseTicks;
 
         if (i > 4 && i % 4 == 0) {
             BlockHitResult blockHitResult;
@@ -105,7 +106,7 @@ public abstract class ShovelItemMixin extends MiningToolItem {
         if (player.isSpectator())
             return null;
 
-        HitResult hit = player.raycast(player.getAttributeValue(EntityAttributes.PLAYER_BLOCK_INTERACTION_RANGE), 0f, false);
+        HitResult hit = player.raycast(player.getAttributeValue(EntityAttributes.BLOCK_INTERACTION_RANGE), 0f, false);
         if (hit instanceof BlockHitResult blockHitResult) {
             BlockState state = world.getBlockState(blockHitResult.getBlockPos());
             if (PATH_STATES.containsKey(state.getBlock())) {
