@@ -13,11 +13,12 @@
     "minecraft:cyan_stained_glass",
     "minecraft:cyan_stained_glass_pane",
     "minecraft:cyan_bed",
-    "great_big_world:chiseled_cyan_stained_glass",
-    "great_big_world:chiseled_cyan_stained_glass_pane",
+    "great_big_world:cyan_glass",
+    "great_big_world:chiseled_cyan_glass",
+    "great_big_world:chiseled_cyan_glass_pane",
     "great_big_world:cyan_item_frame",
     "great_big_world:cyan_glow_item_frame",
     "great_big_world:cyan_glass_shard",
-    "great_big_world:cyan_stained_shattered_glass"
+    "great_big_world:cracked_cyan_glass"
   ]
 }

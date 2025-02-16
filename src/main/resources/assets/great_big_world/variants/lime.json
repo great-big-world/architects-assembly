@@ -13,11 +13,12 @@
     "minecraft:lime_stained_glass",
     "minecraft:lime_stained_glass_pane",
     "minecraft:lime_bed",
-    "great_big_world:chiseled_lime_stained_glass",
-    "great_big_world:chiseled_lime_stained_glass_pane",
+    "great_big_world:lime_glass",
+    "great_big_world:chiseled_lime_glass",
+    "great_big_world:chiseled_lime_glass_pane",
     "great_big_world:lime_item_frame",
     "great_big_world:lime_glow_item_frame",
     "great_big_world:lime_glass_shard",
-    "great_big_world:lime_stained_shattered_glass"
+    "great_big_world:cracked_lime_glass"
   ]
 }

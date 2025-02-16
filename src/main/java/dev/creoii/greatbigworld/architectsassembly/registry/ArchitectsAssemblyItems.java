@@ -143,55 +143,55 @@ public final class ArchitectsAssemblyItems {
     // region Decorative Blocks
     public static Item CHISELED_GLASS;
     public static Item CHISELED_GLASS_PANE;
-    public static Item SHATTERED_GLASS;
-    public static Item CHISELED_BROWN_STAINED_GLASS;
-    public static Item CHISELED_BROWN_STAINED_GLASS_PANE;
-    public static Item BROWN_STAINED_SHATTERED_GLASS;
-    public static Item CHISELED_RED_STAINED_GLASS;
-    public static Item CHISELED_RED_STAINED_GLASS_PANE;
-    public static Item RED_STAINED_SHATTERED_GLASS;
-    public static Item CHISELED_ORANGE_STAINED_GLASS;
-    public static Item CHISELED_ORANGE_STAINED_GLASS_PANE;
-    public static Item ORANGE_STAINED_SHATTERED_GLASS;
-    public static Item CHISELED_YELLOW_STAINED_GLASS;
-    public static Item CHISELED_YELLOW_STAINED_GLASS_PANE;
-    public static Item YELLOW_STAINED_SHATTERED_GLASS;
-    public static Item CHISELED_LIME_STAINED_GLASS;
-    public static Item CHISELED_LIME_STAINED_GLASS_PANE;
-    public static Item LIME_STAINED_SHATTERED_GLASS;
-    public static Item CHISELED_GREEN_STAINED_GLASS;
-    public static Item CHISELED_GREEN_STAINED_GLASS_PANE;
-    public static Item GREEN_STAINED_SHATTERED_GLASS;
-    public static Item CHISELED_CYAN_STAINED_GLASS;
-    public static Item CHISELED_CYAN_STAINED_GLASS_PANE;
-    public static Item CYAN_STAINED_SHATTERED_GLASS;
-    public static Item CHISELED_BLUE_STAINED_GLASS;
-    public static Item CHISELED_BLUE_STAINED_GLASS_PANE;
-    public static Item BLUE_STAINED_SHATTERED_GLASS;
-    public static Item CHISELED_LIGHT_BLUE_STAINED_GLASS;
-    public static Item CHISELED_LIGHT_BLUE_STAINED_GLASS_PANE;
-    public static Item LIGHT_BLUE_STAINED_SHATTERED_GLASS;
-    public static Item CHISELED_PINK_STAINED_GLASS;
-    public static Item CHISELED_PINK_STAINED_GLASS_PANE;
-    public static Item PINK_STAINED_SHATTERED_GLASS;
-    public static Item CHISELED_MAGENTA_STAINED_GLASS;
-    public static Item CHISELED_MAGENTA_STAINED_GLASS_PANE;
-    public static Item MAGENTA_STAINED_SHATTERED_GLASS;
-    public static Item CHISELED_PURPLE_STAINED_GLASS;
-    public static Item CHISELED_PURPLE_STAINED_GLASS_PANE;
-    public static Item PURPLE_STAINED_SHATTERED_GLASS;
-    public static Item CHISELED_BLACK_STAINED_GLASS;
-    public static Item CHISELED_BLACK_STAINED_GLASS_PANE;
-    public static Item BLACK_STAINED_SHATTERED_GLASS;
-    public static Item CHISELED_GRAY_STAINED_GLASS;
-    public static Item CHISELED_GRAY_STAINED_GLASS_PANE;
-    public static Item GRAY_STAINED_SHATTERED_GLASS;
-    public static Item CHISELED_LIGHT_GRAY_STAINED_GLASS;
-    public static Item CHISELED_LIGHT_GRAY_STAINED_GLASS_PANE;
-    public static Item LIGHT_GRAY_STAINED_SHATTERED_GLASS;
-    public static Item CHISELED_WHITE_STAINED_GLASS;
-    public static Item CHISELED_WHITE_STAINED_GLASS_PANE;
-    public static Item WHITE_STAINED_SHATTERED_GLASS;
+    public static Item CRACKED_GLASS;
+    public static Item CHISELED_BROWN_GLASS;
+    public static Item CHISELED_BROWN_GLASS_PANE;
+    public static Item CRACKED_BROWN_GLASS;
+    public static Item CHISELED_RED_GLASS;
+    public static Item CHISELED_RED_GLASS_PANE;
+    public static Item CRACKED_RED_GLASS;
+    public static Item CHISELED_ORANGE_GLASS;
+    public static Item CHISELED_ORANGE_GLASS_PANE;
+    public static Item CRACKED_ORANGE_GLASS;
+    public static Item CHISELED_YELLOW_GLASS;
+    public static Item CHISELED_YELLOW_GLASS_PANE;
+    public static Item CRACKED_YELLOW_GLASS;
+    public static Item CHISELED_LIME_GLASS;
+    public static Item CHISELED_LIME_GLASS_PANE;
+    public static Item CRACKED_LIME_GLASS;
+    public static Item CHISELED_GREEN_GLASS;
+    public static Item CHISELED_GREEN_GLASS_PANE;
+    public static Item CRACKED_GREEN_GLASS;
+    public static Item CHISELED_CYAN_GLASS;
+    public static Item CHISELED_CYAN_GLASS_PANE;
+    public static Item CRACKED_CYAN_GLASS;
+    public static Item CHISELED_BLUE_GLASS;
+    public static Item CHISELED_BLUE_GLASS_PANE;
+    public static Item CRACKED_BLUE_GLASS;
+    public static Item CHISELED_LIGHT_BLUE_GLASS;
+    public static Item CHISELED_LIGHT_BLUE_GLASS_PANE;
+    public static Item CRACKED_LIGHT_BLUE_GLASS;
+    public static Item CHISELED_PINK_GLASS;
+    public static Item CHISELED_PINK_GLASS_PANE;
+    public static Item CRACKED_PINK_GLASS;
+    public static Item CHISELED_MAGENTA_GLASS;
+    public static Item CHISELED_MAGENTA_GLASS_PANE;
+    public static Item CRACKED_MAGENTA_GLASS;
+    public static Item CHISELED_PURPLE_GLASS;
+    public static Item CHISELED_PURPLE_GLASS_PANE;
+    public static Item CRACKED_PURPLE_GLASS;
+    public static Item CHISELED_BLACK_GLASS;
+    public static Item CHISELED_BLACK_GLASS_PANE;
+    public static Item CRACKED_BLACK_GLASS;
+    public static Item CHISELED_GRAY_GLASS;
+    public static Item CHISELED_GRAY_GLASS_PANE;
+    public static Item CRACKED_GRAY_GLASS;
+    public static Item CHISELED_LIGHT_GRAY_GLASS;
+    public static Item CHISELED_LIGHT_GRAY_GLASS_PANE;
+    public static Item CRACKED_LIGHT_GRAY_GLASS;
+    public static Item CHISELED_WHITE_GLASS;
+    public static Item CHISELED_WHITE_GLASS_PANE;
+    public static Item CRACKED_WHITE_GLASS;
     public static Item LAPIS_STAIRS;
     public static Item LAPIS_SLAB;
     public static Item LAPIS_WALL;
@@ -209,6 +209,22 @@ public final class ArchitectsAssemblyItems {
     public static Item MOSSY_BRICK_SLAB;
     public static Item MOSSY_BRICK_WALL;
     public static Item GLASS;
+    public static Item BROWN_GLASS;
+    public static Item RED_GLASS;
+    public static Item ORANGE_GLASS;
+    public static Item YELLOW_GLASS;
+    public static Item LIME_GLASS;
+    public static Item GREEN_GLASS;
+    public static Item CYAN_GLASS;
+    public static Item BLUE_GLASS;
+    public static Item LIGHT_BLUE_GLASS;
+    public static Item PINK_GLASS;
+    public static Item MAGENTA_GLASS;
+    public static Item PURPLE_GLASS;
+    public static Item BLACK_GLASS;
+    public static Item GRAY_GLASS;
+    public static Item LIGHT_GRAY_GLASS;
+    public static Item WHITE_GLASS;
     public static Item CHISELED_OAK_PLANKS;
     public static Item CHISELED_OAK_LOG;
     public static Item CHISELED_OAK_WOOD;
@@ -226,55 +242,55 @@ public final class ArchitectsAssemblyItems {
     private static void registerDecorativeBlocks() {
         CHISELED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_glass"), ArchitectsAssemblyBlocks.CHISELED_GLASS);
         CHISELED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_GLASS_PANE);
-        SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "shattered_glass"), ArchitectsAssemblyBlocks.SHATTERED_GLASS);
-        CHISELED_BROWN_STAINED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_brown_stained_glass"), ArchitectsAssemblyBlocks.CHISELED_BROWN_STAINED_GLASS);
-        CHISELED_BROWN_STAINED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_brown_stained_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_BROWN_STAINED_GLASS_PANE);
-        BROWN_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "brown_stained_shattered_glass"), ArchitectsAssemblyBlocks.BROWN_STAINED_SHATTERED_GLASS);
-        CHISELED_RED_STAINED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_red_stained_glass"), ArchitectsAssemblyBlocks.CHISELED_RED_STAINED_GLASS);
-        CHISELED_RED_STAINED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_red_stained_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_RED_STAINED_GLASS_PANE);
-        RED_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "red_stained_shattered_glass"), ArchitectsAssemblyBlocks.RED_STAINED_SHATTERED_GLASS);
-        CHISELED_ORANGE_STAINED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_orange_stained_glass"), ArchitectsAssemblyBlocks.CHISELED_ORANGE_STAINED_GLASS);
-        CHISELED_ORANGE_STAINED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_orange_stained_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_ORANGE_STAINED_GLASS_PANE);
-        ORANGE_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "orange_stained_shattered_glass"), ArchitectsAssemblyBlocks.ORANGE_STAINED_SHATTERED_GLASS);
-        CHISELED_YELLOW_STAINED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_yellow_stained_glass"), ArchitectsAssemblyBlocks.CHISELED_YELLOW_STAINED_GLASS);
-        CHISELED_YELLOW_STAINED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_yellow_stained_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_YELLOW_STAINED_GLASS_PANE);
-        YELLOW_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "yellow_stained_shattered_glass"), ArchitectsAssemblyBlocks.YELLOW_STAINED_SHATTERED_GLASS);
-        CHISELED_LIME_STAINED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_lime_stained_glass"), ArchitectsAssemblyBlocks.CHISELED_LIME_STAINED_GLASS);
-        CHISELED_LIME_STAINED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_lime_stained_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_LIME_STAINED_GLASS_PANE);
-        LIME_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "lime_stained_shattered_glass"), ArchitectsAssemblyBlocks.LIME_STAINED_SHATTERED_GLASS);
-        CHISELED_GREEN_STAINED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_green_stained_glass"), ArchitectsAssemblyBlocks.CHISELED_GREEN_STAINED_GLASS);
-        CHISELED_GREEN_STAINED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_green_stained_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_GREEN_STAINED_GLASS_PANE);
-        GREEN_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "green_stained_shattered_glass"), ArchitectsAssemblyBlocks.GREEN_STAINED_SHATTERED_GLASS);
-        CHISELED_CYAN_STAINED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_cyan_stained_glass"), ArchitectsAssemblyBlocks.CHISELED_CYAN_STAINED_GLASS);
-        CHISELED_CYAN_STAINED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_cyan_stained_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_CYAN_STAINED_GLASS_PANE);
-        CYAN_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "cyan_stained_shattered_glass"), ArchitectsAssemblyBlocks.CYAN_STAINED_SHATTERED_GLASS);
-        CHISELED_BLUE_STAINED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_blue_stained_glass"), ArchitectsAssemblyBlocks.CHISELED_BLUE_STAINED_GLASS);
-        CHISELED_BLUE_STAINED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_blue_stained_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_BLUE_STAINED_GLASS_PANE);
-        BLUE_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "blue_stained_shattered_glass"), ArchitectsAssemblyBlocks.BLUE_STAINED_SHATTERED_GLASS);
-        CHISELED_LIGHT_BLUE_STAINED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_light_blue_stained_glass"), ArchitectsAssemblyBlocks.CHISELED_LIGHT_BLUE_STAINED_GLASS);
-        CHISELED_LIGHT_BLUE_STAINED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_light_blue_stained_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_LIGHT_BLUE_STAINED_GLASS_PANE);
-        LIGHT_BLUE_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "light_blue_stained_shattered_glass"), ArchitectsAssemblyBlocks.LIGHT_BLUE_STAINED_SHATTERED_GLASS);
-        CHISELED_PINK_STAINED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_pink_stained_glass"), ArchitectsAssemblyBlocks.CHISELED_PINK_STAINED_GLASS);
-        CHISELED_PINK_STAINED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_pink_stained_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_PINK_STAINED_GLASS_PANE);
-        PINK_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "pink_stained_shattered_glass"), ArchitectsAssemblyBlocks.PINK_STAINED_SHATTERED_GLASS);
-        CHISELED_MAGENTA_STAINED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_magenta_stained_glass"), ArchitectsAssemblyBlocks.CHISELED_MAGENTA_STAINED_GLASS);
-        CHISELED_MAGENTA_STAINED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_magenta_stained_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_MAGENTA_STAINED_GLASS_PANE);
-        MAGENTA_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "magenta_stained_shattered_glass"), ArchitectsAssemblyBlocks.MAGENTA_STAINED_SHATTERED_GLASS);
-        CHISELED_PURPLE_STAINED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_purple_stained_glass"), ArchitectsAssemblyBlocks.CHISELED_PURPLE_STAINED_GLASS);
-        CHISELED_PURPLE_STAINED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_purple_stained_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_PURPLE_STAINED_GLASS_PANE);
-        PURPLE_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "purple_stained_shattered_glass"), ArchitectsAssemblyBlocks.PURPLE_STAINED_SHATTERED_GLASS);
-        CHISELED_BLACK_STAINED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_black_stained_glass"), ArchitectsAssemblyBlocks.CHISELED_BLACK_STAINED_GLASS);
-        CHISELED_BLACK_STAINED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_black_stained_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_BLACK_STAINED_GLASS_PANE);
-        BLACK_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "black_stained_shattered_glass"), ArchitectsAssemblyBlocks.BLACK_STAINED_SHATTERED_GLASS);
-        CHISELED_GRAY_STAINED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_gray_stained_glass"), ArchitectsAssemblyBlocks.CHISELED_GRAY_STAINED_GLASS);
-        CHISELED_GRAY_STAINED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_gray_stained_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_GRAY_STAINED_GLASS_PANE);
-        GRAY_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "gray_stained_shattered_glass"), ArchitectsAssemblyBlocks.GRAY_STAINED_SHATTERED_GLASS);
-        CHISELED_LIGHT_GRAY_STAINED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_light_gray_stained_glass"), ArchitectsAssemblyBlocks.CHISELED_LIGHT_GRAY_STAINED_GLASS);
-        CHISELED_LIGHT_GRAY_STAINED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_light_gray_stained_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_LIGHT_GRAY_STAINED_GLASS_PANE);
-        LIGHT_GRAY_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "light_gray_stained_shattered_glass"), ArchitectsAssemblyBlocks.LIGHT_GRAY_STAINED_SHATTERED_GLASS);
-        CHISELED_WHITE_STAINED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_white_stained_glass"), ArchitectsAssemblyBlocks.CHISELED_WHITE_STAINED_GLASS);
-        CHISELED_WHITE_STAINED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_white_stained_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_WHITE_STAINED_GLASS_PANE);
-        WHITE_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "white_stained_shattered_glass"), ArchitectsAssemblyBlocks.WHITE_STAINED_SHATTERED_GLASS);
+        CRACKED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_glass"), ArchitectsAssemblyBlocks.CRACKED_GLASS);
+        CRACKED_BROWN_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_brown_glass"), ArchitectsAssemblyBlocks.CRACKED_BROWN_GLASS);
+        CHISELED_BROWN_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_brown_glass"), ArchitectsAssemblyBlocks.CHISELED_BROWN_GLASS);
+        CHISELED_BROWN_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_brown_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_BROWN_GLASS_PANE);
+        CRACKED_RED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_red_glass"), ArchitectsAssemblyBlocks.CRACKED_RED_GLASS);
+        CHISELED_RED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_red_glass"), ArchitectsAssemblyBlocks.CHISELED_RED_GLASS);
+        CHISELED_RED_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_red_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_RED_GLASS_PANE);
+        CRACKED_ORANGE_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_orange_glass"), ArchitectsAssemblyBlocks.CRACKED_ORANGE_GLASS);
+        CHISELED_ORANGE_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_orange_glass"), ArchitectsAssemblyBlocks.CHISELED_ORANGE_GLASS);
+        CHISELED_ORANGE_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_orange_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_ORANGE_GLASS_PANE);
+        CRACKED_YELLOW_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_yellow_glass"), ArchitectsAssemblyBlocks.CRACKED_YELLOW_GLASS);
+        CHISELED_YELLOW_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_yellow_glass"), ArchitectsAssemblyBlocks.CHISELED_YELLOW_GLASS);
+        CHISELED_YELLOW_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_yellow_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_YELLOW_GLASS_PANE);
+        CRACKED_LIME_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_lime_glass"), ArchitectsAssemblyBlocks.CRACKED_LIME_GLASS);
+        CHISELED_LIME_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_lime_glass"), ArchitectsAssemblyBlocks.CHISELED_LIME_GLASS);
+        CHISELED_LIME_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_lime_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_LIME_GLASS_PANE);
+        CRACKED_GREEN_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_green_glass"), ArchitectsAssemblyBlocks.CRACKED_GREEN_GLASS);
+        CHISELED_GREEN_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_green_glass"), ArchitectsAssemblyBlocks.CHISELED_GREEN_GLASS);
+        CHISELED_GREEN_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_green_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_GREEN_GLASS_PANE);
+        CRACKED_CYAN_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_cyan_glass"), ArchitectsAssemblyBlocks.CRACKED_CYAN_GLASS);
+        CHISELED_CYAN_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_cyan_glass"), ArchitectsAssemblyBlocks.CHISELED_CYAN_GLASS);
+        CHISELED_CYAN_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_cyan_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_CYAN_GLASS_PANE);
+        CRACKED_BLUE_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_blue_glass"), ArchitectsAssemblyBlocks.CRACKED_BLUE_GLASS);
+        CHISELED_BLUE_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_blue_glass"), ArchitectsAssemblyBlocks.CHISELED_BLUE_GLASS);
+        CHISELED_BLUE_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_blue_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_BLUE_GLASS_PANE);
+        CRACKED_LIGHT_BLUE_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_light_blue_glass"), ArchitectsAssemblyBlocks.CRACKED_LIGHT_BLUE_GLASS);
+        CHISELED_LIGHT_BLUE_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_light_blue_glass"), ArchitectsAssemblyBlocks.CHISELED_LIGHT_BLUE_GLASS);
+        CHISELED_LIGHT_BLUE_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_light_blue_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_LIGHT_BLUE_GLASS_PANE);
+        CRACKED_PINK_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_pink_glass"), ArchitectsAssemblyBlocks.CRACKED_PINK_GLASS);
+        CHISELED_PINK_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_pink_glass"), ArchitectsAssemblyBlocks.CHISELED_PINK_GLASS);
+        CHISELED_PINK_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_pink_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_PINK_GLASS_PANE);
+        CRACKED_MAGENTA_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_magenta_glass"), ArchitectsAssemblyBlocks.CRACKED_MAGENTA_GLASS);
+        CHISELED_MAGENTA_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_magenta_glass"), ArchitectsAssemblyBlocks.CHISELED_MAGENTA_GLASS);
+        CHISELED_MAGENTA_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_magenta_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_MAGENTA_GLASS_PANE);
+        CRACKED_PURPLE_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_purple_glass"), ArchitectsAssemblyBlocks.CRACKED_PURPLE_GLASS);
+        CHISELED_PURPLE_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_purple_glass"), ArchitectsAssemblyBlocks.CHISELED_PURPLE_GLASS);
+        CHISELED_PURPLE_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_purple_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_PURPLE_GLASS_PANE);
+        CRACKED_BLACK_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_black_glass"), ArchitectsAssemblyBlocks.CRACKED_BLACK_GLASS);
+        CHISELED_BLACK_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_black_glass"), ArchitectsAssemblyBlocks.CHISELED_BLACK_GLASS);
+        CHISELED_BLACK_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_black_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_BLACK_GLASS_PANE);
+        CRACKED_GRAY_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_gray_glass"), ArchitectsAssemblyBlocks.CRACKED_GRAY_GLASS);
+        CHISELED_GRAY_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_gray_glass"), ArchitectsAssemblyBlocks.CHISELED_GRAY_GLASS);
+        CHISELED_GRAY_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_gray_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_GRAY_GLASS_PANE);
+        CRACKED_LIGHT_GRAY_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_light_gray_glass"), ArchitectsAssemblyBlocks.CRACKED_LIGHT_GRAY_GLASS);
+        CHISELED_LIGHT_GRAY_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_light_gray_glass"), ArchitectsAssemblyBlocks.CHISELED_LIGHT_GRAY_GLASS);
+        CHISELED_LIGHT_GRAY_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_light_gray_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_LIGHT_GRAY_GLASS_PANE);
+        CRACKED_WHITE_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_white_glass"), ArchitectsAssemblyBlocks.CRACKED_WHITE_GLASS);
+        CHISELED_WHITE_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_white_glass"), ArchitectsAssemblyBlocks.CHISELED_WHITE_GLASS);
+        CHISELED_WHITE_GLASS_PANE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_white_glass_pane"), ArchitectsAssemblyBlocks.CHISELED_WHITE_GLASS_PANE);
         LAPIS_STAIRS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "lapis_stairs"), ArchitectsAssemblyBlocks.LAPIS_STAIRS);
         LAPIS_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "lapis_slab"), settings -> new SlabItem(ArchitectsAssemblyBlocks.LAPIS_SLAB, ArchitectsAssemblyBlocks.VERTICAL_LAPIS_SLAB, settings));
         LAPIS_WALL = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "lapis_wall"), ArchitectsAssemblyBlocks.LAPIS_WALL);
@@ -292,6 +308,22 @@ public final class ArchitectsAssemblyItems {
         MOSSY_BRICK_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "mossy_brick_slab"), settings -> new SlabItem(ArchitectsAssemblyBlocks.MOSSY_BRICK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_MOSSY_BRICK_SLAB, settings));
         MOSSY_BRICK_WALL = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "mossy_brick_wall"), ArchitectsAssemblyBlocks.MOSSY_BRICK_WALL);
         GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "glass"), ArchitectsAssemblyBlocks.GLASS);
+        BROWN_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "brown_glass"), ArchitectsAssemblyBlocks.BROWN_GLASS);
+        RED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "red_glass"), ArchitectsAssemblyBlocks.RED_GLASS);
+        ORANGE_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "orange_glass"), ArchitectsAssemblyBlocks.ORANGE_GLASS);
+        YELLOW_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "yellow_glass"), ArchitectsAssemblyBlocks.YELLOW_GLASS);
+        LIME_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "lime_glass"), ArchitectsAssemblyBlocks.LIME_GLASS);
+        GREEN_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "green_glass"), ArchitectsAssemblyBlocks.GREEN_GLASS);
+        CYAN_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "cyan_glass"), ArchitectsAssemblyBlocks.CYAN_GLASS);
+        BLUE_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "blue_glass"), ArchitectsAssemblyBlocks.BLUE_GLASS);
+        LIGHT_BLUE_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "light_blue_glass"), ArchitectsAssemblyBlocks.LIGHT_BLUE_GLASS);
+        PINK_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "pink_glass"), ArchitectsAssemblyBlocks.PINK_GLASS);
+        MAGENTA_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "magenta_glass"), ArchitectsAssemblyBlocks.MAGENTA_GLASS);
+        PURPLE_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "purple_glass"), ArchitectsAssemblyBlocks.PURPLE_GLASS);
+        BLACK_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "black_glass"), ArchitectsAssemblyBlocks.BLACK_GLASS);
+        GRAY_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "gray_glass"), ArchitectsAssemblyBlocks.GRAY_GLASS);
+        LIGHT_GRAY_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "light_gray_glass"), ArchitectsAssemblyBlocks.LIGHT_GRAY_GLASS);
+        WHITE_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "white_glass"), ArchitectsAssemblyBlocks.WHITE_GLASS);
         CHISELED_OAK_PLANKS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_oak_planks"), ArchitectsAssemblyBlocks.CHISELED_OAK_PLANKS);
         CHISELED_OAK_LOG = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_oak_log"), ArchitectsAssemblyBlocks.CHISELED_OAK_LOG);
         CHISELED_OAK_WOOD = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_oak_wood"), ArchitectsAssemblyBlocks.CHISELED_OAK_WOOD);
@@ -307,55 +339,119 @@ public final class ArchitectsAssemblyItems {
         WAXED_OXIDIZED_CUT_COPPER_WALL = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "waxed_oxidized_cut_copper_wall"), ArchitectsAssemblyBlocks.WAXED_OXIDIZED_CUT_COPPER_WALL);
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COLORED_BLOCKS).register(entries -> {
-            entries.addAfter(Items.GLASS, CHISELED_GLASS);
-            entries.addAfter(Items.GLASS_PANE, CHISELED_GLASS_PANE, SHATTERED_GLASS);
-            entries.addAfter(Items.BROWN_STAINED_GLASS, CHISELED_BROWN_STAINED_GLASS);
-            entries.addAfter(Items.BROWN_STAINED_GLASS_PANE, CHISELED_BROWN_STAINED_GLASS_PANE, BROWN_STAINED_SHATTERED_GLASS);
-            entries.addAfter(Items.RED_STAINED_GLASS, CHISELED_RED_STAINED_GLASS);
-            entries.addAfter(Items.RED_STAINED_GLASS_PANE, CHISELED_RED_STAINED_GLASS_PANE, RED_STAINED_SHATTERED_GLASS);
-            entries.addAfter(Items.ORANGE_STAINED_GLASS, CHISELED_ORANGE_STAINED_GLASS);
-            entries.addAfter(Items.ORANGE_STAINED_GLASS_PANE, CHISELED_ORANGE_STAINED_GLASS_PANE, ORANGE_STAINED_SHATTERED_GLASS);
-            entries.addAfter(Items.YELLOW_STAINED_GLASS, CHISELED_YELLOW_STAINED_GLASS);
-            entries.addAfter(Items.YELLOW_STAINED_GLASS_PANE, CHISELED_YELLOW_STAINED_GLASS_PANE, YELLOW_STAINED_SHATTERED_GLASS);
-            entries.addAfter(Items.LIME_STAINED_GLASS, CHISELED_LIME_STAINED_GLASS);
-            entries.addAfter(Items.LIME_STAINED_GLASS_PANE, CHISELED_LIME_STAINED_GLASS_PANE, LIME_STAINED_SHATTERED_GLASS);
-            entries.addAfter(Items.GREEN_STAINED_GLASS, CHISELED_GREEN_STAINED_GLASS);
-            entries.addAfter(Items.GREEN_STAINED_GLASS_PANE, CHISELED_GREEN_STAINED_GLASS_PANE, GREEN_STAINED_SHATTERED_GLASS);
-            entries.addAfter(Items.CYAN_STAINED_GLASS, CHISELED_CYAN_STAINED_GLASS);
-            entries.addAfter(Items.CYAN_STAINED_GLASS_PANE, CHISELED_CYAN_STAINED_GLASS_PANE, CYAN_STAINED_SHATTERED_GLASS);
-            entries.addAfter(Items.BLUE_STAINED_GLASS, CHISELED_BLUE_STAINED_GLASS);
-            entries.addAfter(Items.BLUE_STAINED_GLASS_PANE, CHISELED_BLUE_STAINED_GLASS_PANE, BLUE_STAINED_SHATTERED_GLASS);
-            entries.addAfter(Items.LIGHT_BLUE_STAINED_GLASS, CHISELED_LIGHT_BLUE_STAINED_GLASS);
-            entries.addAfter(Items.LIGHT_BLUE_STAINED_GLASS_PANE, CHISELED_LIGHT_BLUE_STAINED_GLASS_PANE, LIGHT_BLUE_STAINED_SHATTERED_GLASS);
-            entries.addAfter(Items.PINK_STAINED_GLASS, CHISELED_PINK_STAINED_GLASS);
-            entries.addAfter(Items.PINK_STAINED_GLASS_PANE, CHISELED_PINK_STAINED_GLASS_PANE, PINK_STAINED_SHATTERED_GLASS);
-            entries.addAfter(Items.MAGENTA_STAINED_GLASS, CHISELED_MAGENTA_STAINED_GLASS);
-            entries.addAfter(Items.MAGENTA_STAINED_GLASS_PANE, CHISELED_MAGENTA_STAINED_GLASS_PANE, MAGENTA_STAINED_SHATTERED_GLASS);
-            entries.addAfter(Items.PURPLE_STAINED_GLASS, CHISELED_PURPLE_STAINED_GLASS);
-            entries.addAfter(Items.PURPLE_STAINED_GLASS_PANE, CHISELED_PURPLE_STAINED_GLASS_PANE, PURPLE_STAINED_SHATTERED_GLASS);
-            entries.addAfter(Items.BLACK_STAINED_GLASS, CHISELED_BLACK_STAINED_GLASS);
-            entries.addAfter(Items.BLACK_STAINED_GLASS_PANE, CHISELED_BLACK_STAINED_GLASS_PANE, BLACK_STAINED_SHATTERED_GLASS);
-            entries.addAfter(Items.GRAY_STAINED_GLASS, CHISELED_GRAY_STAINED_GLASS);
-            entries.addAfter(Items.GRAY_STAINED_GLASS_PANE, CHISELED_GRAY_STAINED_GLASS_PANE, GRAY_STAINED_SHATTERED_GLASS);
-            entries.addAfter(Items.LIGHT_GRAY_STAINED_GLASS, CHISELED_LIGHT_GRAY_STAINED_GLASS);
-            entries.addAfter(Items.LIGHT_GRAY_STAINED_GLASS_PANE, CHISELED_LIGHT_GRAY_STAINED_GLASS_PANE, LIGHT_GRAY_STAINED_SHATTERED_GLASS);
-            entries.addAfter(Items.WHITE_STAINED_GLASS, CHISELED_WHITE_STAINED_GLASS);
-            entries.addAfter(Items.WHITE_STAINED_GLASS_PANE, CHISELED_WHITE_STAINED_GLASS_PANE, WHITE_STAINED_SHATTERED_GLASS);
             entries.getDisplayStacks().replaceAll(stack -> {
                 if (stack.isOf(Items.GLASS)) {
                     return GLASS.getDefaultStack();
+                } else if (stack.isOf(Items.BROWN_STAINED_GLASS)) {
+                    return BROWN_GLASS.getDefaultStack();
+                } else if (stack.isOf(Items.RED_STAINED_GLASS)) {
+                    return RED_GLASS.getDefaultStack();
+                } else if (stack.isOf(Items.ORANGE_STAINED_GLASS)) {
+                    return ORANGE_GLASS.getDefaultStack();
+                } else if (stack.isOf(Items.YELLOW_STAINED_GLASS)) {
+                    return YELLOW_GLASS.getDefaultStack();
+                } else if (stack.isOf(Items.LIME_STAINED_GLASS)) {
+                    return LIME_GLASS.getDefaultStack();
+                } else if (stack.isOf(Items.GREEN_STAINED_GLASS)) {
+                    return GREEN_GLASS.getDefaultStack();
+                } else if (stack.isOf(Items.CYAN_STAINED_GLASS)) {
+                    return CYAN_GLASS.getDefaultStack();
+                } else if (stack.isOf(Items.BLUE_STAINED_GLASS)) {
+                    return BLUE_GLASS.getDefaultStack();
+                } else if (stack.isOf(Items.LIGHT_BLUE_STAINED_GLASS)) {
+                    return LIGHT_BLUE_GLASS.getDefaultStack();
+                } else if (stack.isOf(Items.PINK_STAINED_GLASS)) {
+                    return PINK_GLASS.getDefaultStack();
+                } else if (stack.isOf(Items.MAGENTA_STAINED_GLASS)) {
+                    return MAGENTA_GLASS.getDefaultStack();
+                } else if (stack.isOf(Items.PURPLE_STAINED_GLASS)) {
+                    return PURPLE_GLASS.getDefaultStack();
+                } else if (stack.isOf(Items.BLACK_STAINED_GLASS)) {
+                    return BLACK_GLASS.getDefaultStack();
+                } else if (stack.isOf(Items.GRAY_STAINED_GLASS)) {
+                    return GRAY_GLASS.getDefaultStack();
+                } else if (stack.isOf(Items.LIGHT_GRAY_STAINED_GLASS)) {
+                    return LIGHT_GRAY_GLASS.getDefaultStack();
+                } else if (stack.isOf(Items.WHITE_STAINED_GLASS)) {
+                    return WHITE_GLASS.getDefaultStack();
                 }
                 return stack;
             });
             entries.getSearchTabStacks().replaceAll(stack -> {
                 if (stack.isOf(Items.GLASS)) {
                     return GLASS.getDefaultStack();
+                } else if (stack.isOf(Items.BROWN_STAINED_GLASS)) {
+                    return BROWN_GLASS.getDefaultStack();
+                } else if (stack.isOf(Items.RED_STAINED_GLASS)) {
+                    return RED_GLASS.getDefaultStack();
+                } else if (stack.isOf(Items.ORANGE_STAINED_GLASS)) {
+                    return ORANGE_GLASS.getDefaultStack();
+                } else if (stack.isOf(Items.YELLOW_STAINED_GLASS)) {
+                    return YELLOW_GLASS.getDefaultStack();
+                } else if (stack.isOf(Items.LIME_STAINED_GLASS)) {
+                    return LIME_GLASS.getDefaultStack();
+                } else if (stack.isOf(Items.GREEN_STAINED_GLASS)) {
+                    return GREEN_GLASS.getDefaultStack();
+                } else if (stack.isOf(Items.CYAN_STAINED_GLASS)) {
+                    return CYAN_GLASS.getDefaultStack();
+                } else if (stack.isOf(Items.BLUE_STAINED_GLASS)) {
+                    return BLUE_GLASS.getDefaultStack();
+                } else if (stack.isOf(Items.LIGHT_BLUE_STAINED_GLASS)) {
+                    return LIGHT_BLUE_GLASS.getDefaultStack();
+                } else if (stack.isOf(Items.PINK_STAINED_GLASS)) {
+                    return PINK_GLASS.getDefaultStack();
+                } else if (stack.isOf(Items.MAGENTA_STAINED_GLASS)) {
+                    return MAGENTA_GLASS.getDefaultStack();
+                } else if (stack.isOf(Items.PURPLE_STAINED_GLASS)) {
+                    return PURPLE_GLASS.getDefaultStack();
+                } else if (stack.isOf(Items.BLACK_STAINED_GLASS)) {
+                    return BLACK_GLASS.getDefaultStack();
+                } else if (stack.isOf(Items.GRAY_STAINED_GLASS)) {
+                    return GRAY_GLASS.getDefaultStack();
+                } else if (stack.isOf(Items.LIGHT_GRAY_STAINED_GLASS)) {
+                    return LIGHT_GRAY_GLASS.getDefaultStack();
+                } else if (stack.isOf(Items.WHITE_STAINED_GLASS)) {
+                    return WHITE_GLASS.getDefaultStack();
                 }
                 return stack;
             });
+            entries.addAfter(ArchitectsAssemblyItems.GLASS, CHISELED_GLASS);
+            entries.addAfter(Items.GLASS_PANE, CHISELED_GLASS_PANE, CRACKED_GLASS);
+            entries.addAfter(ArchitectsAssemblyItems.BROWN_GLASS, CHISELED_BROWN_GLASS);
+            entries.addAfter(Items.BROWN_STAINED_GLASS_PANE, CHISELED_BROWN_GLASS_PANE, CRACKED_BROWN_GLASS);
+            entries.addAfter(ArchitectsAssemblyItems.RED_GLASS, CHISELED_RED_GLASS);
+            entries.addAfter(Items.RED_STAINED_GLASS_PANE, CHISELED_RED_GLASS_PANE, CRACKED_RED_GLASS);
+            entries.addAfter(ArchitectsAssemblyItems.ORANGE_GLASS, CHISELED_ORANGE_GLASS);
+            entries.addAfter(Items.ORANGE_STAINED_GLASS_PANE, CHISELED_ORANGE_GLASS_PANE, CRACKED_ORANGE_GLASS);
+            entries.addAfter(ArchitectsAssemblyItems.YELLOW_GLASS, CHISELED_YELLOW_GLASS);
+            entries.addAfter(Items.YELLOW_STAINED_GLASS_PANE, CHISELED_YELLOW_GLASS_PANE, CRACKED_YELLOW_GLASS);
+            entries.addAfter(ArchitectsAssemblyItems.LIME_GLASS, CHISELED_LIME_GLASS);
+            entries.addAfter(Items.LIME_STAINED_GLASS_PANE, CHISELED_LIME_GLASS_PANE, CRACKED_LIME_GLASS);
+            entries.addAfter(ArchitectsAssemblyItems.GREEN_GLASS, CHISELED_GREEN_GLASS);
+            entries.addAfter(Items.GREEN_STAINED_GLASS_PANE, CHISELED_GREEN_GLASS_PANE, CRACKED_GREEN_GLASS);
+            entries.addAfter(ArchitectsAssemblyItems.CYAN_GLASS, CHISELED_CYAN_GLASS);
+            entries.addAfter(Items.CYAN_STAINED_GLASS_PANE, CHISELED_CYAN_GLASS_PANE, CRACKED_CYAN_GLASS);
+            entries.addAfter(ArchitectsAssemblyItems.BLUE_GLASS, CHISELED_BLUE_GLASS);
+            entries.addAfter(Items.BLUE_STAINED_GLASS_PANE, CHISELED_BLUE_GLASS_PANE, CRACKED_BLUE_GLASS);
+            entries.addAfter(ArchitectsAssemblyItems.LIGHT_BLUE_GLASS, CHISELED_LIGHT_BLUE_GLASS);
+            entries.addAfter(Items.LIGHT_BLUE_STAINED_GLASS_PANE, CHISELED_LIGHT_BLUE_GLASS_PANE, CRACKED_LIGHT_BLUE_GLASS);
+            entries.addAfter(ArchitectsAssemblyItems.PINK_GLASS, CHISELED_PINK_GLASS);
+            entries.addAfter(Items.PINK_STAINED_GLASS_PANE, CHISELED_PINK_GLASS_PANE, CRACKED_PINK_GLASS);
+            entries.addAfter(ArchitectsAssemblyItems.MAGENTA_GLASS, CHISELED_MAGENTA_GLASS);
+            entries.addAfter(Items.MAGENTA_STAINED_GLASS_PANE, CHISELED_MAGENTA_GLASS_PANE, CRACKED_MAGENTA_GLASS);
+            entries.addAfter(ArchitectsAssemblyItems.PURPLE_GLASS, CHISELED_PURPLE_GLASS);
+            entries.addAfter(Items.PURPLE_STAINED_GLASS_PANE, CHISELED_PURPLE_GLASS_PANE, CRACKED_PURPLE_GLASS);
+            entries.addAfter(ArchitectsAssemblyItems.BLACK_GLASS, CHISELED_BLACK_GLASS);
+            entries.addAfter(Items.BLACK_STAINED_GLASS_PANE, CHISELED_BLACK_GLASS_PANE, CRACKED_BLACK_GLASS);
+            entries.addAfter(ArchitectsAssemblyItems.GRAY_GLASS, CHISELED_GRAY_GLASS);
+            entries.addAfter(Items.GRAY_STAINED_GLASS_PANE, CHISELED_GRAY_GLASS_PANE, CRACKED_GRAY_GLASS);
+            entries.addAfter(ArchitectsAssemblyItems.LIGHT_GRAY_GLASS, CHISELED_LIGHT_GRAY_GLASS);
+            entries.addAfter(Items.LIGHT_GRAY_STAINED_GLASS_PANE, CHISELED_LIGHT_GRAY_GLASS_PANE, CRACKED_LIGHT_GRAY_GLASS);
+            entries.addAfter(ArchitectsAssemblyItems.WHITE_GLASS, CHISELED_WHITE_GLASS);
+            entries.addAfter(Items.WHITE_STAINED_GLASS_PANE, CHISELED_WHITE_GLASS_PANE, CRACKED_WHITE_GLASS);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(entries -> {
-            entries.addAfter(Items.TINTED_GLASS, SHATTERED_GLASS);
+            entries.addAfter(Items.TINTED_GLASS, CRACKED_GLASS);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(entries -> {
             entries.addAfter(Items.LAPIS_BLOCK, LAPIS_STAIRS, LAPIS_SLAB, LAPIS_WALL, POLISHED_LAPIS_BLOCK, POLISHED_LAPIS_STAIRS, POLISHED_LAPIS_SLAB, POLISHED_LAPIS_WALL, POLISHED_LAPIS_BRICKS, POLISHED_LAPIS_BRICK_STAIRS, POLISHED_LAPIS_BRICK_SLAB, POLISHED_LAPIS_BRICK_WALL);

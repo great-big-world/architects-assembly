@@ -13,11 +13,12 @@
     "minecraft:brown_stained_glass",
     "minecraft:brown_stained_glass_pane",
     "minecraft:brown_bed",
-    "great_big_world:chiseled_brown_stained_glass",
-    "great_big_world:chiseled_brown_stained_glass_pane",
+    "great_big_world:brown_glass",
+    "great_big_world:chiseled_brown_glass",
+    "great_big_world:chiseled_brown_glass_pane",
     "great_big_world:brown_item_frame",
     "great_big_world:brown_glow_item_frame",
     "great_big_world:brown_glass_shard",
-    "great_big_world:brown_stained_shattered_glass"
+    "great_big_world:cracked_brown_glass"
   ]
 }

@@ -13,11 +13,12 @@
     "minecraft:blue_stained_glass",
     "minecraft:blue_stained_glass_pane",
     "minecraft:blue_bed",
-    "great_big_world:chiseled_blue_stained_glass",
-    "great_big_world:chiseled_blue_stained_glass_pane",
+    "great_big_world:blue_glass",
+    "great_big_world:chiseled_blue_glass",
+    "great_big_world:chiseled_blue_glass_pane",
     "great_big_world:blue_item_frame",
     "great_big_world:blue_glow_item_frame",
     "great_big_world:blue_glass_shard",
-    "great_big_world:blue_stained_shattered_glass"
+    "great_big_world:cracked_blue_glass"
   ]
 }

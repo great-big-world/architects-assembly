@@ -13,12 +13,13 @@
     "minecraft:red_stained_glass",
     "minecraft:red_stained_glass_pane",
     "minecraft:red_bed",
-    "great_big_world:chiseled_red_stained_glass",
-    "great_big_world:chiseled_red_stained_glass_pane",
+    "great_big_world:red_glass",
+    "great_big_world:chiseled_red_glass",
+    "great_big_world:chiseled_red_glass_pane",
     "great_big_world:red_item_frame",
     "great_big_world:red_glow_item_frame",
     "great_big_world:red_glass_shard",
-    "great_big_world:red_stained_shattered_glass",
+    "great_big_world:cracked_red_glass",
     "minecraft:red_tulip"
   ]
 }

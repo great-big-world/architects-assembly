@@ -33,57 +33,57 @@ public final class ArchitectsAssemblyBlocks {
     }
 
     // region Decorative Blocks
-    public static Block SHATTERED_GLASS;
+    public static Block CRACKED_GLASS;
     public static Block CHISELED_GLASS;
     public static Block CHISELED_GLASS_PANE;
-    public static Block BROWN_STAINED_SHATTERED_GLASS;
-    public static Block CHISELED_BROWN_STAINED_GLASS;
-    public static Block CHISELED_BROWN_STAINED_GLASS_PANE;
-    public static Block RED_STAINED_SHATTERED_GLASS;
-    public static Block CHISELED_RED_STAINED_GLASS;
-    public static Block CHISELED_RED_STAINED_GLASS_PANE;
-    public static Block ORANGE_STAINED_SHATTERED_GLASS;
-    public static Block CHISELED_ORANGE_STAINED_GLASS;
-    public static Block CHISELED_ORANGE_STAINED_GLASS_PANE;
-    public static Block YELLOW_STAINED_SHATTERED_GLASS;
-    public static Block CHISELED_YELLOW_STAINED_GLASS;
-    public static Block CHISELED_YELLOW_STAINED_GLASS_PANE;
-    public static Block LIME_STAINED_SHATTERED_GLASS;
-    public static Block CHISELED_LIME_STAINED_GLASS;
-    public static Block CHISELED_LIME_STAINED_GLASS_PANE;
-    public static Block GREEN_STAINED_SHATTERED_GLASS;
-    public static Block CHISELED_GREEN_STAINED_GLASS;
-    public static Block CHISELED_GREEN_STAINED_GLASS_PANE;
-    public static Block CYAN_STAINED_SHATTERED_GLASS;
-    public static Block CHISELED_CYAN_STAINED_GLASS;
-    public static Block CHISELED_CYAN_STAINED_GLASS_PANE;
-    public static Block BLUE_STAINED_SHATTERED_GLASS;
-    public static Block CHISELED_BLUE_STAINED_GLASS;
-    public static Block CHISELED_BLUE_STAINED_GLASS_PANE;
-    public static Block LIGHT_BLUE_STAINED_SHATTERED_GLASS;
-    public static Block CHISELED_LIGHT_BLUE_STAINED_GLASS;
-    public static Block CHISELED_LIGHT_BLUE_STAINED_GLASS_PANE;
-    public static Block PINK_STAINED_SHATTERED_GLASS;
-    public static Block CHISELED_PINK_STAINED_GLASS;
-    public static Block CHISELED_PINK_STAINED_GLASS_PANE;
-    public static Block MAGENTA_STAINED_SHATTERED_GLASS;
-    public static Block CHISELED_MAGENTA_STAINED_GLASS;
-    public static Block CHISELED_MAGENTA_STAINED_GLASS_PANE;
-    public static Block PURPLE_STAINED_SHATTERED_GLASS;
-    public static Block CHISELED_PURPLE_STAINED_GLASS;
-    public static Block CHISELED_PURPLE_STAINED_GLASS_PANE;
-    public static Block BLACK_STAINED_SHATTERED_GLASS;
-    public static Block CHISELED_BLACK_STAINED_GLASS;
-    public static Block CHISELED_BLACK_STAINED_GLASS_PANE;
-    public static Block GRAY_STAINED_SHATTERED_GLASS;
-    public static Block CHISELED_GRAY_STAINED_GLASS;
-    public static Block CHISELED_GRAY_STAINED_GLASS_PANE;
-    public static Block LIGHT_GRAY_STAINED_SHATTERED_GLASS;
-    public static Block CHISELED_LIGHT_GRAY_STAINED_GLASS;
-    public static Block CHISELED_LIGHT_GRAY_STAINED_GLASS_PANE;
-    public static Block WHITE_STAINED_SHATTERED_GLASS;
-    public static Block CHISELED_WHITE_STAINED_GLASS;
-    public static Block CHISELED_WHITE_STAINED_GLASS_PANE;
+    public static Block CRACKED_BROWN_GLASS;
+    public static Block CHISELED_BROWN_GLASS;
+    public static Block CHISELED_BROWN_GLASS_PANE;
+    public static Block CRACKED_RED_GLASS;
+    public static Block CHISELED_RED_GLASS;
+    public static Block CHISELED_RED_GLASS_PANE;
+    public static Block CRACKED_ORANGE_GLASS;
+    public static Block CHISELED_ORANGE_GLASS;
+    public static Block CHISELED_ORANGE_GLASS_PANE;
+    public static Block CRACKED_YELLOW_GLASS;
+    public static Block CHISELED_YELLOW_GLASS;
+    public static Block CHISELED_YELLOW_GLASS_PANE;
+    public static Block CRACKED_LIME_GLASS;
+    public static Block CHISELED_LIME_GLASS;
+    public static Block CHISELED_LIME_GLASS_PANE;
+    public static Block CRACKED_GREEN_GLASS;
+    public static Block CHISELED_GREEN_GLASS;
+    public static Block CHISELED_GREEN_GLASS_PANE;
+    public static Block CRACKED_CYAN_GLASS;
+    public static Block CHISELED_CYAN_GLASS;
+    public static Block CHISELED_CYAN_GLASS_PANE;
+    public static Block CRACKED_BLUE_GLASS;
+    public static Block CHISELED_BLUE_GLASS;
+    public static Block CHISELED_BLUE_GLASS_PANE;
+    public static Block CRACKED_LIGHT_BLUE_GLASS;
+    public static Block CHISELED_LIGHT_BLUE_GLASS;
+    public static Block CHISELED_LIGHT_BLUE_GLASS_PANE;
+    public static Block CRACKED_PINK_GLASS;
+    public static Block CHISELED_PINK_GLASS;
+    public static Block CHISELED_PINK_GLASS_PANE;
+    public static Block CRACKED_MAGENTA_GLASS;
+    public static Block CHISELED_MAGENTA_GLASS;
+    public static Block CHISELED_MAGENTA_GLASS_PANE;
+    public static Block CRACKED_PURPLE_GLASS;
+    public static Block CHISELED_PURPLE_GLASS;
+    public static Block CHISELED_PURPLE_GLASS_PANE;
+    public static Block CRACKED_BLACK_GLASS;
+    public static Block CHISELED_BLACK_GLASS;
+    public static Block CHISELED_BLACK_GLASS_PANE;
+    public static Block CRACKED_GRAY_GLASS;
+    public static Block CHISELED_GRAY_GLASS;
+    public static Block CHISELED_GRAY_GLASS_PANE;
+    public static Block CRACKED_LIGHT_GRAY_GLASS;
+    public static Block CHISELED_LIGHT_GRAY_GLASS;
+    public static Block CHISELED_LIGHT_GRAY_GLASS_PANE;
+    public static Block CRACKED_WHITE_GLASS;
+    public static Block CHISELED_WHITE_GLASS;
+    public static Block CHISELED_WHITE_GLASS_PANE;
     public static Block LAPIS_STAIRS;
     public static Block LAPIS_SLAB;
     public static Block VERTICAL_LAPIS_SLAB;
@@ -105,6 +105,22 @@ public final class ArchitectsAssemblyBlocks {
     public static Block VERTICAL_MOSSY_BRICK_SLAB;
     public static Block MOSSY_BRICK_WALL;
     public static Block GLASS;
+    public static Block BROWN_GLASS;
+    public static Block RED_GLASS;
+    public static Block ORANGE_GLASS;
+    public static Block YELLOW_GLASS;
+    public static Block LIME_GLASS;
+    public static Block GREEN_GLASS;
+    public static Block CYAN_GLASS;
+    public static Block BLUE_GLASS;
+    public static Block LIGHT_BLUE_GLASS;
+    public static Block PINK_GLASS;
+    public static Block MAGENTA_GLASS;
+    public static Block PURPLE_GLASS;
+    public static Block BLACK_GLASS;
+    public static Block GRAY_GLASS;
+    public static Block LIGHT_GRAY_GLASS;
+    public static Block WHITE_GLASS;
     public static Block CHISELED_OAK_PLANKS;
     public static Block CHISELED_OAK_LOG;
     public static Block CHISELED_OAK_WOOD;
@@ -120,57 +136,57 @@ public final class ArchitectsAssemblyBlocks {
     public static Block WAXED_OXIDIZED_CUT_COPPER_WALL;
 
     private static void registerDecorativeBlocks() {
-        SHATTERED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "shattered_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.GLASS).breakInstantly());
-        CHISELED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_glass"), settings -> new GlassBlock(settings, SHATTERED_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.GLASS));
+        CRACKED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.GLASS).breakInstantly());
+        CHISELED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_glass"), settings -> new GlassBlock(settings, CRACKED_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.GLASS));
         CHISELED_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.GLASS_PANE));
-        BROWN_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "brown_stained_shattered_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.BROWN_STAINED_GLASS).breakInstantly());
-        CHISELED_BROWN_STAINED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_brown_stained_glass"), settings -> new GlassBlock(settings, BROWN_STAINED_SHATTERED_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.BROWN_STAINED_GLASS));
-        CHISELED_BROWN_STAINED_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_brown_stained_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.BROWN_STAINED_GLASS_PANE));
-        RED_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "red_stained_shattered_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.RED_STAINED_GLASS).breakInstantly());
-        CHISELED_RED_STAINED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_red_stained_glass"), settings -> new GlassBlock(settings, RED_STAINED_SHATTERED_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.RED_STAINED_GLASS));
-        CHISELED_RED_STAINED_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_red_stained_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.RED_STAINED_GLASS_PANE));
-        ORANGE_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "orange_stained_shattered_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.ORANGE_STAINED_GLASS).breakInstantly());
-        CHISELED_ORANGE_STAINED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_orange_stained_glass"), settings -> new GlassBlock(settings, ORANGE_STAINED_SHATTERED_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.ORANGE_STAINED_GLASS));
-        CHISELED_ORANGE_STAINED_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_orange_stained_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.ORANGE_STAINED_GLASS_PANE));
-        YELLOW_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "yellow_stained_shattered_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.YELLOW_STAINED_GLASS).breakInstantly());
-        CHISELED_YELLOW_STAINED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_yellow_stained_glass"), settings -> new GlassBlock(settings, YELLOW_STAINED_SHATTERED_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.YELLOW_STAINED_GLASS));
-        CHISELED_YELLOW_STAINED_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_yellow_stained_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.YELLOW_STAINED_GLASS_PANE));
-        LIME_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "lime_stained_shattered_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.LIME_STAINED_GLASS).breakInstantly());
-        CHISELED_LIME_STAINED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_lime_stained_glass"), settings -> new GlassBlock(settings, LIME_STAINED_SHATTERED_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.LIME_STAINED_GLASS));
-        CHISELED_LIME_STAINED_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_lime_stained_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.LIME_STAINED_GLASS_PANE));
-        GREEN_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "green_stained_shattered_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.GREEN_STAINED_GLASS).breakInstantly());
-        CHISELED_GREEN_STAINED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_green_stained_glass"), settings -> new GlassBlock(settings, GREEN_STAINED_SHATTERED_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.GREEN_STAINED_GLASS));
-        CHISELED_GREEN_STAINED_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_green_stained_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.GREEN_STAINED_GLASS_PANE));
-        CYAN_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "cyan_stained_shattered_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.CYAN_STAINED_GLASS).breakInstantly());
-        CHISELED_CYAN_STAINED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_cyan_stained_glass"), settings -> new GlassBlock(settings, CYAN_STAINED_SHATTERED_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.CYAN_STAINED_GLASS));
-        CHISELED_CYAN_STAINED_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_cyan_stained_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.CYAN_STAINED_GLASS_PANE));
-        BLUE_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "blue_stained_shattered_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.BLUE_STAINED_GLASS).breakInstantly());
-        CHISELED_BLUE_STAINED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_blue_stained_glass"), settings -> new GlassBlock(settings, BLUE_STAINED_SHATTERED_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.BLUE_STAINED_GLASS));
-        CHISELED_BLUE_STAINED_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_blue_stained_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.BLUE_STAINED_GLASS_PANE));
-        LIGHT_BLUE_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "light_blue_stained_shattered_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.LIGHT_BLUE_STAINED_GLASS).breakInstantly());
-        CHISELED_LIGHT_BLUE_STAINED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_light_blue_stained_glass"), settings -> new GlassBlock(settings, LIGHT_BLUE_STAINED_SHATTERED_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.LIGHT_BLUE_STAINED_GLASS));
-        CHISELED_LIGHT_BLUE_STAINED_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_light_blue_stained_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.LIGHT_BLUE_STAINED_GLASS_PANE));
-        PINK_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "pink_stained_shattered_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.PINK_STAINED_GLASS).breakInstantly());
-        CHISELED_PINK_STAINED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_pink_stained_glass"), settings -> new GlassBlock(settings, PINK_STAINED_SHATTERED_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.PINK_STAINED_GLASS));
-        CHISELED_PINK_STAINED_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_pink_stained_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.PINK_STAINED_GLASS_PANE));
-        MAGENTA_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "magenta_stained_shattered_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.MAGENTA_STAINED_GLASS).breakInstantly());
-        CHISELED_MAGENTA_STAINED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_magenta_stained_glass"), settings -> new GlassBlock(settings, MAGENTA_STAINED_SHATTERED_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.MAGENTA_STAINED_GLASS));
-        CHISELED_MAGENTA_STAINED_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_magenta_stained_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.MAGENTA_STAINED_GLASS_PANE));
-        PURPLE_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "purple_stained_shattered_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.PURPLE_STAINED_GLASS).breakInstantly());
-        CHISELED_PURPLE_STAINED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_purple_stained_glass"), settings -> new GlassBlock(settings, PURPLE_STAINED_SHATTERED_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.PURPLE_STAINED_GLASS));
-        CHISELED_PURPLE_STAINED_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_purple_stained_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.PURPLE_STAINED_GLASS_PANE));
-        BLACK_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "black_stained_shattered_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.BLACK_STAINED_GLASS).breakInstantly());
-        CHISELED_BLACK_STAINED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_black_stained_glass"), settings -> new GlassBlock(settings, BLACK_STAINED_SHATTERED_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.BLACK_STAINED_GLASS));
-        CHISELED_BLACK_STAINED_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_black_stained_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.BLACK_STAINED_GLASS_PANE));
-        GRAY_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "gray_stained_shattered_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.GRAY_STAINED_GLASS).breakInstantly());
-        CHISELED_GRAY_STAINED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_gray_stained_glass"), settings -> new GlassBlock(settings, GRAY_STAINED_SHATTERED_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.GRAY_STAINED_GLASS));
-        CHISELED_GRAY_STAINED_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_gray_stained_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.GRAY_STAINED_GLASS_PANE));
-        LIGHT_GRAY_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "light_gray_stained_shattered_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.LIGHT_GRAY_STAINED_GLASS).breakInstantly());
-        CHISELED_LIGHT_GRAY_STAINED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_light_gray_stained_glass"), settings -> new GlassBlock(settings, LIGHT_GRAY_STAINED_SHATTERED_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.LIGHT_GRAY_STAINED_GLASS));
-        CHISELED_LIGHT_GRAY_STAINED_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_light_gray_stained_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.LIGHT_GRAY_STAINED_GLASS_PANE));
-        WHITE_STAINED_SHATTERED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "white_stained_shattered_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.WHITE_STAINED_GLASS).breakInstantly());
-        CHISELED_WHITE_STAINED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_white_stained_glass"), settings -> new GlassBlock(settings, WHITE_STAINED_SHATTERED_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.WHITE_STAINED_GLASS));
-        CHISELED_WHITE_STAINED_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_white_stained_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.WHITE_STAINED_GLASS_PANE));
+        CRACKED_BROWN_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_brown_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.BROWN_STAINED_GLASS).breakInstantly());
+        CHISELED_BROWN_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_brown_glass"), settings -> new GlassBlock(settings, CRACKED_BROWN_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.BROWN_STAINED_GLASS));
+        CHISELED_BROWN_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_brown_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.BROWN_STAINED_GLASS_PANE));
+        CRACKED_RED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_red_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.RED_STAINED_GLASS).breakInstantly());
+        CHISELED_RED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_red_glass"), settings -> new GlassBlock(settings, CRACKED_RED_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.RED_STAINED_GLASS));
+        CHISELED_RED_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_red_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.RED_STAINED_GLASS_PANE));
+        CRACKED_ORANGE_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_orange_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.ORANGE_STAINED_GLASS).breakInstantly());
+        CHISELED_ORANGE_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_orange_glass"), settings -> new GlassBlock(settings, CRACKED_ORANGE_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.ORANGE_STAINED_GLASS));
+        CHISELED_ORANGE_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_orange_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.ORANGE_STAINED_GLASS_PANE));
+        CRACKED_YELLOW_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_yellow_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.YELLOW_STAINED_GLASS).breakInstantly());
+        CHISELED_YELLOW_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_yellow_glass"), settings -> new GlassBlock(settings, CRACKED_YELLOW_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.YELLOW_STAINED_GLASS));
+        CHISELED_YELLOW_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_yellow_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.YELLOW_STAINED_GLASS_PANE));
+        CRACKED_LIME_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_lime_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.LIME_STAINED_GLASS).breakInstantly());
+        CHISELED_LIME_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_lime_glass"), settings -> new GlassBlock(settings, CRACKED_LIME_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.LIME_STAINED_GLASS));
+        CHISELED_LIME_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_lime_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.LIME_STAINED_GLASS_PANE));
+        CRACKED_GREEN_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_green_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.GREEN_STAINED_GLASS).breakInstantly());
+        CHISELED_GREEN_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_green_glass"), settings -> new GlassBlock(settings, CRACKED_GREEN_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.GREEN_STAINED_GLASS));
+        CHISELED_GREEN_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_green_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.GREEN_STAINED_GLASS_PANE));
+        CRACKED_CYAN_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_cyan_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.CYAN_STAINED_GLASS).breakInstantly());
+        CHISELED_CYAN_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_cyan_glass"), settings -> new GlassBlock(settings, CRACKED_CYAN_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.CYAN_STAINED_GLASS));
+        CHISELED_CYAN_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_cyan_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.CYAN_STAINED_GLASS_PANE));
+        CRACKED_BLUE_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_blue_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.BLUE_STAINED_GLASS).breakInstantly());
+        CHISELED_BLUE_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_blue_glass"), settings -> new GlassBlock(settings, CRACKED_BLUE_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.BLUE_STAINED_GLASS));
+        CHISELED_BLUE_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_blue_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.BLUE_STAINED_GLASS_PANE));
+        CRACKED_LIGHT_BLUE_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_light_blue_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.LIGHT_BLUE_STAINED_GLASS).breakInstantly());
+        CHISELED_LIGHT_BLUE_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_light_blue_glass"), settings -> new GlassBlock(settings, CRACKED_LIGHT_BLUE_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.LIGHT_BLUE_STAINED_GLASS));
+        CHISELED_LIGHT_BLUE_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_light_blue_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.LIGHT_BLUE_STAINED_GLASS_PANE));
+        CRACKED_PINK_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_pink_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.PINK_STAINED_GLASS).breakInstantly());
+        CHISELED_PINK_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_pink_glass"), settings -> new GlassBlock(settings, CRACKED_PINK_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.PINK_STAINED_GLASS));
+        CHISELED_PINK_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_pink_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.PINK_STAINED_GLASS_PANE));
+        CRACKED_MAGENTA_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_magenta_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.MAGENTA_STAINED_GLASS).breakInstantly());
+        CHISELED_MAGENTA_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_magenta_glass"), settings -> new GlassBlock(settings, CRACKED_MAGENTA_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.MAGENTA_STAINED_GLASS));
+        CHISELED_MAGENTA_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_magenta_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.MAGENTA_STAINED_GLASS_PANE));
+        CRACKED_PURPLE_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_purple_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.PURPLE_STAINED_GLASS).breakInstantly());
+        CHISELED_PURPLE_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_purple_glass"), settings -> new GlassBlock(settings, CRACKED_PURPLE_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.PURPLE_STAINED_GLASS));
+        CHISELED_PURPLE_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_purple_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.PURPLE_STAINED_GLASS_PANE));
+        CRACKED_BLACK_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_black_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.BLACK_STAINED_GLASS).breakInstantly());
+        CHISELED_BLACK_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_black_glass"), settings -> new GlassBlock(settings, CRACKED_BLACK_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.BLACK_STAINED_GLASS));
+        CHISELED_BLACK_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_black_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.BLACK_STAINED_GLASS_PANE));
+        CRACKED_GRAY_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_gray_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.GRAY_STAINED_GLASS).breakInstantly());
+        CHISELED_GRAY_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_gray_glass"), settings -> new GlassBlock(settings, CRACKED_GRAY_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.GRAY_STAINED_GLASS));
+        CHISELED_GRAY_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_gray_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.GRAY_STAINED_GLASS_PANE));
+        CRACKED_LIGHT_GRAY_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_light_gray_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.LIGHT_GRAY_STAINED_GLASS).breakInstantly());
+        CHISELED_LIGHT_GRAY_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_light_gray_glass"), settings -> new GlassBlock(settings, CRACKED_LIGHT_GRAY_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.LIGHT_GRAY_STAINED_GLASS));
+        CHISELED_LIGHT_GRAY_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_light_gray_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.LIGHT_GRAY_STAINED_GLASS_PANE));
+        CRACKED_WHITE_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_white_glass"), ShatteredGlassBlock::new, AbstractBlock.Settings.copy(Blocks.WHITE_STAINED_GLASS).breakInstantly());
+        CHISELED_WHITE_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_white_glass"), settings -> new GlassBlock(settings, CRACKED_WHITE_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.WHITE_STAINED_GLASS));
+        CHISELED_WHITE_GLASS_PANE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_white_glass_pane"), PaneBlock::new, AbstractBlock.Settings.copy(Blocks.WHITE_STAINED_GLASS_PANE));
         LAPIS_STAIRS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "lapis_stairs"), settings -> new StairsBlock(Blocks.LAPIS_BLOCK.getDefaultState(), settings), AbstractBlock.Settings.copy(Blocks.LAPIS_BLOCK));
         LAPIS_SLAB = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "lapis_slab"), SlabBlock::new, AbstractBlock.Settings.copy(Blocks.LAPIS_BLOCK));
         VERTICAL_LAPIS_SLAB = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "vertical_lapis_slab"), VerticalSlabBlock::new, AbstractBlock.Settings.copy(Blocks.LAPIS_BLOCK));
@@ -191,7 +207,23 @@ public final class ArchitectsAssemblyBlocks {
         MOSSY_BRICK_SLAB = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "mossy_brick_slab"), SlabBlock::new, AbstractBlock.Settings.copy(MOSSY_BRICKS));
         VERTICAL_MOSSY_BRICK_SLAB = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "vertical_mossy_brick_slab"), VerticalSlabBlock::new, AbstractBlock.Settings.copy(MOSSY_BRICKS));
         MOSSY_BRICK_WALL = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "mossy_brick_wall"), WallBlock::new, AbstractBlock.Settings.copyShallow(MOSSY_BRICKS).solid());
-        GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "glass"), settings -> new GlassBlock(settings, SHATTERED_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.GLASS));
+        GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "glass"), settings -> new GlassBlock(settings, CRACKED_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.GLASS));
+        BROWN_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "brown_glass"), settings -> new GlassBlock(settings, CRACKED_BROWN_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.BROWN_STAINED_GLASS));
+        RED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "red_glass"), settings -> new GlassBlock(settings, CRACKED_RED_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.RED_STAINED_GLASS));
+        ORANGE_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "orange_glass"), settings -> new GlassBlock(settings, CRACKED_ORANGE_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.ORANGE_STAINED_GLASS));
+        YELLOW_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "yellow_glass"), settings -> new GlassBlock(settings, CRACKED_YELLOW_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.YELLOW_STAINED_GLASS));
+        LIME_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "lime_glass"), settings -> new GlassBlock(settings, CRACKED_LIME_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.LIME_STAINED_GLASS));
+        GREEN_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "green_glass"), settings -> new GlassBlock(settings, CRACKED_GREEN_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.GREEN_STAINED_GLASS));
+        CYAN_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "cyan_glass"), settings -> new GlassBlock(settings, CRACKED_CYAN_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.CYAN_STAINED_GLASS));
+        BLUE_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "blue_glass"), settings -> new GlassBlock(settings, CRACKED_BLUE_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.BLUE_STAINED_GLASS));
+        LIGHT_BLUE_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "light_blue_glass"), settings -> new GlassBlock(settings, CRACKED_LIGHT_BLUE_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.LIGHT_BLUE_STAINED_GLASS));
+        PINK_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "pink_glass"), settings -> new GlassBlock(settings, CRACKED_PINK_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.PINK_STAINED_GLASS));
+        MAGENTA_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "magenta_glass"), settings -> new GlassBlock(settings, CRACKED_MAGENTA_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.MAGENTA_STAINED_GLASS));
+        PURPLE_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "purple_glass"), settings -> new GlassBlock(settings, CRACKED_PURPLE_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.PURPLE_STAINED_GLASS));
+        BLACK_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "black_glass"), settings -> new GlassBlock(settings, CRACKED_BLACK_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.BLACK_STAINED_GLASS));
+        GRAY_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "gray_glass"), settings -> new GlassBlock(settings, CRACKED_GRAY_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.GRAY_STAINED_GLASS));
+        LIGHT_GRAY_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "light_gray_glass"), settings -> new GlassBlock(settings, CRACKED_LIGHT_GRAY_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.LIGHT_GRAY_STAINED_GLASS));
+        WHITE_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "white_glass"), settings -> new GlassBlock(settings, CRACKED_WHITE_GLASS.getDefaultState()), AbstractBlock.Settings.copy(Blocks.WHITE_STAINED_GLASS));
         CHISELED_OAK_PLANKS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_oak_planks"), AbstractBlock.Settings.copy(Blocks.OAK_PLANKS));
         CHISELED_OAK_LOG = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_oak_log"), PillarBlock::new, AbstractBlock.Settings.copy(Blocks.OAK_LOG));
         CHISELED_OAK_WOOD = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_oak_wood"), PillarBlock::new, AbstractBlock.Settings.copy(Blocks.OAK_WOOD));
@@ -225,41 +257,57 @@ public final class ArchitectsAssemblyBlocks {
                 CHISELED_GLASS,
                 CHISELED_GLASS_PANE,
                 GLASS,
-                SHATTERED_GLASS
+                CRACKED_GLASS
         );
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(),
-                CHISELED_BROWN_STAINED_GLASS,
-                CHISELED_BROWN_STAINED_GLASS_PANE,
-                CHISELED_RED_STAINED_GLASS,
-                CHISELED_RED_STAINED_GLASS_PANE,
-                CHISELED_ORANGE_STAINED_GLASS,
-                CHISELED_ORANGE_STAINED_GLASS_PANE,
-                CHISELED_YELLOW_STAINED_GLASS,
-                CHISELED_YELLOW_STAINED_GLASS_PANE,
-                CHISELED_LIME_STAINED_GLASS,
-                CHISELED_LIME_STAINED_GLASS_PANE,
-                CHISELED_GREEN_STAINED_GLASS,
-                CHISELED_GREEN_STAINED_GLASS_PANE,
-                CHISELED_CYAN_STAINED_GLASS,
-                CHISELED_CYAN_STAINED_GLASS_PANE,
-                CHISELED_BLUE_STAINED_GLASS,
-                CHISELED_BLUE_STAINED_GLASS_PANE,
-                CHISELED_LIGHT_BLUE_STAINED_GLASS,
-                CHISELED_LIGHT_BLUE_STAINED_GLASS_PANE,
-                CHISELED_PINK_STAINED_GLASS,
-                CHISELED_PINK_STAINED_GLASS_PANE,
-                CHISELED_MAGENTA_STAINED_GLASS,
-                CHISELED_MAGENTA_STAINED_GLASS_PANE,
-                CHISELED_PURPLE_STAINED_GLASS,
-                CHISELED_PURPLE_STAINED_GLASS_PANE,
-                CHISELED_BLACK_STAINED_GLASS,
-                CHISELED_BLACK_STAINED_GLASS_PANE,
-                CHISELED_GRAY_STAINED_GLASS,
-                CHISELED_GRAY_STAINED_GLASS_PANE,
-                CHISELED_LIGHT_GRAY_STAINED_GLASS,
-                CHISELED_LIGHT_GRAY_STAINED_GLASS_PANE,
-                CHISELED_WHITE_STAINED_GLASS,
-                CHISELED_WHITE_STAINED_GLASS_PANE
+                BROWN_GLASS, CHISELED_BROWN_GLASS,
+                CHISELED_BROWN_GLASS_PANE,
+                CRACKED_BROWN_GLASS,
+                RED_GLASS, CHISELED_RED_GLASS,
+                CHISELED_RED_GLASS_PANE,
+                CRACKED_RED_GLASS,
+                ORANGE_GLASS, CHISELED_ORANGE_GLASS,
+                CHISELED_ORANGE_GLASS_PANE,
+                CRACKED_ORANGE_GLASS,
+                YELLOW_GLASS, CHISELED_YELLOW_GLASS,
+                CHISELED_YELLOW_GLASS_PANE,
+                CRACKED_YELLOW_GLASS,
+                LIME_GLASS, CHISELED_LIME_GLASS,
+                CHISELED_LIME_GLASS_PANE,
+                CRACKED_LIME_GLASS,
+                GREEN_GLASS, CHISELED_GREEN_GLASS,
+                CHISELED_GREEN_GLASS_PANE,
+                CRACKED_GREEN_GLASS,
+                CYAN_GLASS, CHISELED_CYAN_GLASS,
+                CHISELED_CYAN_GLASS_PANE,
+                CRACKED_CYAN_GLASS,
+                BLUE_GLASS, CHISELED_BLUE_GLASS,
+                CHISELED_BLUE_GLASS_PANE,
+                CRACKED_BLUE_GLASS,
+                LIGHT_BLUE_GLASS, CHISELED_LIGHT_BLUE_GLASS,
+                CHISELED_LIGHT_BLUE_GLASS_PANE,
+                CRACKED_LIGHT_BLUE_GLASS,
+                PINK_GLASS, CHISELED_PINK_GLASS,
+                CHISELED_PINK_GLASS_PANE,
+                CRACKED_PINK_GLASS,
+                MAGENTA_GLASS, CHISELED_MAGENTA_GLASS,
+                CHISELED_MAGENTA_GLASS_PANE,
+                CRACKED_MAGENTA_GLASS,
+                PURPLE_GLASS, CHISELED_PURPLE_GLASS,
+                CHISELED_PURPLE_GLASS_PANE,
+                CRACKED_PURPLE_GLASS,
+                BLACK_GLASS, CHISELED_BLACK_GLASS,
+                CHISELED_BLACK_GLASS_PANE,
+                CRACKED_BLACK_GLASS,
+                GRAY_GLASS, CHISELED_GRAY_GLASS,
+                CHISELED_GRAY_GLASS_PANE,
+                CRACKED_GRAY_GLASS,
+                LIGHT_GRAY_GLASS, CHISELED_LIGHT_GRAY_GLASS,
+                CHISELED_LIGHT_GRAY_GLASS_PANE,
+                CRACKED_LIGHT_GRAY_GLASS,
+                WHITE_GLASS, CHISELED_WHITE_GLASS,
+                CHISELED_WHITE_GLASS_PANE,
+                CRACKED_WHITE_GLASS
         );
     }
     // endregion

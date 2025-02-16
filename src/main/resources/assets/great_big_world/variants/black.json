@@ -13,11 +13,12 @@
     "minecraft:black_stained_glass",
     "minecraft:black_stained_glass_pane",
     "minecraft:black_bed",
-    "great_big_world:chiseled_black_stained_glass",
-    "great_big_world:chiseled_black_stained_glass_pane",
+    "great_big_world:black_glass",
+    "great_big_world:chiseled_black_glass",
+    "great_big_world:chiseled_black_glass_pane",
     "great_big_world:black_item_frame",
     "great_big_world:black_glow_item_frame",
     "great_big_world:black_glass_shard",
-    "great_big_world:black_stained_shattered_glass"
+    "great_big_world:cracked_black_glass"
   ]
 }

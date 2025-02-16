@@ -13,12 +13,13 @@
     "minecraft:white_stained_glass",
     "minecraft:white_stained_glass_pane",
     "minecraft:white_bed",
-    "great_big_world:chiseled_white_stained_glass",
-    "great_big_world:chiseled_white_stained_glass_pane",
+    "great_big_world:white_glass",
+    "great_big_world:chiseled_white_glass",
+    "great_big_world:chiseled_white_glass_pane",
     "great_big_world:white_item_frame",
     "great_big_world:white_glow_item_frame",
     "great_big_world:white_glass_shard",
-    "great_big_world:white_stained_shattered_glass",
+    "great_big_world:cracked_white_glass",
     "minecraft:white_tulip"
   ]
 }

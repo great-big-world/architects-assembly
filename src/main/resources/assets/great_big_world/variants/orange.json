@@ -13,12 +13,13 @@
     "minecraft:orange_stained_glass",
     "minecraft:orange_stained_glass_pane",
     "minecraft:orange_bed",
-    "great_big_world:chiseled_orange_stained_glass",
-    "great_big_world:chiseled_orange_stained_glass_pane",
+    "great_big_world:orange_glass",
+    "great_big_world:chiseled_orange_glass",
+    "great_big_world:chiseled_orange_glass_pane",
     "great_big_world:orange_item_frame",
     "great_big_world:orange_glow_item_frame",
     "great_big_world:orange_glass_shard",
-    "great_big_world:orange_stained_shattered_glass",
+    "great_big_world:cracked_orange_glass",
     "minecraft:orange_tulip"
   ]
 }

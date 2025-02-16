@@ -13,11 +13,12 @@
     "minecraft:yellow_stained_glass",
     "minecraft:yellow_stained_glass_pane",
     "minecraft:yellow_bed",
-    "great_big_world:chiseled_yellow_stained_glass",
-    "great_big_world:chiseled_yellow_stained_glass_pane",
+    "great_big_world:yellow_glass",
+    "great_big_world:chiseled_yellow_glass",
+    "great_big_world:chiseled_yellow_glass_pane",
     "great_big_world:yellow_item_frame",
     "great_big_world:yellow_glow_item_frame",
     "great_big_world:yellow_glass_shard",
-    "great_big_world:yellow_stained_shattered_glass"
+    "great_big_world:cracked_yellow_glass"
   ]
 }

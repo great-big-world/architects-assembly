@@ -13,11 +13,12 @@
     "minecraft:light_gray_stained_glass",
     "minecraft:light_gray_stained_glass_pane",
     "minecraft:light_gray_bed",
-    "great_big_world:chiseled_light_gray_stained_glass",
-    "great_big_world:chiseled_light_gray_stained_glass_pane",
+    "great_big_world:light_gray_glass",
+    "great_big_world:chiseled_light_gray_glass",
+    "great_big_world:chiseled_light_gray_glass_pane",
     "great_big_world:light_gray_item_frame",
     "great_big_world:light_gray_glow_item_frame",
     "great_big_world:light_gray_glass_shard",
-    "great_big_world:light_gray_stained_shattered_glass"
+    "great_big_world:cracked_light_gray_glass"
   ]
 }

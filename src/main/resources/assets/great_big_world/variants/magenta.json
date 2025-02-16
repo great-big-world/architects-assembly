@@ -13,11 +13,12 @@
     "minecraft:magenta_stained_glass",
     "minecraft:magenta_stained_glass_pane",
     "minecraft:magenta_bed",
-    "great_big_world:chiseled_magenta_stained_glass",
-    "great_big_world:chiseled_magenta_stained_glass_pane",
+    "great_big_world:magenta_glass",
+    "great_big_world:chiseled_magenta_glass",
+    "great_big_world:chiseled_magenta_glass_pane",
     "great_big_world:magenta_item_frame",
     "great_big_world:magenta_glow_item_frame",
     "great_big_world:magenta_glass_shard",
-    "great_big_world:magenta_stained_shattered_glass"
+    "great_big_world:cracked_magenta_glass"
   ]
 }

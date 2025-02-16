@@ -3,7 +3,7 @@
     "type": "minecraft:condition",
     "on_false": {
       "type": "minecraft:model",
-      "model": "great_big_world:block/quartz_slab"
+      "model": "block/quartz_slab"
     },
     "on_true": {
       "type": "minecraft:model",
