@@ -1,24 +1,11 @@
 {
   "model": {
-    "type": "minecraft:composite",
-    "models": [
+    "type": "minecraft:model",
+    "model": "great_big_world:item/template_dyed_item_frame",
+    "tints": [
       {
-        "type": "minecraft:model",
-        "model": "item/item_frame"
-      },
-      {
-        "type": "minecraft:model",
-        "model": "great_big_world:item/blue_item_frame",
-        "tints": [
-          {
-            "type": "minecraft:constant",
-            "value": 0
-          },
-          {
-            "type": "minecraft:dye",
-            "default": 3361970
-          }
-        ]
+        "type": "minecraft:constant",
+        "value": 3361970
       }
     ]
   }

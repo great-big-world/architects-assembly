@@ -1,7 +1,12 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "item/glow_item_frame",
-    "layer1": "great_big_world:item/dyed_glow_item_frame_overlay"
+  "model": {
+    "type": "minecraft:model",
+    "model": "great_big_world:item/template_dyed_glow_item_frame",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 11685080
+      }
+    ]
   }
 }
