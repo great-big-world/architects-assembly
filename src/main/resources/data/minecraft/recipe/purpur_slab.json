@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "wooden_slab",
+  "key": {
+    "#": [
+      "minecraft:purpur_block",
+      "minecraft:purpur_pillar"
+    ]
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "great_big_world:purpur_slab"
+  }
+}

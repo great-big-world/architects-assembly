@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "wooden_slab",
+  "key": {
+    "#": [
+      "minecraft:sandstone",
+      "minecraft:chiseled_sandstone"
+    ]
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "great_big_world:sandstone_slab"
+  }
+}

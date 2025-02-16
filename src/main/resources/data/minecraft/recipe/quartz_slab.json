@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "wooden_slab",
+  "key": {
+    "#": [
+      "minecraft:chiseled_quartz_block",
+      "minecraft:quartz_block",
+      "minecraft:quartz_pillar"
+    ]
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "great_big_world:quartz_slab"
+  }
+}
