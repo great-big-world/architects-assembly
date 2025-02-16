@@ -21,6 +21,10 @@ public class GlassBlock extends TransparentBlock {
         this.cracked = cracked;
     }
 
+    public BlockState getCracked() {
+        return cracked;
+    }
+
     @Override
     public void afterBreak(World world, PlayerEntity player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack tool) {
         super.afterBreak(world, player, pos, state, blockEntity, tool);
