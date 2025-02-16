@@ -1,7 +1,10 @@
 {
   "type": "minecraft:stonecutting",
   "count": 1,
-  "ingredient": "minecraft:polished_granite",
+  "ingredient": [
+    "minecraft:granite",
+    "minecraft:polished_granite"
+  ],
   "result": {
     "id": "great_big_world:polished_granite_wall"
   }

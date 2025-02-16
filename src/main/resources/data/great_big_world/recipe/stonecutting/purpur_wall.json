@@ -1,7 +1,10 @@
 {
   "type": "minecraft:stonecutting",
   "count": 1,
-  "ingredient": "minecraft:purpur_block",
+  "ingredient": [
+    "minecraft:purpur_block",
+    "minecraft:purpur_pillar"
+  ],
   "result": {
     "id": "great_big_world:purpur_wall"
   }

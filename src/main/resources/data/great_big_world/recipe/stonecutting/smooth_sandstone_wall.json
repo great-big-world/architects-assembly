@@ -1,7 +1,10 @@
 {
   "type": "minecraft:stonecutting",
   "count": 1,
-  "ingredient": "minecraft:smooth_sandstone",
+  "ingredient": [
+    "minecraft:sandstone",
+    "minecraft:smooth_sandstone"
+  ],
   "result": {
     "id": "great_big_world:smooth_sandstone_wall"
   }
