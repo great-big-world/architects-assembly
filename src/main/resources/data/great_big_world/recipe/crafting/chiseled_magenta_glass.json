@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "chiseled_glass",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": [
+      "minecraft:magenta_stained_glass",
+      "great_big_world:magenta_glass"
+    ]
+  },
+  "result": {
+    "id": "great_big_world:chiseled_magenta_glass",
+    "count": 4
+  }
+}

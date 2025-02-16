@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "stained_glass_pane",
+  "key": {
+    "#": [
+      "minecraft:light_blue_stained_glass",
+      "great_big_world:light_blue_glass"
+    ]
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 16,
+    "id": "great_big_world:light_blue_glass_pane"
+  }
+}
