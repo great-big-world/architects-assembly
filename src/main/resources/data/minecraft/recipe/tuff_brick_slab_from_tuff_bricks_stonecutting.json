@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": [
+    "minecraft:tuff_bricks",
+    "minecraft:chiseled_tuff_bricks"
+  ],
+  "result": {
+    "count": 2,
+    "id": "great_big_world:tuff_brick_slab"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:weathered_copper",
+  "result": {
+    "count": 8,
+    "id": "great_big_world:weathered_cut_copper_slab"
+  }
+}

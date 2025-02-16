@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:waxed_copper_block",
+  "result": {
+    "count": 8,
+    "id": "great_big_world:waxed_cut_copper_slab"
+  }
+}
