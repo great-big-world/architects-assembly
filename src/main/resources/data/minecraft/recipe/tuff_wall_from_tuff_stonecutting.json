@@ -2,10 +2,10 @@
   "type": "minecraft:stonecutting",
   "ingredient": [
     "minecraft:tuff",
-    "minecraft:polished_tuff"
+    "minecraft:chiseled_tuff"
   ],
   "result": {
-    "count": 2,
-    "id": "great_big_world:polished_tuff_slab"
+    "count": 1,
+    "id": "minecraft:tuff_wall"
   }
 }

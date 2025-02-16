@@ -1,6 +1,10 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "minecraft:smooth_red_sandstone",
+  "ingredient": [
+    "minecraft:red_sandstone",
+    "minecraft:chiseled_red_sandstone",
+    "minecraft:smooth_red_sandstone"
+  ],
   "result": {
     "count": 2,
     "id": "great_big_world:smooth_red_sandstone_slab"
