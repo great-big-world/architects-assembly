@@ -57,6 +57,7 @@
     "client.ClientPlayerEntityMixin",
     "client.CreativeInventoryScreenMixin",
     "client.HeldItemRendererMixin",
+    "client.InGameHudMixin",
     "client.ItemFrameEntityRendererMixin",
     "client.ItemFrameEntityRenderStateMixin",
     "client.ModelLoaderMixin",
