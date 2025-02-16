@@ -3,11 +3,11 @@
     "type": "minecraft:condition",
     "on_false": {
       "type": "minecraft:model",
-      "model": "minecraft:block/acacia_slab"
+      "model": "minecraft:block/andesite_slab"
     },
     "on_true": {
       "type": "minecraft:model",
-      "model": "great_big_world:block/vertical_acacia_slab"
+      "model": "great_big_world:block/vertical_andesite_slab"
     },
     "property": "great_big_world:slab_placement"
   }

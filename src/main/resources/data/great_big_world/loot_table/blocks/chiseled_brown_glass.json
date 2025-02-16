@@ -23,7 +23,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "great_big_world:glass"
+          "name": "great_big_world:chiseled_brown_glass"
         }
       ],
       "rolls": 1
@@ -50,11 +50,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "great_big_world:glass_shard"
+          "name": "great_big_world:brown_glass_shard"
         }
       ],
       "rolls": 1
     }
   ],
-  "random_sequence": "great_big_world:blocks/glass"
+  "random_sequence": "great_big_world:blocks/chiseled_brown_glass"
 }

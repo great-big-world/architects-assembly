@@ -23,7 +23,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "great_big_world:glass"
+          "name": "great_big_world:cracked_glass"
         }
       ],
       "rolls": 1
@@ -50,11 +50,17 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "great_big_world:glass_shard"
+          "name": "great_big_world:glass_shard",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": 3
+            }
+          ]
         }
       ],
       "rolls": 1
     }
   ],
-  "random_sequence": "great_big_world:blocks/glass"
+  "random_sequence": "great_big_world:blocks/cracked_glass"
 }
