@@ -18,7 +18,7 @@ public record SlabPlacementProperty() implements BooleanProperty {
     public static final MapCodec<SlabPlacementProperty> CODEC = MapCodec.unit(new SlabPlacementProperty());
 
     public boolean getValue(ItemStack stack, @Nullable ClientWorld world, @Nullable LivingEntity user, int seed, ModelTransformationMode modelTransformationMode) {
-        if (user instanceof SlabPlacer slabPlacer && user.getStackInHand(user.getActiveHand()).isIn(ItemTags.SLABS)) {
+        if (user instanceof SlabPlacer slabPlacer) {
             return !slabPlacer.gbw$getSlabPlacementState().equals(SlabItem.SlabPlacement.VERTICAL);
         }
         return false;

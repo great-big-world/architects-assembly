@@ -11,7 +11,7 @@
               "add": false,
               "conditions": [
                 {
-                  "block": "great_big_world:vertical_stone_slab",
+                  "block": "great_big_world:vertical_polished_tuff_slab",
                   "condition": "minecraft:block_state_property",
                   "properties": {
                     "type": "double"
@@ -25,11 +25,11 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "great_big_world:stone_slab"
+          "name": "great_big_world:polished_tuff_slab"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "great_big_world:blocks/vertical_stone_slab"
+  "random_sequence": "great_big_world:blocks/vertical_polished_tuff_slab"
 }
