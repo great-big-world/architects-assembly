@@ -19,7 +19,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.GrassColors;
 
 public class ArchitectsAssemblyClient implements ClientModInitializer {
-    public static final MinecraftClient CLIENT = MinecraftClient.getInstance();
     public static final KeyBinding EXPAND_TOOLTIPS = new KeyBinding("key." + GreatBigWorld.NAMESPACE + ".expand_tooltips", InputUtil.GLFW_KEY_LEFT_CONTROL, KeyBinding.INVENTORY_CATEGORY);
     public static final KeyBinding CYCLE_HOTBAR = new KeyBinding("key." + GreatBigWorld.NAMESPACE + ".cycle_hotbar", InputUtil.GLFW_KEY_LEFT_CONTROL, KeyBinding.INVENTORY_CATEGORY);
     private static final Identifier CYCLE_HOTBAR_ARROW_TEXTURE = Identifier.of(GreatBigWorld.NAMESPACE, "hud/cycle_hotbar_arrow");
@@ -40,7 +39,7 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
         });
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            if (client.player != null && client.player.isSpectator())
+            if (client.player == null || client.player.isSpectator())
                 return;
 
             EXPAND_TOOLTIPS.setPressed(client.currentScreen != null && InputUtil.isKeyPressed(client.getWindow().getHandle(), EXPAND_TOOLTIPS.boundKey.getCode()));
@@ -51,7 +50,7 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
         });
 
         HudRenderCallback.EVENT.register((drawContext, tickDelta) -> {
-            if (!CLIENT.options.hudHidden && CYCLE_HOTBAR.isPressed()) {
+            if (!drawContext.client.options.hudHidden && CYCLE_HOTBAR.isPressed()) {
                 int x = (drawContext.getScaledWindowWidth() / 2) - 91 - 4;
                 int y = drawContext.getScaledWindowHeight() - 22 - 6;
 
