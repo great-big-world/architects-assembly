@@ -198,7 +198,7 @@ public class TorchBlock extends AbstractTorchBlock {
 
     private boolean canPlaceInDirection(WorldView world, BlockPos pos, Direction direction) {
         if (direction == Direction.DOWN)
-            return sideCoversSmallSquare(world, pos.offset(direction.getOpposite()), Direction.UP);
+            return sideCoversSmallSquare(world, pos.offset(Direction.DOWN), Direction.UP);
         return sideCoversSmallSquare(world, pos.offset(direction.getOpposite()), direction);
     }
 
