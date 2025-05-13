@@ -9,11 +9,14 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.fabricmc.fabric.api.client.rendering.v1.HudLayerRegistrationCallback;
+import net.fabricmc.fabric.api.client.rendering.v1.IdentifiedLayer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.color.world.BiomeColors;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.GrassColors;
@@ -49,16 +52,26 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
             shouldCycleHotbar = CYCLE_HOTBAR.isPressed();
         });
 
-        HudRenderCallback.EVENT.register((drawContext, tickDelta) -> {
-            if (!drawContext.client.options.hudHidden && CYCLE_HOTBAR.isPressed()) {
-                int x = (drawContext.getScaledWindowWidth() / 2) - 91 - 4;
-                int y = drawContext.getScaledWindowHeight() - 22 - 6;
+        HudLayerRegistrationCallback.EVENT.register(layeredDrawerWrapper -> {
+            layeredDrawerWrapper.addLayer(new IdentifiedLayer() {
+                @Override
+                public Identifier id() {
+                    return Identifier.of(GreatBigWorld.NAMESPACE, "cycle_hotbar");
+                }
 
-                drawContext.getMatrices().push();
-                drawContext.getMatrices().translate(0f, 0f, -90f);
-                drawContext.drawGuiTexture(RenderLayer::getGuiTextured, CYCLE_HOTBAR_ARROW_TEXTURE, x, y, 9, 14);
-                drawContext.getMatrices().pop();
-            }
+                @Override
+                public void render(DrawContext context, RenderTickCounter tickCounter) {
+                    if (!context.client.options.hudHidden && CYCLE_HOTBAR.isPressed()) {
+                        int x = (context.getScaledWindowWidth() / 2) - 91 - 4;
+                        int y = context.getScaledWindowHeight() - 22 - 6;
+
+                        context.getMatrices().push();
+                        context.getMatrices().translate(0f, 0f, -90f);
+                        context.drawGuiTexture(RenderLayer::getGuiTextured, CYCLE_HOTBAR_ARROW_TEXTURE, x, y, 9, 14);
+                        context.getMatrices().pop();
+                    }
+                }
+            });
         });
 
         ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> tintIndex > 0 ? -1 : world != null && pos != null ? BiomeColors.getGrassColor(world, pos) : GrassColors.getDefaultColor(), ArchitectsAssemblyBlocks.POTTED_SHORT_GRASS);

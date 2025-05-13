@@ -10,8 +10,8 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.item.consume.UseAction;
-import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.stat.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -32,12 +32,12 @@ import java.util.Map;
 import java.util.Optional;
 
 @Mixin(AxeItem.class)
-public abstract class AxeItemMixin extends MiningToolItem {
+public abstract class AxeItemMixin extends Item {
     @Shadow @Final protected static Map<Block, Block> STRIPPED_BLOCKS;
     @Shadow protected abstract Optional<BlockState> tryStrip(World world, BlockPos pos, @Nullable PlayerEntity player, BlockState state);
 
-    public AxeItemMixin(ToolMaterial material, TagKey<Block> effectiveBlocks, float attackDamage, float attackSpeed, Settings settings) {
-        super(material, effectiveBlocks, attackDamage, attackSpeed, settings);
+    public AxeItemMixin(ToolMaterial material, float attackDamage, float attackSpeed, Settings settings) {
+        super(settings.axe(material, attackDamage, attackSpeed));
     }
 
     public UseAction getUseAction(ItemStack stack) {
@@ -71,17 +71,19 @@ public abstract class AxeItemMixin extends MiningToolItem {
             if (user instanceof PlayerEntity player && (blockHitResult = canPlayerStrip(world, player)) != null) {
                 BlockPos pos = blockHitResult.getBlockPos();
 
-                if (player instanceof ServerPlayerEntity serverPlayer)
-                    Criteria.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, stack);
-
                 Optional<BlockState> optional = tryStrip(world, pos, player, world.getBlockState(pos));
                 if (optional.isPresent()) {
-                    world.setBlockState(pos, optional.get(), 11);
+                    if (player instanceof ServerPlayerEntity serverPlayer)
+                        Criteria.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, stack);
+
+                    world.setBlockState(pos, optional.get(), Block.NOTIFY_ALL);
                     world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(player, optional.get()));
 
                     if (!player.isCreative()) {
                         stack.damage(1, player, LivingEntity.getSlotForHand(player.getActiveHand()));
                     }
+
+                    player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
 
                     if (world.isClient)
                         player.swingHand(player.getActiveHand());

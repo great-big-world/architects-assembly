@@ -1,6 +1,5 @@
 package dev.creoii.greatbigworld.architectsassembly.mixin.block;
 
-import com.google.common.collect.ImmutableMap;
 import com.llamalad7.mixinextras.sugar.Local;
 import dev.creoii.greatbigworld.architectsassembly.block.VerticalSlabBlock;
 import dev.creoii.greatbigworld.architectsassembly.block.enums.FluidType;
@@ -9,6 +8,7 @@ import dev.creoii.greatbigworld.architectsassembly.util.ArchitectsAssemblyTags;
 import dev.creoii.greatbigworld.architectsassembly.util.Fluidloggable;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.WallShape;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
@@ -31,7 +31,6 @@ import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -40,18 +39,18 @@ import java.util.Optional;
 @Mixin(WallBlock.class)
 @Implements(@Interface(iface = Fluidloggable.class, prefix = "fluidloggable$"))
 public abstract class WallBlockMixin extends Block implements Waterloggable {
-    @Shadow @Final public static EnumProperty<WallShape> WEST_SHAPE;
+    @Shadow @Final public static EnumProperty<WallShape> WEST_WALL_SHAPE;
     @Shadow @Final public static BooleanProperty UP;
-    @Shadow @Final public static EnumProperty<WallShape> NORTH_SHAPE;
-    @Shadow @Final public static EnumProperty<WallShape> EAST_SHAPE;
-    @Shadow @Final public static EnumProperty<WallShape> SOUTH_SHAPE;
+    @Shadow @Final public static EnumProperty<WallShape> NORTH_WALL_SHAPE;
+    @Shadow @Final public static EnumProperty<WallShape> EAST_WALL_SHAPE;
+    @Shadow @Final public static EnumProperty<WallShape> SOUTH_WALL_SHAPE;
     @Shadow @Final public static BooleanProperty WATERLOGGED;
 
     public WallBlockMixin(Settings settings) {
         super(settings);
     }
 
-    public boolean canFillWithFluid(@Nullable PlayerEntity player, BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
+    public boolean canFillWithFluid(@Nullable LivingEntity filler, BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
         return Fluidloggable.defaultCanFillWithFluid(state);
     }
 
@@ -59,7 +58,7 @@ public abstract class WallBlockMixin extends Block implements Waterloggable {
         return Fluidloggable.defaultTryFillWithFluid(world, pos, state, fluidState);
     }
 
-    public ItemStack tryDrainFluid(@Nullable PlayerEntity player, WorldAccess world, BlockPos pos, BlockState state) {
+    public ItemStack tryDrainFluid(@Nullable LivingEntity drainer, WorldAccess world, BlockPos pos, BlockState state) {
         return Fluidloggable.defaultTryDrainFluid(world, pos, state);
     }
 
@@ -69,7 +68,7 @@ public abstract class WallBlockMixin extends Block implements Waterloggable {
 
     @Inject(method = "<init>", at = @At("TAIL"))
     private void gbw$setFluidloggableDefaultState(Settings settings, CallbackInfo ci) {
-        setDefaultState(stateManager.getDefaultState().with(UP, true).with(NORTH_SHAPE, WallShape.NONE).with(EAST_SHAPE, WallShape.NONE).with(SOUTH_SHAPE, WallShape.NONE).with(WEST_SHAPE, WallShape.NONE).with(WATERLOGGED, false).with(Fluidloggable.FLUIDLOGGED, FluidType.EMPTY));
+        setDefaultState(stateManager.getDefaultState().with(UP, true).with(NORTH_WALL_SHAPE, WallShape.NONE).with(EAST_WALL_SHAPE, WallShape.NONE).with(SOUTH_WALL_SHAPE, WallShape.NONE).with(WEST_WALL_SHAPE, WallShape.NONE).with(WATERLOGGED, false).with(Fluidloggable.FLUIDLOGGED, FluidType.EMPTY));
     }
 
     @Inject(method = "appendProperties", at = @At("TAIL"))
@@ -101,14 +100,6 @@ public abstract class WallBlockMixin extends Block implements Waterloggable {
         if (state.get(Fluidloggable.FLUIDLOGGED).getFluid() instanceof FlowableFluid flowableFluid) {
             cir.setReturnValue(flowableFluid.getStill(false));
         }
-    }
-
-    @Redirect(method = "getShapeMap", at = @At(value = "INVOKE", target = "Lcom/google/common/collect/ImmutableMap$Builder;put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/google/common/collect/ImmutableMap$Builder;"))
-    private <K, V> ImmutableMap.Builder<BlockState, VoxelShape> gbw$fixWallShapeMap(ImmutableMap.Builder<BlockState, VoxelShape> instance, K key, V value) {
-        for (FluidType fluidType : FluidType.values()) {
-            instance.put(((BlockState) key).with(Fluidloggable.FLUIDLOGGED, fluidType), (VoxelShape) value);
-        }
-        return instance;
     }
 
     @Inject(method = "shouldConnectTo", at = @At("RETURN"), cancellable = true)

@@ -215,12 +215,12 @@ public class TorchBlock extends AbstractTorchBlock {
 
         for (Direction direction : collectDirections(state)) {
             if (direction == Direction.UP) {
-                world.addParticle(ParticleTypes.SMOKE, d, e, f, 0d, 0d, 0d);
-                world.addParticle(particle, d, e, f, 0d, 0d, 0d);
+                world.addParticleClient(ParticleTypes.SMOKE, d, e, f, 0d, 0d, 0d);
+                world.addParticleClient(particle, d, e, f, 0d, 0d, 0d);
             } else {
                 Direction opposite = direction.getOpposite();
-                world.addParticle(ParticleTypes.SMOKE, d + .27d * (double)opposite.getOffsetX(), e + .22d, f + .27d * (double)opposite.getOffsetZ(), 0d, 0d, 0d);
-                world.addParticle(this.particle, d + .27d * (double)opposite.getOffsetX(), e + .22d, f + .27d * (double)opposite.getOffsetZ(), 0d, 0d, 0d);
+                world.addParticleClient(ParticleTypes.SMOKE, d + .27d * (double)opposite.getOffsetX(), e + .22d, f + .27d * (double)opposite.getOffsetZ(), 0d, 0d, 0d);
+                world.addParticleClient(this.particle, d + .27d * (double)opposite.getOffsetX(), e + .22d, f + .27d * (double)opposite.getOffsetZ(), 0d, 0d, 0d);
             }
         }
     }

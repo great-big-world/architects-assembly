@@ -8,23 +8,23 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.render.item.property.bool.BooleanProperty;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ItemDisplayContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ModelTransformationMode;
-import net.minecraft.registry.tag.ItemTags;
 import org.jetbrains.annotations.Nullable;
 
 @Environment(EnvType.CLIENT)
 public record SlabPlacementProperty() implements BooleanProperty {
     public static final MapCodec<SlabPlacementProperty> CODEC = MapCodec.unit(new SlabPlacementProperty());
 
-    public boolean getValue(ItemStack stack, @Nullable ClientWorld world, @Nullable LivingEntity user, int seed, ModelTransformationMode modelTransformationMode) {
-        if (user instanceof SlabPlacer slabPlacer) {
+    public MapCodec<SlabPlacementProperty> getCodec() {
+        return CODEC;
+    }
+
+    @Override
+    public boolean test(ItemStack stack, @Nullable ClientWorld world, @Nullable LivingEntity entity, int seed, ItemDisplayContext displayContext) {
+        if (entity instanceof SlabPlacer slabPlacer) {
             return !slabPlacer.gbw$getSlabPlacementState().equals(SlabItem.SlabPlacement.VERTICAL);
         }
         return false;
-    }
-
-    public MapCodec<SlabPlacementProperty> getCodec() {
-        return CODEC;
     }
 }

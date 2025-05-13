@@ -8,6 +8,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.Waterloggable;
 import net.minecraft.block.enums.SlabType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
@@ -42,7 +43,7 @@ public abstract class SlabBlockMixin extends Block implements Waterloggable {
         super(settings);
     }
 
-    public boolean canFillWithFluid(@Nullable PlayerEntity player, BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
+    public boolean canFillWithFluid(@Nullable LivingEntity filler, BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
         return state.get(TYPE) != SlabType.DOUBLE && Fluidloggable.defaultCanFillWithFluid(state);
     }
 
@@ -50,7 +51,7 @@ public abstract class SlabBlockMixin extends Block implements Waterloggable {
         return state.get(TYPE) != SlabType.DOUBLE && Fluidloggable.defaultTryFillWithFluid(world, pos, state, fluidState);
     }
 
-    public ItemStack tryDrainFluid(@Nullable PlayerEntity player, WorldAccess world, BlockPos pos, BlockState state) {
+    public ItemStack tryDrainFluid(@Nullable LivingEntity drainer, WorldAccess world, BlockPos pos, BlockState state) {
         return Fluidloggable.defaultTryDrainFluid(world, pos, state);
     }
 

@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FluidFillable;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
@@ -25,18 +26,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(BucketItem.class)
 public abstract class BucketItemMixin {
     @Shadow @Final private Fluid fluid;
-    @Shadow protected abstract void playEmptyingSound(@Nullable PlayerEntity player, WorldAccess world, BlockPos pos);
+    @Shadow protected abstract void playEmptyingSound(@Nullable LivingEntity user, WorldAccess world, BlockPos pos);
 
-    @ModifyArg(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/BucketItem;placeFluid(Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/hit/BlockHitResult;)Z"))
+    @ModifyArg(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/BucketItem;placeFluid(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/hit/BlockHitResult;)Z"))
     private BlockPos gbw$fixFluidloggingFilling(BlockPos pos, @Local(argsOnly = true) World world, @Local(argsOnly = true) PlayerEntity user, @Local BlockState blockState, @Local(ordinal = 0) BlockPos blockPos, @Local(ordinal = 1) BlockPos blockPos2) {
         return blockState.getBlock() instanceof FluidFillable fluidFillable && fluidFillable.canFillWithFluid(user, world, pos, blockState, fluid) ? blockPos : blockPos2;
     }
 
     @Inject(method = "placeFluid", at = @At(value = "FIELD", target = "Lnet/minecraft/world/World;isClient:Z", opcode = Opcodes.GETFIELD), cancellable = true)
-    private void gbw$fixFluidloggingFilling(PlayerEntity player, World world, BlockPos pos, BlockHitResult hitResult, CallbackInfoReturnable<Boolean> cir, @Local FlowableFluid flowableFluid, @Local Block block, @Local BlockState blockState) {
+    private void gbw$fixFluidloggingFilling(LivingEntity user, World world, BlockPos pos, BlockHitResult hitResult, CallbackInfoReturnable<Boolean> cir, @Local FlowableFluid flowableFluid, @Local Block block, @Local BlockState blockState) {
         if (block instanceof FluidFillable fluidFillable) {
             fluidFillable.tryFillWithFluid(world, pos, blockState, flowableFluid.getStill(false));
-            playEmptyingSound(player, world, pos);
+            playEmptyingSound(user, world, pos);
             cir.setReturnValue(true);
         }
     }

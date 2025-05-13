@@ -5,6 +5,7 @@ import dev.creoii.greatbigworld.architectsassembly.block.enums.VerticalSlabType;
 import dev.creoii.greatbigworld.architectsassembly.block.enums.FluidType;
 import dev.creoii.greatbigworld.architectsassembly.util.Fluidloggable;
 import net.minecraft.block.*;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FlowableFluid;
@@ -129,8 +130,8 @@ public class VerticalSlabBlock extends Block implements Fluidloggable {
     }
 
     @Override
-    public boolean canFillWithFluid(@Nullable PlayerEntity player, BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
-        return state.get(TYPE) != VerticalSlabType.DOUBLE && Fluidloggable.super.canFillWithFluid(player, world, pos, state, fluid);
+    public boolean canFillWithFluid(@Nullable LivingEntity filler, BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
+        return state.get(TYPE) != VerticalSlabType.DOUBLE && Fluidloggable.super.canFillWithFluid(filler, world, pos, state, fluid);
     }
 
     @Override

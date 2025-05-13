@@ -61,17 +61,17 @@ public abstract class ItemFrameEntityMixin extends AbstractDecorationEntity impl
         if (color == null)
             nbt.putInt("Color", NO_COLOR);
         else
-            nbt.putInt("Color", color.getId());
+            nbt.putInt("Color", color.getIndex());
 
         nbt.putBoolean("Waxed", gbw$isWaxed());
     }
 
     @Inject(method = "readCustomDataFromNbt", at = @At("TAIL"))
     private void gbw$readColorFromNbt(NbtCompound nbt, CallbackInfo ci) {
-        int color = nbt.getInt("Color");
+        int color = nbt.getInt("Color", 0);
         if (color >= 0 && color <= 15)
-            gbw$setColor(DyeColor.byId(color));
-        gbw$setWaxed(nbt.getBoolean("Waxed"));
+            gbw$setColor(DyeColor.byIndex(color));
+        gbw$setWaxed(nbt.getBoolean("Waxed", false));
     }
 
     @Inject(method = "interact", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/decoration/ItemFrameEntity;getWorld()Lnet/minecraft/world/World;", ordinal = 0), cancellable = true)
@@ -193,14 +193,14 @@ public abstract class ItemFrameEntityMixin extends AbstractDecorationEntity impl
         int color = dataTracker.get(COLOR);
         if (color == NO_COLOR)
             return null;
-        return DyeColor.byId(color);
+        return DyeColor.byIndex(color);
     }
 
     public void gbw$setColor(@Nullable DyeColor color) {
         if (color == null)
             dataTracker.set(COLOR, NO_COLOR);
         else {
-            dataTracker.set(COLOR, color.getId());
+            dataTracker.set(COLOR, color.getIndex());
         }
     }
 

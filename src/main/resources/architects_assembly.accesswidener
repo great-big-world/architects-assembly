@@ -12,3 +12,4 @@ accessible field net/minecraft/client/option/KeyBinding boundKey Lnet/minecraft/
 accessible field net/minecraft/block/FireBlock burnChances Lit/unimi/dsi/fastutil/objects/Object2IntMap;
 accessible field net/minecraft/block/FireBlock spreadChances Lit/unimi/dsi/fastutil/objects/Object2IntMap;
 accessible field net/minecraft/recipe/SingleStackRecipe ingredient Lnet/minecraft/recipe/Ingredient;
+accessible field net/minecraft/block/AbstractTorchBlock SHAPE Lnet/minecraft/util/shape/VoxelShape;

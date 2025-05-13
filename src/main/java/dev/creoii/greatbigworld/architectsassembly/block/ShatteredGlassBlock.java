@@ -51,7 +51,7 @@ public class ShatteredGlassBlock extends TransparentBlock {
     }
 
     @Override
-    public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
+    public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
         entity.handleFallDamage(fallDistance * .8f, .5f, entity.getDamageSources().fall());
         if (!world.isClient && fallDistance >= .6f && !entity.getType().isIn(ArchitectsAssemblyTags.LIGHTWEIGHT_ENTITIES)) {
             world.breakBlock(pos, !(entity instanceof PlayerEntity player) || !player.isCreative(), entity);

@@ -11,8 +11,8 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.item.consume.UseAction;
-import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.stat.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -32,11 +32,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Map;
 
 @Mixin(ShovelItem.class)
-public abstract class ShovelItemMixin extends MiningToolItem {
+public abstract class ShovelItemMixin extends Item {
     @Shadow @Final protected static Map<Block, BlockState> PATH_STATES;
 
-    public ShovelItemMixin(ToolMaterial material, TagKey<Block> effectiveBlocks, float attackDamage, float attackSpeed, Settings settings) {
-        super(material, effectiveBlocks, attackDamage, attackSpeed, settings);
+    public ShovelItemMixin(ToolMaterial material, float attackDamage, float attackSpeed, Settings settings) {
+        super(settings.shovel(material, attackDamage, attackSpeed));
     }
 
     public UseAction getUseAction(ItemStack stack) {
@@ -68,8 +68,10 @@ public abstract class ShovelItemMixin extends MiningToolItem {
                     context.getStack().damage(1, playerEntity, LivingEntity.getSlotForHand(context.getHand()));
                 }
                 cir.setReturnValue(ActionResult.SUCCESS_SERVER);
+                return;
             }
             cir.setReturnValue(ActionResult.SUCCESS);
+            return;
         }
         cir.setReturnValue(ActionResult.PASS);
     }
@@ -87,12 +89,14 @@ public abstract class ShovelItemMixin extends MiningToolItem {
                 if (player instanceof ServerPlayerEntity serverPlayer)
                     Criteria.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, stack);
 
-                world.setBlockState(pos, PATH_STATES.get(state.getBlock()), 11);
+                world.setBlockState(pos, PATH_STATES.get(state.getBlock()), Block.NOTIFY_ALL);
                 world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(player, state));
 
                 if (!player.isCreative()) {
                     stack.damage(1, player, LivingEntity.getSlotForHand(player.getActiveHand()));
                 }
+
+                player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
 
                 if (world.isClient)
                     player.swingHand(player.getActiveHand());

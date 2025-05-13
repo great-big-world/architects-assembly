@@ -2,45 +2,59 @@ package dev.creoii.greatbigworld.architectsassembly.mixin.client;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import dev.creoii.greatbigworld.architectsassembly.util.ExtendedItemFrame;
+import net.fabricmc.fabric.api.renderer.v1.render.FabricBlockModelRenderer;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.block.BlockModelRenderer;
+import net.minecraft.client.render.OverlayTexture;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.ItemFrameEntityRenderer;
 import net.minecraft.client.render.entity.state.ItemFrameEntityRenderState;
-import net.minecraft.client.render.model.BakedModel;
-import net.minecraft.client.util.ModelIdentifier;
+import net.minecraft.client.render.model.BlockStateModel;
+import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.decoration.ItemFrameEntity;
 import net.minecraft.util.DyeColor;
-import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ColorHelper;
+import net.minecraft.util.math.RotationAxis;
+import net.minecraft.world.EmptyBlockRenderView;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ItemFrameEntityRenderer.class)
-public class ItemFrameEntityRendererMixin<T extends ItemFrameEntity> {
-    @Unique private static final ModelIdentifier DYED_NORMAL_FRAME = new ModelIdentifier(Identifier.ofVanilla("item_frame"), "dyed=true,map=false");
-    @Unique private static final ModelIdentifier DYED_GLOW_FRAME = new ModelIdentifier(Identifier.ofVanilla("glow_item_frame"), "dyed=true,map=false");
+public abstract class ItemFrameEntityRendererMixin<T extends ItemFrameEntity> {
+    @Shadow protected abstract int getLight(boolean glow, int glowLight, int regularLight);
 
-    @Inject(method = "getModelId", at = @At(value = "RETURN", ordinal = 1), cancellable = true)
-    private static void gbw$renderDyedItemFrame(ItemFrameEntityRenderState state, CallbackInfoReturnable<ModelIdentifier> cir) {
-        if (state instanceof ExtendedItemFrame extendedItemFrame && extendedItemFrame.gbw$getColor() != null) {
-            cir.setReturnValue(state.glow ? DYED_GLOW_FRAME : DYED_NORMAL_FRAME);
-        }
-    }
+    @Inject(method = "render(Lnet/minecraft/client/render/entity/state/ItemFrameEntityRenderState;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/block/BlockModelRenderer;render(Lnet/minecraft/client/util/math/MatrixStack$Entry;Lnet/minecraft/client/render/VertexConsumer;Lnet/minecraft/client/render/model/BlockStateModel;FFFII)V"), cancellable = true)
+    private void gbw$tintDyedItemFrame(ItemFrameEntityRenderState itemFrameEntityRenderState, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci, @Local(argsOnly = true) ItemFrameEntityRenderState itemFrameEntity, @Local BlockState blockState, @Local BlockStateModel blockStateModel) {
+        if (itemFrameEntityRenderState.mapId == null) {
+            DyeColor color;
+            if (itemFrameEntity instanceof ExtendedItemFrame extendedItemFrame && (color = extendedItemFrame.gbw$getColor()) != null) {
+                FabricBlockModelRenderer.render(matrixStack.peek(), (layer) -> vertexConsumerProvider.getBuffer(RenderLayer.getEntitySolidZOffsetForward(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE)), blockStateModel, ColorHelper.getRed(color.getEntityColor()) / 255f, ColorHelper.getGreen(color.getEntityColor()) / 255f, ColorHelper.getBlue(color.getEntityColor()) / 255f, i, OverlayTexture.DEFAULT_UV, EmptyBlockRenderView.INSTANCE, BlockPos.ORIGIN, blockState);
+            } else {
+                FabricBlockModelRenderer.render(matrixStack.peek(), (layer) -> vertexConsumerProvider.getBuffer(RenderLayer.getEntitySolidZOffsetForward(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE)), blockStateModel, 1f, 1f, 1f, i, OverlayTexture.DEFAULT_UV, EmptyBlockRenderView.INSTANCE, BlockPos.ORIGIN, blockState);
+            }
 
-    @Redirect(method = "render(Lnet/minecraft/client/render/entity/state/ItemFrameEntityRenderState;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/block/BlockModelRenderer;render(Lnet/minecraft/client/util/math/MatrixStack$Entry;Lnet/minecraft/client/render/VertexConsumer;Lnet/minecraft/block/BlockState;Lnet/minecraft/client/render/model/BakedModel;FFFII)V"))
-    private void gbw$tintDyedItemFrame(BlockModelRenderer instance, MatrixStack.Entry entry, VertexConsumer vertexConsumer, BlockState state, BakedModel bakedModel, float red, float green, float blue, int light, int overlay, @Local(argsOnly = true) ItemFrameEntityRenderState itemFrameEntity, @Local ModelIdentifier modelIdentifier) {
-        DyeColor color;
-        if (itemFrameEntity instanceof ExtendedItemFrame extendedItemFrame && (color = extendedItemFrame.gbw$getColor()) != null) {
-            instance.render(entry, vertexConsumer, state, bakedModel, ColorHelper.getRed(color.getEntityColor()) / 255f, ColorHelper.getGreen(color.getEntityColor()) / 255f, ColorHelper.getBlue(color.getEntityColor()) / 255f, light, overlay);
-        } else {
-            instance.render(entry, vertexConsumer, state, bakedModel, 1f, 1f, 1f, light, overlay);
+            matrixStack.pop();
+
+            if (itemFrameEntityRenderState.invisible) {
+                matrixStack.translate(0f, 0f, .5f);
+            } else {
+                matrixStack.translate(0f, 0f, .4375f);
+            }
+
+            if (!itemFrameEntityRenderState.itemRenderState.isEmpty()) {
+                matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees((float)itemFrameEntityRenderState.rotation * 360f / 8f));
+                int j = getLight(itemFrameEntityRenderState.glow, 15728880, i);
+                matrixStack.scale(.5f, .5f, .5f);
+                itemFrameEntityRenderState.itemRenderState.render(matrixStack, vertexConsumerProvider, j, OverlayTexture.DEFAULT_UV);
+            }
+
+            matrixStack.pop();
         }
+        ci.cancel();
     }
 
     @Inject(method = "updateRenderState(Lnet/minecraft/entity/decoration/ItemFrameEntity;Lnet/minecraft/client/render/entity/state/ItemFrameEntityRenderState;F)V", at = @At("TAIL"))

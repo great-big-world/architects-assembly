@@ -5,7 +5,7 @@ import dev.creoii.greatbigworld.architectsassembly.block.enums.FluidType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FluidDrainable;
 import net.minecraft.block.FluidFillable;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -30,7 +30,7 @@ public interface Fluidloggable extends FluidDrainable, FluidFillable {
             .put(Fluids.FLOWING_LAVA, FluidType.EMPTY)
             .build();
 
-    default boolean canFillWithFluid(@Nullable PlayerEntity player, BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
+    default boolean canFillWithFluid(@Nullable LivingEntity filler, BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
         return defaultCanFillWithFluid(state);
     }
 
@@ -38,7 +38,7 @@ public interface Fluidloggable extends FluidDrainable, FluidFillable {
         return defaultTryFillWithFluid(world, pos, state, fluidState);
     }
 
-    default ItemStack tryDrainFluid(@Nullable PlayerEntity player, WorldAccess world, BlockPos pos, BlockState state) {
+    default ItemStack tryDrainFluid(@Nullable LivingEntity drainer, WorldAccess world, BlockPos pos, BlockState state) {
         return defaultTryDrainFluid(world, pos, state);
     }
 
