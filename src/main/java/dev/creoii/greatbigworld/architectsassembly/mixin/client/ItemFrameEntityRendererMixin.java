@@ -9,7 +9,6 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.BlockRenderManager;
 import net.minecraft.client.render.entity.ItemFrameEntityRenderer;
 import net.minecraft.client.render.entity.state.ItemFrameEntityRenderState;
-import net.minecraft.client.render.model.BlockStateManagers;
 import net.minecraft.client.render.model.BlockStateModel;
 import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.client.util.math.MatrixStack;
@@ -33,7 +32,6 @@ public abstract class ItemFrameEntityRendererMixin<T extends ItemFrameEntity> {
     @Inject(method = "render(Lnet/minecraft/client/render/entity/state/ItemFrameEntityRenderState;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/block/BlockModelRenderer;render(Lnet/minecraft/client/util/math/MatrixStack$Entry;Lnet/minecraft/client/render/VertexConsumer;Lnet/minecraft/client/render/model/BlockStateModel;FFFII)V"), cancellable = true)
     private void gbw$tintDyedItemFrame(ItemFrameEntityRenderState itemFrameEntityRenderState, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
         if (itemFrameEntityRenderState.mapId == null) {
-            // default state/model
             BlockState blockState = ExtendedItemFrame.getStateForItemFrame(itemFrameEntityRenderState.glow, false, false);
             BlockStateModel blockStateModel = blockRenderManager.getModel(blockState);
 
