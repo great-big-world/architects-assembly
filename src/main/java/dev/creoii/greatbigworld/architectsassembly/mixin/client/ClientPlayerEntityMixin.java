@@ -9,8 +9,13 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(ClientPlayerEntity.class)
 public class ClientPlayerEntityMixin {
-    @WrapOperation(method = "tickMovement", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;isUsingItem()Z"))
+    @WrapOperation(method = "applyMovementSpeedFactors", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;isUsingItem()Z"))
     private boolean gbw$dontSlowDownUsingTool(ClientPlayerEntity instance, Operation<Boolean> original) {
+        return original.call(instance) && instance.getActiveItem().getUseAction() != ArchitectsAssemblyUseActions.TOOL;
+    }
+
+    @WrapOperation(method = "tickMovement", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;isUsingItem()Z"))
+    private boolean gbw$dontStopDoubleTapSprintUsingTool(ClientPlayerEntity instance, Operation<Boolean> original) {
         return original.call(instance) && instance.getActiveItem().getUseAction() != ArchitectsAssemblyUseActions.TOOL;
     }
 }

@@ -71,6 +71,7 @@ public abstract class ItemFrameEntityMixin extends AbstractDecorationEntity impl
         int color = nbt.getInt("Color", 0);
         if (color >= 0 && color <= 15)
             gbw$setColor(DyeColor.byIndex(color));
+        else gbw$setColor(null);
         gbw$setWaxed(nbt.getBoolean("Waxed", false));
     }
 

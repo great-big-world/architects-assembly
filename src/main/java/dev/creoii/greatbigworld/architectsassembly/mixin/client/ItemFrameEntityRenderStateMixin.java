@@ -18,7 +18,7 @@ public class ItemFrameEntityRenderStateMixin implements ExtendedItemFrame {
     }
 
     @Override
-    public void gbw$setColor(DyeColor color) {
+    public void gbw$setColor(@Nullable DyeColor color) {
         this.color = color;
     }
 
