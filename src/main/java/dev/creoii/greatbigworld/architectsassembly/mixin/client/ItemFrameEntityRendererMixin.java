@@ -26,6 +26,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ItemFrameEntityRenderer.class)
 public abstract class ItemFrameEntityRendererMixin<T extends ItemFrameEntity> {
     @Shadow protected abstract int getLight(boolean glow, int glowLight, int regularLight);
+    @Unique private static final float DEFAULT_COLOR = 44298.2314f;
 
     @Inject(method = "render(Lnet/minecraft/client/render/entity/state/ItemFrameEntityRenderState;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/block/BlockModelRenderer;render(Lnet/minecraft/client/util/math/MatrixStack$Entry;Lnet/minecraft/client/render/VertexConsumer;Lnet/minecraft/client/render/model/BlockStateModel;FFFII)V"), cancellable = true)
     private void gbw$tintDyedItemFrame(ItemFrameEntityRenderState itemFrameEntityRenderState, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci, @Local(argsOnly = true) ItemFrameEntityRenderState itemFrameEntity, @Local BlockState blockState, @Local BlockStateModel blockStateModel) {
@@ -33,17 +34,14 @@ public abstract class ItemFrameEntityRendererMixin<T extends ItemFrameEntity> {
             DyeColor color;
             if (itemFrameEntity instanceof ExtendedItemFrame extendedItemFrame && (color = extendedItemFrame.gbw$getColor()) != null) {
                 FabricBlockModelRenderer.render(matrixStack.peek(), (layer) -> vertexConsumerProvider.getBuffer(RenderLayer.getEntitySolidZOffsetForward(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE)), blockStateModel, ColorHelper.getRed(color.getEntityColor()) / 255f, ColorHelper.getGreen(color.getEntityColor()) / 255f, ColorHelper.getBlue(color.getEntityColor()) / 255f, i, OverlayTexture.DEFAULT_UV, EmptyBlockRenderView.INSTANCE, BlockPos.ORIGIN, blockState);
-            } else {
-                FabricBlockModelRenderer.render(matrixStack.peek(), (layer) -> vertexConsumerProvider.getBuffer(RenderLayer.getEntitySolidZOffsetForward(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE)), blockStateModel, 1f, 1f, 1f, i, OverlayTexture.DEFAULT_UV, EmptyBlockRenderView.INSTANCE, BlockPos.ORIGIN, blockState);
-            }
+            } else return;
 
             matrixStack.pop();
 
-            if (itemFrameEntityRenderState.invisible) {
+            if (itemFrameEntityRenderState.invisible)
                 matrixStack.translate(0f, 0f, .5f);
-            } else {
+            else
                 matrixStack.translate(0f, 0f, .4375f);
-            }
 
             if (!itemFrameEntityRenderState.itemRenderState.isEmpty()) {
                 matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees((float)itemFrameEntityRenderState.rotation * 360f / 8f));
@@ -53,8 +51,8 @@ public abstract class ItemFrameEntityRendererMixin<T extends ItemFrameEntity> {
             }
 
             matrixStack.pop();
+            ci.cancel();
         }
-        ci.cancel();
     }
 
     @Inject(method = "updateRenderState(Lnet/minecraft/entity/decoration/ItemFrameEntity;Lnet/minecraft/client/render/entity/state/ItemFrameEntityRenderState;F)V", at = @At("TAIL"))

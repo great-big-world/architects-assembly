@@ -6,11 +6,14 @@ import dev.creoii.greatbigworld.architectsassembly.registry.*;
 import dev.creoii.greatbigworld.architectsassembly.variant.Variant;
 import dev.creoii.greatbigworld.architectsassembly.world.feature.MossifyVegetationPatchFeature;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FireBlock;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.resource.Resource;
@@ -56,6 +59,18 @@ public class ArchitectsAssembly implements ModInitializer {
             if (verticalSlab != null) {
                 fireBlock.spreadChances.put(verticalSlab, integer);
             }
+        });
+
+        DefaultItemComponentEvents.MODIFY.register(modifyContext -> {
+            modifyContext.modify(Items.IRON_AXE, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 500));
+            modifyContext.modify(Items.IRON_PICKAXE, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 500));
+            modifyContext.modify(Items.IRON_SHOVEL, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 500));
+            modifyContext.modify(Items.IRON_HOE, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 500));
+            modifyContext.modify(Items.IRON_SWORD, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 500));
+            modifyContext.modify(Items.IRON_HELMET, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 265));
+            modifyContext.modify(Items.IRON_CHESTPLATE, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 340));
+            modifyContext.modify(Items.IRON_LEGGINGS, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 325));
+            modifyContext.modify(Items.IRON_BOOTS, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 295));
         });
 
         ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(new SimpleSynchronousResourceReloadListener() {

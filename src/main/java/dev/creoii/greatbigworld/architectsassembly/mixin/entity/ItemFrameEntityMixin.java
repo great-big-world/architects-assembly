@@ -1,6 +1,7 @@
 package dev.creoii.greatbigworld.architectsassembly.mixin.entity;
 
 import com.llamalad7.mixinextras.sugar.Local;
+import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyItems;
 import dev.creoii.greatbigworld.architectsassembly.util.ExtendedItemFrame;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.data.DataTracker;
@@ -36,7 +37,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ItemFrameEntity.class)
 public abstract class ItemFrameEntityMixin extends AbstractDecorationEntity implements ExtendedItemFrame {
-    @Shadow private boolean fixed;
     @Shadow public abstract int getRotation();
     @Shadow public abstract void setRotation(int value);
     @Shadow public abstract SoundEvent getRotateItemSound();
@@ -74,9 +74,9 @@ public abstract class ItemFrameEntityMixin extends AbstractDecorationEntity impl
         gbw$setWaxed(nbt.getBoolean("Waxed", false));
     }
 
-    @Inject(method = "interact", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/decoration/ItemFrameEntity;getWorld()Lnet/minecraft/world/World;", ordinal = 0), cancellable = true)
+    @Inject(method = "interact", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/FilledMapItem;getMapState(Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;)Lnet/minecraft/item/map/MapState;", ordinal = 0), cancellable = true)
     private void gbw$overwriteInteraction(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir, @Local ItemStack itemStack, @Local(ordinal = 0) boolean bl, @Local(ordinal = 1) boolean bl2) {
-        if (!fixed && !bl && !itemStack.isEmpty() && !isRemoved() && player.shouldCancelInteraction()) {
+        if (!bl && !itemStack.isEmpty() && !isRemoved() && player.shouldCancelInteraction()) {
             if (gbw$isWaxed() && itemStack.isIn(ItemTags.AXES) && player.shouldCancelInteraction()) {
                 cir.setReturnValue(unwax((ItemFrameEntity) (Object) this, player, itemStack));
                 return;
@@ -87,57 +87,58 @@ public abstract class ItemFrameEntityMixin extends AbstractDecorationEntity impl
                 getWorld().playSoundFromEntity(player, (ItemFrameEntity) (Object) this, SoundEvents.ITEM_DYE_USE, SoundCategory.PLAYERS, 1f, 1f);
                 gbw$setColor(dyeItem.getColor());
                 emitGameEvent(GameEvent.BLOCK_CHANGE, player);
-                if (!player.isCreative()) {
-                    itemStack.decrement(1);
-                }
+                itemStack.decrementUnlessCreative(1, player);
 
                 if (!getWorld().isClient)
                     cir.setReturnValue(ActionResult.SUCCESS_SERVER);
-                else cir.setReturnValue(ActionResult.SUCCESS);
+                else
+                    cir.setReturnValue(ActionResult.SUCCESS);
                 return;
             }
             cir.setReturnValue(ActionResult.PASS);
             return;
         }
+
         if (!bl) {
             if (bl2 && !isRemoved() && !getWorld().isClient) {
                 if (itemStack.isOf(Items.FILLED_MAP)) {
                     MapState mapState = FilledMapItem.getMapState(itemStack, getWorld());
                     if (mapState != null && mapState.decorationCountNotLessThan(256)) {
                         cir.setReturnValue(ActionResult.FAIL);
+                        return;
                     }
                 }
 
                 setHeldItemStack(itemStack);
                 emitGameEvent(GameEvent.BLOCK_CHANGE, player);
-                if (!player.isCreative()) {
-                    itemStack.decrement(1);
-                }
+                itemStack.decrementUnlessCreative(1, player);
+                if (!getWorld().isClient)
+                    cir.setReturnValue(ActionResult.SUCCESS_SERVER);
+                else cir.setReturnValue(ActionResult.SUCCESS);
                 return;
             }
         } else {
             if (gbw$isWaxed()) {
                 if (itemStack.isIn(ItemTags.AXES) && player.shouldCancelInteraction()) {
                     cir.setReturnValue(unwax((ItemFrameEntity) (Object) this, player, itemStack));
-                } else {
+                } else
                     cir.setReturnValue(ActionResult.PASS);
-                }
                 return;
             } else if (!gbw$isWaxed()) {
                 if (player.shouldCancelInteraction()) {
                     if (itemStack.isOf(Items.HONEYCOMB)) {
                         cir.setReturnValue(wax((ItemFrameEntity) (Object) this, player, itemStack));
+                        return;
                     } else if (itemStack.getItem() instanceof DyeItem dyeItem && gbw$getColor() != dyeItem.getColor()) {
                         getWorld().playSoundFromEntity(player, (ItemFrameEntity) (Object) this, SoundEvents.ITEM_DYE_USE, SoundCategory.PLAYERS, 1f, 1f);
                         gbw$setColor(dyeItem.getColor());
                         emitGameEvent(GameEvent.BLOCK_CHANGE, player);
-                        if (!player.isCreative()) {
-                            itemStack.decrement(1);
-                        }
+                        itemStack.decrementUnlessCreative(1, player);
 
                         if (!getWorld().isClient)
                             cir.setReturnValue(ActionResult.SUCCESS_SERVER);
                         else cir.setReturnValue(ActionResult.SUCCESS);
+                        return;
                     }
                 } else {
                     playSound(getRotateItemSound(), 1f, 1f);
@@ -149,6 +150,7 @@ public abstract class ItemFrameEntityMixin extends AbstractDecorationEntity impl
                     if (!getWorld().isClient)
                         cir.setReturnValue(ActionResult.SUCCESS_SERVER);
                     else cir.setReturnValue(ActionResult.SUCCESS);
+                    return;
                 }
                 return;
             }
@@ -159,6 +161,31 @@ public abstract class ItemFrameEntityMixin extends AbstractDecorationEntity impl
             if (!getWorld().isClient) {
                 cir.setReturnValue(ActionResult.SUCCESS_SERVER);
             } else cir.setReturnValue(ActionResult.SUCCESS);
+        }
+    }
+
+    @Inject(method = "getAsItemStack", at = @At("HEAD"), cancellable = true)
+    private void gbw$fixItemFrameDropAndPickStack(CallbackInfoReturnable<ItemStack> cir) {
+        DyeColor color = gbw$getColor();
+        if (color == null)
+            return;
+        switch (color) {
+            case GRAY -> cir.setReturnValue(ArchitectsAssemblyItems.GRAY_ITEM_FRAME.getDefaultStack());
+            case RED -> cir.setReturnValue(ArchitectsAssemblyItems.RED_ITEM_FRAME.getDefaultStack());
+            case BLUE -> cir.setReturnValue(ArchitectsAssemblyItems.BLUE_ITEM_FRAME.getDefaultStack());
+            case CYAN -> cir.setReturnValue(ArchitectsAssemblyItems.CYAN_ITEM_FRAME.getDefaultStack());
+            case LIME -> cir.setReturnValue(ArchitectsAssemblyItems.LIME_ITEM_FRAME.getDefaultStack());
+            case PINK -> cir.setReturnValue(ArchitectsAssemblyItems.PINK_ITEM_FRAME.getDefaultStack());
+            case BLACK -> cir.setReturnValue(ArchitectsAssemblyItems.BLACK_ITEM_FRAME.getDefaultStack());
+            case BROWN -> cir.setReturnValue(ArchitectsAssemblyItems.BROWN_ITEM_FRAME.getDefaultStack());
+            case GREEN -> cir.setReturnValue(ArchitectsAssemblyItems.GREEN_ITEM_FRAME.getDefaultStack());
+            case WHITE -> cir.setReturnValue(ArchitectsAssemblyItems.WHITE_ITEM_FRAME.getDefaultStack());
+            case ORANGE -> cir.setReturnValue(ArchitectsAssemblyItems.ORANGE_ITEM_FRAME.getDefaultStack());
+            case PURPLE -> cir.setReturnValue(ArchitectsAssemblyItems.PURPLE_ITEM_FRAME.getDefaultStack());
+            case YELLOW -> cir.setReturnValue(ArchitectsAssemblyItems.YELLOW_ITEM_FRAME.getDefaultStack());
+            case MAGENTA -> cir.setReturnValue(ArchitectsAssemblyItems.MAGENTA_ITEM_FRAME.getDefaultStack());
+            case LIGHT_BLUE -> cir.setReturnValue(ArchitectsAssemblyItems.LIGHT_BLUE_ITEM_FRAME.getDefaultStack());
+            case LIGHT_GRAY -> cir.setReturnValue(ArchitectsAssemblyItems.LIGHT_GRAY_ITEM_FRAME.getDefaultStack());
         }
     }
 

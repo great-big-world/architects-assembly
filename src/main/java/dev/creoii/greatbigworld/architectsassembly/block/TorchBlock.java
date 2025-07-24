@@ -220,7 +220,7 @@ public class TorchBlock extends AbstractTorchBlock {
             } else {
                 Direction opposite = direction.getOpposite();
                 world.addParticleClient(ParticleTypes.SMOKE, d + .27d * (double)opposite.getOffsetX(), e + .22d, f + .27d * (double)opposite.getOffsetZ(), 0d, 0d, 0d);
-                world.addParticleClient(this.particle, d + .27d * (double)opposite.getOffsetX(), e + .22d, f + .27d * (double)opposite.getOffsetZ(), 0d, 0d, 0d);
+                world.addParticleClient(particle, d + .27d * (double)opposite.getOffsetX(), e + .22d, f + .27d * (double)opposite.getOffsetZ(), 0d, 0d, 0d);
             }
         }
     }
