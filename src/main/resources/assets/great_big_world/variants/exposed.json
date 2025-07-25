@@ -21,6 +21,7 @@
     "minecraft:exposed_copper_grate",
     "minecraft:waxed_exposed_copper_grate",
     "minecraft:exposed_copper_bulb",
-    "minecraft:waxed_exposed_copper_bulb"
+    "minecraft:waxed_exposed_copper_bulb",
+    "great_big_world:exposed_copper_pressure_plate"
   ]
 }

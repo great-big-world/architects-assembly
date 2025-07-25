@@ -21,6 +21,7 @@
     "minecraft:oxidized_copper_grate",
     "minecraft:waxed_oxidized_copper_grate",
     "minecraft:oxidized_copper_bulb",
-    "minecraft:waxed_oxidized_copper_bulb"
+    "minecraft:waxed_oxidized_copper_bulb",
+    "great_big_world:oxidized_copper_pressure_plate"
   ]
 }
