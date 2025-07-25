@@ -515,9 +515,21 @@ public final class ArchitectsAssemblyBlocks {
 
     // region Misc Blocks
     public static Block SAWMILL;
+    public static Block COPPER_PRESSURE_PLATE;
+    public static Block EXPOSED_COPPER_PRESSURE_PLATE;
+    public static Block WEATHERED_COPPER_PRESSURE_PLATE;
+    public static Block OXIDIZED_COPPER_PRESSURE_PLATE;
 
     private static void registerMiscBlocks() {
         SAWMILL = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "sawmill"), SawmillBlock::new, AbstractBlock.Settings.copy(Blocks.STONECUTTER).strength(2f).sounds(BlockSoundGroup.WOOD));
+        COPPER_PRESSURE_PLATE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "copper_pressure_plate"), settings -> new CopperPressurePlateBlock(Oxidizable.OxidationLevel.UNAFFECTED, settings), AbstractBlock.Settings.copy(Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE).sounds(BlockSoundGroup.COPPER).mapColor(MapColor.ORANGE));
+        EXPOSED_COPPER_PRESSURE_PLATE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "exposed_copper_pressure_plate"), settings -> new CopperPressurePlateBlock(Oxidizable.OxidationLevel.EXPOSED, settings), AbstractBlock.Settings.copy(Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE).sounds(BlockSoundGroup.COPPER).mapColor(MapColor.TERRACOTTA_LIGHT_GRAY));
+        WEATHERED_COPPER_PRESSURE_PLATE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "weathered_copper_pressure_plate"), settings -> new CopperPressurePlateBlock(Oxidizable.OxidationLevel.WEATHERED, settings), AbstractBlock.Settings.copy(Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE).sounds(BlockSoundGroup.COPPER).mapColor(MapColor.DARK_AQUA));
+        OXIDIZED_COPPER_PRESSURE_PLATE = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "oxidized_copper_pressure_plate"), settings -> new CopperPressurePlateBlock(Oxidizable.OxidationLevel.OXIDIZED, settings), AbstractBlock.Settings.copy(Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE).sounds(BlockSoundGroup.COPPER).mapColor(MapColor.TEAL));
+
+        OxidizableBlocksRegistry.registerOxidizableBlockPair(COPPER_PRESSURE_PLATE, EXPOSED_COPPER_PRESSURE_PLATE);
+        OxidizableBlocksRegistry.registerOxidizableBlockPair(EXPOSED_COPPER_PRESSURE_PLATE, WEATHERED_COPPER_PRESSURE_PLATE);
+        OxidizableBlocksRegistry.registerOxidizableBlockPair(WEATHERED_COPPER_PRESSURE_PLATE, OXIDIZED_COPPER_PRESSURE_PLATE);
     }
 
     @Environment(EnvType.CLIENT)

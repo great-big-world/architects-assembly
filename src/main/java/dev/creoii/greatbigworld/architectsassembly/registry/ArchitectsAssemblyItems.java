@@ -761,12 +761,23 @@ public final class ArchitectsAssemblyItems {
 
     // region Misc Blocks
     public static Item SAWMILL;
+    public static Item COPPER_PRESSURE_PLATE;
+    public static Item EXPOSED_COPPER_PRESSURE_PLATE;
+    public static Item WEATHERED_COPPER_PRESSURE_PLATE;
+    public static Item OXIDIZED_COPPER_PRESSURE_PLATE;
 
     private static void registerMiscBlocks() {
         SAWMILL = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "sawmill"), ArchitectsAssemblyBlocks.SAWMILL);
+        COPPER_PRESSURE_PLATE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "copper_pressure_plate"), ArchitectsAssemblyBlocks.COPPER_PRESSURE_PLATE);
+        EXPOSED_COPPER_PRESSURE_PLATE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "exposed_copper_pressure_plate"), ArchitectsAssemblyBlocks.EXPOSED_COPPER_PRESSURE_PLATE);
+        WEATHERED_COPPER_PRESSURE_PLATE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "weathered_copper_pressure_plate"), ArchitectsAssemblyBlocks.WEATHERED_COPPER_PRESSURE_PLATE);
+        OXIDIZED_COPPER_PRESSURE_PLATE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "oxidized_copper_pressure_plate"), ArchitectsAssemblyBlocks.OXIDIZED_COPPER_PRESSURE_PLATE);
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(entries -> {
             entries.addAfter(Items.STONECUTTER, SAWMILL);
+        });
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.REDSTONE).register(entries -> {
+            entries.addAfter(Items.HEAVY_WEIGHTED_PRESSURE_PLATE, COPPER_PRESSURE_PLATE, EXPOSED_COPPER_PRESSURE_PLATE, WEATHERED_COPPER_PRESSURE_PLATE, OXIDIZED_COPPER_PRESSURE_PLATE);
         });
     }
     // endregion

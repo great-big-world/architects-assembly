@@ -94,6 +94,10 @@
     "great_big_world:cracked_mud_bricks",
     "great_big_world:cracked_quartz_bricks",
     "great_big_world:cracked_red_nether_bricks",
-    "great_big_world:cracked_end_stone_bricks"
+    "great_big_world:cracked_end_stone_bricks",
+    "great_big_world:copper_pressure_plate",
+    "great_big_world:exposed_copper_pressure_plate",
+    "great_big_world:weathered_copper_pressure_plate",
+    "great_big_world:oxidized_copper_pressure_plate"
   ]
 }
