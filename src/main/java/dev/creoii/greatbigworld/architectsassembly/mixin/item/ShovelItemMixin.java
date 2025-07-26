@@ -62,13 +62,11 @@ public abstract class ShovelItemMixin extends Item {
             CampfireBlock.extinguish(playerEntity, world, blockPos, blockState);
             if (!world.isClient) {
                 BlockState state = blockState.with(CampfireBlock.LIT, false);
-                world.setBlockState(blockPos, state, 11);
+                world.setBlockState(blockPos, state, Block.NOTIFY_ALL_AND_REDRAW);
                 world.emitGameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Emitter.of(playerEntity, state));
                 if (playerEntity != null) {
                     context.getStack().damage(1, playerEntity, LivingEntity.getSlotForHand(context.getHand()));
                 }
-                cir.setReturnValue(ActionResult.SUCCESS_SERVER);
-                return;
             }
             cir.setReturnValue(ActionResult.SUCCESS);
             return;
@@ -83,23 +81,23 @@ public abstract class ShovelItemMixin extends Item {
         if (i > 4 && i % 4 == 0) {
             BlockHitResult blockHitResult;
             if (user instanceof PlayerEntity player && (blockHitResult = canPlayerPath(world, player)) != null) {
-                BlockPos pos = blockHitResult.getBlockPos();
-                BlockState state = world.getBlockState(pos);
+                if (!world.isClient) {
+                    BlockPos pos = blockHitResult.getBlockPos();
+                    BlockState state = world.getBlockState(pos);
 
-                if (player instanceof ServerPlayerEntity serverPlayer)
-                    Criteria.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, stack);
+                    if (player instanceof ServerPlayerEntity serverPlayer)
+                        Criteria.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, stack);
 
-                world.setBlockState(pos, PATH_STATES.get(state.getBlock()), Block.NOTIFY_ALL);
-                world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(player, state));
+                    world.setBlockState(pos, PATH_STATES.get(state.getBlock()), Block.NOTIFY_ALL);
+                    world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(player, state));
 
-                if (!player.isCreative()) {
-                    stack.damage(1, player, LivingEntity.getSlotForHand(player.getActiveHand()));
+                    if (!player.isCreative()) {
+                        stack.damage(1, player, LivingEntity.getSlotForHand(player.getActiveHand()));
+                    }
+
+                    player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
+                    player.swingHand(player.getActiveHand(), true);
                 }
-
-                player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
-
-                if (world.isClient)
-                    player.swingHand(player.getActiveHand());
             }
         }
     }

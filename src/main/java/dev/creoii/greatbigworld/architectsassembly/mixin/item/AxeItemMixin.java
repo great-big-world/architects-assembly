@@ -72,11 +72,11 @@ public abstract class AxeItemMixin extends Item {
                 BlockPos pos = blockHitResult.getBlockPos();
 
                 Optional<BlockState> optional = tryStrip(world, pos, player, world.getBlockState(pos));
-                if (optional.isPresent()) {
+                if (optional.isPresent() && !world.isClient) {
                     if (player instanceof ServerPlayerEntity serverPlayer)
                         Criteria.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, stack);
 
-                    world.setBlockState(pos, optional.get(), Block.NOTIFY_ALL);
+                    world.setBlockState(pos, optional.get(), Block.NOTIFY_ALL_AND_REDRAW);
                     world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(player, optional.get()));
 
                     if (!player.isCreative()) {
@@ -84,9 +84,7 @@ public abstract class AxeItemMixin extends Item {
                     }
 
                     player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
-
-                    if (world.isClient)
-                        player.swingHand(player.getActiveHand());
+                    player.swingHand(player.getActiveHand(), true);
                 }
             }
         }
