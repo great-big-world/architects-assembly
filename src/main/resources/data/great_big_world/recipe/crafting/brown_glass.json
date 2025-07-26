@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "glass",
+  "key": {
+    "#": "great_big_world:brown_glass_shard"
+  },
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "result": {
+    "id": "great_big_world:brown_glass"
+  }
+}
