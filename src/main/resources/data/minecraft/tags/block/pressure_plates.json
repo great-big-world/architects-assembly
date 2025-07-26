@@ -1,7 +1,7 @@
 {
   "values": [
     "great_big_world:copper_pressure_plate",
-    "minecraft:exposed_copper_pressure_plate",
+    "great_big_world:exposed_copper_pressure_plate",
     "great_big_world:weathered_copper_pressure_plate",
     "great_big_world:oxidized_copper_pressure_plate"
   ]
