@@ -1,7 +1,6 @@
 package dev.creoii.greatbigworld.architectsassembly.mixin.entity;
 
 import dev.creoii.greatbigworld.architectsassembly.item.SlabItem;
-import dev.creoii.greatbigworld.architectsassembly.util.FreePlacer;
 import dev.creoii.greatbigworld.architectsassembly.util.SlabPlacer;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -17,9 +16,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerEntity.class)
-public abstract class PlayerEntityMixin extends LivingEntity implements SlabPlacer, FreePlacer {
+public abstract class PlayerEntityMixin extends LivingEntity implements SlabPlacer {
     @Unique private static final TrackedData<String> SLAB_PLACEMENT_TYPE = DataTracker.registerData(PlayerEntity.class, TrackedDataHandlerRegistry.STRING);
-    @Unique private boolean gbw$freePlacing = false;
 
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
@@ -33,16 +31,6 @@ public abstract class PlayerEntityMixin extends LivingEntity implements SlabPlac
     @Override
     public void gbw$setSlabPlacementState(SlabItem.SlabPlacement slabPlacementState) {
         dataTracker.set(SLAB_PLACEMENT_TYPE, slabPlacementState.name());
-    }
-
-    @Override
-    public boolean gbw$hasFreePlacement() {
-        return gbw$freePlacing;
-    }
-
-    @Override
-    public void gbw$setFreePlacement(boolean freePlacement) {
-        gbw$freePlacing = freePlacement;
     }
 
     @Inject(method = "initDataTracker", at = @At("TAIL"))

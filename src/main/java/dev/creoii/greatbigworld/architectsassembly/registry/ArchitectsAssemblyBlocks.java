@@ -2,7 +2,6 @@ package dev.creoii.greatbigworld.architectsassembly.registry;
 
 import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.architectsassembly.block.*;
-import dev.creoii.greatbigworld.architectsassembly.block.TorchBlock;
 import dev.creoii.greatbigworld.util.RegistryHelper;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -11,7 +10,6 @@ import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.block.*;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 
@@ -21,14 +19,12 @@ public final class ArchitectsAssemblyBlocks {
         registerDecorativeBlocks();
         registerVerticalSlabs();
         registerMissingBlocks();
-        registerImprovedBlocks();
         registerMiscBlocks();
     }
 
     public static void registerClient() {
         registerDecorativeBlocksClient();
         registerMissingBlocksClient();
-        registerImprovedBlocksClient();
         registerMiscBlocksClient();
     }
 
@@ -492,24 +488,6 @@ public final class ArchitectsAssemblyBlocks {
     @Environment(EnvType.CLIENT)
     private static void registerMissingBlocksClient() {
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), POTTED_SHORT_GRASS);
-    }
-    // endregion
-
-    // region Improved Blocks
-    public static Block TORCH;
-    public static Block SOUL_TORCH;
-
-    private static void registerImprovedBlocks() {
-        TORCH = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "torch"), settings -> new TorchBlock(ParticleTypes.FLAME, settings), AbstractBlock.Settings.copy(Blocks.TORCH));
-        SOUL_TORCH = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "soul_torch"), settings -> new TorchBlock(ParticleTypes.SOUL_FIRE_FLAME, settings), AbstractBlock.Settings.copy(Blocks.SOUL_TORCH));
-    }
-
-    @Environment(EnvType.CLIENT)
-    private static void registerImprovedBlocksClient() {
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(),
-                TORCH,
-                SOUL_TORCH
-        );
     }
     // endregion
 

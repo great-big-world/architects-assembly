@@ -18,16 +18,10 @@ public class TranslucentVerticalSlabBlock extends VerticalSlabBlock {
             if (slabType != VerticalSlabType.DOUBLE) {
                 if (direction == slabType.getDirection().getOpposite() && (otherType == slabType.getOpposite() || otherType == VerticalSlabType.DOUBLE)) {
                     return true;
-                } else if ((slabType.getPerpendiculars().contains(direction) || direction.getAxis() == Direction.Axis.Y) && slabType == otherType) {
-                    return true;
-                }
+                } else return (slabType.getPerpendiculars().contains(direction) || direction.getAxis() == Direction.Axis.Y) && slabType == otherType;
             } else {
-                if (otherType.getDirection() == direction || otherType == VerticalSlabType.DOUBLE) {
-                    return true;
-                }
+                return otherType.getDirection() == direction || otherType == VerticalSlabType.DOUBLE;
             }
-
-            return false;
             //return state.get(VerticalSlabBlock.TYPE) != VerticalSlabType.DOUBLE || other.get(VerticalSlabBlock.TYPE) == VerticalSlabType.DOUBLE;
         }
         return super.isSideInvisible(state, other, direction);

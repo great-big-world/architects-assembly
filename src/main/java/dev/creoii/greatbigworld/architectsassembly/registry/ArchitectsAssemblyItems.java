@@ -22,7 +22,6 @@ public final class ArchitectsAssemblyItems {
         registerVerticalSlabs();
         registerDecorativeBlocks();
         registerMissingBlocks();
-        registerImprovedBlocks();
         registerMiscBlocks();
     }
 
@@ -726,35 +725,6 @@ public final class ArchitectsAssemblyItems {
             entries.addAfter(Items.QUARTZ_BRICKS, CRACKED_QUARTZ_BRICKS);
             entries.addAfter(Items.RED_NETHER_BRICKS, CRACKED_RED_NETHER_BRICKS);
             entries.addAfter(Items.END_STONE_BRICKS, CRACKED_END_STONE_BRICKS);
-        });
-    }
-    // endregion
-
-    // region Improved Blocks
-    public static Item TORCH;
-    public static Item SOUL_TORCH;
-
-    private static void registerImprovedBlocks() {
-        TORCH = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "torch"), ArchitectsAssemblyBlocks.TORCH);
-        SOUL_TORCH = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "soul_torch"), ArchitectsAssemblyBlocks.SOUL_TORCH);
-
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(entries -> {
-            replaceImprovedBlocks(entries.getDisplayStacks());
-            replaceImprovedBlocks(entries.getSearchTabStacks());
-        });
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.REDSTONE).register(entries -> {
-            replaceImprovedBlocks(entries.getDisplayStacks());
-            replaceImprovedBlocks(entries.getSearchTabStacks());
-        });
-    }
-
-    private static void replaceImprovedBlocks(List<ItemStack> stacks) {
-        stacks.replaceAll(stack -> {
-            if (stack.isOf(Items.TORCH))
-                return TORCH.getDefaultStack();
-            if (stack.isOf(Items.SOUL_TORCH))
-                return SOUL_TORCH.getDefaultStack();
-            return stack;
         });
     }
     // endregion

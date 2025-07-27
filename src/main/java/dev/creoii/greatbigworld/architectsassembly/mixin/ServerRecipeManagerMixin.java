@@ -56,6 +56,7 @@ public abstract class ServerRecipeManagerMixin implements SawmillingRecipeManage
         return sawmillingRecipes;
     }
 
+    @SuppressWarnings("unchecked")
     @Redirect(method = "initialize", at = @At(value = "INVOKE", target = "Ljava/util/Collection;forEach(Ljava/util/function/Consumer;)V"))
     private void gbw$manageRecipes(Collection<RecipeEntry<?>> instance, Consumer<RecipeEntry<?>> consumer, @Local(argsOnly = true) FeatureSet features, @Local(ordinal = 0) List<CuttingRecipeDisplay.GroupEntry<StonecuttingRecipe>> list, @Local(ordinal = 1) List<ServerRecipeManager.PropertySetBuilder> list2) {
         preSawmillingRecipes = new ArrayList<>();
