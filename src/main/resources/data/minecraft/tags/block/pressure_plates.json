@@ -3,6 +3,10 @@
     "great_big_world:copper_pressure_plate",
     "great_big_world:exposed_copper_pressure_plate",
     "great_big_world:weathered_copper_pressure_plate",
-    "great_big_world:oxidized_copper_pressure_plate"
+    "great_big_world:oxidized_copper_pressure_plate",
+    "great_big_world:waxed_copper_pressure_plate",
+    "great_big_world:waxed_exposed_copper_pressure_plate",
+    "great_big_world:waxed_weathered_copper_pressure_plate",
+    "great_big_world:waxed_oxidized_copper_pressure_plate"
   ]
 }

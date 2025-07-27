@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "state=up": {
+      "model": "great_big_world:block/exposed_copper_pressure_plate"
+    },
+    "state=powered": {
+      "model": "great_big_world:block/exposed_copper_pressure_plate"
+    },
+    "state=down": {
+      "model": "great_big_world:block/exposed_copper_pressure_plate_down"
+    }
+  }
+}

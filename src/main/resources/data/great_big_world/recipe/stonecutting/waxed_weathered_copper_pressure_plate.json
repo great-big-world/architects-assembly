@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": "minecraft:waxed_weathered_copper",
+  "result": {
+    "id": "great_big_world:waxed_weathered_copper_pressure_plate"
+  }
+}

@@ -735,6 +735,10 @@ public final class ArchitectsAssemblyItems {
     public static Item EXPOSED_COPPER_PRESSURE_PLATE;
     public static Item WEATHERED_COPPER_PRESSURE_PLATE;
     public static Item OXIDIZED_COPPER_PRESSURE_PLATE;
+    public static Item WAXED_COPPER_PRESSURE_PLATE;
+    public static Item WAXED_EXPOSED_COPPER_PRESSURE_PLATE;
+    public static Item WAXED_WEATHERED_COPPER_PRESSURE_PLATE;
+    public static Item WAXED_OXIDIZED_COPPER_PRESSURE_PLATE;
 
     private static void registerMiscBlocks() {
         SAWMILL = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "sawmill"), ArchitectsAssemblyBlocks.SAWMILL);
@@ -742,12 +746,17 @@ public final class ArchitectsAssemblyItems {
         EXPOSED_COPPER_PRESSURE_PLATE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "exposed_copper_pressure_plate"), ArchitectsAssemblyBlocks.EXPOSED_COPPER_PRESSURE_PLATE);
         WEATHERED_COPPER_PRESSURE_PLATE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "weathered_copper_pressure_plate"), ArchitectsAssemblyBlocks.WEATHERED_COPPER_PRESSURE_PLATE);
         OXIDIZED_COPPER_PRESSURE_PLATE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "oxidized_copper_pressure_plate"), ArchitectsAssemblyBlocks.OXIDIZED_COPPER_PRESSURE_PLATE);
+        WAXED_COPPER_PRESSURE_PLATE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "waxed_copper_pressure_plate"), ArchitectsAssemblyBlocks.WAXED_COPPER_PRESSURE_PLATE);
+        WAXED_EXPOSED_COPPER_PRESSURE_PLATE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "waxed_exposed_copper_pressure_plate"), ArchitectsAssemblyBlocks.WAXED_EXPOSED_COPPER_PRESSURE_PLATE);
+        WAXED_WEATHERED_COPPER_PRESSURE_PLATE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "waxed_weathered_copper_pressure_plate"), ArchitectsAssemblyBlocks.WAXED_WEATHERED_COPPER_PRESSURE_PLATE);
+        WAXED_OXIDIZED_COPPER_PRESSURE_PLATE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "waxed_oxidized_copper_pressure_plate"), ArchitectsAssemblyBlocks.WAXED_OXIDIZED_COPPER_PRESSURE_PLATE);
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(entries -> {
             entries.addAfter(Items.STONECUTTER, SAWMILL);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.REDSTONE).register(entries -> {
-            entries.addAfter(Items.HEAVY_WEIGHTED_PRESSURE_PLATE, COPPER_PRESSURE_PLATE, EXPOSED_COPPER_PRESSURE_PLATE, WEATHERED_COPPER_PRESSURE_PLATE, OXIDIZED_COPPER_PRESSURE_PLATE);
+            entries.addAfter(Items.HEAVY_WEIGHTED_PRESSURE_PLATE, COPPER_PRESSURE_PLATE, EXPOSED_COPPER_PRESSURE_PLATE, WEATHERED_COPPER_PRESSURE_PLATE, OXIDIZED_COPPER_PRESSURE_PLATE,
+                    WAXED_COPPER_PRESSURE_PLATE, WAXED_EXPOSED_COPPER_PRESSURE_PLATE, WAXED_WEATHERED_COPPER_PRESSURE_PLATE, WAXED_OXIDIZED_COPPER_PRESSURE_PLATE);
         });
     }
     // endregion

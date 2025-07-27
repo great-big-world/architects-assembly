@@ -53,10 +53,10 @@ public class CopperPressurePlateBlock extends OxidizableBlock {
 
     protected int getTickRate() {
         return switch (oxidationLevel) {
+            case OXIDIZED -> 30;
+            case WEATHERED -> 20;
             case EXPOSED -> 10;
-            case OXIDIZED -> 20;
-            case WEATHERED -> 15;
-            case UNAFFECTED -> 5;
+            case UNAFFECTED -> 0;
         };
     }
 
@@ -70,18 +70,17 @@ public class CopperPressurePlateBlock extends OxidizableBlock {
     protected void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (state.get(STATE) == State.DOWN && getEntityCount(world, BOX.offset(pos), LivingEntity.class) <= 0) {
             world.setBlockState(pos, state.with(STATE, State.POWERED), 2);
-            world.scheduleBlockTick(new BlockPos(pos), this, getTickRate() * 2);
+            world.scheduleBlockTick(new BlockPos(pos), this, 5);
             updateNeighbors(world, pos);
 
             world.playSound(null, pos, BlockSetType.COPPER.pressurePlateClickOn(), SoundCategory.BLOCKS);
             world.emitGameEvent(null, GameEvent.BLOCK_ACTIVATE, pos);
         } else if (state.get(STATE) == State.POWERED) {
             world.setBlockState(pos, state.with(STATE, State.UP), 2);
+            updateNeighbors(world, pos);
 
             world.playSound(null, pos, BlockSetType.COPPER.pressurePlateClickOff(), SoundCategory.BLOCKS);
             world.emitGameEvent(null, GameEvent.BLOCK_DEACTIVATE, pos);
-
-            updateNeighbors(world, pos);
         }
     }
 
