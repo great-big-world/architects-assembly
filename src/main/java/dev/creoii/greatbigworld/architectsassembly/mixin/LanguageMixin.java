@@ -11,6 +11,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Language;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -18,6 +19,7 @@ import java.util.function.BiConsumer;
 
 @Mixin(Language.class)
 public class LanguageMixin implements LocaleAwareLanguage {
+    @Shadow private static volatile Language instance;
     @Unique
     private String gbw$langCode;
 
@@ -30,9 +32,14 @@ public class LanguageMixin implements LocaleAwareLanguage {
         String translationKey = (String) key;
         String translated = (String) value;
 
-        if ((translationKey.startsWith("item.") && ((translationKey.contains("_pottery_sherd") || translationKey.contains("_pottery_shard"))) || translationKey.contains("_spawn_egg"))) {
-            entryConsumer.accept(translationKey, translated.substring(translated.indexOf(" ") + 1));
-            return false;
+        if (translationKey.startsWith("item.")) {
+            if (translationKey.contains("_pottery_sherd")) {
+                entryConsumer.accept(translationKey, instance.get("item.great_big_world.pottery_sherd"));
+                return false;
+            } else if (translationKey.contains("_spawn_egg")) {
+                entryConsumer.accept(translationKey, instance.get("item.great_big_world.spawn_egg"));
+                return false;
+            }
         }
 
         Item item = Registries.ITEM.get(toId(translationKey));
