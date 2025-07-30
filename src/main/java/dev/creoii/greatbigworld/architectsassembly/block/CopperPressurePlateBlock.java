@@ -73,7 +73,7 @@ public class CopperPressurePlateBlock extends OxidizableBlock {
     }
 
     protected void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (state.get(STATE) == State.DOWN && getEntityCount(world, BOX.offset(pos), LivingEntity.class) <= 0) {
+        if (state.get(STATE) == State.DOWN && getEntityCount(world, BOX.offset(pos)) <= 0) {
             world.setBlockState(pos, state.with(STATE, State.POWERED), 2);
             world.scheduleBlockTick(new BlockPos(pos), this, 5);
             updateNeighbors(world, pos);
@@ -89,8 +89,8 @@ public class CopperPressurePlateBlock extends OxidizableBlock {
         }
     }
 
-    protected static int getEntityCount(World world, Box box, Class<? extends Entity> entityClass) {
-        return world.getEntitiesByClass(entityClass, box, EntityPredicates.EXCEPT_SPECTATOR.and(entity -> !entity.canAvoidTraps())).size();
+    protected static int getEntityCount(World world, Box box) {
+        return world.getEntitiesByClass(LivingEntity.class, box, EntityPredicates.EXCEPT_SPECTATOR.and(entity -> !entity.canAvoidTraps())).size();
     }
 
     protected void updateNeighbors(World world, BlockPos pos) {
