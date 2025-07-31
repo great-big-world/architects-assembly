@@ -62,11 +62,11 @@ public class ArchitectsAssembly implements ModInitializer {
         });
 
         DefaultItemComponentEvents.MODIFY.register(modifyContext -> {
-            modifyContext.modify(Items.IRON_AXE, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 500));
-            modifyContext.modify(Items.IRON_PICKAXE, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 500));
-            modifyContext.modify(Items.IRON_SHOVEL, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 500));
-            modifyContext.modify(Items.IRON_HOE, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 500));
-            modifyContext.modify(Items.IRON_SWORD, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 500));
+            modifyContext.modify(Items.IRON_AXE, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 451));
+            modifyContext.modify(Items.IRON_PICKAXE, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 451));
+            modifyContext.modify(Items.IRON_SHOVEL, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 451));
+            modifyContext.modify(Items.IRON_HOE, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 451));
+            modifyContext.modify(Items.IRON_SWORD, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 451));
             modifyContext.modify(Items.IRON_HELMET, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 265));
             modifyContext.modify(Items.IRON_CHESTPLATE, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 340));
             modifyContext.modify(Items.IRON_LEGGINGS, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 325));
