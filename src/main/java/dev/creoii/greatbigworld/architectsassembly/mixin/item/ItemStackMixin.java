@@ -36,7 +36,7 @@ import java.util.List;
 
 @Mixin(ItemStack.class)
 public class ItemStackMixin {
-    @Inject(method = "getTooltip", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z", ordinal = 0, shift = At.Shift.AFTER))
+    /*@Inject(method = "getTooltip", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z", ordinal = 0, shift = At.Shift.AFTER))
     private void gbw$appendBlockVariantTooltips(Item.TooltipContext context, PlayerEntity player, TooltipType type, CallbackInfoReturnable<List<Text>> cir, @Local List<Text> list) {
         ItemStack stack = (ItemStack) (Object) this;
         if (stack.isIn(ItemTags.DECORATED_POT_SHERDS)) {
@@ -56,7 +56,7 @@ public class ItemStackMixin {
                 list.add(MutableText.of(spawnEggItem.getEntityType(context.getRegistryLookup(), stack).getName().getContent()).formatted(Formatting.GRAY));
             }
         }
-    }
+    }*/
 
     /*@Inject(method = "getTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/item/TooltipType;isAdvanced()Z", ordinal = 1))
     private void gbw$appendItemInformationTooltips(Item.TooltipContext context, PlayerEntity player, TooltipType type, CallbackInfoReturnable<List<Text>> cir, @Local List<Text> list) {
@@ -74,22 +74,7 @@ public class ItemStackMixin {
                 list.add(Text.translatable("item.hunger", creoFoodComponent.nutrition()).formatted(Formatting.GRAY));
             }
 
-            ToolComponent toolComponent = stack.get(DataComponentTypes.TOOL);
-            if (stack.getItem() instanceof ArmorItem armorItem) {
-                appendValue(list, armorItem.getProtection(), "item.armor");
-                if (stack.isOf(Items.TURTLE_HELMET)) {
-                    list.add(Text.translatable("item.air", "10s").formatted(Formatting.GRAY));
-                }
-            } else if (toolComponent != null) {
-                appendValue(list, toolComponent.defaultMiningSpeed(), "item.mining_speed");
-                appendValue(list, toolComponent.getAttackDamage(), "item.damage");
-            } else if (stack.getItem() instanceof SwordItem swordItem) {
-                appendValue(list, swordItem.getAttackDamage(), "item.damage");
-            } else if (stack.getItem() instanceof TridentItem tridentItem) {
-                appendValue(list, (float) tridentItem.getAttributeModifiers(EquipmentSlot.MAINHAND).get(EntityAttributes.GENERIC_ATTACK_DAMAGE).stream().findFirst().get().getValue(), "item.damage");
-            } else if (stack.getItem() instanceof HorseArmorItem horseArmorItem) {
-                appendValue(list, horseArmorItem.getBonus(), "item.armor");
-            }
+
         }
     }
 
@@ -98,13 +83,4 @@ public class ItemStackMixin {
         return false;
     }*/
 
-    @Unique
-    private static void appendValue(List<Text> lines, float value, String translationKey) {
-        if (value == 0f)
-            return;
-
-        if (value == (int) value)
-            lines.add(Text.translatable(translationKey, (int) value).formatted(Formatting.GRAY));
-        else lines.add(Text.translatable(translationKey, value).formatted(Formatting.GRAY));
-    }
 }
