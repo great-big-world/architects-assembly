@@ -1,5 +1,13 @@
 {
   "asset_id": "great_big_world:red_ceiling",
   "height": 2,
-  "width": 3
+  "width": 3,
+  "title":{
+    "color": "yellow",
+    "translate": "painting.great_big_world.red_ceiling.title"
+  },
+  "author": {
+    "color": "gray",
+    "translate": "painting.great_big_world.red_ceiling.author"
+  }
 }
