@@ -5,10 +5,11 @@ import dev.creoii.greatbigworld.architectsassembly.block.*;
 import dev.creoii.greatbigworld.util.RegistryHelper;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.block.*;
+import net.minecraft.client.render.BlockRenderLayer;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
@@ -249,13 +250,13 @@ public final class ArchitectsAssemblyBlocks {
 
     @Environment(EnvType.CLIENT)
     private static void registerDecorativeBlocksClient() {
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutoutMipped(),
+        BlockRenderLayerMap.putBlocks(BlockRenderLayer.CUTOUT_MIPPED,
                 CHISELED_GLASS,
                 CHISELED_GLASS_PANE,
                 GLASS,
                 CRACKED_GLASS
         );
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(),
+        BlockRenderLayerMap.putBlocks(BlockRenderLayer.TRANSLUCENT,
                 BROWN_GLASS, CHISELED_BROWN_GLASS,
                 CHISELED_BROWN_GLASS_PANE,
                 CRACKED_BROWN_GLASS,
@@ -487,7 +488,7 @@ public final class ArchitectsAssemblyBlocks {
 
     @Environment(EnvType.CLIENT)
     private static void registerMissingBlocksClient() {
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), POTTED_SHORT_GRASS);
+        BlockRenderLayerMap.putBlocks(BlockRenderLayer.CUTOUT, POTTED_SHORT_GRASS);
     }
     // endregion
 
@@ -524,7 +525,7 @@ public final class ArchitectsAssemblyBlocks {
 
     @Environment(EnvType.CLIENT)
     private static void registerMiscBlocksClient() {
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(),
+        BlockRenderLayerMap.putBlocks(BlockRenderLayer.CUTOUT,
                 SAWMILL
         );
     }
