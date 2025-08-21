@@ -79,7 +79,7 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
                 int y = context.getScaledWindowHeight() - 22 - 6;
 
                 context.getMatrices().pushMatrix();
-                context.getMatrices().rotateAbout(-90f, 0f, 0f);
+                context.getMatrices().translate(0f, 0f);
                 context.drawGuiTexture(RenderPipelines.GUI_TEXTURED, CYCLE_HOTBAR_ARROW_TEXTURE, x, y, 9, 14);
                 context.getMatrices().popMatrix();
             }
