@@ -85,7 +85,6 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
             }
         });
 
-        // Fix Saddle, Elytra, Shears,
         ItemTooltipCallback.EVENT.register((stack, context, tooltipType, list) -> {
             EquippableComponent equippableComponent = stack.getOrDefault(DataComponentTypes.EQUIPPABLE, null);
             ToolComponent toolComponent = stack.getOrDefault(DataComponentTypes.TOOL, null);
@@ -161,9 +160,9 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
                         variantItem.gbw$addVariant(variant);
                 }
 
-                if (!variantItem.gbw$getVariants().isEmpty())
+                if (!variantItem.gbw$getVariants().isEmpty()) {
                     list.add(1, VariantItem.getVariantTooltip(variantItem));
-                else if (stack.getItem() instanceof SpawnEggItem spawnEggItem) {
+                } else if (stack.getItem() instanceof SpawnEggItem spawnEggItem) {
                     list.add(1, MutableText.of(spawnEggItem.getEntityType(context.getRegistryLookup(), stack).getName().getContent()).formatted(Formatting.GRAY));
                 }
             }
