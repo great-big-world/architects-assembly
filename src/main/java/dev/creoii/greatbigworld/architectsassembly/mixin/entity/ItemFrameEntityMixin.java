@@ -15,11 +15,12 @@ import net.minecraft.item.FilledMapItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.map.MapState;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Hand;
@@ -55,24 +56,24 @@ public abstract class ItemFrameEntityMixin extends AbstractDecorationEntity impl
         builder.add(WAXED, false);
     }
 
-    @Inject(method = "writeCustomDataToNbt", at = @At("TAIL"))
-    private void gbw$writeDataToNbt(NbtCompound nbt, CallbackInfo ci) {
+    @Inject(method = "writeCustomData", at = @At("TAIL"))
+    private void gbw$writeDataToNbt(WriteView view, CallbackInfo ci) {
         DyeColor color = gbw$getColor();
         if (color == null)
-            nbt.putInt("Color", NO_COLOR);
+            view.putInt("Color", NO_COLOR);
         else
-            nbt.putInt("Color", color.getIndex());
+            view.putInt("Color", color.getIndex());
 
-        nbt.putBoolean("Waxed", gbw$isWaxed());
+        view.putBoolean("Waxed", gbw$isWaxed());
     }
 
-    @Inject(method = "readCustomDataFromNbt", at = @At("TAIL"))
-    private void gbw$readColorFromNbt(NbtCompound nbt, CallbackInfo ci) {
-        int color = nbt.getInt("Color", 0);
+    @Inject(method = "readCustomData", at = @At("TAIL"))
+    private void gbw$readColorFromNbt(ReadView view, CallbackInfo ci) {
+        int color = view.getInt("Color", 0);
         if (color >= 0 && color <= 15)
             gbw$setColor(DyeColor.byIndex(color));
         else gbw$setColor(null);
-        gbw$setWaxed(nbt.getBoolean("Waxed", false));
+        gbw$setWaxed(view.getBoolean("Waxed", false));
     }
 
     @Inject(method = "interact", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/FilledMapItem;getMapState(Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;)Lnet/minecraft/item/map/MapState;", ordinal = 0), cancellable = true)

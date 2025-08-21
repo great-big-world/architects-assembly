@@ -12,14 +12,12 @@ import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.HudLayerRegistrationCallback;
-import net.fabricmc.fabric.api.client.rendering.v1.IdentifiedLayer;
+import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.color.world.BiomeColors;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.*;
@@ -75,26 +73,16 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
             shouldCycleHotbar = CYCLE_HOTBAR.isPressed();
         });
 
-        HudLayerRegistrationCallback.EVENT.register(layeredDrawerWrapper -> {
-            layeredDrawerWrapper.addLayer(new IdentifiedLayer() {
-                @Override
-                public Identifier id() {
-                    return Identifier.of(GreatBigWorld.NAMESPACE, "cycle_hotbar");
-                }
+        HudElementRegistry.attachElementAfter(VanillaHudElements.HOTBAR, Identifier.of(GreatBigWorld.NAMESPACE, "cycle_hotbar"), (context, tickCounter) -> {
+            if (!context.client.options.hudHidden && CYCLE_HOTBAR.isPressed()) {
+                int x = (context.getScaledWindowWidth() / 2) - 91 - 4;
+                int y = context.getScaledWindowHeight() - 22 - 6;
 
-                @Override
-                public void render(DrawContext context, RenderTickCounter tickCounter) {
-                    if (!context.client.options.hudHidden && CYCLE_HOTBAR.isPressed()) {
-                        int x = (context.getScaledWindowWidth() / 2) - 91 - 4;
-                        int y = context.getScaledWindowHeight() - 22 - 6;
-
-                        context.getMatrices().push();
-                        context.getMatrices().translate(0f, 0f, -90f);
-                        context.drawGuiTexture(RenderLayer::getGuiTextured, CYCLE_HOTBAR_ARROW_TEXTURE, x, y, 9, 14);
-                        context.getMatrices().pop();
-                    }
-                }
-            });
+                context.getMatrices().pushMatrix();
+                context.getMatrices().rotateAbout(-90f, 0f, 0f);
+                context.drawGuiTexture(RenderPipelines.GUI_TEXTURED, CYCLE_HOTBAR_ARROW_TEXTURE, x, y, 9, 14);
+                context.getMatrices().popMatrix();
+            }
         });
 
         // Fix Saddle, Elytra, Shears,

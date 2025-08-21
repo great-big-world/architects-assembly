@@ -24,8 +24,8 @@ public abstract class InGameHudMixin {
     @Shadow private ItemStack currentStack;
     @Shadow @Final private MinecraftClient client;
 
-    @Redirect(method = "renderHeldItemTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawTextWithBackground(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/text/Text;IIII)I"))
-    private int gbw$renderHeldItemVariants(DrawContext instance, TextRenderer textRenderer, Text text, int x, int y, int width, int color) {
+    @Redirect(method = "renderHeldItemTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawTextWithBackground(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/text/Text;IIII)V"))
+    private void gbw$renderHeldItemVariants(DrawContext instance, TextRenderer textRenderer, Text text, int x, int y, int width, int color) {
         if (client.player != null && client.player.getArmor() > 0) {
             y -= 10;
         }
@@ -39,6 +39,6 @@ public abstract class InGameHudMixin {
             instance.drawCenteredTextWithShadow(textRenderer, Text.translatable("variant.item.sherd." + id.getPath().replace("_pottery_sherd", "")).formatted(Formatting.GRAY), x + (textRenderer.getWidth(text.getString()) / 2), y + 10, color);
         }
 
-        return instance.drawTextWithBackground(textRenderer, text, x, y, width, color);
+        instance.drawTextWithBackground(textRenderer, text, x, y, width, color);
     }
 }
