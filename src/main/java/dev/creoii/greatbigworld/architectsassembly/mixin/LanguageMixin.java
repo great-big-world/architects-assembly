@@ -25,7 +25,10 @@ public class LanguageMixin implements LocaleAwareLanguage {
 
     @WrapWithCondition(method = "load(Ljava/io/InputStream;Ljava/util/function/BiConsumer;)V", at = @At(value = "INVOKE", target = "Ljava/util/function/BiConsumer;accept(Ljava/lang/Object;Ljava/lang/Object;)V"))
     private static boolean gbw$applyTranslationLoadEvent(BiConsumer<String, String> entryConsumer, Object key, Object value) {
-        String langCode = Language.getInstance() == null ? Language.DEFAULT_LANGUAGE : ((LocaleAwareLanguage) Language.getInstance()).gbw$getLangCode();
+        if (instance == null)
+            return true;
+
+        String langCode = ((LocaleAwareLanguage) Language.getInstance()).gbw$getLangCode();
         if (langCode == null || !langCode.equals("en_us"))
             return true;
 
