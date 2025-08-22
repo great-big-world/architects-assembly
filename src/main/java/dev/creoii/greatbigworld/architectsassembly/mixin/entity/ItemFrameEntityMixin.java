@@ -77,57 +77,62 @@ public abstract class ItemFrameEntityMixin extends AbstractDecorationEntity impl
     }
 
     @Inject(method = "interact", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/FilledMapItem;getMapState(Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;)Lnet/minecraft/item/map/MapState;", ordinal = 0), cancellable = true)
-    private void gbw$overwriteInteraction(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir, @Local ItemStack itemStack, @Local(ordinal = 0) boolean bl, @Local(ordinal = 1) boolean bl2) {
-        if (!bl && !itemStack.isEmpty() && !isRemoved() && player.shouldCancelInteraction()) {
-            if (gbw$isWaxed() && itemStack.isIn(ItemTags.AXES) && player.shouldCancelInteraction()) {
-                cir.setReturnValue(unwax((ItemFrameEntity) (Object) this, player, itemStack));
-                return;
-            } else if (!gbw$isWaxed() && itemStack.isOf(Items.HONEYCOMB)) {
-                cir.setReturnValue(wax((ItemFrameEntity) (Object) this, player, itemStack));
-                return;
-            } else if (!gbw$isWaxed() && itemStack.getItem() instanceof DyeItem dyeItem) {
-                getWorld().playSoundFromEntity(player, (ItemFrameEntity) (Object) this, SoundEvents.ITEM_DYE_USE, SoundCategory.PLAYERS, 1f, 1f);
-                gbw$setColor(dyeItem.getColor());
-                emitGameEvent(GameEvent.BLOCK_CHANGE, player);
-                itemStack.decrementUnlessCreative(1, player);
-
-                if (!getWorld().isClient)
-                    cir.setReturnValue(ActionResult.SUCCESS_SERVER);
-                else
-                    cir.setReturnValue(ActionResult.SUCCESS);
-                return;
-            }
+    private void gbw$overwriteInteraction(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir, @Local ItemStack itemStack, @Local(ordinal = 0) boolean frameNotEmpty, @Local(ordinal = 1) boolean heldNotEmpty) {
+        if (isRemoved()) {
             cir.setReturnValue(ActionResult.PASS);
             return;
         }
 
-        if (!bl) {
-            if (bl2 && !isRemoved() && !getWorld().isClient) {
-                if (itemStack.isOf(Items.FILLED_MAP)) {
-                    MapState mapState = FilledMapItem.getMapState(itemStack, getWorld());
-                    if (mapState != null && mapState.decorationCountNotLessThan(256)) {
-                        cir.setReturnValue(ActionResult.FAIL);
+        if (!frameNotEmpty) {
+            if (heldNotEmpty) {
+                if (player.isSneaking()) {
+                    if (gbw$isWaxed() && itemStack.isIn(ItemTags.AXES) && player.isSneaking()) {
+                        cir.setReturnValue(unwax((ItemFrameEntity) (Object) this, player, itemStack));
+                        return;
+                    } else if (!gbw$isWaxed() && itemStack.isOf(Items.HONEYCOMB)) {
+                        cir.setReturnValue(wax((ItemFrameEntity) (Object) this, player, itemStack));
+                        return;
+                    } else if (!gbw$isWaxed() && itemStack.getItem() instanceof DyeItem dyeItem) {
+                        getWorld().playSoundFromEntity(player, (ItemFrameEntity) (Object) this, SoundEvents.ITEM_DYE_USE, SoundCategory.PLAYERS, 1f, 1f);
+                        gbw$setColor(dyeItem.getColor());
+                        emitGameEvent(GameEvent.BLOCK_CHANGE, player);
+                        itemStack.decrementUnlessCreative(1, player);
+
+                        if (!getWorld().isClient)
+                            cir.setReturnValue(ActionResult.SUCCESS_SERVER);
+                        else
+                            cir.setReturnValue(ActionResult.SUCCESS);
                         return;
                     }
-                }
+                    cir.setReturnValue(ActionResult.PASS);
+                } else if (!getWorld().isClient) {
+                    if (itemStack.isOf(Items.FILLED_MAP)) {
+                        MapState mapState = FilledMapItem.getMapState(itemStack, getWorld());
+                        if (mapState != null && mapState.decorationCountNotLessThan(256)) {
+                            cir.setReturnValue(ActionResult.FAIL);
+                            return;
+                        }
+                    }
 
-                setHeldItemStack(itemStack);
-                emitGameEvent(GameEvent.BLOCK_CHANGE, player);
-                itemStack.decrementUnlessCreative(1, player);
-                if (!getWorld().isClient)
-                    cir.setReturnValue(ActionResult.SUCCESS_SERVER);
-                else cir.setReturnValue(ActionResult.SUCCESS);
+                    setHeldItemStack(itemStack);
+                    emitGameEvent(GameEvent.BLOCK_CHANGE, player);
+                    itemStack.decrementUnlessCreative(1, player);
+                    if (!getWorld().isClient)
+                        cir.setReturnValue(ActionResult.SUCCESS_SERVER);
+                    else cir.setReturnValue(ActionResult.SUCCESS);
+                }
                 return;
             }
         } else {
             if (gbw$isWaxed()) {
-                if (itemStack.isIn(ItemTags.AXES) && player.shouldCancelInteraction()) {
+                if (itemStack.isIn(ItemTags.AXES) && player.isSneaking()) {
                     cir.setReturnValue(unwax((ItemFrameEntity) (Object) this, player, itemStack));
-                } else
+                } else {
                     cir.setReturnValue(ActionResult.PASS);
+                }
                 return;
-            } else if (!gbw$isWaxed()) {
-                if (player.shouldCancelInteraction()) {
+            } else {
+                if (player.isSneaking()) {
                     if (itemStack.isOf(Items.HONEYCOMB)) {
                         cir.setReturnValue(wax((ItemFrameEntity) (Object) this, player, itemStack));
                         return;
@@ -137,33 +142,20 @@ public abstract class ItemFrameEntityMixin extends AbstractDecorationEntity impl
                         emitGameEvent(GameEvent.BLOCK_CHANGE, player);
                         itemStack.decrementUnlessCreative(1, player);
 
-                        if (!getWorld().isClient)
-                            cir.setReturnValue(ActionResult.SUCCESS_SERVER);
-                        else cir.setReturnValue(ActionResult.SUCCESS);
+                        cir.setReturnValue(!getWorld().isClient ? ActionResult.SUCCESS_SERVER : ActionResult.SUCCESS);
                         return;
                     }
-                } else {
-                    playSound(getRotateItemSound(), 1f, 1f);
-                    if (player.shouldCancelInteraction()) {
-                        setRotation(getRotation() - 1);
-                    } else setRotation(getRotation() + 1);
-                    emitGameEvent(GameEvent.BLOCK_CHANGE, player);
-
-                    if (!getWorld().isClient)
-                        cir.setReturnValue(ActionResult.SUCCESS_SERVER);
-                    else cir.setReturnValue(ActionResult.SUCCESS);
-                    return;
                 }
+                playSound(getRotateItemSound(), 1f, 1f);
+                setRotation(getRotation() + (player.isSneaking() ? -1 : 1));
+                emitGameEvent(GameEvent.BLOCK_CHANGE, player);
+
+                cir.setReturnValue(!getWorld().isClient ? ActionResult.SUCCESS_SERVER : ActionResult.SUCCESS);
                 return;
             }
         }
-        if (!bl && !bl2) {
-            cir.setReturnValue(ActionResult.PASS);
-        } else {
-            if (!getWorld().isClient) {
-                cir.setReturnValue(ActionResult.SUCCESS_SERVER);
-            } else cir.setReturnValue(ActionResult.SUCCESS);
-        }
+
+        cir.setReturnValue(ActionResult.PASS);
     }
 
     @Inject(method = "getAsItemStack", at = @At("HEAD"), cancellable = true)
