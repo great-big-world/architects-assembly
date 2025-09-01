@@ -129,6 +129,10 @@
   "block.great_big_world.waxed_weathered_cut_copper_wall": "Waxed Weathered Cut Copper Wall",
   "block.great_big_world.oxidized_cut_copper_wall": "Oxidized Cut Copper Wall",
   "block.great_big_world.waxed_oxidized_cut_copper_wall": "Waxed Oxidized Cut Copper Wall",
+  "block.great_big_world.chiseled_purpur": "Chiseled Purpur",
+  "block.great_big_world.chiseled_purpur.variant": "Purpur Block",
+  "block.great_big_world.polished_blackstone_pillar": "Polished Blackstone Pillar",
+  "block.great_big_world.polished_blackstone_pillar.variant": "Blackstone Pillar",
   "block.great_big_world.oak_slab": "Oak Slab",
   "block.great_big_world.spruce_slab": "Spruce Slab",
   "block.great_big_world.birch_slab": "Birch Slab",
@@ -143,7 +147,6 @@
   "block.great_big_world.bamboo_mosaic_slab.variant": "Bamboo Slab",
   "block.great_big_world.crimson_slab": "Crimson Slab",
   "block.great_big_world.warped_slab": "Warped Slab",
-
   "block.great_big_world.stone_slab": "Stone Slab",
   "block.great_big_world.cobblestone_slab": "Cobblestone Slab",
   "block.great_big_world.mossy_cobblestone_slab": "Mossy Cobblestone Slab",

@@ -10,7 +10,6 @@ import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.block.*;
 import net.minecraft.client.render.BlockRenderLayer;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 
@@ -131,6 +130,8 @@ public final class ArchitectsAssemblyBlocks {
     public static Block WAXED_EXPOSED_CUT_COPPER_WALL;
     public static Block WAXED_WEATHERED_CUT_COPPER_WALL;
     public static Block WAXED_OXIDIZED_CUT_COPPER_WALL;
+    public static Block CHISELED_PURPUR;
+    public static Block POLISHED_BLACKSTONE_PILLAR;
 
     private static void registerDecorativeBlocks() {
         CRACKED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_glass"), settings -> new CrackedGlassBlock(settings, Blocks.GLASS::getDefaultState, () -> ArchitectsAssemblyItems.GLASS_SHARD), AbstractBlock.Settings.copy(Blocks.GLASS).breakInstantly());
@@ -234,6 +235,8 @@ public final class ArchitectsAssemblyBlocks {
         WAXED_EXPOSED_CUT_COPPER_WALL = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "waxed_exposed_cut_copper_wall"), WallBlock::new, AbstractBlock.Settings.copyShallow(Blocks.WAXED_EXPOSED_CUT_COPPER).solid());
         WAXED_WEATHERED_CUT_COPPER_WALL = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "waxed_weathered_cut_copper_wall"), WallBlock::new, AbstractBlock.Settings.copyShallow(Blocks.WAXED_WEATHERED_CUT_COPPER).solid());
         WAXED_OXIDIZED_CUT_COPPER_WALL = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "waxed_oxidized_cut_copper_wall"), WallBlock::new, AbstractBlock.Settings.copyShallow(Blocks.WAXED_OXIDIZED_CUT_COPPER).solid());
+        CHISELED_PURPUR = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_purpur"), AbstractBlock.Settings.copy(Blocks.PURPUR_BLOCK));
+        POLISHED_BLACKSTONE_PILLAR = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "polished_blackstone_pillar"), PillarBlock::new, AbstractBlock.Settings.copy(Blocks.POLISHED_BLACKSTONE));
 
         StrippableBlockRegistry.register(CHISELED_OAK_LOG, STRIPPED_CHISELED_OAK_LOG);
         StrippableBlockRegistry.register(CHISELED_OAK_WOOD, STRIPPED_CHISELED_OAK_WOOD);

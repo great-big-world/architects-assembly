@@ -237,6 +237,8 @@ public final class ArchitectsAssemblyItems {
     public static Item WAXED_WEATHERED_CUT_COPPER_WALL;
     public static Item OXIDIZED_CUT_COPPER_WALL;
     public static Item WAXED_OXIDIZED_CUT_COPPER_WALL;
+    public static Item CHISELED_PURPUR;
+    public static Item POLISHED_BLACKSTONE_PILLAR;
 
     private static void registerDecorativeBlocks() {
         CHISELED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_glass"), ArchitectsAssemblyBlocks.CHISELED_GLASS);
@@ -336,6 +338,8 @@ public final class ArchitectsAssemblyItems {
         WAXED_WEATHERED_CUT_COPPER_WALL = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "waxed_weathered_cut_copper_wall"), ArchitectsAssemblyBlocks.WAXED_WEATHERED_CUT_COPPER_WALL);
         OXIDIZED_CUT_COPPER_WALL = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "oxidized_cut_copper_wall"), ArchitectsAssemblyBlocks.OXIDIZED_CUT_COPPER_WALL);
         WAXED_OXIDIZED_CUT_COPPER_WALL = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "waxed_oxidized_cut_copper_wall"), ArchitectsAssemblyBlocks.WAXED_OXIDIZED_CUT_COPPER_WALL);
+        CHISELED_PURPUR = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_purpur"), ArchitectsAssemblyBlocks.CHISELED_PURPUR);
+        POLISHED_BLACKSTONE_PILLAR = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "polished_blackstone_pillar"), ArchitectsAssemblyBlocks.POLISHED_BLACKSTONE_PILLAR);
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COLORED_BLOCKS).register(entries -> {
             entries.getDisplayStacks().replaceAll(stack -> {
@@ -464,6 +468,7 @@ public final class ArchitectsAssemblyItems {
             entries.addAfter(WAXED_EXPOSED_CUT_COPPER_SLAB, WAXED_EXPOSED_CUT_COPPER_WALL);
             entries.addAfter(WAXED_WEATHERED_CUT_COPPER_SLAB, WAXED_WEATHERED_CUT_COPPER_WALL);
             entries.addAfter(WAXED_OXIDIZED_CUT_COPPER_SLAB, WAXED_OXIDIZED_CUT_COPPER_WALL);
+            entries.addAfter(Items.POLISHED_BLACKSTONE_WALL, POLISHED_BLACKSTONE_PILLAR);
         });
     }
     // endregion
@@ -720,7 +725,7 @@ public final class ArchitectsAssemblyItems {
             entries.addAfter(ArchitectsAssemblyItems.POLISHED_GRANITE_SLAB, POLISHED_GRANITE_WALL);
             entries.addAfter(ArchitectsAssemblyItems.POLISHED_ANDESITE_SLAB, POLISHED_ANDESITE_WALL);
             entries.addAfter(ArchitectsAssemblyItems.POLISHED_DIORITE_SLAB, POLISHED_DIORITE_WALL);
-            entries.addAfter(ArchitectsAssemblyItems.PURPUR_SLAB, PURPUR_WALL);
+            entries.addAfter(ArchitectsAssemblyItems.PURPUR_SLAB, PURPUR_WALL, CHISELED_PURPUR);
             entries.addAfter(Items.MUD_BRICKS, CRACKED_MUD_BRICKS);
             entries.addAfter(Items.QUARTZ_BRICKS, CRACKED_QUARTZ_BRICKS);
             entries.addAfter(Items.RED_NETHER_BRICKS, CRACKED_RED_NETHER_BRICKS);

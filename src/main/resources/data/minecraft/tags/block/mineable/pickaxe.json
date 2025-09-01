@@ -102,6 +102,8 @@
     "great_big_world:waxed_copper_pressure_plate",
     "great_big_world:waxed_exposed_copper_pressure_plate",
     "great_big_world:waxed_weathered_copper_pressure_plate",
-    "great_big_world:waxed_oxidized_copper_pressure_plate"
+    "great_big_world:waxed_oxidized_copper_pressure_plate",
+    "great_big_world:chiseled_purpur",
+    "great_big_world:polished_blackstone_pillar"
   ]
 }
