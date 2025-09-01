@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": "minecraft:purpur_block",
+  "result": {
+    "id": "great_big_world:chiseled_purpur"
+  }
+}

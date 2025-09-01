@@ -130,8 +130,6 @@ public final class ArchitectsAssemblyBlocks {
     public static Block WAXED_EXPOSED_CUT_COPPER_WALL;
     public static Block WAXED_WEATHERED_CUT_COPPER_WALL;
     public static Block WAXED_OXIDIZED_CUT_COPPER_WALL;
-    public static Block CHISELED_PURPUR;
-    public static Block POLISHED_BLACKSTONE_PILLAR;
 
     private static void registerDecorativeBlocks() {
         CRACKED_GLASS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_glass"), settings -> new CrackedGlassBlock(settings, Blocks.GLASS::getDefaultState, () -> ArchitectsAssemblyItems.GLASS_SHARD), AbstractBlock.Settings.copy(Blocks.GLASS).breakInstantly());
@@ -235,8 +233,6 @@ public final class ArchitectsAssemblyBlocks {
         WAXED_EXPOSED_CUT_COPPER_WALL = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "waxed_exposed_cut_copper_wall"), WallBlock::new, AbstractBlock.Settings.copyShallow(Blocks.WAXED_EXPOSED_CUT_COPPER).solid());
         WAXED_WEATHERED_CUT_COPPER_WALL = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "waxed_weathered_cut_copper_wall"), WallBlock::new, AbstractBlock.Settings.copyShallow(Blocks.WAXED_WEATHERED_CUT_COPPER).solid());
         WAXED_OXIDIZED_CUT_COPPER_WALL = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "waxed_oxidized_cut_copper_wall"), WallBlock::new, AbstractBlock.Settings.copyShallow(Blocks.WAXED_OXIDIZED_CUT_COPPER).solid());
-        CHISELED_PURPUR = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_purpur"), AbstractBlock.Settings.copy(Blocks.PURPUR_BLOCK));
-        POLISHED_BLACKSTONE_PILLAR = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "polished_blackstone_pillar"), PillarBlock::new, AbstractBlock.Settings.copy(Blocks.POLISHED_BLACKSTONE));
 
         StrippableBlockRegistry.register(CHISELED_OAK_LOG, STRIPPED_CHISELED_OAK_LOG);
         StrippableBlockRegistry.register(CHISELED_OAK_WOOD, STRIPPED_CHISELED_OAK_WOOD);
@@ -468,6 +464,9 @@ public final class ArchitectsAssemblyBlocks {
     public static Block CRACKED_QUARTZ_BRICKS;
     public static Block CRACKED_RED_NETHER_BRICKS;
     public static Block CRACKED_END_STONE_BRICKS;
+    public static Block CHISELED_PURPUR;
+    public static Block POLISHED_BLACKSTONE_PILLAR;
+    public static Block CRACKED_TUFF_BRICKS;
 
     private static void registerMissingBlocks() {
         QUARTZ_BRICK_STAIRS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "quartz_brick_stairs"), settings -> new StairsBlock(Blocks.QUARTZ_BRICKS.getDefaultState(), settings), AbstractBlock.Settings.copy(Blocks.QUARTZ_BRICKS));
@@ -487,6 +486,9 @@ public final class ArchitectsAssemblyBlocks {
         CRACKED_QUARTZ_BRICKS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_quartz_bricks"), AbstractBlock.Settings.copy(Blocks.QUARTZ_BRICKS));
         CRACKED_RED_NETHER_BRICKS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_red_nether_bricks"), AbstractBlock.Settings.copy(Blocks.RED_NETHER_BRICKS));
         CRACKED_END_STONE_BRICKS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_end_stone_bricks"), AbstractBlock.Settings.copy(Blocks.END_STONE_BRICKS));
+        CHISELED_PURPUR = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_purpur"), AbstractBlock.Settings.copy(Blocks.PURPUR_BLOCK));
+        POLISHED_BLACKSTONE_PILLAR = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "polished_blackstone_pillar"), PillarBlock::new, AbstractBlock.Settings.copy(Blocks.POLISHED_BLACKSTONE));
+        CRACKED_TUFF_BRICKS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_tuff_bricks"), AbstractBlock.Settings.copy(Blocks.TUFF_BRICKS));
     }
 
     @Environment(EnvType.CLIENT)

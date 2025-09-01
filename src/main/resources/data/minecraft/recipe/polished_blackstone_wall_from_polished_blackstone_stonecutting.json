@@ -2,7 +2,8 @@
   "type": "minecraft:stonecutting",
   "ingredient": [
     "minecraft:polished_blackstone",
-    "minecraft:chiseled_polished_blackstone"
+    "minecraft:chiseled_polished_blackstone",
+    "great_big_world:polished_blackstone_pillar"
   ],
   "result": {
     "count": 1,

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": [
+    "minecraft:blackstone",
+    "minecraft:polished_blackstone"
+  ],
+  "result": {
+    "id": "great_big_world:polished_blackstone_pillar"
+  }
+}
