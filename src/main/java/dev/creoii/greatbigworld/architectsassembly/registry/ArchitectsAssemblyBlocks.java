@@ -2,6 +2,7 @@ package dev.creoii.greatbigworld.architectsassembly.registry;
 
 import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.architectsassembly.block.*;
+import dev.creoii.greatbigworld.block.FacingBlock;
 import dev.creoii.greatbigworld.util.RegistryHelper;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -487,7 +488,7 @@ public final class ArchitectsAssemblyBlocks {
         CRACKED_RED_NETHER_BRICKS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_red_nether_bricks"), AbstractBlock.Settings.copy(Blocks.RED_NETHER_BRICKS));
         CRACKED_END_STONE_BRICKS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_end_stone_bricks"), AbstractBlock.Settings.copy(Blocks.END_STONE_BRICKS));
         CHISELED_PURPUR = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_purpur"), AbstractBlock.Settings.copy(Blocks.PURPUR_BLOCK));
-        POLISHED_BLACKSTONE_PILLAR = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "polished_blackstone_pillar"), PillarBlock::new, AbstractBlock.Settings.copy(Blocks.POLISHED_BLACKSTONE));
+        POLISHED_BLACKSTONE_PILLAR = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "polished_blackstone_pillar"), FacingBlock::new, AbstractBlock.Settings.copy(Blocks.POLISHED_BLACKSTONE));
         CRACKED_TUFF_BRICKS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_tuff_bricks"), AbstractBlock.Settings.copy(Blocks.TUFF_BRICKS));
     }
 
