@@ -65,7 +65,7 @@ public abstract class ShovelItemMixin extends Item {
                 world.setBlockState(blockPos, state, Block.NOTIFY_ALL_AND_REDRAW);
                 world.emitGameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Emitter.of(playerEntity, state));
                 if (playerEntity != null) {
-                    context.getStack().damage(1, playerEntity, LivingEntity.getSlotForHand(context.getHand()));
+                    context.getStack().damage(1, playerEntity, context.getHand());
                 }
             }
             cir.setReturnValue(ActionResult.SUCCESS);
@@ -78,7 +78,7 @@ public abstract class ShovelItemMixin extends Item {
     public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
         int i = getMaxUseTime(stack, user) - remainingUseTicks;
 
-        if (i > 4 && i % 4 == 0) {
+        if (i >= 3 && i % 2 == 0) {
             BlockHitResult blockHitResult;
             if (user instanceof PlayerEntity player && (blockHitResult = canPlayerPath(world, player)) != null) {
                 if (!world.isClient) {
@@ -92,7 +92,7 @@ public abstract class ShovelItemMixin extends Item {
                     world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(player, state));
 
                     if (!player.isCreative()) {
-                        stack.damage(1, player, LivingEntity.getSlotForHand(player.getActiveHand()));
+                        stack.damage(1, player, player.getActiveHand());
                     }
 
                     player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));

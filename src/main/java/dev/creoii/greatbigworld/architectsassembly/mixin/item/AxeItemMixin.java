@@ -66,7 +66,7 @@ public abstract class AxeItemMixin extends Item {
     public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
         int i = getMaxUseTime(stack, user) - remainingUseTicks;
 
-        if (i > 4 && i % 4 == 0) {
+        if (i >= 3 && i % 2 == 0) {
             BlockHitResult blockHitResult;
             if (user instanceof PlayerEntity player && (blockHitResult = canPlayerStrip(world, player)) != null) {
                 BlockPos pos = blockHitResult.getBlockPos();
@@ -80,7 +80,7 @@ public abstract class AxeItemMixin extends Item {
                     world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(player, optional.get()));
 
                     if (!player.isCreative()) {
-                        stack.damage(1, player, LivingEntity.getSlotForHand(player.getActiveHand()));
+                        stack.damage(1, player, player.getActiveHand());
                     }
 
                     player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
