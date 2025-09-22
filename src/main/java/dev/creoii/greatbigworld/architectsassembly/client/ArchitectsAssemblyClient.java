@@ -41,10 +41,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArchitectsAssemblyClient implements ClientModInitializer {
-    public static final KeyBinding EXPAND_TOOLTIPS = new KeyBinding("key." + GreatBigWorld.NAMESPACE + ".expand_tooltips", InputUtil.GLFW_KEY_LEFT_CONTROL, KeyBinding.INVENTORY_CATEGORY);
     public static final KeyBinding CYCLE_HOTBAR = new KeyBinding("key." + GreatBigWorld.NAMESPACE + ".cycle_hotbar", InputUtil.GLFW_KEY_LEFT_CONTROL, KeyBinding.INVENTORY_CATEGORY);
     private static final Identifier CYCLE_HOTBAR_ARROW_TEXTURE = Identifier.of(GreatBigWorld.NAMESPACE, "hud/cycle_hotbar_arrow");
-    private static boolean shouldExpandTooltips = false;
     private static boolean shouldCycleHotbar = false;
 
     @Override
@@ -53,7 +51,6 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
         ArchitectsAssemblyParticleTypes.registerClient();
         ArchitectsAssemblyScreens.registerClient();
 
-        KeyBindingHelper.registerKeyBinding(EXPAND_TOOLTIPS);
         KeyBindingHelper.registerKeyBinding(CYCLE_HOTBAR);
 
         ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> tintIndex > 0 ? -1 : world != null && pos != null ? BiomeColors.getGrassColor(world, pos) : GrassColors.getDefaultColor(), ArchitectsAssemblyBlocks.POTTED_SHORT_GRASS);
@@ -66,10 +63,8 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
             if (client.player == null || client.player.isSpectator())
                 return;
 
-            EXPAND_TOOLTIPS.setPressed(client.currentScreen != null && InputUtil.isKeyPressed(client.getWindow().getHandle(), EXPAND_TOOLTIPS.boundKey.getCode()));
             CYCLE_HOTBAR.setPressed(client.currentScreen == null && InputUtil.isKeyPressed(client.getWindow().getHandle(), CYCLE_HOTBAR.boundKey.getCode()));
 
-            shouldExpandTooltips = EXPAND_TOOLTIPS.isPressed();
             shouldCycleHotbar = CYCLE_HOTBAR.isPressed();
         });
 
@@ -86,68 +81,39 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
         });
 
         ItemTooltipCallback.EVENT.register((stack, context, tooltipType, list) -> {
-            EquippableComponent equippableComponent = stack.getOrDefault(DataComponentTypes.EQUIPPABLE, null);
+            List<MutableText> itemTooltipInfos = new ArrayList<>();
+
+            FoodComponent foodComponent = stack.getOrDefault(DataComponentTypes.FOOD, null);
+            if (foodComponent != null) {
+                itemTooltipInfos.add(Text.translatable("item.tooltip.hunger", foodComponent.nutrition()).formatted(Formatting.GRAY));
+            }
+
             ToolComponent toolComponent = stack.getOrDefault(DataComponentTypes.TOOL, null);
-            if (equippableComponent != null || toolComponent != null) {
-                // remove ugly tooltip text, such as "When in hand...", but don't remove advanced item identifiers
-                MutableInt attributesStartIndex = new MutableInt(-2);
-                for (Text text : list) {
-                    attributesStartIndex.increment();
-                    if (text.getString().startsWith("When ")) {
-                        break;
-                    }
-                }
-                if (tooltipType.isAdvanced()) {
-                    MutableInt identifierStartIndex = new MutableInt(-1);
-                    for (int i = 0; i < list.size(); ++i) {
-                        String line = list.get(i).getString();
-                        if (!line.isBlank() && Identifier.tryParse(line) != null) {
-                            identifierStartIndex.setValue(i);
-                            break;
-                        }
-                    }
-                    list.removeIf(text -> {
-                        int i = list.indexOf(text);
-                        int minI = attributesStartIndex.getValue();
-                        int maxI = identifierStartIndex.getValue();
-                        if (maxI != -1) {
-                            return i >= minI && i < maxI;
-                        } else return i >= minI;
-                    });
-                } else if (attributesStartIndex.getValue() > 0) {
-                    list.removeIf(text -> list.indexOf(text) >= attributesStartIndex.getValue());
-                }
+            if (toolComponent != null) {
+                itemTooltipInfos.add(Text.translatable("item.tooltip.mining_speed", (int) toolComponent.defaultMiningSpeed()).formatted(Formatting.GRAY));
             }
 
-            if (shouldExpandTooltips() || tooltipType.isAdvanced()) {
-                List<MutableText> itemTooltipInfos = new ArrayList<>();
-
-                FoodComponent foodComponent = stack.getOrDefault(DataComponentTypes.FOOD, null);
-                if (foodComponent != null) {
-                    itemTooltipInfos.add(Text.translatable("item.tooltip.hunger", foodComponent.nutrition()).formatted(Formatting.GRAY));
-                }
-                if (toolComponent != null) {
-                    itemTooltipInfos.add(Text.translatable("item.tooltip.mining_speed", (int) toolComponent.defaultMiningSpeed()).formatted(Formatting.GRAY));
-                }
-                WeaponComponent weaponComponent = stack.getOrDefault(DataComponentTypes.WEAPON, null);
-                if (weaponComponent != null) {
-                    itemTooltipInfos.add(Text.translatable("item.tooltip.damage", weaponComponent.itemDamagePerAttack()).formatted(Formatting.GRAY));
-                }
-                if (stack.isOf(Items.TURTLE_HELMET)) {
-                    itemTooltipInfos.add(Text.translatable("item.tooltip.air", "10s").formatted(Formatting.GRAY));
-                }
-                AttributeModifiersComponent attributeModifiersComponent = stack.getOrDefault(DataComponentTypes.ATTRIBUTE_MODIFIERS, null);
-                if (equippableComponent != null && attributeModifiersComponent != null) {
-                    attributeModifiersComponent.modifiers().forEach(entry -> {
-                        if (entry.attribute().matchesKey(EntityAttributes.ARMOR.getKey().get())) {
-                            itemTooltipInfos.add(Text.translatable("item.tooltip.armor", entry.modifier().value()).formatted(Formatting.GRAY));
-                        }
-                    });
-                }
-
-                if (!itemTooltipInfos.isEmpty())
-                    list.add(1, Texts.join(itemTooltipInfos, Text.translatable("item.tooltip.separator")));
+            WeaponComponent weaponComponent = stack.getOrDefault(DataComponentTypes.WEAPON, null);
+            if (weaponComponent != null) {
+                itemTooltipInfos.add(Text.translatable("item.tooltip.damage", weaponComponent.itemDamagePerAttack()).formatted(Formatting.GRAY));
             }
+
+            if (stack.isOf(Items.TURTLE_HELMET)) {
+                itemTooltipInfos.add(Text.translatable("item.tooltip.air", "10s").formatted(Formatting.GRAY));
+            }
+
+            EquippableComponent equippableComponent = stack.getOrDefault(DataComponentTypes.EQUIPPABLE, null);
+            AttributeModifiersComponent attributeModifiersComponent = stack.getOrDefault(DataComponentTypes.ATTRIBUTE_MODIFIERS, null);
+            if (equippableComponent != null && attributeModifiersComponent != null) {
+                attributeModifiersComponent.modifiers().forEach(entry -> {
+                    if (entry.attribute().matchesKey(EntityAttributes.ARMOR.getKey().get())) {
+                        itemTooltipInfos.add(Text.translatable("item.tooltip.armor", entry.modifier().value()).formatted(Formatting.GRAY));
+                    }
+                });
+            }
+
+            if (!itemTooltipInfos.isEmpty())
+                list.add(1, Texts.join(itemTooltipInfos, Text.translatable("item.tooltip.separator")));
 
             if (stack.isIn(ItemTags.DECORATED_POT_SHERDS)) {
                 Identifier id = Registries.ITEM.getId(stack.getItem());
@@ -167,10 +133,6 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
                 }
             }
         });
-    }
-
-    public static boolean shouldExpandTooltips() {
-        return shouldExpandTooltips;
     }
 
     public static boolean shouldCycleHotbar() {

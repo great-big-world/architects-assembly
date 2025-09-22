@@ -1,86 +1,43 @@
 package dev.creoii.greatbigworld.architectsassembly.mixin.item;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
-import dev.creoii.greatbigworld.architectsassembly.client.ArchitectsAssemblyClient;
-import dev.creoii.greatbigworld.architectsassembly.variant.Variant;
-import dev.creoii.greatbigworld.architectsassembly.variant.VariantItem;
-import net.minecraft.block.entity.BannerPattern;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.FoodComponent;
-import net.minecraft.component.type.ToolComponent;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryEntryLookup;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.ItemTags;
-import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
-import net.minecraft.text.Texts;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
-import net.minecraft.village.raid.Raid;
-import org.apache.commons.lang3.StringUtils;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.List;
+import java.util.function.Consumer;
 
 @Mixin(ItemStack.class)
-public class ItemStackMixin {
-    /*@Inject(method = "getTooltip", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z", ordinal = 0, shift = At.Shift.AFTER))
-    private void gbw$appendBlockVariantTooltips(Item.TooltipContext context, PlayerEntity player, TooltipType type, CallbackInfoReturnable<List<Text>> cir, @Local List<Text> list) {
-        ItemStack stack = (ItemStack) (Object) this;
-        if (stack.isIn(ItemTags.DECORATED_POT_SHERDS)) {
-            Identifier id = Registries.ITEM.getId(stack.getItem());
-            list.add(Text.translatable("variant.item.sherd." + id.getPath().replace("_pottery_sherd", "")).formatted(Formatting.GRAY));
-        }
+public abstract class ItemStackMixin {
+    @Shadow public abstract int getMaxDamage();
+    @Shadow public abstract int getDamage();
 
-        if (stack.getItem() instanceof VariantItem variantItem && player != null && !ItemStack.areEqual(stack, Raid.createOminousBanner(player.getRegistryManager().getOrThrow(RegistryKeys.BANNER_PATTERN)))) {
-            for (Variant variant : Variant.VARIANTS.values()) {
-                if (variant.getItems().contains(variantItem) || variant.isStackInTags(stack))
-                    variantItem.gbw$addVariant(variant);
-            }
-
-            if (!variantItem.gbw$getVariants().isEmpty())
-                list.add(VariantItem.getVariantTooltip(variantItem));
-            else if (stack.getItem() instanceof SpawnEggItem spawnEggItem) {
-                list.add(MutableText.of(spawnEggItem.getEntityType(context.getRegistryLookup(), stack).getName().getContent()).formatted(Formatting.GRAY));
-            }
-        }
-    }*/
-
-    /*@Inject(method = "getTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/item/TooltipType;isAdvanced()Z", ordinal = 1))
-    private void gbw$appendItemInformationTooltips(Item.TooltipContext context, PlayerEntity player, TooltipType type, CallbackInfoReturnable<List<Text>> cir, @Local List<Text> list) {
-        ItemStack stack = (ItemStack) (Object) this;
-        if (!type.isAdvanced() && stack.isDamaged()) {
-            list.add(Text.translatable("item.durability", stack.getMaxDamage() - stack.getDamage(), stack.getMaxDamage()).formatted(Formatting.GRAY));
-        }
-
-        if (!type.isAdvanced() && ArchitectsAssemblyClient.shouldExpandTooltips()) {
-            FoodComponent component;
-            CreoFoodComponent creoFoodComponent;
-            if ((component = stack.get(DataComponentTypes.FOOD)) != null) {
-                list.add(Text.translatable("item.hunger", component.nutrition()).formatted(Formatting.GRAY));
-            } else if ((creoFoodComponent = stack.get(CreoDataComponentTypes.FOOD)) != null) {
-                list.add(Text.translatable("item.hunger", creoFoodComponent.nutrition()).formatted(Formatting.GRAY));
-            }
-
-
-        }
+    @ModifyExpressionValue(method = "appendTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/tooltip/TooltipType;isAdvanced()Z"))
+    private boolean gbw$allowAdvanced(boolean original) {
+        return true;
     }
 
-    @ModifyExpressionValue(method = "getTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isSectionVisible(ILnet/minecraft/item/ItemStack$TooltipSection;)Z", ordinal = 4))
-    private boolean gbw$ignoreTooltipModifiers(boolean original) {
-        return false;
-    }*/
+    @SuppressWarnings("unchecked")
+    @WrapOperation(method = "appendTooltip", at = @At(value = "INVOKE", target = "Ljava/util/function/Consumer;accept(Ljava/lang/Object;)V", ordinal = 5))
+    private <T> void gbw$allowAdvanced5(Consumer<T> instance, T t, Operation<Void> original, @Local(argsOnly = true) TooltipType type) {
+        instance.accept((T) Text.translatable("item.durability", getMaxDamage() - getDamage(), getMaxDamage()).formatted(Formatting.GRAY));
+    }
 
+    @WrapWithCondition(method = "appendTooltip", at = @At(value = "INVOKE", target = "Ljava/util/function/Consumer;accept(Ljava/lang/Object;)V", ordinal = 6))
+    private <T> boolean gbw$allowAdvanced6(Consumer<T> instance, T t, @Local(argsOnly = true) TooltipType type) {
+        return type.isAdvanced();
+    }
+
+    @WrapWithCondition(method = "appendTooltip", at = @At(value = "INVOKE", target = "Ljava/util/function/Consumer;accept(Ljava/lang/Object;)V", ordinal = 7))
+    private <T> boolean gbw$allowAdvanced7(Consumer<T> instance, T t, @Local(argsOnly = true) TooltipType type) {
+        return type.isAdvanced();
+    }
 }
