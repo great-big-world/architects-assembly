@@ -60,7 +60,7 @@ public abstract class ShovelItemMixin extends Item {
     private void gbw$cancelDefaultBehavior(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir, @Local World world, @Local BlockPos blockPos, @Local(ordinal = 0) BlockState blockState, @Local PlayerEntity playerEntity) {
         if (blockState.getBlock() instanceof CampfireBlock && blockState.get(CampfireBlock.LIT)) {
             CampfireBlock.extinguish(playerEntity, world, blockPos, blockState);
-            if (!world.isClient) {
+            if (!world.isClient()) {
                 BlockState state = blockState.with(CampfireBlock.LIT, false);
                 world.setBlockState(blockPos, state, Block.NOTIFY_ALL_AND_REDRAW);
                 world.emitGameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Emitter.of(playerEntity, state));
@@ -81,7 +81,7 @@ public abstract class ShovelItemMixin extends Item {
         if (i >= 3 && i % 2 == 0) {
             BlockHitResult blockHitResult;
             if (user instanceof PlayerEntity player && (blockHitResult = canPlayerPath(world, player)) != null) {
-                if (!world.isClient) {
+                if (!world.isClient()) {
                     BlockPos pos = blockHitResult.getBlockPos();
                     BlockState state = world.getBlockState(pos);
 

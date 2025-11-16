@@ -51,7 +51,7 @@ public class SawmillScreenHandler extends ScreenHandler {
         super(ArchitectsAssemblyScreens.SAWMILL, syncId);
         int i;
         this.context = context;
-        this.world = playerInventory.player.getWorld();
+        this.world = playerInventory.player.getEntityWorld();
         this.inputSlot = this.addSlot(new Slot(this.input, 0, 20, 33));
         this.outputSlot = this.addSlot(new Slot(this.output, 1, 143, 33){
 

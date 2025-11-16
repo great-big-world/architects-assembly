@@ -35,13 +35,12 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.village.raid.Raid;
 import net.minecraft.world.biome.GrassColors;
-import org.apache.commons.lang3.mutable.MutableInt;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ArchitectsAssemblyClient implements ClientModInitializer {
-    public static final KeyBinding CYCLE_HOTBAR = new KeyBinding("key." + GreatBigWorld.NAMESPACE + ".cycle_hotbar", InputUtil.GLFW_KEY_LEFT_CONTROL, KeyBinding.INVENTORY_CATEGORY);
+    public static final KeyBinding CYCLE_HOTBAR = new KeyBinding("key." + GreatBigWorld.NAMESPACE + ".cycle_hotbar", InputUtil.GLFW_KEY_LEFT_CONTROL, KeyBinding.Category.INVENTORY);
     private static final Identifier CYCLE_HOTBAR_ARROW_TEXTURE = Identifier.of(GreatBigWorld.NAMESPACE, "hud/cycle_hotbar_arrow");
     private static boolean shouldCycleHotbar = false;
 
@@ -63,7 +62,7 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
             if (client.player == null || client.player.isSpectator())
                 return;
 
-            CYCLE_HOTBAR.setPressed(client.currentScreen == null && InputUtil.isKeyPressed(client.getWindow().getHandle(), CYCLE_HOTBAR.boundKey.getCode()));
+            CYCLE_HOTBAR.setPressed(client.currentScreen == null && InputUtil.isKeyPressed(client.getWindow(), CYCLE_HOTBAR.boundKey.getCode()));
 
             shouldCycleHotbar = CYCLE_HOTBAR.isPressed();
         });
@@ -129,7 +128,7 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
                 if (!variantItem.gbw$getVariants().isEmpty()) {
                     list.add(1, VariantItem.getVariantTooltip(variantItem));
                 } else if (stack.getItem() instanceof SpawnEggItem spawnEggItem) {
-                    list.add(1, MutableText.of(spawnEggItem.getEntityType(context.getRegistryLookup(), stack).getName().getContent()).formatted(Formatting.GRAY));
+                    list.add(1, MutableText.of(spawnEggItem.getEntityType(stack).getName().getContent()).formatted(Formatting.GRAY));
                 }
             }
         });

@@ -61,7 +61,7 @@ public class CopperPressurePlateBlock extends OxidizableBlock {
     }
 
     protected void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, EntityCollisionHandler handler) {
-        if (!world.isClient) {
+        if (!world.isClient()) {
             if (state.get(STATE) == State.UP) {
                 world.playSound(null, pos, BlockSetType.COPPER.pressurePlateClickOn(), SoundCategory.BLOCKS);
                 world.emitGameEvent(entity, GameEvent.BLOCK_ACTIVATE, pos);

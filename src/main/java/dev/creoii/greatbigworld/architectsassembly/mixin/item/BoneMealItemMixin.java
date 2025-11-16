@@ -27,7 +27,7 @@ public class BoneMealItemMixin {
                 ServerWorld serverWorld = (ServerWorld) world;
                 entry.value().generate(serverWorld, serverWorld.getChunkManager().getChunkGenerator(), world.getRandom(), pos.up());
             });
-            if (!world.isClient)
+            if (!world.isClient())
                 stack.decrement(1);
             cir.setReturnValue(true);
         }

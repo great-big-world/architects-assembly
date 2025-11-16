@@ -56,7 +56,7 @@ public class SlabItem extends BlockItem {
                 slabPlacer.gbw$setSlabPlacementState(SlabPlacement.NORMAL); {
             }
 
-            if (!world.isClient)
+            if (!world.isClient())
                 ((ServerPlayerEntity) user).sendMessageToClient(Text.translatable("gui.placement.switch_slab_placement", Text.translatable(currentState.getTranslationKey())), true);
         }
         return super.use(world, user, hand);

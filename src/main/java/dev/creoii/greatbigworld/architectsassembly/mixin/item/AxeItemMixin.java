@@ -72,7 +72,7 @@ public abstract class AxeItemMixin extends Item {
                 BlockPos pos = blockHitResult.getBlockPos();
 
                 Optional<BlockState> optional = tryStrip(world, pos, player, world.getBlockState(pos));
-                if (optional.isPresent() && !world.isClient) {
+                if (optional.isPresent() && !world.isClient()) {
                     if (player instanceof ServerPlayerEntity serverPlayer)
                         Criteria.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, stack);
 

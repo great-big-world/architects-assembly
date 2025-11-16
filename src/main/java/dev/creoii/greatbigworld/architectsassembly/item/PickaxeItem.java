@@ -90,12 +90,12 @@ public class PickaxeItem extends Item {
                 world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(player, cracked));
 
                 if (!player.isCreative()) {
-                    stack.damage(1, player, LivingEntity.getSlotForHand(player.getActiveHand()));
+                    stack.damage(1, player, player.getActiveHand());
                 }
 
                 player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
 
-                if (world.isClient)
+                if (world.isClient())
                     player.swingHand(player.getActiveHand());
             }
         }

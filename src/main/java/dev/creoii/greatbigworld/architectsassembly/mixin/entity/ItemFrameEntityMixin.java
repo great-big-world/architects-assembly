@@ -93,21 +93,21 @@ public abstract class ItemFrameEntityMixin extends AbstractDecorationEntity impl
                         cir.setReturnValue(wax((ItemFrameEntity) (Object) this, player, itemStack));
                         return;
                     } else if (!gbw$isWaxed() && itemStack.getItem() instanceof DyeItem dyeItem) {
-                        getWorld().playSoundFromEntity(player, (ItemFrameEntity) (Object) this, SoundEvents.ITEM_DYE_USE, SoundCategory.PLAYERS, 1f, 1f);
+                        getEntityWorld().playSoundFromEntity(player, (ItemFrameEntity) (Object) this, SoundEvents.ITEM_DYE_USE, SoundCategory.PLAYERS, 1f, 1f);
                         gbw$setColor(dyeItem.getColor());
                         emitGameEvent(GameEvent.BLOCK_CHANGE, player);
                         itemStack.decrementUnlessCreative(1, player);
 
-                        if (!getWorld().isClient)
+                        if (!getEntityWorld().isClient())
                             cir.setReturnValue(ActionResult.SUCCESS_SERVER);
                         else
                             cir.setReturnValue(ActionResult.SUCCESS);
                         return;
                     }
                     cir.setReturnValue(ActionResult.PASS);
-                } else if (!getWorld().isClient) {
+                } else if (!getEntityWorld().isClient()) {
                     if (itemStack.isOf(Items.FILLED_MAP)) {
-                        MapState mapState = FilledMapItem.getMapState(itemStack, getWorld());
+                        MapState mapState = FilledMapItem.getMapState(itemStack, getEntityWorld());
                         if (mapState != null && mapState.decorationCountNotLessThan(256)) {
                             cir.setReturnValue(ActionResult.FAIL);
                             return;
@@ -117,7 +117,7 @@ public abstract class ItemFrameEntityMixin extends AbstractDecorationEntity impl
                     setHeldItemStack(itemStack);
                     emitGameEvent(GameEvent.BLOCK_CHANGE, player);
                     itemStack.decrementUnlessCreative(1, player);
-                    if (!getWorld().isClient)
+                    if (!getEntityWorld().isClient())
                         cir.setReturnValue(ActionResult.SUCCESS_SERVER);
                     else cir.setReturnValue(ActionResult.SUCCESS);
                 }
@@ -137,12 +137,12 @@ public abstract class ItemFrameEntityMixin extends AbstractDecorationEntity impl
                         cir.setReturnValue(wax((ItemFrameEntity) (Object) this, player, itemStack));
                         return;
                     } else if (itemStack.getItem() instanceof DyeItem dyeItem && gbw$getColor() != dyeItem.getColor()) {
-                        getWorld().playSoundFromEntity(player, (ItemFrameEntity) (Object) this, SoundEvents.ITEM_DYE_USE, SoundCategory.PLAYERS, 1f, 1f);
+                        getEntityWorld().playSoundFromEntity(player, (ItemFrameEntity) (Object) this, SoundEvents.ITEM_DYE_USE, SoundCategory.PLAYERS, 1f, 1f);
                         gbw$setColor(dyeItem.getColor());
                         emitGameEvent(GameEvent.BLOCK_CHANGE, player);
                         itemStack.decrementUnlessCreative(1, player);
 
-                        cir.setReturnValue(!getWorld().isClient ? ActionResult.SUCCESS_SERVER : ActionResult.SUCCESS);
+                        cir.setReturnValue(!getEntityWorld().isClient() ? ActionResult.SUCCESS_SERVER : ActionResult.SUCCESS);
                         return;
                     }
                 }
@@ -150,7 +150,7 @@ public abstract class ItemFrameEntityMixin extends AbstractDecorationEntity impl
                 setRotation(getRotation() + (player.isSneaking() ? -1 : 1));
                 emitGameEvent(GameEvent.BLOCK_CHANGE, player);
 
-                cir.setReturnValue(!getWorld().isClient ? ActionResult.SUCCESS_SERVER : ActionResult.SUCCESS);
+                cir.setReturnValue(!getEntityWorld().isClient() ? ActionResult.SUCCESS_SERVER : ActionResult.SUCCESS);
                 return;
             }
         }
@@ -186,12 +186,12 @@ public abstract class ItemFrameEntityMixin extends AbstractDecorationEntity impl
     @Unique
     private static ActionResult wax(ItemFrameEntity itemFrame, PlayerEntity player, ItemStack itemStack) {
         ((ExtendedItemFrame) itemFrame).gbw$setWaxed(true);
-        itemFrame.getWorld().syncWorldEvent(player, WorldEvents.BLOCK_WAXED, itemFrame.getBlockPos(), 0);
+        itemFrame.getEntityWorld().syncWorldEvent(player, WorldEvents.BLOCK_WAXED, itemFrame.getBlockPos(), 0);
         itemFrame.emitGameEvent(GameEvent.BLOCK_CHANGE, player);
         if (!player.getAbilities().creativeMode) {
             itemStack.decrement(1);
         }
-        if (!itemFrame.getWorld().isClient) {
+        if (!itemFrame.getEntityWorld().isClient()) {
             return ActionResult.SUCCESS_SERVER;
         } else return ActionResult.SUCCESS;
     }
@@ -199,12 +199,12 @@ public abstract class ItemFrameEntityMixin extends AbstractDecorationEntity impl
     @Unique
     private static ActionResult unwax(ItemFrameEntity itemFrame, PlayerEntity player, ItemStack itemStack) {
         ((ExtendedItemFrame) itemFrame).gbw$setWaxed(false);
-        itemFrame.getWorld().syncWorldEvent(player, WorldEvents.WAX_REMOVED, itemFrame.getBlockPos(), 0);
+        itemFrame.getEntityWorld().syncWorldEvent(player, WorldEvents.WAX_REMOVED, itemFrame.getBlockPos(), 0);
         itemFrame.emitGameEvent(GameEvent.BLOCK_CHANGE, player);
         if (!player.getAbilities().creativeMode) {
             itemStack.decrement(1);
         }
-        if (!itemFrame.getWorld().isClient) {
+        if (!itemFrame.getEntityWorld().isClient()) {
             return ActionResult.SUCCESS_SERVER;
         } else return ActionResult.SUCCESS;
     }

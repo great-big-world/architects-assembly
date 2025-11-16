@@ -37,7 +37,7 @@ public class CrackedGlassBlock extends TransparentBlock {
             world.setBlockState(pos, fixed.get(), 3);
             world.playSound(player, pos, ArchitectsAssemblySoundEvents.BLOCK_GLASS_REPAIR, SoundCategory.BLOCKS, 1f, 1f);
             stack.decrementUnlessCreative(1, player);
-            if (!world.isClient)
+            if (!world.isClient())
                 return ActionResult.SUCCESS_SERVER;
             return ActionResult.SUCCESS;
         }
@@ -46,7 +46,7 @@ public class CrackedGlassBlock extends TransparentBlock {
 
     @Override
     public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
-        if (!world.isClient) {
+        if (!world.isClient()) {
             BlockPos pos = hit.getBlockPos();
             if (projectile.canModifyAt((ServerWorld) world, pos) && projectile.canBreakBlocks((ServerWorld) world) && projectile.getVelocity().length() > .4d) {
                 world.breakBlock(pos, true, projectile);
@@ -57,7 +57,7 @@ public class CrackedGlassBlock extends TransparentBlock {
     @Override
     public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
         entity.handleFallDamage(fallDistance * .8f, .5f, entity.getDamageSources().fall());
-        if (!world.isClient && fallDistance >= .6f && !entity.getType().isIn(ArchitectsAssemblyTags.LIGHTWEIGHT_ENTITIES)) {
+        if (!world.isClient() && fallDistance >= .6f && !entity.getType().isIn(ArchitectsAssemblyTags.LIGHTWEIGHT_ENTITIES)) {
             world.breakBlock(pos, !(entity instanceof PlayerEntity player) || !player.isCreative(), entity);
         }
     }

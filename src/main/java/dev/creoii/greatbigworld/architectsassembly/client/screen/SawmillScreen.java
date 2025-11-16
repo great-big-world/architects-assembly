@@ -7,6 +7,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.RenderPipelines;
+import net.minecraft.client.gui.Click;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.sound.PositionedSoundInstance;
@@ -106,53 +107,60 @@ public class SawmillScreen extends HandledScreen<SawmillScreenHandler> {
     }
 
     @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+    public boolean mouseClicked(Click click, boolean doubled) {
         this.mouseClicked = false;
         if (this.canCraft) {
             int i = this.x + 52;
             int j = this.y + 14;
             int k = this.scrollOffset + 12;
-            for (int l = this.scrollOffset; l < k; ++l) {
+
+            for(int l = this.scrollOffset; l < k; ++l) {
                 int m = l - this.scrollOffset;
-                double d = mouseX - (double)(i + m % 4 * 16);
-                double e = mouseY - (double)(j + m / 4 * 18);
-                if (!(d >= 0.0) || !(e >= 0.0) || !(d < 16.0) || !(e < 18.0) || !handler.onButtonClick(client.player, l))
-                    continue;
-                MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(ArchitectsAssemblySoundEvents.UI_SAWMILL_SELECT_RECIPE, 1.0f));
-                this.client.interactionManager.clickButton(handler.syncId, l);
-                return true;
+                double d = click.x() - (double)(i + m % 4 * 16);
+                double e = click.y() - (double)(j + m / 4 * 18);
+                if (d >= (double)0.0F && e >= (double)0.0F && d < (double)16.0F && e < (double)18.0F && handler.onButtonClick(client.player, l)) {
+                    MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(ArchitectsAssemblySoundEvents.UI_SAWMILL_SELECT_RECIPE, 1.0F));
+                    this.client.interactionManager.clickButton(handler.syncId, l);
+                    return true;
+                }
             }
+
             i = this.x + 119;
             j = this.y + 9;
-            if (mouseX >= (double)i && mouseX < (double)(i + 12) && mouseY >= (double)j && mouseY < (double)(j + 54)) {
+            if (click.x() >= (double)i && click.x() < (double)(i + 12) && click.y() >= (double)j && click.y() < (double)(j + 54)) {
                 this.mouseClicked = true;
             }
         }
-        return super.mouseClicked(mouseX, mouseY, button);
+
+        return super.mouseClicked(click, doubled);
     }
 
-    @Override
-    public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY) {
+    public boolean mouseDragged(Click click, double offsetX, double offsetY) {
         if (this.mouseClicked && this.shouldScroll()) {
             int i = this.y + 14;
             int j = i + 54;
-            this.scrollAmount = ((float)mouseY - (float)i - 7.5f) / ((float)(j - i) - 15.0f);
-            this.scrollAmount = MathHelper.clamp(this.scrollAmount, 0.0f, 1.0f);
-            this.scrollOffset = (int)((double)(this.scrollAmount * (float)this.getMaxScroll()) + 0.5) * 4;
+            this.scrollAmount = ((float)click.y() - (float)i - 7.5F) / ((float)(j - i) - 15.0F);
+            this.scrollAmount = MathHelper.clamp(this.scrollAmount, 0.0F, 1.0F);
+            this.scrollOffset = (int)((double)(this.scrollAmount * (float)this.getMaxScroll()) + (double)0.5F) * 4;
             return true;
+        } else {
+            return super.mouseDragged(click, offsetX, offsetY);
         }
-        return super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY);
     }
 
-    @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double horizontalAmount, double verticalAmount) {
-        if (this.shouldScroll()) {
-            int i = this.getMaxScroll();
-            float f = (float)verticalAmount / (float)i;
-            this.scrollAmount = MathHelper.clamp(this.scrollAmount - f, 0.0f, 1.0f);
-            this.scrollOffset = (int)((double)(this.scrollAmount * (float)i) + 0.5) * 4;
+        if (super.mouseScrolled(mouseX, mouseY, horizontalAmount, verticalAmount)) {
+            return true;
+        } else {
+            if (this.shouldScroll()) {
+                int i = this.getMaxScroll();
+                float f = (float)verticalAmount / (float)i;
+                this.scrollAmount = MathHelper.clamp(this.scrollAmount - f, 0.0F, 1.0F);
+                this.scrollOffset = (int)((double)(this.scrollAmount * (float)i) + (double)0.5F) * 4;
+            }
+
+            return true;
         }
-        return true;
     }
 
     private boolean shouldScroll() {

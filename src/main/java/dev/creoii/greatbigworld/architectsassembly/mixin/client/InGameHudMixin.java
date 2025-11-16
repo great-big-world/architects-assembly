@@ -32,7 +32,7 @@ public abstract class InGameHudMixin {
         if (currentStack.getItem() instanceof VariantItem variantItem && !variantItem.gbw$getVariants().isEmpty()) {
             instance.drawCenteredTextWithShadow(textRenderer, VariantItem.getVariantTooltip(variantItem), x + (textRenderer.getWidth(text.getString()) / 2), y + 10, color);
         } else if (currentStack.getItem() instanceof SpawnEggItem spawnEggItem && instance.client.world != null) {
-            MutableText mutableText = MutableText.of(spawnEggItem.getEntityType(instance.client.world.getRegistryManager(), currentStack).getName().getContent()).formatted(Formatting.GRAY);
+            MutableText mutableText = MutableText.of(spawnEggItem.getEntityType(currentStack).getName().getContent()).formatted(Formatting.GRAY);
             instance.drawCenteredTextWithShadow(textRenderer, mutableText, x + (textRenderer.getWidth(text.getString()) / 2), y + 10, color);
         } else if (currentStack.isIn(ItemTags.DECORATED_POT_SHERDS)) {
             Identifier id = Registries.ITEM.getId(currentStack.getItem());
