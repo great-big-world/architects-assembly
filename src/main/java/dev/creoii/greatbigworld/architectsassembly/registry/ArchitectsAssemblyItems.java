@@ -472,7 +472,6 @@ public final class ArchitectsAssemblyItems {
             entries.addAfter(WAXED_EXPOSED_CUT_COPPER_SLAB, WAXED_EXPOSED_CUT_COPPER_WALL);
             entries.addAfter(WAXED_WEATHERED_CUT_COPPER_SLAB, WAXED_WEATHERED_CUT_COPPER_WALL);
             entries.addAfter(WAXED_OXIDIZED_CUT_COPPER_SLAB, WAXED_OXIDIZED_CUT_COPPER_WALL);
-            entries.addAfter(Items.CALCITE, POLISHED_CALCITE, POLISHED_CALCITE_STAIRS, POLISHED_CALCITE_SLAB, POLISHED_CALCITE_WALL);
         });
     }
     // endregion
@@ -748,7 +747,7 @@ public final class ArchitectsAssemblyItems {
             entries.addAfter(Items.END_STONE_BRICKS, CRACKED_END_STONE_BRICKS);
             entries.addAfter(Items.POLISHED_BLACKSTONE_WALL, POLISHED_BLACKSTONE_PILLAR);
             entries.addAfter(Items.TUFF_BRICKS, CRACKED_TUFF_BRICKS);
-            entries.addAfter(Items.CALCITE, CALCITE_STAIRS, CALCITE_SLAB, CALCITE_WALL);
+            entries.addAfter(Items.CHISELED_TUFF_BRICKS, Items.CALCITE, CALCITE_STAIRS, CALCITE_SLAB, CALCITE_WALL, POLISHED_CALCITE, POLISHED_CALCITE_STAIRS, POLISHED_CALCITE_SLAB, POLISHED_CALCITE_WALL);
         });
     }
     // endregion
