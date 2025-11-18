@@ -104,6 +104,13 @@
     "great_big_world:waxed_weathered_copper_pressure_plate",
     "great_big_world:waxed_oxidized_copper_pressure_plate",
     "great_big_world:chiseled_purpur",
-    "great_big_world:polished_blackstone_pillar"
+    "great_big_world:polished_blackstone_pillar",
+    "great_big_world:calcite_slab",
+    "great_big_world:calcite_stairs",
+    "great_big_world:calcite_wall",
+    "great_big_world:polished_calcite",
+    "great_big_world:polished_calcite_slab",
+    "great_big_world:polished_calcite_stairs",
+    "great_big_world:polished_calcite_wall"
   ]
 }

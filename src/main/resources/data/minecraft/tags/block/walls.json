@@ -20,6 +20,8 @@
     "great_big_world:lapis_wall",
     "great_big_world:polished_lapis_wall",
     "great_big_world:polished_lapis_brick_wall",
-    "great_big_world:mossy_brick_wall"
+    "great_big_world:mossy_brick_wall",
+    "great_big_world:calcite_wall",
+    "great_big_world:polished_calcite_wall"
   ]
 }

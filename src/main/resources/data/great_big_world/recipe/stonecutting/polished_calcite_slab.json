@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": [
+    "minecraft:calcite",
+    "great_big_world:polished_calcite"
+  ],
+  "result": {
+    "id": "great_big_world:polished_calcite_slab"
+  }
+}

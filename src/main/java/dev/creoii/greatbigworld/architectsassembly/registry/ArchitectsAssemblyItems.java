@@ -237,6 +237,10 @@ public final class ArchitectsAssemblyItems {
     public static Item WAXED_WEATHERED_CUT_COPPER_WALL;
     public static Item OXIDIZED_CUT_COPPER_WALL;
     public static Item WAXED_OXIDIZED_CUT_COPPER_WALL;
+    public static Item POLISHED_CALCITE;
+    public static Item POLISHED_CALCITE_STAIRS;
+    public static Item POLISHED_CALCITE_SLAB;
+    public static Item POLISHED_CALCITE_WALL;
 
     private static void registerDecorativeBlocks() {
         CHISELED_GLASS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_glass"), ArchitectsAssemblyBlocks.CHISELED_GLASS);
@@ -336,6 +340,10 @@ public final class ArchitectsAssemblyItems {
         WAXED_WEATHERED_CUT_COPPER_WALL = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "waxed_weathered_cut_copper_wall"), ArchitectsAssemblyBlocks.WAXED_WEATHERED_CUT_COPPER_WALL);
         OXIDIZED_CUT_COPPER_WALL = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "oxidized_cut_copper_wall"), ArchitectsAssemblyBlocks.OXIDIZED_CUT_COPPER_WALL);
         WAXED_OXIDIZED_CUT_COPPER_WALL = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "waxed_oxidized_cut_copper_wall"), ArchitectsAssemblyBlocks.WAXED_OXIDIZED_CUT_COPPER_WALL);
+        POLISHED_CALCITE = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "polished_calcite"), ArchitectsAssemblyBlocks.POLISHED_CALCITE);
+        POLISHED_CALCITE_STAIRS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "polished_calcite_stairs"), ArchitectsAssemblyBlocks.POLISHED_CALCITE_STAIRS);
+        POLISHED_CALCITE_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "polished_calcite_slab"), settings -> new SlabItem(ArchitectsAssemblyBlocks.POLISHED_CALCITE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_POLISHED_CALCITE_SLAB, settings.useBlockPrefixedTranslationKey()));
+        POLISHED_CALCITE_WALL = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "polished_calcite_wall"), ArchitectsAssemblyBlocks.POLISHED_CALCITE_WALL);
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COLORED_BLOCKS).register(entries -> {
             entries.getDisplayStacks().replaceAll(stack -> {
@@ -464,6 +472,7 @@ public final class ArchitectsAssemblyItems {
             entries.addAfter(WAXED_EXPOSED_CUT_COPPER_SLAB, WAXED_EXPOSED_CUT_COPPER_WALL);
             entries.addAfter(WAXED_WEATHERED_CUT_COPPER_SLAB, WAXED_WEATHERED_CUT_COPPER_WALL);
             entries.addAfter(WAXED_OXIDIZED_CUT_COPPER_SLAB, WAXED_OXIDIZED_CUT_COPPER_WALL);
+            entries.addAfter(Items.CALCITE, POLISHED_CALCITE, POLISHED_CALCITE_STAIRS, POLISHED_CALCITE_SLAB, POLISHED_CALCITE_WALL);
         });
     }
     // endregion
@@ -696,6 +705,9 @@ public final class ArchitectsAssemblyItems {
     public static Item CHISELED_PURPUR;
     public static Item POLISHED_BLACKSTONE_PILLAR;
     public static Item CRACKED_TUFF_BRICKS;
+    public static Item CALCITE_STAIRS;
+    public static Item CALCITE_SLAB;
+    public static Item CALCITE_WALL;
 
     private static void registerMissingBlocks() {
         QUARTZ_BRICK_STAIRS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "quartz_brick_stairs"), ArchitectsAssemblyBlocks.QUARTZ_BRICK_STAIRS);
@@ -716,6 +728,9 @@ public final class ArchitectsAssemblyItems {
         CHISELED_PURPUR = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "chiseled_purpur"), ArchitectsAssemblyBlocks.CHISELED_PURPUR);
         POLISHED_BLACKSTONE_PILLAR = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "polished_blackstone_pillar"), ArchitectsAssemblyBlocks.POLISHED_BLACKSTONE_PILLAR);
         CRACKED_TUFF_BRICKS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "cracked_tuff_bricks"), ArchitectsAssemblyBlocks.CRACKED_TUFF_BRICKS);
+        CALCITE_STAIRS = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "calcite_stairs"), ArchitectsAssemblyBlocks.CALCITE_STAIRS);
+        CALCITE_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "calcite_slab"), settings -> new SlabItem(ArchitectsAssemblyBlocks.CALCITE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_CALCITE_SLAB, settings.useBlockPrefixedTranslationKey()));
+        CALCITE_WALL = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "calcite_wall"), ArchitectsAssemblyBlocks.CALCITE_WALL);
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(entries -> {
             entries.addAfter(Items.QUARTZ_BRICKS, QUARTZ_BRICK_STAIRS, QUARTZ_BRICK_SLAB, QUARTZ_BRICK_WALL);
@@ -733,6 +748,7 @@ public final class ArchitectsAssemblyItems {
             entries.addAfter(Items.END_STONE_BRICKS, CRACKED_END_STONE_BRICKS);
             entries.addAfter(Items.POLISHED_BLACKSTONE_WALL, POLISHED_BLACKSTONE_PILLAR);
             entries.addAfter(Items.TUFF_BRICKS, CRACKED_TUFF_BRICKS);
+            entries.addAfter(Items.CALCITE, CALCITE_STAIRS, CALCITE_SLAB, CALCITE_WALL);
         });
     }
     // endregion
