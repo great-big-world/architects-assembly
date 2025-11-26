@@ -649,6 +649,8 @@
   "trim_pattern.minecraft.ward": "Ward",
   "trim_pattern.minecraft.wayfinder": "Wayfinder",
   "trim_pattern.minecraft.wild": "Wild",
+  "trim_pattern.minecraft.bolt": "Bolt",
+  "trim_pattern.minecraft.flow": "Flow",
 
   "painting.random": "Random"
 }
