@@ -14,10 +14,6 @@ public interface ExtendedItemFrame {
 
     void gbw$setColor(DyeColor color);
 
-    boolean gbw$isWaxed();
-
-    void gbw$setWaxed(boolean waxed);
-
     static BlockState getStateForItemFrame(boolean hasGlow, boolean hasMap, boolean isDyed) {
         return BlockStateManagers.getStateForItemFrame(hasGlow, hasMap).with(DYED, isDyed);
     }

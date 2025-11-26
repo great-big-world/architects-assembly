@@ -64,7 +64,6 @@ public abstract class ItemFrameEntityRendererMixin<T extends ItemFrameEntity> {
     private void gbw$fixItemFrameRenderState(T itemFrameEntity, ItemFrameEntityRenderState itemFrameEntityRenderState, float f, CallbackInfo ci) {
         if (itemFrameEntity instanceof ExtendedItemFrame extendedItemFrame && itemFrameEntityRenderState instanceof ExtendedItemFrame extendedItemFrame1) {
             extendedItemFrame1.gbw$setColor(extendedItemFrame.gbw$getColor());
-            extendedItemFrame1.gbw$setWaxed(extendedItemFrame.gbw$isWaxed());
         }
     }
 }

@@ -10,7 +10,6 @@ import org.spongepowered.asm.mixin.Unique;
 @Mixin(ItemFrameEntityRenderState.class)
 public class ItemFrameEntityRenderStateMixin implements ExtendedItemFrame {
     @Unique private DyeColor color;
-    @Unique private boolean waxed;
 
     @Override
     public @Nullable DyeColor gbw$getColor() {
@@ -20,15 +19,5 @@ public class ItemFrameEntityRenderStateMixin implements ExtendedItemFrame {
     @Override
     public void gbw$setColor(@Nullable DyeColor color) {
         this.color = color;
-    }
-
-    @Override
-    public boolean gbw$isWaxed() {
-        return waxed;
-    }
-
-    @Override
-    public void gbw$setWaxed(boolean waxed) {
-        this.waxed = waxed;
     }
 }

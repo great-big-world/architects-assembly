@@ -71,6 +71,16 @@ public class ArchitectsAssembly implements ModInitializer {
             modifyContext.modify(Items.IRON_CHESTPLATE, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 340));
             modifyContext.modify(Items.IRON_LEGGINGS, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 325));
             modifyContext.modify(Items.IRON_BOOTS, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 295));
+
+            modifyContext.modify(Items.COPPER_AXE, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 221));
+            modifyContext.modify(Items.COPPER_PICKAXE, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 221));
+            modifyContext.modify(Items.COPPER_SHOVEL, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 221));
+            modifyContext.modify(Items.COPPER_HOE, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 221));
+            modifyContext.modify(Items.COPPER_SWORD, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 221));
+            modifyContext.modify(Items.COPPER_HELMET, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 130)); // drop
+            modifyContext.modify(Items.COPPER_CHESTPLATE, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 170)); // drop
+            modifyContext.modify(Items.COPPER_LEGGINGS, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 160)); // drop
+            modifyContext.modify(Items.COPPER_BOOTS, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 145)); // drop
         });
 
         ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(new SimpleSynchronousResourceReloadListener() {
