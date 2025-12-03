@@ -1,6 +1,6 @@
 package dev.creoii.greatbigworld.architectsassembly.mixin.entity;
 
-import dev.creoii.greatbigworld.client.ScreenShake;
+import dev.creoii.greatbigworld.client.ScreenShakeManager;
 import dev.creoii.greatbigworld.util.network.ScreenShakeS2C;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -24,7 +24,7 @@ public abstract class LightningEntityMixin extends Entity {
     private void gbw$lightningScreenShake(CallbackInfo ci) {
         PlayerLookup.tracking((ServerWorld) getEntityWorld(), getBlockPos()).forEach(serverPlayer -> {
             float t = Math.max(0f, 2.5f - ((float) serverPlayer.getEntityPos().distanceTo(getEntityPos()) / 64f));
-            ServerPlayNetworking.send(serverPlayer, new ScreenShakeS2C(t, 200, ScreenShake.Easing.OUT));
+            ServerPlayNetworking.send(serverPlayer, new ScreenShakeS2C(t, 200, ScreenShakeManager.Easing.OUT));
         });
     }
 }

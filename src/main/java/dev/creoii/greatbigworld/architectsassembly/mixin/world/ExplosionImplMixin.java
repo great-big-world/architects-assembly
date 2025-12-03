@@ -1,7 +1,7 @@
 package dev.creoii.greatbigworld.architectsassembly.mixin.world;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import dev.creoii.greatbigworld.client.ScreenShake;
+import dev.creoii.greatbigworld.client.ScreenShakeManager;
 import dev.creoii.greatbigworld.util.network.ScreenShakeS2C;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.Entity;
@@ -22,7 +22,7 @@ public abstract class ExplosionImplMixin {
     @Inject(method = "damageEntities", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;addVelocity(Lnet/minecraft/util/math/Vec3d;)V"))
     private void gbw$explosionScreenShake(CallbackInfo ci, @Local Entity entity) {
         if (entity instanceof ServerPlayerEntity serverPlayer) {
-            ServerPlayNetworking.send(serverPlayer, new ScreenShakeS2C((float) Math.exp(-.08f * serverPlayer.getEntityPos().distanceTo(getPosition())), 80, ScreenShake.Easing.OUT));
+            ServerPlayNetworking.send(serverPlayer, new ScreenShakeS2C((float) Math.exp(-.08f * serverPlayer.getEntityPos().distanceTo(getPosition())), 80, ScreenShakeManager.Easing.OUT));
         }
     }
 }
