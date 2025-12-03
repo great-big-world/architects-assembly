@@ -33,6 +33,7 @@
     "entity.ArmorStandEntityMixin",
     "entity.GlowItemFrameEntityMixin",
     "entity.ItemFrameEntityMixin",
+    "entity.LightningEntityMixin",
     "entity.PlayerEntityMixin",
     "item.AxeItemMixin",
     "item.BoneMealItemMixin",
@@ -43,6 +44,7 @@
     "item.ItemStackMixin",
     "item.ShovelItemMixin",
     "world.DripstoneHelperMixin",
+    "world.ExplosionImplMixin",
     "world.feature.GeodeFeatureMixin"
   ],
   "client": [
