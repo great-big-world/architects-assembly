@@ -1,7 +1,5 @@
 package dev.creoii.greatbigworld.architectsassembly.mixin.client;
 
-import net.minecraft.client.recipebook.RecipeBookType;
-import net.minecraft.recipe.book.RecipeBookCategory;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -14,25 +12,27 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import net.minecraft.client.gui.screens.recipebook.SearchRecipeBookCategory;
+import net.minecraft.world.item.crafting.RecipeBookCategory;
 
-@Mixin(RecipeBookType.class)
+@Mixin(SearchRecipeBookCategory.class)
 public class RecipeBookTypeMixin {
     @SuppressWarnings("InvokerTarget")
     @Invoker("<init>")
-    private static RecipeBookType create(String internalName, int internalId, RecipeBookCategory... categories) {
+    private static SearchRecipeBookCategory create(String internalName, int internalId, RecipeBookCategory... categories) {
         throw new AssertionError();
     }
 
-    @Shadow @Final @Mutable private static RecipeBookType[] field_54842;
+    @Shadow @Final @Mutable private static SearchRecipeBookCategory[] $VALUES;
 
-    @Inject(method = "<clinit>", at = @At(value = "FIELD", opcode = Opcodes.PUTSTATIC, target = "Lnet/minecraft/client/recipebook/RecipeBookType;field_54842:[Lnet/minecraft/client/recipebook/RecipeBookType;", shift = At.Shift.AFTER))
+    @Inject(method = "<clinit>", at = @At(value = "FIELD", opcode = Opcodes.PUTSTATIC, target = "Lnet/minecraft/client/gui/screens/recipebook/SearchRecipeBookCategory;$VALUES:[Lnet/minecraft/client/gui/screens/recipebook/SearchRecipeBookCategory;", shift = At.Shift.AFTER))
     private static void addCustomRecipeBookGroup(CallbackInfo ci) {
-        ArrayList<RecipeBookType> values = new ArrayList<>(Arrays.asList(field_54842));
+        ArrayList<SearchRecipeBookCategory> values = new ArrayList<>(Arrays.asList($VALUES));
         int last = values.size();
 
-        RecipeBookType sawmill = create("GBW_SAWMILL", last, new RecipeBookCategory());
+        SearchRecipeBookCategory sawmill = create("GBW_SAWMILL", last, new RecipeBookCategory());
         values.add(sawmill);
 
-        field_54842 = values.toArray(new RecipeBookType[0]);
+        $VALUES = values.toArray(new SearchRecipeBookCategory[0]);
     }
 }

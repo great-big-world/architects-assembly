@@ -1,44 +1,44 @@
 package dev.creoii.greatbigworld.architectsassembly.mixin.client;
 
 import dev.creoii.greatbigworld.architectsassembly.variant.VariantItem;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.hud.InGameHud;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.SpawnEggItem;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.tag.ItemTags;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.Identifier;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SpawnEggItem;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-@Mixin(InGameHud.class)
+@Mixin(Gui.class)
 public abstract class InGameHudMixin {
-    @Shadow private ItemStack currentStack;
-    @Shadow @Final private MinecraftClient client;
+    @Shadow private ItemStack lastToolHighlight;
+    @Shadow @Final private Minecraft minecraft;
 
-    @Redirect(method = "renderHeldItemTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawTextWithBackground(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/text/Text;IIII)V"))
-    private void gbw$renderHeldItemVariants(DrawContext instance, TextRenderer textRenderer, Text text, int x, int y, int width, int color) {
-        if (client.player != null && client.player.getArmor() > 0) {
+    @Redirect(method = "renderSelectedItemName", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;drawStringWithBackdrop(Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;IIII)V"))
+    private void gbw$renderHeldItemVariants(GuiGraphics instance, Font textRenderer, Component text, int x, int y, int width, int color) {
+        if (minecraft.player != null && minecraft.player.getArmorValue() > 0) {
             y -= 10;
         }
-        if (currentStack.getItem() instanceof VariantItem variantItem && !variantItem.gbw$getVariants().isEmpty()) {
-            instance.drawCenteredTextWithShadow(textRenderer, VariantItem.getVariantTooltip(variantItem), x + (textRenderer.getWidth(text.getString()) / 2), y + 10, color);
-        } else if (currentStack.getItem() instanceof SpawnEggItem spawnEggItem && instance.client.world != null) {
-            MutableText mutableText = MutableText.of(spawnEggItem.getEntityType(currentStack).getName().getContent()).formatted(Formatting.GRAY);
-            instance.drawCenteredTextWithShadow(textRenderer, mutableText, x + (textRenderer.getWidth(text.getString()) / 2), y + 10, color);
-        } else if (currentStack.isIn(ItemTags.DECORATED_POT_SHERDS)) {
-            Identifier id = Registries.ITEM.getId(currentStack.getItem());
-            instance.drawCenteredTextWithShadow(textRenderer, Text.translatable("variant.item.sherd." + id.getPath().replace("_pottery_sherd", "")).formatted(Formatting.GRAY), x + (textRenderer.getWidth(text.getString()) / 2), y + 10, color);
+        if (lastToolHighlight.getItem() instanceof VariantItem variantItem && !variantItem.gbw$getVariants().isEmpty()) {
+            instance.drawCenteredString(textRenderer, VariantItem.getVariantTooltip(variantItem), x + (textRenderer.width(text.getString()) / 2), y + 10, color);
+        } else if (lastToolHighlight.getItem() instanceof SpawnEggItem spawnEggItem && instance.minecraft.level != null) {
+            MutableComponent mutableText = MutableComponent.create(spawnEggItem.getType(lastToolHighlight).getDescription().getContents()).withStyle(ChatFormatting.GRAY);
+            instance.drawCenteredString(textRenderer, mutableText, x + (textRenderer.width(text.getString()) / 2), y + 10, color);
+        } else if (lastToolHighlight.is(ItemTags.DECORATED_POT_SHERDS)) {
+            Identifier id = BuiltInRegistries.ITEM.getKey(lastToolHighlight.getItem());
+            instance.drawCenteredString(textRenderer, Component.translatable("variant.item.sherd." + id.getPath().replace("_pottery_sherd", "")).withStyle(ChatFormatting.GRAY), x + (textRenderer.width(text.getString()) / 2), y + 10, color);
         }
 
-        instance.drawTextWithBackground(textRenderer, text, x, y, width, color);
+        instance.drawStringWithBackdrop(textRenderer, text, x, y, width, color);
     }
 }

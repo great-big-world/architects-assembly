@@ -2,22 +2,24 @@ package dev.creoii.greatbigworld.architectsassembly.mixin.block;
 
 import dev.creoii.greatbigworld.architectsassembly.block.enums.FluidType;
 import dev.creoii.greatbigworld.architectsassembly.util.Fluidloggable;
-import net.minecraft.block.*;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FlowableFluid;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.IntProperty;
-import net.minecraft.state.property.Property;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.LightBlock;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.material.FlowingFluid;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
@@ -30,55 +32,55 @@ import java.util.Optional;
 
 @Mixin(LightBlock.class)
 @Implements(@Interface(iface = Fluidloggable.class, prefix = "fluidloggable$"))
-public abstract class LightBlockMixin extends Block implements Waterloggable {
-    @Shadow @Final public static IntProperty LEVEL_15;
+public abstract class LightBlockMixin extends Block implements SimpleWaterloggedBlock {
+    @Shadow @Final public static IntegerProperty LEVEL;
     @Shadow @Final public static BooleanProperty WATERLOGGED;
 
-    public LightBlockMixin(Settings settings) {
+    public LightBlockMixin(Properties settings) {
         super(settings);
     }
 
-    public boolean canFillWithFluid(@Nullable LivingEntity filler, BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
+    public boolean canPlaceLiquid(@Nullable LivingEntity filler, BlockGetter world, BlockPos pos, BlockState state, Fluid fluid) {
         return Fluidloggable.defaultCanFillWithFluid(state);
     }
 
-    public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
+    public boolean placeLiquid(LevelAccessor world, BlockPos pos, BlockState state, FluidState fluidState) {
         return Fluidloggable.defaultTryFillWithFluid(world, pos, state, fluidState);
     }
 
-    public ItemStack tryDrainFluid(@Nullable LivingEntity drainer, WorldAccess world, BlockPos pos, BlockState state) {
+    public ItemStack pickupBlock(@Nullable LivingEntity drainer, LevelAccessor world, BlockPos pos, BlockState state) {
         return Fluidloggable.defaultTryDrainFluid(world, pos, state);
     }
 
-    public Optional<SoundEvent> getBucketFillSound() {
+    public Optional<SoundEvent> getPickupSound() {
         return Fluidloggable.defaultGetBucketFillSound();
     }
 
     @Inject(method = "<init>", at = @At("TAIL"))
-    private void gbw$setFluidloggableDefaultState(Settings settings, CallbackInfo ci) {
-        setDefaultState(stateManager.getDefaultState().with(LEVEL_15, 15).with(WATERLOGGED, false).with(Fluidloggable.FLUIDLOGGED, FluidType.EMPTY));
+    private void gbw$setFluidloggableDefaultState(Properties settings, CallbackInfo ci) {
+        registerDefaultState(stateDefinition.any().setValue(LEVEL, 15).setValue(WATERLOGGED, false).setValue(Fluidloggable.FLUIDLOGGED, FluidType.EMPTY));
     }
 
-    @Inject(method = "appendProperties", at = @At("TAIL"))
-    private void gbw$addFluidloggableProperty(StateManager.Builder<Block, BlockState> builder, CallbackInfo ci) {
+    @Inject(method = "createBlockStateDefinition", at = @At("TAIL"))
+    private void gbw$addFluidloggableProperty(StateDefinition.Builder<Block, BlockState> builder, CallbackInfo ci) {
         builder.add(Fluidloggable.FLUIDLOGGED);
     }
 
     @Nullable
     @Override
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return getDefaultState().with(WATERLOGGED, false).with(Fluidloggable.FLUIDLOGGED, Fluidloggable.FLUIDS.get(ctx.getWorld().getFluidState(ctx.getBlockPos()).getFluid()));
+    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+        return defaultBlockState().setValue(WATERLOGGED, false).setValue(Fluidloggable.FLUIDLOGGED, Fluidloggable.FLUIDS.get(ctx.getLevel().getFluidState(ctx.getClickedPos()).getType()));
     }
 
-    @Redirect(method = "getStateForNeighborUpdate", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;get(Lnet/minecraft/state/property/Property;)Ljava/lang/Comparable;"))
+    @Redirect(method = "updateShape", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;getValue(Lnet/minecraft/world/level/block/state/properties/Property;)Ljava/lang/Comparable;"))
     private Comparable<?> gbw$fixFluidloggableStateForNeighborUpdate(BlockState instance, Property<?> property) {
-        return instance.get(Fluidloggable.FLUIDLOGGED) != FluidType.EMPTY;
+        return instance.getValue(Fluidloggable.FLUIDLOGGED) != FluidType.EMPTY;
     }
 
     @Inject(method = "getFluidState", at = @At("RETURN"), cancellable = true)
     private void gbw$fixFluidloggableFluidState(BlockState state, CallbackInfoReturnable<FluidState> cir) {
-        if (state.get(Fluidloggable.FLUIDLOGGED).getFluid() instanceof FlowableFluid flowableFluid) {
-            cir.setReturnValue(flowableFluid.getStill(false));
+        if (state.getValue(Fluidloggable.FLUIDLOGGED).getFluid() instanceof FlowingFluid flowableFluid) {
+            cir.setReturnValue(flowableFluid.getSource(false));
         }
     }
 }

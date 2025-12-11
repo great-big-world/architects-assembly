@@ -1,17 +1,17 @@
 package dev.creoii.greatbigworld.architectsassembly.registry;
 
 import dev.creoii.greatbigworld.GreatBigWorld;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.stat.StatFormatter;
-import net.minecraft.stat.Stats;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.stats.StatFormatter;
+import net.minecraft.stats.Stats;
 
 public class ArchitectsAssemblyStats {
-    public static Identifier INTERACT_WITH_SAWMILL = Identifier.of(GreatBigWorld.NAMESPACE, "interact_with_sawmill");
+    public static Identifier INTERACT_WITH_SAWMILL = Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "interact_with_sawmill");
 
     public static void register() {
-        Registry.register(Registries.CUSTOM_STAT, INTERACT_WITH_SAWMILL, INTERACT_WITH_SAWMILL);
-        Stats.CUSTOM.getOrCreateStat(INTERACT_WITH_SAWMILL, StatFormatter.DEFAULT);
+        Registry.register(BuiltInRegistries.CUSTOM_STAT, INTERACT_WITH_SAWMILL, INTERACT_WITH_SAWMILL);
+        Stats.CUSTOM.get(INTERACT_WITH_SAWMILL, StatFormatter.DEFAULT);
     }
 }

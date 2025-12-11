@@ -1,11 +1,11 @@
 package dev.creoii.greatbigworld.architectsassembly.mixin.block;
 
 import dev.creoii.greatbigworld.architectsassembly.util.Fluidloggable;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.FenceGateBlock;
-import net.minecraft.entity.ai.pathing.NavigationType;
-import net.minecraft.registry.tag.FluidTags;
-import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.world.level.block.FenceGateBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.pathfinder.PathComputationType;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -18,11 +18,11 @@ public class FenceGateBlockMixin {
     @Shadow @Final public static BooleanProperty OPEN;
 
     @SuppressWarnings("deprecation")
-    @Inject(method = "canPathfindThrough", at = @At("HEAD"), cancellable = true)
-    private void gbw$fixNavigationForWaterGate(BlockState state, NavigationType type, CallbackInfoReturnable<Boolean> cir) {
-        if (type == NavigationType.WATER) {
+    @Inject(method = "isPathfindable", at = @At("HEAD"), cancellable = true)
+    private void gbw$fixNavigationForWaterGate(BlockState state, PathComputationType type, CallbackInfoReturnable<Boolean> cir) {
+        if (type == PathComputationType.WATER) {
             if (state.getProperties().contains(Fluidloggable.FLUIDLOGGED)) {
-                cir.setReturnValue(state.get(Fluidloggable.FLUIDLOGGED).getFluid().isIn(FluidTags.WATER) && state.get(OPEN));
+                cir.setReturnValue(state.getValue(Fluidloggable.FLUIDLOGGED).getFluid().is(FluidTags.WATER) && state.getValue(OPEN));
             }
         }
     }

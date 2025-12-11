@@ -2,12 +2,12 @@ package dev.creoii.greatbigworld.architectsassembly.mixin.item;
 
 import dev.creoii.greatbigworld.architectsassembly.variant.Variant;
 import dev.creoii.greatbigworld.architectsassembly.variant.VariantItem;
-import net.minecraft.item.Item;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
 import java.util.HashSet;
 import java.util.Set;
+import net.minecraft.world.item.Item;
 
 @Mixin(Item.class)
 public class ItemMixin implements VariantItem {

@@ -1,67 +1,67 @@
 package dev.creoii.greatbigworld.architectsassembly.mixin.client;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import dev.creoii.greatbigworld.architectsassembly.util.ExtendedItemFrame;
-import net.minecraft.block.BlockState;
-import net.minecraft.client.render.OverlayTexture;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.block.BlockRenderManager;
-import net.minecraft.client.render.command.OrderedRenderCommandQueue;
-import net.minecraft.client.render.entity.ItemFrameEntityRenderer;
-import net.minecraft.client.render.entity.state.ItemFrameEntityRenderState;
-import net.minecraft.client.render.model.BlockStateModel;
-import net.minecraft.client.render.state.CameraRenderState;
-import net.minecraft.client.texture.SpriteAtlasTexture;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.decoration.ItemFrameEntity;
-import net.minecraft.util.DyeColor;
-import net.minecraft.util.math.ColorHelper;
-import net.minecraft.util.math.RotationAxis;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.block.BlockRenderDispatcher;
+import net.minecraft.client.renderer.block.model.BlockStateModel;
+import net.minecraft.client.renderer.entity.ItemFrameRenderer;
+import net.minecraft.client.renderer.entity.state.ItemFrameRenderState;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.renderer.texture.TextureAtlas;
+import net.minecraft.util.ARGB;
+import net.minecraft.world.entity.decoration.ItemFrame;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(ItemFrameEntityRenderer.class)
-public abstract class ItemFrameEntityRendererMixin<T extends ItemFrameEntity> {
-    @Shadow protected abstract int getLight(boolean glow, int glowLight, int regularLight);
-    @Final @Shadow private BlockRenderManager blockRenderManager;
+@Mixin(ItemFrameRenderer.class)
+public abstract class ItemFrameEntityRendererMixin<T extends ItemFrame> {
+    @Shadow protected abstract int getLightCoords(boolean glow, int glowLight, int regularLight);
+    @Final @Shadow private BlockRenderDispatcher blockRenderer;
 
     @SuppressWarnings("deprecation")
-    @Inject(method = "render(Lnet/minecraft/client/render/entity/state/ItemFrameEntityRenderState;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/command/OrderedRenderCommandQueue;Lnet/minecraft/client/render/state/CameraRenderState;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/command/OrderedRenderCommandQueue;submitBlockStateModel(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/RenderLayer;Lnet/minecraft/client/render/model/BlockStateModel;FFFIII)V"), cancellable = true)
-    private void gbw$tintDyedItemFrame(ItemFrameEntityRenderState itemFrameEntityRenderState, MatrixStack matrixStack, OrderedRenderCommandQueue orderedRenderCommandQueue, CameraRenderState cameraRenderState, CallbackInfo ci) {
+    @Inject(method = "submit(Lnet/minecraft/client/renderer/entity/state/ItemFrameRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/CameraRenderState;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/resources/model/BlockStateDefinitions;getItemFrameFakeState(ZZ)Lnet/minecraft/world/level/block/state/BlockState;"), cancellable = true)
+    private void gbw$tintDyedItemFrame(ItemFrameRenderState itemFrameEntityRenderState, PoseStack matrixStack, SubmitNodeCollector orderedRenderCommandQueue, CameraRenderState cameraRenderState, CallbackInfo ci) {
         if (itemFrameEntityRenderState.mapId == null) {
-            BlockState blockState = ExtendedItemFrame.getStateForItemFrame(itemFrameEntityRenderState.glow, false, false);
-            BlockStateModel blockStateModel = blockRenderManager.getModel(blockState);
+            BlockState blockState = ExtendedItemFrame.getStateForItemFrame(itemFrameEntityRenderState.isGlowFrame, false, false);
+            BlockStateModel blockStateModel = blockRenderer.getBlockModel(blockState);
 
             if (itemFrameEntityRenderState instanceof ExtendedItemFrame extendedItemFrame) {
                 DyeColor color = extendedItemFrame.gbw$getColor();
                 if (color != null) {
-                    blockState = blockState.with(ExtendedItemFrame.DYED, true);
-                    blockStateModel = blockRenderManager.getModel(blockState);
-                    orderedRenderCommandQueue.submitBlockStateModel(matrixStack, RenderLayer.getEntitySolidZOffsetForward(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE), blockStateModel, ColorHelper.getRed(color.getEntityColor()) / 255f, ColorHelper.getGreen(color.getEntityColor()) / 255f, ColorHelper.getBlue(color.getEntityColor()) / 255f, itemFrameEntityRenderState.light, OverlayTexture.DEFAULT_UV, itemFrameEntityRenderState.outlineColor);
-                } else orderedRenderCommandQueue.submitBlockStateModel(matrixStack, RenderLayer.getEntitySolidZOffsetForward(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE), blockStateModel, 1f, 1f, 1f, itemFrameEntityRenderState.light, OverlayTexture.DEFAULT_UV, itemFrameEntityRenderState.outlineColor);
-            } else orderedRenderCommandQueue.submitBlockStateModel(matrixStack, RenderLayer.getEntitySolidZOffsetForward(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE), blockStateModel, 1f, 1f, 1f, itemFrameEntityRenderState.light, OverlayTexture.DEFAULT_UV, itemFrameEntityRenderState.outlineColor);
+                    blockState = blockState.setValue(ExtendedItemFrame.DYED, true);
+                    blockStateModel = blockRenderer.getBlockModel(blockState);
+                    orderedRenderCommandQueue.submitBlockModel(matrixStack, RenderTypes.entitySolidZOffsetForward(TextureAtlas.LOCATION_BLOCKS), blockStateModel, ARGB.red(color.getTextureDiffuseColor()) / 255f, ARGB.green(color.getTextureDiffuseColor()) / 255f, ARGB.blue(color.getTextureDiffuseColor()) / 255f, itemFrameEntityRenderState.lightCoords, OverlayTexture.NO_OVERLAY, itemFrameEntityRenderState.outlineColor);
+                } else orderedRenderCommandQueue.submitBlockModel(matrixStack, RenderTypes.entitySolidZOffsetForward(TextureAtlas.LOCATION_BLOCKS), blockStateModel, 1f, 1f, 1f, itemFrameEntityRenderState.lightCoords, OverlayTexture.NO_OVERLAY, itemFrameEntityRenderState.outlineColor);
+            } else orderedRenderCommandQueue.submitBlockModel(matrixStack, RenderTypes.entitySolidZOffsetForward(TextureAtlas.LOCATION_BLOCKS), blockStateModel, 1f, 1f, 1f, itemFrameEntityRenderState.lightCoords, OverlayTexture.NO_OVERLAY, itemFrameEntityRenderState.outlineColor);
 
-            matrixStack.pop();
+            matrixStack.popPose();
 
-            if (itemFrameEntityRenderState.invisible)
+            if (itemFrameEntityRenderState.isInvisible)
                 matrixStack.translate(0f, 0f, .5f);
             else matrixStack.translate(0f, 0f, .4375f);
 
-            if (!itemFrameEntityRenderState.itemRenderState.isEmpty()) {
-                matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees((float)itemFrameEntityRenderState.rotation * 360f / 8f));
-                int j = getLight(itemFrameEntityRenderState.glow, 15728880, itemFrameEntityRenderState.light);
+            if (!itemFrameEntityRenderState.item.isEmpty()) {
+                matrixStack.mulPose(Axis.ZP.rotationDegrees((float)itemFrameEntityRenderState.rotation * 360f / 8f));
+                int j = getLightCoords(itemFrameEntityRenderState.isGlowFrame, 15728880, itemFrameEntityRenderState.lightCoords);
                 matrixStack.scale(.5f, .5f, .5f);
-                itemFrameEntityRenderState.itemRenderState.render(matrixStack, orderedRenderCommandQueue, j, OverlayTexture.DEFAULT_UV, itemFrameEntityRenderState.outlineColor);
+                itemFrameEntityRenderState.item.submit(matrixStack, orderedRenderCommandQueue, j, OverlayTexture.NO_OVERLAY, itemFrameEntityRenderState.outlineColor);
             }
 
-            matrixStack.pop();
+            matrixStack.popPose();
             ci.cancel();
         }
     }
 
-    @Inject(method = "updateRenderState(Lnet/minecraft/entity/decoration/ItemFrameEntity;Lnet/minecraft/client/render/entity/state/ItemFrameEntityRenderState;F)V", at = @At("TAIL"))
-    private void gbw$fixItemFrameRenderState(T itemFrameEntity, ItemFrameEntityRenderState itemFrameEntityRenderState, float f, CallbackInfo ci) {
+    @Inject(method = "extractRenderState(Lnet/minecraft/world/entity/decoration/ItemFrame;Lnet/minecraft/client/renderer/entity/state/ItemFrameRenderState;F)V", at = @At("TAIL"))
+    private void gbw$fixItemFrameRenderState(T itemFrameEntity, ItemFrameRenderState itemFrameEntityRenderState, float f, CallbackInfo ci) {
         if (itemFrameEntity instanceof ExtendedItemFrame extendedItemFrame && itemFrameEntityRenderState instanceof ExtendedItemFrame extendedItemFrame1) {
             extendedItemFrame1.gbw$setColor(extendedItemFrame.gbw$getColor());
         }

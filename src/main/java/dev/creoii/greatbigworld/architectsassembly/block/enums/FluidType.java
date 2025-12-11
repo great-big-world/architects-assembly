@@ -1,17 +1,16 @@
 package dev.creoii.greatbigworld.architectsassembly.block.enums;
 
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.StringIdentifiable;
-
 import java.util.function.Supplier;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 
-public enum FluidType implements StringIdentifiable {
+public enum FluidType implements StringRepresentable {
     EMPTY("empty", Fluids.EMPTY, () -> ItemStack.EMPTY),
-    WATER("water", Fluids.WATER, () -> Items.WATER_BUCKET.getDefaultStack()), // DO NOT USE METHOD SUPPLIERS HERE
-    LAVA("lava", Fluids.LAVA, () -> Items.LAVA_BUCKET.getDefaultStack());
+    WATER("water", Fluids.WATER, () -> Items.WATER_BUCKET.getDefaultInstance()), // DO NOT USE METHOD SUPPLIERS HERE
+    LAVA("lava", Fluids.LAVA, () -> Items.LAVA_BUCKET.getDefaultInstance());
 
     private final String name;
     private final Fluid fluid;
@@ -24,7 +23,7 @@ public enum FluidType implements StringIdentifiable {
     }
 
     @Override
-    public String asString() {
+    public String getSerializedName() {
         return name;
     }
 

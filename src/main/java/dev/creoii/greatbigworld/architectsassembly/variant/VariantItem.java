@@ -1,11 +1,10 @@
 package dev.creoii.greatbigworld.architectsassembly.variant;
 
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-
 import java.util.Iterator;
 import java.util.Set;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 
 public interface VariantItem {
     Set<Variant> gbw$getVariants();
@@ -14,14 +13,14 @@ public interface VariantItem {
         gbw$getVariants().add(variant);
     }
 
-    static Text getVariantTooltip(VariantItem variantItem) {
-        MutableText text = Text.empty();
+    static Component getVariantTooltip(VariantItem variantItem) {
+        MutableComponent text = Component.empty();
         Iterator<Variant> iterator = variantItem.gbw$getVariants().iterator();
         while (iterator.hasNext()) {
             Variant variant = iterator.next();
-            text.append(Text.translatable(variant.getTranslationKey()).formatted(Formatting.GRAY));
+            text.append(Component.translatable(variant.getTranslationKey()).withStyle(ChatFormatting.GRAY));
             if (iterator.hasNext())
-                text.append(Text.literal(", ").formatted(Formatting.GRAY));
+                text.append(Component.literal(", ").withStyle(ChatFormatting.GRAY));
         }
         return text;
     }

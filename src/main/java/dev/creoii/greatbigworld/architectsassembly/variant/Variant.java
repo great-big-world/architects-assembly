@@ -2,16 +2,15 @@ package dev.creoii.greatbigworld.architectsassembly.variant;
 
 import com.google.gson.*;
 import dev.creoii.greatbigworld.architectsassembly.ArchitectsAssembly;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.JsonHelper;
-
 import java.lang.reflect.Type;
 import java.util.*;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.tags.TagKey;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 public class Variant {
     public static final Gson GSON = new GsonBuilder().setPrettyPrinting().registerTypeAdapter(Variant.class, new Serializer()).create();
@@ -44,7 +43,7 @@ public class Variant {
 
     public boolean isStackInTags(ItemStack stack) {
         for (TagKey<Item> tagKey : itemTags) {
-            if (stack.isIn(tagKey))
+            if (stack.is(tagKey))
                 return true;
         }
         return false;
@@ -70,17 +69,17 @@ public class Variant {
                 JsonObject object = json.getAsJsonObject();
                 Variant variant = new Variant();
 
-                JsonArray values = JsonHelper.getArray(object, "values");
+                JsonArray values = GsonHelper.getAsJsonArray(object, "values");
                 values.forEach(value -> {
                     if (value.isJsonPrimitive()) {
                         String pValue = value.getAsString();
                         if (pValue.startsWith("#")) {
-                            TagKey<Item> tagKey = TagKey.of(RegistryKeys.ITEM, Identifier.tryParse(pValue.substring(1)));
+                            TagKey<Item> tagKey = TagKey.create(Registries.ITEM, Identifier.tryParse(pValue.substring(1)));
                             variant.addItemTag(tagKey);
                         } else {
                             Identifier id = Identifier.tryParse(pValue);
-                            if (Registries.ITEM.containsId(id)) {
-                                variant.addItem(Registries.ITEM.get(id));
+                            if (BuiltInRegistries.ITEM.containsKey(id)) {
+                                variant.addItem(BuiltInRegistries.ITEM.getValue(id));
                             } else ArchitectsAssembly.LOGGER.warn("Found unknown item id '{}' in a variant.", id);
                         }
                     }
@@ -95,8 +94,8 @@ public class Variant {
             JsonObject obj = new JsonObject();
             JsonArray array = new JsonArray();
 
-            src.getItemTags().forEach(tagKey -> array.add("#" + tagKey.id()));
-            src.getItems().forEach(item -> array.add(Registries.ITEM.getId(item).toString()));
+            src.getItemTags().forEach(tagKey -> array.add("#" + tagKey.location()));
+            src.getItems().forEach(item -> array.add(BuiltInRegistries.ITEM.getKey(item).toString()));
 
             obj.add("values", array);
             return obj;

@@ -1,13 +1,13 @@
 package dev.creoii.greatbigworld.architectsassembly.mixin.client;
 
 import dev.creoii.greatbigworld.architectsassembly.util.ExtendedItemFrame;
-import net.minecraft.client.render.entity.state.ItemFrameEntityRenderState;
-import net.minecraft.util.DyeColor;
+import net.minecraft.client.renderer.entity.state.ItemFrameRenderState;
+import net.minecraft.world.item.DyeColor;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
-@Mixin(ItemFrameEntityRenderState.class)
+@Mixin(ItemFrameRenderState.class)
 public class ItemFrameEntityRenderStateMixin implements ExtendedItemFrame {
     @Unique private DyeColor color;
 

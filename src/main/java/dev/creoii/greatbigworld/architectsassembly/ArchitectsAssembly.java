@@ -9,18 +9,18 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.FireBlock;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.item.Items;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.resource.Resource;
-import net.minecraft.resource.ResourceManager;
-import net.minecraft.resource.ResourceType;
-import net.minecraft.util.Identifier;
-import net.minecraft.world.gen.feature.VegetationPatchFeatureConfig;
+import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.packs.PackType;
+import net.minecraft.server.packs.resources.Resource;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FireBlock;
+import net.minecraft.world.level.levelgen.feature.configurations.VegetationPatchConfiguration;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -45,60 +45,60 @@ public class ArchitectsAssembly implements ModInitializer {
         ArchitectsAssemblyRecipes.register();
         ArchitectsAssemblyStats.register();
 
-        Registry.register(Registries.FEATURE, Identifier.of(GreatBigWorld.NAMESPACE, "mossify_vegetation_patch"), new MossifyVegetationPatchFeature(VegetationPatchFeatureConfig.CODEC));
+        Registry.register(BuiltInRegistries.FEATURE, Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "mossify_vegetation_patch"), new MossifyVegetationPatchFeature(VegetationPatchConfiguration.CODEC));
 
         FireBlock fireBlock = (FireBlock) Blocks.FIRE;
-        fireBlock.burnChances.forEach((block, integer) -> {
+        fireBlock.igniteOdds.forEach((block, integer) -> {
             Block verticalSlab = VerticalSlabBlock.fromSlab(block);
             if (verticalSlab != null) {
-                fireBlock.burnChances.put(verticalSlab, integer);
+                fireBlock.igniteOdds.put(verticalSlab, integer);
             }
         });
-        fireBlock.spreadChances.forEach((block, integer) -> {
+        fireBlock.burnOdds.forEach((block, integer) -> {
             Block verticalSlab = VerticalSlabBlock.fromSlab(block);
             if (verticalSlab != null) {
-                fireBlock.spreadChances.put(verticalSlab, integer);
+                fireBlock.burnOdds.put(verticalSlab, integer);
             }
         });
 
         DefaultItemComponentEvents.MODIFY.register(modifyContext -> {
-            modifyContext.modify(Items.IRON_AXE, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 451));
-            modifyContext.modify(Items.IRON_PICKAXE, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 451));
-            modifyContext.modify(Items.IRON_SHOVEL, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 451));
-            modifyContext.modify(Items.IRON_HOE, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 451));
-            modifyContext.modify(Items.IRON_SWORD, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 451));
-            modifyContext.modify(Items.IRON_HELMET, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 265));
-            modifyContext.modify(Items.IRON_CHESTPLATE, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 340));
-            modifyContext.modify(Items.IRON_LEGGINGS, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 325));
-            modifyContext.modify(Items.IRON_BOOTS, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 295));
+            modifyContext.modify(Items.IRON_AXE, builder -> builder.set(DataComponents.MAX_DAMAGE, 451));
+            modifyContext.modify(Items.IRON_PICKAXE, builder -> builder.set(DataComponents.MAX_DAMAGE, 451));
+            modifyContext.modify(Items.IRON_SHOVEL, builder -> builder.set(DataComponents.MAX_DAMAGE, 451));
+            modifyContext.modify(Items.IRON_HOE, builder -> builder.set(DataComponents.MAX_DAMAGE, 451));
+            modifyContext.modify(Items.IRON_SWORD, builder -> builder.set(DataComponents.MAX_DAMAGE, 451));
+            modifyContext.modify(Items.IRON_HELMET, builder -> builder.set(DataComponents.MAX_DAMAGE, 265));
+            modifyContext.modify(Items.IRON_CHESTPLATE, builder -> builder.set(DataComponents.MAX_DAMAGE, 340));
+            modifyContext.modify(Items.IRON_LEGGINGS, builder -> builder.set(DataComponents.MAX_DAMAGE, 325));
+            modifyContext.modify(Items.IRON_BOOTS, builder -> builder.set(DataComponents.MAX_DAMAGE, 295));
 
-            modifyContext.modify(Items.COPPER_AXE, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 221));
-            modifyContext.modify(Items.COPPER_PICKAXE, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 221));
-            modifyContext.modify(Items.COPPER_SHOVEL, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 221));
-            modifyContext.modify(Items.COPPER_HOE, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 221));
-            modifyContext.modify(Items.COPPER_SWORD, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 221));
-            modifyContext.modify(Items.COPPER_HELMET, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 130)); // drop
-            modifyContext.modify(Items.COPPER_CHESTPLATE, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 170)); // drop
-            modifyContext.modify(Items.COPPER_LEGGINGS, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 160)); // drop
-            modifyContext.modify(Items.COPPER_BOOTS, builder -> builder.add(DataComponentTypes.MAX_DAMAGE, 145)); // drop
+            modifyContext.modify(Items.COPPER_AXE, builder -> builder.set(DataComponents.MAX_DAMAGE, 221));
+            modifyContext.modify(Items.COPPER_PICKAXE, builder -> builder.set(DataComponents.MAX_DAMAGE, 221));
+            modifyContext.modify(Items.COPPER_SHOVEL, builder -> builder.set(DataComponents.MAX_DAMAGE, 221));
+            modifyContext.modify(Items.COPPER_HOE, builder -> builder.set(DataComponents.MAX_DAMAGE, 221));
+            modifyContext.modify(Items.COPPER_SWORD, builder -> builder.set(DataComponents.MAX_DAMAGE, 221));
+            modifyContext.modify(Items.COPPER_HELMET, builder -> builder.set(DataComponents.MAX_DAMAGE, 130)); // drop
+            modifyContext.modify(Items.COPPER_CHESTPLATE, builder -> builder.set(DataComponents.MAX_DAMAGE, 170)); // drop
+            modifyContext.modify(Items.COPPER_LEGGINGS, builder -> builder.set(DataComponents.MAX_DAMAGE, 160)); // drop
+            modifyContext.modify(Items.COPPER_BOOTS, builder -> builder.set(DataComponents.MAX_DAMAGE, 145)); // drop
         });
 
-        ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(new SimpleSynchronousResourceReloadListener() {
+        ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(new SimpleSynchronousResourceReloadListener() {
             @Override
             public Identifier getFabricId() {
-                return Identifier.of(GreatBigWorld.NAMESPACE, "variant");
+                return Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "variant");
             }
 
             @Override
-            public void reload(ResourceManager manager) {
+            public void onResourceManagerReload(ResourceManager manager) {
                 Variant.VARIANTS.clear();
-                Map<Identifier, List<Resource>> resourceMap = manager.findAllResources("variants", path -> path.getPath().endsWith(".json"));
+                Map<Identifier, List<Resource>> resourceMap = manager.listResourceStacks("variants", path -> path.getPath().endsWith(".json"));
                 for (Map.Entry<Identifier, List<Resource>> entry : resourceMap.entrySet()) {
                     Identifier identifier = entry.getKey();
                     for (Resource resource : entry.getValue()) {
-                        try (InputStream stream = resource.getInputStream()) {
+                        try (InputStream stream = resource.open()) {
                             String result = IOUtils.toString(stream, StandardCharsets.UTF_8);
-                            Identifier identifier1 = Identifier.of(identifier.getNamespace(), identifier.getPath().replace("variants/", "").replace(".json", ""));
+                            Identifier identifier1 = Identifier.fromNamespaceAndPath(identifier.getNamespace(), identifier.getPath().replace("variants/", "").replace(".json", ""));
                             Variant variant = Variant.GSON.fromJson(result, Variant.class).build(identifier1);
 
                             if (variant.getItems().isEmpty() && variant.getItemTags().isEmpty()) {

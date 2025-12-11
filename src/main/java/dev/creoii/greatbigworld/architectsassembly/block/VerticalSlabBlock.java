@@ -4,148 +4,151 @@ import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.architectsassembly.block.enums.VerticalSlabType;
 import dev.creoii.greatbigworld.architectsassembly.block.enums.FluidType;
 import dev.creoii.greatbigworld.architectsassembly.util.Fluidloggable;
-import net.minecraft.block.*;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.pathing.NavigationType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FlowableFluid;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.tag.FluidTags;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
-import net.minecraft.world.tick.ScheduledTickView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.material.FlowingFluid;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class VerticalSlabBlock extends Block implements Fluidloggable {
-    public static final EnumProperty<VerticalSlabType> TYPE = EnumProperty.of("type", VerticalSlabType.class);
-    public static final EnumProperty<Direction> FACING = Properties.HORIZONTAL_FACING;
+    public static final EnumProperty<VerticalSlabType> TYPE = EnumProperty.create("type", VerticalSlabType.class);
+    public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-    public VerticalSlabBlock(Settings settings) {
-        super(settings.luminance(state -> state.get(FLUIDLOGGED) == FluidType.LAVA ? 15 : 0));
-        setDefaultState(getDefaultState().with(TYPE, VerticalSlabType.NORTH).with(FACING, Direction.NORTH).with(FLUIDLOGGED, FluidType.EMPTY));
+    public VerticalSlabBlock(Properties settings) {
+        super(settings.lightLevel(state -> state.getValue(FLUIDLOGGED) == FluidType.LAVA ? 15 : 0));
+        registerDefaultState(defaultBlockState().setValue(TYPE, VerticalSlabType.NORTH).setValue(FACING, Direction.NORTH).setValue(FLUIDLOGGED, FluidType.EMPTY));
     }
 
     @Nullable
     public static Block fromSlab(Block block) {
         if (block instanceof SlabBlock) {
-            String path = Registries.BLOCK.getId(block).getPath();
-            Block verticalSlab = Registries.BLOCK.get(Identifier.of(GreatBigWorld.NAMESPACE, "vertical_" + path));
+            String path = BuiltInRegistries.BLOCK.getKey(block).getPath();
+            Block verticalSlab = BuiltInRegistries.BLOCK.getValue(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "vertical_" + path));
             return verticalSlab == Blocks.AIR ? null : verticalSlab;
         }
         return null;
     }
 
     @Override
-    public BlockState rotate(BlockState state, BlockRotation rotation) {
-        Direction direction = rotation.rotate(state.get(TYPE).getDirection());
-        return state.get(TYPE) == VerticalSlabType.DOUBLE ? state : state.with(TYPE, VerticalSlabType.fromDirection(direction)).with(FACING, direction);
+    public BlockState rotate(BlockState state, Rotation rotation) {
+        Direction direction = rotation.rotate(state.getValue(TYPE).getDirection());
+        return state.getValue(TYPE) == VerticalSlabType.DOUBLE ? state : state.setValue(TYPE, VerticalSlabType.fromDirection(direction)).setValue(FACING, direction);
     }
 
     @Override
-    public BlockState mirror(BlockState state, BlockMirror mirror) {
-        VerticalSlabType type = state.get(TYPE);
-        if (type == VerticalSlabType.DOUBLE || mirror == BlockMirror.NONE)
+    public BlockState mirror(BlockState state, Mirror mirror) {
+        VerticalSlabType type = state.getValue(TYPE);
+        if (type == VerticalSlabType.DOUBLE || mirror == Mirror.NONE)
             return state;
 
-        if ((mirror == BlockMirror.LEFT_RIGHT && type.getDirection().getAxis() == Direction.Axis.Z) || (mirror == BlockMirror.FRONT_BACK && type.getDirection().getAxis() == Direction.Axis.X)) {
-            Direction direction = state.get(TYPE).getDirection().getOpposite();
-            return state.with(TYPE, VerticalSlabType.fromDirection(direction)).with(FACING, direction);
+        if ((mirror == Mirror.LEFT_RIGHT && type.getDirection().getAxis() == Direction.Axis.Z) || (mirror == Mirror.FRONT_BACK && type.getDirection().getAxis() == Direction.Axis.X)) {
+            Direction direction = state.getValue(TYPE).getDirection().getOpposite();
+            return state.setValue(TYPE, VerticalSlabType.fromDirection(direction)).setValue(FACING, direction);
         }
 
         return state;
     }
 
     @Override
-    public boolean hasSidedTransparency(BlockState state) {
-        return state.get(TYPE) != VerticalSlabType.DOUBLE;
+    public boolean useShapeForLightOcclusion(BlockState state) {
+        return state.getValue(TYPE) != VerticalSlabType.DOUBLE;
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(TYPE, FACING, FLUIDLOGGED);
     }
 
     @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return state.get(TYPE).getShape();
+    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+        return state.getValue(TYPE).getShape();
     }
 
     @Nullable
     @Override
-    public BlockState getPlacementState(ItemPlacementContext context) {
-        BlockPos pos = context.getBlockPos();
-        BlockState state = context.getWorld().getBlockState(pos);
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        BlockPos pos = context.getClickedPos();
+        BlockState state = context.getLevel().getBlockState(pos);
         Direction direction = getDirectionForPlacement(context);
         if (state.getBlock() == this) {
-            return state.with(TYPE, VerticalSlabType.DOUBLE).with(FACING, direction).with(FLUIDLOGGED, FluidType.EMPTY);
+            return state.setValue(TYPE, VerticalSlabType.DOUBLE).setValue(FACING, direction).setValue(FLUIDLOGGED, FluidType.EMPTY);
         }
 
-        FluidState fluid = context.getWorld().getFluidState(pos);
-        return getDefaultState().with(FLUIDLOGGED, Fluidloggable.FLUIDS.get(fluid.getFluid())).with(TYPE, VerticalSlabType.fromDirection(direction));
+        FluidState fluid = context.getLevel().getFluidState(pos);
+        return defaultBlockState().setValue(FLUIDLOGGED, Fluidloggable.FLUIDS.get(fluid.getType())).setValue(TYPE, VerticalSlabType.fromDirection(direction));
     }
 
-    private Direction getDirectionForPlacement(ItemPlacementContext context) {
-        Direction side = context.getSide();
+    private Direction getDirectionForPlacement(BlockPlaceContext context) {
+        Direction side = context.getClickedFace();
         if (side.getAxis() != Direction.Axis.Y)
             return side;
 
-        BlockPos pos = context.getBlockPos();
-        Vec3d vec3d = context.getHitPos().subtract(new Vec3d(pos.getX(), pos.getY(), pos.getZ())).subtract(.5d, 0d, .5d);
-        return Direction.fromHorizontalDegrees(Math.atan2(vec3d.x, vec3d.z) * -180d / Math.PI).getOpposite();
+        BlockPos pos = context.getClickedPos();
+        Vec3 vec3d = context.getClickLocation().subtract(new Vec3(pos.getX(), pos.getY(), pos.getZ())).subtract(.5d, 0d, .5d);
+        return Direction.fromYRot(Math.atan2(vec3d.x, vec3d.z) * -180d / Math.PI).getOpposite();
     }
 
     @Override
-    public boolean canReplace(BlockState state, ItemPlacementContext context) {
-        VerticalSlabType type = state.get(TYPE);
-        return type != VerticalSlabType.DOUBLE && context.getStack().isOf(asItem()) && (context.canReplaceExisting() && (context.getSide() == type.getDirection() && getDirectionForPlacement(context) == type.getDirection()) || (!context.canReplaceExisting() && context.getSide() != type.getDirection()));
+    public boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
+        VerticalSlabType type = state.getValue(TYPE);
+        return type != VerticalSlabType.DOUBLE && context.getItemInHand().is(asItem()) && (context.replacingClickedOnBlock() && (context.getClickedFace() == type.getDirection() && getDirectionForPlacement(context) == type.getDirection()) || (!context.replacingClickedOnBlock() && context.getClickedFace() != type.getDirection()));
     }
 
     @Override
     public FluidState getFluidState(BlockState state) {
-        FluidType fluidType = state.get(FLUIDLOGGED);
-        if (fluidType.getFluid() instanceof FlowableFluid flowableFluid) {
-            return flowableFluid.getStill(false);
+        FluidType fluidType = state.getValue(FLUIDLOGGED);
+        if (fluidType.getFluid() instanceof FlowingFluid flowableFluid) {
+            return flowableFluid.getSource(false);
         }
         return super.getFluidState(state);
     }
 
     @Override
-    public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
-        return state.get(TYPE) != VerticalSlabType.DOUBLE && Fluidloggable.super.tryFillWithFluid(world, pos, state, fluidState);
+    public boolean placeLiquid(LevelAccessor world, BlockPos pos, BlockState state, FluidState fluidState) {
+        return state.getValue(TYPE) != VerticalSlabType.DOUBLE && Fluidloggable.super.placeLiquid(world, pos, state, fluidState);
     }
 
     @Override
-    public boolean canFillWithFluid(@Nullable LivingEntity filler, BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
-        return state.get(TYPE) != VerticalSlabType.DOUBLE && Fluidloggable.super.canFillWithFluid(filler, world, pos, state, fluid);
+    public boolean canPlaceLiquid(@Nullable LivingEntity filler, BlockGetter world, BlockPos pos, BlockState state, Fluid fluid) {
+        return state.getValue(TYPE) != VerticalSlabType.DOUBLE && Fluidloggable.super.canPlaceLiquid(filler, world, pos, state, fluid);
     }
 
     @Override
-    protected BlockState getStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random) {
-        if (state.get(FLUIDLOGGED) != FluidType.EMPTY) {
-            Fluid fluid = state.get(FLUIDLOGGED).getFluid();
-            tickView.scheduleFluidTick(pos, fluid, fluid.getTickRate(world));
+    protected BlockState updateShape(BlockState state, LevelReader world, ScheduledTickAccess tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
+        if (state.getValue(FLUIDLOGGED) != FluidType.EMPTY) {
+            Fluid fluid = state.getValue(FLUIDLOGGED).getFluid();
+            tickView.scheduleTick(pos, fluid, fluid.getTickDelay(world));
         }
 
-        return super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random);
+        return super.updateShape(state, world, tickView, pos, direction, neighborPos, neighborState, random);
     }
 
     @Override
-    protected boolean canPathfindThrough(BlockState state, NavigationType type) {
-        return type == NavigationType.WATER && state.getFluidState().isIn(FluidTags.WATER);
+    protected boolean isPathfindable(BlockState state, PathComputationType type) {
+        return type == PathComputationType.WATER && state.getFluidState().is(FluidTags.WATER);
     }
 }

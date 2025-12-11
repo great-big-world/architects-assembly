@@ -2,12 +2,12 @@ package dev.creoii.greatbigworld.architectsassembly.registry;
 
 import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.architectsassembly.recipe.SawmillingRecipe;
-import net.minecraft.recipe.RecipeSerializer;
-import net.minecraft.recipe.RecipeType;
-import net.minecraft.recipe.SingleStackRecipe;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SingleItemRecipe;
 
 public class ArchitectsAssemblyRecipes {
     public static final RecipeType<SawmillingRecipe> SAWMILLING = new RecipeType<>() {
@@ -16,10 +16,10 @@ public class ArchitectsAssemblyRecipes {
             return "sawmilling";
         }
     };
-    public static final RecipeSerializer<SawmillingRecipe> SAWMLLING_SERIALIZER = new SingleStackRecipe.Serializer<>(SawmillingRecipe::new);
+    public static final RecipeSerializer<SawmillingRecipe> SAWMLLING_SERIALIZER = new SingleItemRecipe.Serializer<>(SawmillingRecipe::new);
 
     public static void register() {
-        Registry.register(Registries.RECIPE_TYPE, Identifier.of(GreatBigWorld.NAMESPACE, "sawmilling"), SAWMILLING);
-        Registry.register(Registries.RECIPE_SERIALIZER, Identifier.of(GreatBigWorld.NAMESPACE, "sawmilling"), SAWMLLING_SERIALIZER);
+        Registry.register(BuiltInRegistries.RECIPE_TYPE, Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "sawmilling"), SAWMILLING);
+        Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "sawmilling"), SAWMLLING_SERIALIZER);
     }
 }

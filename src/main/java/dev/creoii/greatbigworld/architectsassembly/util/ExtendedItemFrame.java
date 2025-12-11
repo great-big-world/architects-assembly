@@ -1,13 +1,13 @@
 package dev.creoii.greatbigworld.architectsassembly.util;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.client.render.model.BlockStateManagers;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.util.DyeColor;
+import net.minecraft.client.resources.model.BlockStateDefinitions;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import org.jetbrains.annotations.Nullable;
 
 public interface ExtendedItemFrame {
-    BooleanProperty DYED = BooleanProperty.of("dyed");
+    BooleanProperty DYED = BooleanProperty.create("dyed");
 
     @Nullable
     DyeColor gbw$getColor();
@@ -15,6 +15,6 @@ public interface ExtendedItemFrame {
     void gbw$setColor(DyeColor color);
 
     static BlockState getStateForItemFrame(boolean hasGlow, boolean hasMap, boolean isDyed) {
-        return BlockStateManagers.getStateForItemFrame(hasGlow, hasMap).with(DYED, isDyed);
+        return BlockStateDefinitions.getItemFrameFakeState(hasGlow, hasMap).setValue(DYED, isDyed);
     }
 }

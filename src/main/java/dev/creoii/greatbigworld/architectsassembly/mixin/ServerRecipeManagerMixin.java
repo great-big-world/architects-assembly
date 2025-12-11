@@ -5,10 +5,16 @@ import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import com.llamalad7.mixinextras.sugar.Local;
 import dev.creoii.greatbigworld.architectsassembly.recipe.SawmillingRecipe;
 import dev.creoii.greatbigworld.architectsassembly.util.SawmillingRecipeManager;
-import net.minecraft.recipe.*;
-import net.minecraft.recipe.display.CuttingRecipeDisplay;
-import net.minecraft.resource.featuretoggle.FeatureSet;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.flag.FeatureFlagSet;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SelectableRecipe;
+import net.minecraft.world.item.crafting.StonecutterRecipe;
+import net.minecraft.world.item.crafting.display.RecipeDisplayEntry;
 import org.slf4j.Logger;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -25,69 +31,69 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-@Mixin(ServerRecipeManager.class)
+@Mixin(RecipeManager.class)
 public abstract class ServerRecipeManagerMixin implements SawmillingRecipeManager {
     @Shadow @Final private static Logger LOGGER;
-    @Shadow private static boolean isEnabled(FeatureSet features, Ingredient ingredient) {
+    @Shadow private static boolean isIngredientEnabled(FeatureFlagSet features, Ingredient ingredient) {
         return false;
     }
 
     @Unique
     private static final List<Identifier> CRAFTING_RECIPES_TO_REMOVE = new ImmutableList.Builder<Identifier>()
-            .add(Identifier.of("chiseled_deepslate"))
-            .add(Identifier.of("chiseled_nether_bricks"))
-            .add(Identifier.of("chiseled_polished_blackstone"))
-            .add(Identifier.of("chiseled_quartz_block"))
-            .add(Identifier.of("chiseled_red_sandstone"))
-            .add(Identifier.of("chiseled_sandstone"))
-            .add(Identifier.of("chiseled_stone_bricks"))
-            .add(Identifier.of("chiseled_tuff"))
-            .add(Identifier.of("chiseled_copper"))
-            .add(Identifier.of("purpur_pillar"))
-            .add(Identifier.of("quartz_pillar"))
-            .add(Identifier.of("deepslate_tiles"))
-            .add(Identifier.of("bamboo_mosaic"))
+            .add(Identifier.parse("chiseled_deepslate"))
+            .add(Identifier.parse("chiseled_nether_bricks"))
+            .add(Identifier.parse("chiseled_polished_blackstone"))
+            .add(Identifier.parse("chiseled_quartz_block"))
+            .add(Identifier.parse("chiseled_red_sandstone"))
+            .add(Identifier.parse("chiseled_sandstone"))
+            .add(Identifier.parse("chiseled_stone_bricks"))
+            .add(Identifier.parse("chiseled_tuff"))
+            .add(Identifier.parse("chiseled_copper"))
+            .add(Identifier.parse("purpur_pillar"))
+            .add(Identifier.parse("quartz_pillar"))
+            .add(Identifier.parse("deepslate_tiles"))
+            .add(Identifier.parse("bamboo_mosaic"))
             .build();
-    @Unique private CuttingRecipeDisplay.Grouping<SawmillingRecipe> sawmillingRecipes;
-    @Unique private List<CuttingRecipeDisplay.GroupEntry<SawmillingRecipe>> preSawmillingRecipes;
+    @Unique private SelectableRecipe.SingleInputSet<SawmillingRecipe> sawmillingRecipes;
+    @Unique private List<SelectableRecipe.SingleInputEntry<SawmillingRecipe>> preSawmillingRecipes;
 
     @Override
-    public CuttingRecipeDisplay.Grouping<SawmillingRecipe> gbw$getSawmillingRecipes() {
+    public SelectableRecipe.SingleInputSet<SawmillingRecipe> gbw$getSawmillingRecipes() {
         return sawmillingRecipes;
     }
 
     @SuppressWarnings("unchecked")
-    @Redirect(method = "initialize", at = @At(value = "INVOKE", target = "Ljava/util/Collection;forEach(Ljava/util/function/Consumer;)V"))
-    private void gbw$manageRecipes(Collection<RecipeEntry<?>> instance, Consumer<RecipeEntry<?>> consumer, @Local(argsOnly = true) FeatureSet features, @Local(ordinal = 0) List<CuttingRecipeDisplay.GroupEntry<StonecuttingRecipe>> list, @Local(ordinal = 1) List<ServerRecipeManager.PropertySetBuilder> list2) {
+    @Redirect(method = "finalizeRecipeLoading", at = @At(value = "INVOKE", target = "Ljava/util/Collection;forEach(Ljava/util/function/Consumer;)V"))
+    private void gbw$manageRecipes(Collection<RecipeHolder<?>> instance, Consumer<RecipeHolder<?>> consumer, @Local(argsOnly = true) FeatureFlagSet features, @Local(ordinal = 0) List<SelectableRecipe.SingleInputEntry<StonecutterRecipe>> list, @Local(ordinal = 1) List<RecipeManager.IngredientCollector> list2) {
         preSawmillingRecipes = new ArrayList<>();
         instance.forEach(recipe -> {
             Recipe<?> recipe2 = recipe.value();
-            if (!recipe2.isIgnoredInRecipeBook() && recipe2.getIngredientPlacement().hasNoPlacement()) {
-                LOGGER.warn("Recipe {} can't be placed due to empty ingredients and will be ignored", recipe.id().getValue());
+            if (!recipe2.isSpecial() && recipe2.placementInfo().isImpossibleToPlace()) {
+                LOGGER.warn("Recipe {} can't be placed due to empty ingredients and will be ignored", recipe.id().identifier());
             } else {
                 list2.forEach(builder -> builder.accept(recipe2));
-                if (recipe2 instanceof StonecuttingRecipe stonecuttingRecipe) {
-                    RecipeEntry<StonecuttingRecipe> recipeEntry = (RecipeEntry<StonecuttingRecipe>) recipe;
-                    if (isEnabled(features, stonecuttingRecipe.ingredient()) && stonecuttingRecipe.createResultDisplay().isEnabled(features)) {
-                        list.add(new CuttingRecipeDisplay.GroupEntry<>(stonecuttingRecipe.ingredient(), new CuttingRecipeDisplay<>(stonecuttingRecipe.createResultDisplay(), Optional.of(recipeEntry))));
+                if (recipe2 instanceof StonecutterRecipe stonecuttingRecipe) {
+                    RecipeHolder<StonecutterRecipe> recipeEntry = (RecipeHolder<StonecutterRecipe>) recipe;
+                    if (isIngredientEnabled(features, stonecuttingRecipe.input()) && stonecuttingRecipe.resultDisplay().isEnabled(features)) {
+                        list.add(new SelectableRecipe.SingleInputEntry<>(stonecuttingRecipe.input(), new SelectableRecipe<>(stonecuttingRecipe.resultDisplay(), Optional.of(recipeEntry))));
                     }
                 } else if (recipe2 instanceof SawmillingRecipe sawmillingRecipe) {
-                    RecipeEntry<SawmillingRecipe> recipeEntry = (RecipeEntry<SawmillingRecipe>) recipe;
-                    if (isEnabled(features, sawmillingRecipe.ingredient()) && sawmillingRecipe.createResultDisplay().isEnabled(features)) {
-                        preSawmillingRecipes.add(new CuttingRecipeDisplay.GroupEntry<>(sawmillingRecipe.ingredient(), new CuttingRecipeDisplay<>(sawmillingRecipe.createResultDisplay(), Optional.of(recipeEntry))));
+                    RecipeHolder<SawmillingRecipe> recipeEntry = (RecipeHolder<SawmillingRecipe>) recipe;
+                    if (isIngredientEnabled(features, sawmillingRecipe.input()) && sawmillingRecipe.createResultDisplay().isEnabled(features)) {
+                        preSawmillingRecipes.add(new SelectableRecipe.SingleInputEntry<>(sawmillingRecipe.input(), new SelectableRecipe<>(sawmillingRecipe.createResultDisplay(), Optional.of(recipeEntry))));
                     }
                 }
             }
         });
     }
 
-    @Inject(method = "initialize", at = @At("TAIL"))
-    private void gbw$setSawmillingRecipes(FeatureSet features, CallbackInfo ci) {
-        sawmillingRecipes = new CuttingRecipeDisplay.Grouping<>(preSawmillingRecipes);
+    @Inject(method = "finalizeRecipeLoading", at = @At("TAIL"))
+    private void gbw$setSawmillingRecipes(FeatureFlagSet features, CallbackInfo ci) {
+        sawmillingRecipes = new SelectableRecipe.SingleInputSet<>(preSawmillingRecipes);
     }
 
-    @WrapWithCondition(method = "collectServerRecipes", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z"))
-    private static <E> boolean gbw$removeRecipes(List<ServerRecipeManager.ServerRecipe> instance, E e, @Local RecipeEntry<?> recipeEntry, @Local RecipeDisplayEntry recipeDisplayEntry) {
-        return !CRAFTING_RECIPES_TO_REMOVE.contains(recipeEntry.id().getValue()) && recipeEntry.value().getType() == RecipeType.CRAFTING;
+    @WrapWithCondition(method = "unpackRecipeInfo", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z"))
+    private static <E> boolean gbw$removeRecipes(List<RecipeManager.ServerDisplayInfo> instance, E e, @Local RecipeHolder<?> recipeEntry, @Local RecipeDisplayEntry recipeDisplayEntry) {
+        return !CRAFTING_RECIPES_TO_REMOVE.contains(recipeEntry.id().identifier()) && recipeEntry.value().getType() == RecipeType.CRAFTING;
     }
 }

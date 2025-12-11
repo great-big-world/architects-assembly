@@ -1,14 +1,14 @@
 package dev.creoii.greatbigworld.architectsassembly.item;
 
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.decoration.AbstractDecorationEntity;
-import net.minecraft.item.ItemFrameItem;
-import net.minecraft.util.DyeColor;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.decoration.HangingEntity;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.ItemFrameItem;
 
 public class DyedItemFrameItem extends ItemFrameItem {
     private final DyeColor color;
 
-    public DyedItemFrameItem(EntityType<? extends AbstractDecorationEntity> entityType, DyeColor color, Settings settings) {
+    public DyedItemFrameItem(EntityType<? extends HangingEntity> entityType, DyeColor color, Properties settings) {
         super(entityType, settings);
         this.color = color;
     }

@@ -1,15 +1,14 @@
 package dev.creoii.greatbigworld.architectsassembly.block.enums;
 
-import net.minecraft.block.Block;
-import net.minecraft.util.StringIdentifiable;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
-
 import java.util.Arrays;
 import java.util.List;
+import net.minecraft.core.Direction;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
-public enum VerticalSlabType implements StringIdentifiable {
+public enum VerticalSlabType implements StringRepresentable {
     NORTH(Direction.NORTH),
     SOUTH(Direction.SOUTH),
     WEST(Direction.WEST),
@@ -21,28 +20,28 @@ public enum VerticalSlabType implements StringIdentifiable {
     private final VoxelShape shape;
 
     VerticalSlabType(Direction direction) {
-        name = direction == null ? "double" : direction.asString();
+        name = direction == null ? "double" : direction.getSerializedName();
         this.direction = direction;
 
         if (direction == null)
-            shape = VoxelShapes.fullCube();
+            shape = Shapes.block();
         else {
             double min = 0d;
             double max = 8d;
-            if (direction.getDirection() == Direction.AxisDirection.NEGATIVE) {
+            if (direction.getAxisDirection() == Direction.AxisDirection.NEGATIVE) {
                 min = 8d;
                 max = 16d;
             }
 
             if (direction.getAxis() == Direction.Axis.X) {
-                shape = Block.createCuboidShape(min, 0d, 0d, max, 16d, 16d);
+                shape = Block.box(min, 0d, 0d, max, 16d, 16d);
             } else
-                shape = Block.createCuboidShape(0d, 0d, min, 16d, 16d, max);
+                shape = Block.box(0d, 0d, min, 16d, 16d, max);
         }
     }
 
     @Override
-    public String asString() {
+    public String getSerializedName() {
         return name;
     }
 

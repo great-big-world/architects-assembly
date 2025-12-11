@@ -1,19 +1,6 @@
 package dev.creoii.greatbigworld.architectsassembly.mixin.block;
 
 import dev.creoii.greatbigworld.architectsassembly.util.Fluidloggable;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalConnectingBlock;
-import net.minecraft.block.Waterloggable;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.fluid.FlowableFluid;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.item.ItemStack;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Implements;
 import org.spongepowered.asm.mixin.Interface;
@@ -23,34 +10,47 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Optional;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.CrossCollisionBlock;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FlowingFluid;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
 
-@Mixin(HorizontalConnectingBlock.class)
+@Mixin(CrossCollisionBlock.class)
 @Implements(@Interface(iface = Fluidloggable.class, prefix = "fluidloggable$"))
-public abstract class HorizontalConnectingBlockMixin extends Block implements Waterloggable {
-    public HorizontalConnectingBlockMixin(Settings settings) {
+public abstract class HorizontalConnectingBlockMixin extends Block implements SimpleWaterloggedBlock {
+    public HorizontalConnectingBlockMixin(Properties settings) {
         super(settings);
     }
 
-    public boolean canFillWithFluid(@Nullable LivingEntity filler, BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
+    public boolean canPlaceLiquid(@Nullable LivingEntity filler, BlockGetter world, BlockPos pos, BlockState state, Fluid fluid) {
         return Fluidloggable.defaultCanFillWithFluid(state);
     }
 
-    public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
+    public boolean placeLiquid(LevelAccessor world, BlockPos pos, BlockState state, FluidState fluidState) {
         return Fluidloggable.defaultTryFillWithFluid(world, pos, state, fluidState);
     }
 
-    public ItemStack tryDrainFluid(@Nullable LivingEntity drainer, WorldAccess world, BlockPos pos, BlockState state) {
+    public ItemStack pickupBlock(@Nullable LivingEntity drainer, LevelAccessor world, BlockPos pos, BlockState state) {
         return Fluidloggable.defaultTryDrainFluid(world, pos, state);
     }
 
-    public Optional<SoundEvent> getBucketFillSound() {
+    public Optional<SoundEvent> getPickupSound() {
         return Fluidloggable.defaultGetBucketFillSound();
     }
 
     @Inject(method = "getFluidState", at = @At("RETURN"), cancellable = true)
     private void gbw$fixFluidloggableFluidState(BlockState state, CallbackInfoReturnable<FluidState> cir) {
-        if (state.get(Fluidloggable.FLUIDLOGGED).getFluid() instanceof FlowableFluid flowableFluid) {
-            cir.setReturnValue(flowableFluid.getStill(false));
+        if (state.getValue(Fluidloggable.FLUIDLOGGED).getFluid() instanceof FlowingFluid flowableFluid) {
+            cir.setReturnValue(flowableFluid.getSource(false));
         }
     }
 }

@@ -6,27 +6,29 @@ import dev.creoii.greatbigworld.architectsassembly.block.enums.FluidType;
 import dev.creoii.greatbigworld.architectsassembly.block.enums.VerticalSlabType;
 import dev.creoii.greatbigworld.architectsassembly.util.ArchitectsAssemblyTags;
 import dev.creoii.greatbigworld.architectsassembly.util.Fluidloggable;
-import net.minecraft.block.*;
-import net.minecraft.block.enums.WallShape;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FlowableFluid;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
-import net.minecraft.world.tick.ScheduledTickView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.WallSide;
+import net.minecraft.world.level.material.FlowingFluid;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
@@ -38,41 +40,41 @@ import java.util.Optional;
 
 @Mixin(WallBlock.class)
 @Implements(@Interface(iface = Fluidloggable.class, prefix = "fluidloggable$"))
-public abstract class WallBlockMixin extends Block implements Waterloggable {
-    @Shadow @Final public static EnumProperty<WallShape> WEST_WALL_SHAPE;
+public abstract class WallBlockMixin extends Block implements SimpleWaterloggedBlock {
+    @Shadow @Final public static EnumProperty<WallSide> WEST;
     @Shadow @Final public static BooleanProperty UP;
-    @Shadow @Final public static EnumProperty<WallShape> NORTH_WALL_SHAPE;
-    @Shadow @Final public static EnumProperty<WallShape> EAST_WALL_SHAPE;
-    @Shadow @Final public static EnumProperty<WallShape> SOUTH_WALL_SHAPE;
+    @Shadow @Final public static EnumProperty<WallSide> NORTH;
+    @Shadow @Final public static EnumProperty<WallSide> EAST;
+    @Shadow @Final public static EnumProperty<WallSide> SOUTH;
     @Shadow @Final public static BooleanProperty WATERLOGGED;
 
-    public WallBlockMixin(Settings settings) {
+    public WallBlockMixin(Properties settings) {
         super(settings);
     }
 
-    public boolean canFillWithFluid(@Nullable LivingEntity filler, BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
+    public boolean canPlaceLiquid(@Nullable LivingEntity filler, BlockGetter world, BlockPos pos, BlockState state, Fluid fluid) {
         return Fluidloggable.defaultCanFillWithFluid(state);
     }
 
-    public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
+    public boolean placeLiquid(LevelAccessor world, BlockPos pos, BlockState state, FluidState fluidState) {
         return Fluidloggable.defaultTryFillWithFluid(world, pos, state, fluidState);
     }
 
-    public ItemStack tryDrainFluid(@Nullable LivingEntity drainer, WorldAccess world, BlockPos pos, BlockState state) {
+    public ItemStack pickupBlock(@Nullable LivingEntity drainer, LevelAccessor world, BlockPos pos, BlockState state) {
         return Fluidloggable.defaultTryDrainFluid(world, pos, state);
     }
 
-    public Optional<SoundEvent> getBucketFillSound() {
+    public Optional<SoundEvent> getPickupSound() {
         return Fluidloggable.defaultGetBucketFillSound();
     }
 
     @Inject(method = "<init>", at = @At("TAIL"))
-    private void gbw$setFluidloggableDefaultState(Settings settings, CallbackInfo ci) {
-        setDefaultState(stateManager.getDefaultState().with(UP, true).with(NORTH_WALL_SHAPE, WallShape.NONE).with(EAST_WALL_SHAPE, WallShape.NONE).with(SOUTH_WALL_SHAPE, WallShape.NONE).with(WEST_WALL_SHAPE, WallShape.NONE).with(WATERLOGGED, false).with(Fluidloggable.FLUIDLOGGED, FluidType.EMPTY));
+    private void gbw$setFluidloggableDefaultState(Properties settings, CallbackInfo ci) {
+        registerDefaultState(stateDefinition.any().setValue(UP, true).setValue(NORTH, WallSide.NONE).setValue(EAST, WallSide.NONE).setValue(SOUTH, WallSide.NONE).setValue(WEST, WallSide.NONE).setValue(WATERLOGGED, false).setValue(Fluidloggable.FLUIDLOGGED, FluidType.EMPTY));
     }
 
-    @Inject(method = "appendProperties", at = @At("TAIL"))
-    private void gbw$addFluidloggableProperty(StateManager.Builder<Block, BlockState> builder, CallbackInfo ci) {
+    @Inject(method = "createBlockStateDefinition", at = @At("TAIL"))
+    private void gbw$addFluidloggableProperty(StateDefinition.Builder<Block, BlockState> builder, CallbackInfo ci) {
         builder.add(Fluidloggable.FLUIDLOGGED);
     }
 
@@ -82,33 +84,33 @@ public abstract class WallBlockMixin extends Block implements Waterloggable {
         return original.call(instance, state.with(WATERLOGGED, false).with(SnowyHelper.SNOW_LAYERS, Math.max(0, state.get(SnowyHelper.SNOW_LAYERS) - 1)));
     }*/
 
-    @Inject(method = "getPlacementState", at = @At("RETURN"), cancellable = true)
-    private void gbw$fixFluidloggablePlacementState(ItemPlacementContext ctx, CallbackInfoReturnable<BlockState> cir, @Local FluidState fluidState) {
-        cir.setReturnValue(cir.getReturnValue().with(WATERLOGGED, false).with(Fluidloggable.FLUIDLOGGED, Fluidloggable.FLUIDS.get(fluidState.getFluid())));
+    @Inject(method = "getStateForPlacement", at = @At("RETURN"), cancellable = true)
+    private void gbw$fixFluidloggablePlacementState(BlockPlaceContext ctx, CallbackInfoReturnable<BlockState> cir, @Local FluidState fluidState) {
+        cir.setReturnValue(cir.getReturnValue().setValue(WATERLOGGED, false).setValue(Fluidloggable.FLUIDLOGGED, Fluidloggable.FLUIDS.get(fluidState.getType())));
     }
 
-    @Inject(method = "getStateForNeighborUpdate", at = @At("HEAD"))
-    private void gbw$fixFluidloggableStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random, CallbackInfoReturnable<BlockState> cir) {
-        FluidType fluidType = state.get(Fluidloggable.FLUIDLOGGED);
+    @Inject(method = "updateShape(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/LevelReader;Lnet/minecraft/world/level/ScheduledTickAccess;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/util/RandomSource;)Lnet/minecraft/world/level/block/state/BlockState;", at = @At("HEAD"))
+    private void gbw$fixFluidloggableStateForNeighborUpdate(BlockState state, LevelReader world, ScheduledTickAccess tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random, CallbackInfoReturnable<BlockState> cir) {
+        FluidType fluidType = state.getValue(Fluidloggable.FLUIDLOGGED);
         if (fluidType != FluidType.EMPTY) {
-            tickView.scheduleFluidTick(pos, fluidType.getFluid(), fluidType.getFluid().getTickRate(world));
+            tickView.scheduleTick(pos, fluidType.getFluid(), fluidType.getFluid().getTickDelay(world));
         }
     }
 
     @Inject(method = "getFluidState", at = @At("RETURN"), cancellable = true)
     private void gbw$fixFluidloggableFluidState(BlockState state, CallbackInfoReturnable<FluidState> cir) {
-        if (state.get(Fluidloggable.FLUIDLOGGED).getFluid() instanceof FlowableFluid flowableFluid) {
-            cir.setReturnValue(flowableFluid.getStill(false));
+        if (state.getValue(Fluidloggable.FLUIDLOGGED).getFluid() instanceof FlowingFluid flowableFluid) {
+            cir.setReturnValue(flowableFluid.getSource(false));
         }
     }
 
-    @Inject(method = "shouldConnectTo", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "connectsTo", at = @At("RETURN"), cancellable = true)
     private void gbw$connectWallsToVerticalSlabs(BlockState state, boolean faceFullSquare, Direction side, CallbackInfoReturnable<Boolean> cir) {
-        if (state.isIn(ArchitectsAssemblyTags.VERTICAL_SLABS) && state.get(VerticalSlabBlock.TYPE).getDirection() != side)
+        if (state.is(ArchitectsAssemblyTags.VERTICAL_SLABS) && state.getValue(VerticalSlabBlock.TYPE).getDirection() != side)
             cir.setReturnValue(true);
     }
 
-    @Inject(method = "shouldUseTallShape", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "isCovered", at = @At("HEAD"), cancellable = true)
     private static void gbw$useTallShapeForVerticalSlabs(VoxelShape aboveShape, VoxelShape tallShape, CallbackInfoReturnable<Boolean> cir) {
         if (VerticalSlabType.getShapes().contains(aboveShape))
             cir.setReturnValue(true);

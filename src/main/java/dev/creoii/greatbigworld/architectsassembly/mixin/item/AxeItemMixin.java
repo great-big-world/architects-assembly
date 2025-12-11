@@ -1,24 +1,29 @@
 package dev.creoii.greatbigworld.architectsassembly.mixin.item;
 
 import dev.creoii.greatbigworld.architectsassembly.util.ArchitectsAssemblyUseActions;
-import net.minecraft.advancement.criterion.Criteria;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Oxidizable;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.*;
-import net.minecraft.item.consume.UseAction;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.stat.Stats;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.stats.Stats;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.HoneycombItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUseAnimation;
+import net.minecraft.world.item.ToolMaterial;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.WeatheringCopper;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -33,58 +38,58 @@ import java.util.Optional;
 
 @Mixin(AxeItem.class)
 public abstract class AxeItemMixin extends Item {
-    @Shadow @Final protected static Map<Block, Block> STRIPPED_BLOCKS;
-    @Shadow protected abstract Optional<BlockState> tryStrip(World world, BlockPos pos, @Nullable PlayerEntity player, BlockState state);
+    @Shadow @Final protected static Map<Block, Block> STRIPPABLES;
+    @Shadow protected abstract Optional<BlockState> evaluateNewBlockState(Level world, BlockPos pos, @Nullable Player player, BlockState state);
 
-    public AxeItemMixin(ToolMaterial material, float attackDamage, float attackSpeed, Settings settings) {
+    public AxeItemMixin(ToolMaterial material, float attackDamage, float attackSpeed, Properties settings) {
         super(settings.axe(material, attackDamage, attackSpeed));
     }
 
-    public UseAction getUseAction(ItemStack stack) {
+    public ItemUseAnimation getUseAnimation(ItemStack stack) {
         return ArchitectsAssemblyUseActions.TOOL;
     }
 
     @Override
-    public int getMaxUseTime(ItemStack stack, LivingEntity user) {
+    public int getUseDuration(ItemStack stack, LivingEntity user) {
         return 72000;
     }
 
     @Override
-    public ActionResult use(World world, PlayerEntity user, Hand hand) {
+    public InteractionResult use(Level world, Player user, InteractionHand hand) {
         if (canPlayerStrip(world, user) != null) {
-            user.setCurrentHand(hand);
+            user.startUsingItem(hand);
         }
-        return ActionResult.PASS;
+        return InteractionResult.PASS;
     }
 
-    @Inject(method = "useOnBlock", at = @At("HEAD"), cancellable = true)
-    private void gbw$cancelDefaultBehavior(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir) {
-        cir.setReturnValue(ActionResult.PASS);
+    @Inject(method = "useOn", at = @At("HEAD"), cancellable = true)
+    private void gbw$cancelDefaultBehavior(UseOnContext context, CallbackInfoReturnable<InteractionResult> cir) {
+        cir.setReturnValue(InteractionResult.PASS);
     }
 
     @Override
-    public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
-        int i = getMaxUseTime(stack, user) - remainingUseTicks;
+    public void onUseTick(Level world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
+        int i = getUseDuration(stack, user) - remainingUseTicks;
 
         if (i >= 3 && i % 2 == 0) {
             BlockHitResult blockHitResult;
-            if (user instanceof PlayerEntity player && (blockHitResult = canPlayerStrip(world, player)) != null) {
+            if (user instanceof Player player && (blockHitResult = canPlayerStrip(world, player)) != null) {
                 BlockPos pos = blockHitResult.getBlockPos();
 
-                Optional<BlockState> optional = tryStrip(world, pos, player, world.getBlockState(pos));
-                if (optional.isPresent() && !world.isClient()) {
-                    if (player instanceof ServerPlayerEntity serverPlayer)
-                        Criteria.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, stack);
+                Optional<BlockState> optional = evaluateNewBlockState(world, pos, player, world.getBlockState(pos));
+                if (optional.isPresent() && !world.isClientSide()) {
+                    if (player instanceof ServerPlayer serverPlayer)
+                        CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, stack);
 
-                    world.setBlockState(pos, optional.get(), Block.NOTIFY_ALL_AND_REDRAW);
-                    world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(player, optional.get()));
+                    world.setBlock(pos, optional.get(), Block.UPDATE_ALL_IMMEDIATE);
+                    world.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, optional.get()));
 
                     if (!player.isCreative()) {
-                        stack.damage(1, player, player.getActiveHand());
+                        stack.hurtAndBreak(1, player, player.getUsedItemHand());
                     }
 
-                    player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
-                    player.swingHand(player.getActiveHand(), true);
+                    player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
+                    player.swing(player.getUsedItemHand(), true);
                 }
             }
         }
@@ -92,18 +97,18 @@ public abstract class AxeItemMixin extends Item {
 
     @Unique
     @Nullable
-    private BlockHitResult canPlayerStrip(World world, PlayerEntity player) {
+    private BlockHitResult canPlayerStrip(Level world, Player player) {
         if (player.isSpectator())
             return null;
 
-        HitResult hit = player.raycast(player.getAttributeValue(EntityAttributes.BLOCK_INTERACTION_RANGE), 0f, false);
+        HitResult hit = player.pick(player.getAttributeValue(Attributes.BLOCK_INTERACTION_RANGE), 0f, false);
         if (hit instanceof BlockHitResult blockHitResult) {
             BlockState state = world.getBlockState(blockHitResult.getBlockPos());
-            if (STRIPPED_BLOCKS.containsKey(state.getBlock())) {
+            if (STRIPPABLES.containsKey(state.getBlock())) {
                 return blockHitResult;
-            } else if (Oxidizable.getDecreasedOxidationState(state).isPresent()) {
+            } else if (WeatheringCopper.getPrevious(state).isPresent()) {
                 return blockHitResult;
-            } else if (Optional.ofNullable(HoneycombItem.WAXED_TO_UNWAXED_BLOCKS.get().get(state.getBlock())).map(block -> block.getStateWithProperties(state)).isPresent()) {
+            } else if (Optional.ofNullable(HoneycombItem.WAX_OFF_BY_BLOCK.get().get(state.getBlock())).map(block -> block.withPropertiesOf(state)).isPresent()) {
                 return blockHitResult;
             }
         }

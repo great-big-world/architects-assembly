@@ -2,18 +2,22 @@ package dev.creoii.greatbigworld.architectsassembly.mixin.block;
 
 import dev.creoii.greatbigworld.architectsassembly.block.enums.FluidType;
 import dev.creoii.greatbigworld.architectsassembly.util.Fluidloggable;
-import net.minecraft.block.*;
-import net.minecraft.fluid.FlowableFluid;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.state.StateManager;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
-import net.minecraft.world.tick.ScheduledTickView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.level.block.BeaconBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DragonEggBlock;
+import net.minecraft.world.level.block.EnchantingTableBlock;
+import net.minecraft.world.level.block.SpawnerBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.material.FlowingFluid;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 
@@ -24,35 +28,35 @@ import org.spongepowered.asm.mixin.Mixin;
         SpawnerBlock.class
 })
 public abstract class BlockForceFluidloggableMixin extends Block implements Fluidloggable {
-    public BlockForceFluidloggableMixin(Settings settings) {
+    public BlockForceFluidloggableMixin(Properties settings) {
         super(settings);
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        super.appendProperties(builder);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
         builder.add(Fluidloggable.FLUIDLOGGED);
     }
 
     @Nullable
     @Override
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return getDefaultState().with(FLUIDLOGGED, FLUIDS.get(ctx.getWorld().getFluidState(ctx.getBlockPos()).getFluid()));
+    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+        return defaultBlockState().setValue(FLUIDLOGGED, FLUIDS.get(ctx.getLevel().getFluidState(ctx.getClickedPos()).getType()));
     }
 
     @Override
-    protected BlockState getStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random) {
-        if (state.get(FLUIDLOGGED) != FluidType.EMPTY) {
-            tickView.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+    protected BlockState updateShape(BlockState state, LevelReader world, ScheduledTickAccess tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
+        if (state.getValue(FLUIDLOGGED) != FluidType.EMPTY) {
+            tickView.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
         }
 
-        return super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random);
+        return super.updateShape(state, world, tickView, pos, direction, neighborPos, neighborState, random);
     }
 
     @Override
     public FluidState getFluidState(BlockState state) {
-        if (state.get(Fluidloggable.FLUIDLOGGED).getFluid() instanceof FlowableFluid flowableFluid) {
-            return flowableFluid.getStill(false);
+        if (state.getValue(Fluidloggable.FLUIDLOGGED).getFluid() instanceof FlowingFluid flowableFluid) {
+            return flowableFluid.getSource(false);
         }
         return super.getFluidState(state);
     }

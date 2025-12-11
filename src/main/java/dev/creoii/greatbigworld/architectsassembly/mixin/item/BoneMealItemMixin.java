@@ -2,14 +2,14 @@ package dev.creoii.greatbigworld.architectsassembly.mixin.item;
 
 import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyWorldgen;
 import dev.creoii.greatbigworld.architectsassembly.world.feature.MossifyVegetationPatchFeature;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.BoneMealItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.item.BoneMealItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -18,25 +18,25 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BoneMealItem.class)
 public class BoneMealItemMixin {
-    @Inject(method = "useOnFertilizable", at = @At(value = "RETURN", ordinal = 1), cancellable = true)
-    private static void gbw$fertilizeMossifiables(ItemStack stack, World world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
+    @Inject(method = "growCrop", at = @At(value = "RETURN", ordinal = 1), cancellable = true)
+    private static void gbw$fertilizeMossifiables(ItemStack stack, Level world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
         if (MossifyVegetationPatchFeature.MOSSY_CONVERSIONS.containsKey(world.getBlockState(pos).getBlock()) && isNextToMoss(world, pos)) {
-            world.getRegistryManager().getOptional(RegistryKeys.CONFIGURED_FEATURE).flatMap(key -> {
-                return key.getOptional(ArchitectsAssemblyWorldgen.MOSSIFY_PATCH_BONEMEAL);
+            world.registryAccess().lookup(Registries.CONFIGURED_FEATURE).flatMap(key -> {
+                return key.get(ArchitectsAssemblyWorldgen.MOSSIFY_PATCH_BONEMEAL);
             }).ifPresent(entry -> {
-                ServerWorld serverWorld = (ServerWorld) world;
-                entry.value().generate(serverWorld, serverWorld.getChunkManager().getChunkGenerator(), world.getRandom(), pos.up());
+                ServerLevel serverWorld = (ServerLevel) world;
+                entry.value().place(serverWorld, serverWorld.getChunkSource().getGenerator(), world.getRandom(), pos.above());
             });
-            if (!world.isClient())
-                stack.decrement(1);
+            if (!world.isClientSide())
+                stack.shrink(1);
             cir.setReturnValue(true);
         }
     }
 
     @Unique
-    private static boolean isNextToMoss(World world, BlockPos pos) {
+    private static boolean isNextToMoss(Level world, BlockPos pos) {
         for (Direction direction : Direction.values()) {
-            if (world.getBlockState(pos.offset(direction)).isOf(Blocks.MOSS_BLOCK))
+            if (world.getBlockState(pos.relative(direction)).is(Blocks.MOSS_BLOCK))
                 return true;
         }
         return false;

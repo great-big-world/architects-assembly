@@ -1,6 +1,5 @@
 package dev.creoii.greatbigworld.architectsassembly.mixin;
 
-import net.minecraft.item.consume.UseAction;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
@@ -9,22 +8,23 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import net.minecraft.world.item.ItemUseAnimation;
 
-@Mixin(UseAction.class)
+@Mixin(ItemUseAnimation.class)
 public class UseActionMixin {
     @Invoker("<init>")
-    private static UseAction init(String internalName, int internalId, int id, final String name) {
+    private static ItemUseAnimation init(String internalName, int internalId, int id, final String name) {
         throw new AssertionError();
     }
 
-    @Shadow @Final @Mutable private static UseAction[] field_8948;
+    @Shadow @Final @Mutable private static ItemUseAnimation[] $VALUES;
 
     static {
-        ArrayList<UseAction> values = new ArrayList<>(Arrays.asList(field_8948));
+        ArrayList<ItemUseAnimation> values = new ArrayList<>(Arrays.asList($VALUES));
         int last = values.size();
 
         values.add(init("TOOL", last, 100, "tool"));
 
-        field_8948 = values.toArray(new UseAction[0]);
+        $VALUES = values.toArray(new ItemUseAnimation[0]);
     }
 }

@@ -1,7 +1,7 @@
 package dev.creoii.greatbigworld.architectsassembly.util;
 
-import net.minecraft.item.consume.UseAction;
+import net.minecraft.world.item.ItemUseAnimation;
 
 public final class ArchitectsAssemblyUseActions {
-    public static final UseAction TOOL = UseAction.valueOf("TOOL");
+    public static final ItemUseAnimation TOOL = ItemUseAnimation.valueOf("TOOL");
 }

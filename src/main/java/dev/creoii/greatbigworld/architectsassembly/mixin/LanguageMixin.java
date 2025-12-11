@@ -4,18 +4,18 @@ import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import dev.creoii.greatbigworld.architectsassembly.util.LocaleAwareLanguage;
 import dev.creoii.greatbigworld.architectsassembly.variant.Variant;
 import dev.creoii.greatbigworld.architectsassembly.variant.VariantItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.registry.Registries;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.Language;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.function.BiConsumer;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.locale.Language;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 
 @Mixin(Language.class)
 public class LanguageMixin implements LocaleAwareLanguage {
@@ -23,7 +23,7 @@ public class LanguageMixin implements LocaleAwareLanguage {
     @Unique
     private String gbw$langCode;
 
-    @WrapWithCondition(method = "load(Ljava/io/InputStream;Ljava/util/function/BiConsumer;)V", at = @At(value = "INVOKE", target = "Ljava/util/function/BiConsumer;accept(Ljava/lang/Object;Ljava/lang/Object;)V"))
+    @WrapWithCondition(method = "loadFromJson(Ljava/io/InputStream;Ljava/util/function/BiConsumer;)V", at = @At(value = "INVOKE", target = "Ljava/util/function/BiConsumer;accept(Ljava/lang/Object;Ljava/lang/Object;)V"))
     private static boolean gbw$applyTranslationLoadEvent(BiConsumer<String, String> entryConsumer, Object key, Object value) {
         if (instance == null)
             return true;
@@ -37,15 +37,15 @@ public class LanguageMixin implements LocaleAwareLanguage {
 
         if (translationKey.startsWith("item.")) {
             if (translationKey.contains("_pottery_sherd")) {
-                entryConsumer.accept(translationKey, instance.get("item.great_big_world.pottery_sherd"));
+                entryConsumer.accept(translationKey, instance.getOrDefault("item.great_big_world.pottery_sherd"));
                 return false;
             } else if (translationKey.contains("_spawn_egg")) {
-                entryConsumer.accept(translationKey, instance.get("item.great_big_world.spawn_egg"));
+                entryConsumer.accept(translationKey, instance.getOrDefault("item.great_big_world.spawn_egg"));
                 return false;
             }
         }
 
-        Item item = Registries.ITEM.get(toId(translationKey));
+        Item item = BuiltInRegistries.ITEM.getValue(toId(translationKey));
         return renameItemForVariants(item, entryConsumer, translationKey, translated);
     }
 
@@ -67,13 +67,13 @@ public class LanguageMixin implements LocaleAwareLanguage {
         int dot3 = translationKey.indexOf('.', dot2 + 1);
 
         if (dot2 < 0)
-            return Identifier.of("air");
+            return Identifier.parse("air");
 
         String path;
         if (dot3 <= 0) path = translationKey.substring(dot2 + 1);
         else path = translationKey.substring(dot2 + 1, dot3);
 
-        return Identifier.of(translationKey.substring(dot1, dot2), path);
+        return Identifier.fromNamespaceAndPath(translationKey.substring(dot1, dot2), path);
     }
 
     @Unique
@@ -82,14 +82,14 @@ public class LanguageMixin implements LocaleAwareLanguage {
             return true;
         if (item instanceof VariantItem variantItem) {
             for (Variant variant : Variant.VARIANTS.values()) {
-                if (variant.getItems().contains(item) || variant.isStackInTags(item.getDefaultStack())) {
+                if (variant.getItems().contains(item) || variant.isStackInTags(item.getDefaultInstance())) {
                     variantItem.gbw$addVariant(variant);
                 }
             }
 
             if (!variantItem.gbw$getVariants().isEmpty()) {
                 String variantKey = translationKey.endsWith(".variant") ? translationKey : translationKey + ".variant";
-                String translated1 = Text.translatable(variantKey).getString();
+                String translated1 = Component.translatable(variantKey).getString();
                 if (!translated1.equals(translated)) {
                     consumer.accept(translationKey, translated1);
                     return false;
