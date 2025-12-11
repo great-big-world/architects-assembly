@@ -1,15 +1,9 @@
 accessWidener v2 named
-accessible class net/minecraft/client/gui/screen/recipebook/RecipeAlternativesWidget$AlternativeButtonWidget
-accessible class net/minecraft/client/gui/screen/recipebook/AnimatedResultButton$Result
-
 accessible method net/minecraft/world/item/context/UseOnContext getHitResult ()Lnet/minecraft/world/phys/BlockHitResult;
 accessible method net/minecraft/world/item/crafting/SingleItemRecipe$Serializer <init> (Lnet/minecraft/world/item/crafting/SingleItemRecipe$Factory;)V
 
-accessible field net/minecraft/block/Block cachedItem Lnet/minecraft/item/Item;
-accessible field net/minecraft/item/ItemPlacementContext placementPos Lnet/minecraft/util/math/BlockPos;
 accessible field net/minecraft/client/gui/GuiGraphics minecraft Lnet/minecraft/client/Minecraft;
 accessible field net/minecraft/client/KeyMapping key Lcom/mojang/blaze3d/platform/InputConstants$Key;
 accessible field net/minecraft/world/level/block/FireBlock igniteOdds Lit/unimi/dsi/fastutil/objects/Object2IntMap;
 accessible field net/minecraft/world/level/block/FireBlock burnOdds Lit/unimi/dsi/fastutil/objects/Object2IntMap;
-accessible field net/minecraft/recipe/SingleStackRecipe ingredient Lnet/minecraft/recipe/Ingredient;
 accessible field net/minecraft/world/entity/decoration/ItemFrame fixed Z
