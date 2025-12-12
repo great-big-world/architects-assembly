@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ServerExplosion.class)
 public abstract class ExplosionImplMixin {
-    @Shadow
+    /*@Shadow
     public abstract Vec3 center();
 
     @Inject(method = "hurtEntities", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;push(Lnet/minecraft/world/phys/Vec3;)V"))
@@ -24,5 +24,5 @@ public abstract class ExplosionImplMixin {
         if (entity instanceof ServerPlayer serverPlayer) {
             ServerPlayNetworking.send(serverPlayer, new ScreenShakeS2C((float) Math.exp(-.08f * serverPlayer.position().distanceTo(center())), 80, ScreenShakeManager.Easing.OUT));
         }
-    }
+    }*/
 }

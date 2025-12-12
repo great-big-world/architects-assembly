@@ -20,11 +20,11 @@ public abstract class LightningEntityMixin extends Entity {
         super(type, world);
     }
 
-    @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LightningBolt;gameEvent(Lnet/minecraft/core/Holder;)V"))
+    /*@Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LightningBolt;gameEvent(Lnet/minecraft/core/Holder;)V"))
     private void gbw$lightningScreenShake(CallbackInfo ci) {
         PlayerLookup.tracking((ServerLevel) level(), blockPosition()).forEach(serverPlayer -> {
             float t = Math.max(0f, 2.5f - ((float) serverPlayer.position().distanceTo(position()) / 64f));
             ServerPlayNetworking.send(serverPlayer, new ScreenShakeS2C(t, 200, ScreenShakeManager.Easing.OUT));
         });
-    }
+    }*/
 }
