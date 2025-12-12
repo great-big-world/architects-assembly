@@ -23,6 +23,7 @@ import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentUtils;
 import net.minecraft.network.chat.MutableComponent;
@@ -39,6 +40,8 @@ import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.item.component.Weapon;
 import net.minecraft.world.item.equipment.Equippable;
 import net.minecraft.world.level.GrassColor;
+import net.minecraft.world.level.block.entity.PotDecorations;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -120,6 +123,20 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
             if (stack.is(ItemTags.DECORATED_POT_SHERDS)) {
                 Identifier id = BuiltInRegistries.ITEM.getKey(stack.getItem());
                 list.add(Component.translatable("variant.item.sherd." + id.getPath().replace("_pottery_sherd", "")).withStyle(ChatFormatting.GRAY));
+            }
+
+            if (stack.has(DataComponents.POT_DECORATIONS)) {
+                PotDecorations decorations = stack.getOrDefault(DataComponents.POT_DECORATIONS, PotDecorations.EMPTY);
+                if (decorations != PotDecorations.EMPTY) {
+                    list.add(CommonComponents.EMPTY);
+                    decorations.ordered().forEach(item -> {
+                        ItemStack stack1 = item.getDefaultInstance();
+                        if (stack1.is(ItemTags.DECORATED_POT_SHERDS)) {
+                            Identifier id = BuiltInRegistries.ITEM.getKey(stack1.getItem());
+                            list.add(Component.translatable("variant.item.sherd." + id.getPath().replace("_pottery_sherd", "")).withStyle(ChatFormatting.GRAY));
+                        }
+                    });
+                }
             }
 
             if (stack.getItem() instanceof VariantItem variantItem && !ItemStack.matches(stack, Raid.getOminousBannerInstance(context.registries().lookupOrThrow(Registries.BANNER_PATTERN)))) {
