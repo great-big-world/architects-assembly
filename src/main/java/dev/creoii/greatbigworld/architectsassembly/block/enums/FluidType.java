@@ -9,7 +9,7 @@ import net.minecraft.world.level.material.Fluids;
 
 public enum FluidType implements StringRepresentable {
     EMPTY("empty", Fluids.EMPTY, () -> ItemStack.EMPTY),
-    WATER("water", Fluids.WATER, () -> Items.WATER_BUCKET.getDefaultInstance()), // DO NOT USE METHOD SUPPLIERS HERE
+    WATER("water", Fluids.WATER, () -> Items.WATER_BUCKET.getDefaultInstance()), // DO NOT USE METHOD REFERENCES HERE
     LAVA("lava", Fluids.LAVA, () -> Items.LAVA_BUCKET.getDefaultInstance());
 
     private final String name;
