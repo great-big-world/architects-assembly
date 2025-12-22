@@ -407,6 +407,11 @@
   "block.minecraft.orange_tulip.variant": "Tulip",
   "block.minecraft.white_tulip.variant": "Tulip",
 
+  "block.minecraft.cobbled_deepslate.variant": "Deepslate",
+  "block.minecraft.cobbled_deepslate_slab.variant": "Deepslate Slab",
+  "block.minecraft.cobbled_deepslate_stairs.variant": "Deepslate Stairs",
+  "block.minecraft.cobbled_deepslate_wall.variant": "Deepslate Wall",
+
   "block.great_big_world.chiseled_glass.variant": "Glass",
   "block.great_big_world.chiseled_glass_pane.variant": "Glass Pane",
   "block.great_big_world.brown_glass.variant": "Glass",
