@@ -33,8 +33,6 @@
     "minecraft:exposed_copper_chest",
     "minecraft:waxed_exposed_copper_chest",
     "minecraft:exposed_copper_golem_statue",
-    "minecraft:waxed_exposed_copper_golem_statue",
-    "great_big_world:exposed_copper_pressure_plate",
-    "great_big_world:waxed_exposed_copper_pressure_plate"
+    "minecraft:waxed_exposed_copper_golem_statue"
   ]
 }

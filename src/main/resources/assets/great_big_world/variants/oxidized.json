@@ -33,8 +33,6 @@
     "minecraft:oxidized_copper_chest",
     "minecraft:waxed_oxidized_copper_chest",
     "minecraft:oxidized_copper_golem_statue",
-    "minecraft:waxed_oxidized_copper_golem_statue",
-    "great_big_world:oxidized_copper_pressure_plate",
-    "great_big_world:waxed_oxidized_copper_pressure_plate"
+    "minecraft:waxed_oxidized_copper_golem_statue"
   ]
 }

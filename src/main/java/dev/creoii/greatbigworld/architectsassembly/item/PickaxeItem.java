@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableMap;
 import dev.creoii.greatbigworld.architectsassembly.block.GlassBlock;
 import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyBlocks;
 import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblySoundEvents;
-import dev.creoii.greatbigworld.architectsassembly.util.ArchitectsAssemblyUseActions;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Unique;
 
@@ -52,7 +51,12 @@ public class PickaxeItem extends Item {
     }
 
     public ItemUseAnimation getUseAnimation(ItemStack stack) {
-        return ArchitectsAssemblyUseActions.TOOL;
+        for (ItemUseAnimation itemUseAnimation : ItemUseAnimation.values()) {
+            if (itemUseAnimation.name().equals("TOOL")) { // check if TOOL exists (from delay-tool-usage standalone mod)
+                return itemUseAnimation;
+            }
+        }
+        return super.getUseAnimation(stack);
     }
 
     @Override
