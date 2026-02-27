@@ -33,6 +33,9 @@ public abstract class ItemFrameEntityRendererMixin<T extends ItemFrame> {
             BlockState blockState = ExtendedItemFrame.getStateForItemFrame(itemFrameEntityRenderState.isGlowFrame, false, false);
             BlockStateModel blockStateModel = blockRenderer.getBlockModel(blockState);
 
+            matrixStack.pushPose();
+            matrixStack.translate(-.5f, -.5f, -.5f);
+
             if (itemFrameEntityRenderState instanceof ExtendedItemFrame extendedItemFrame) {
                 DyeColor color = extendedItemFrame.gbw$getColor();
                 if (color != null) {
@@ -44,15 +47,13 @@ public abstract class ItemFrameEntityRendererMixin<T extends ItemFrame> {
 
             matrixStack.popPose();
 
-            if (itemFrameEntityRenderState.isInvisible)
-                matrixStack.translate(0f, 0f, .5f);
-            else matrixStack.translate(0f, 0f, .4375f);
+            matrixStack.translate(0f, 0f, .4375f);
 
             if (!itemFrameEntityRenderState.item.isEmpty()) {
                 matrixStack.mulPose(Axis.ZP.rotationDegrees((float)itemFrameEntityRenderState.rotation * 360f / 8f));
-                int j = getLightCoords(itemFrameEntityRenderState.isGlowFrame, 15728880, itemFrameEntityRenderState.lightCoords);
+                int i = getLightCoords(itemFrameEntityRenderState.isGlowFrame, 15728880, itemFrameEntityRenderState.lightCoords);
                 matrixStack.scale(.5f, .5f, .5f);
-                itemFrameEntityRenderState.item.submit(matrixStack, orderedRenderCommandQueue, j, OverlayTexture.NO_OVERLAY, itemFrameEntityRenderState.outlineColor);
+                itemFrameEntityRenderState.item.submit(matrixStack, orderedRenderCommandQueue, i, OverlayTexture.NO_OVERLAY, itemFrameEntityRenderState.outlineColor);
             }
 
             matrixStack.popPose();
