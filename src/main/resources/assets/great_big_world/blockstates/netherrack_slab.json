@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "great_big_world:block/netherrack_slab"
+    },
+    "type=double": {
+      "model": "block/netherrack"
+    },
+    "type=top": {
+      "model": "great_big_world:block/netherrack_slab_top"
+    }
+  }
+}

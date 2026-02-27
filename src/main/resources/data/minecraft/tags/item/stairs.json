@@ -4,6 +4,11 @@
     "great_big_world:mossy_brick_stairs",
     "great_big_world:lapis_stairs",
     "great_big_world:polished_lapis_stairs",
-    "great_big_world:polished_lapis_brick_stairs"
+    "great_big_world:polished_lapis_brick_stairs",
+    "great_big_world:packed_mud_stairs",
+    "great_big_world:netherrack_stairs",
+    "great_big_world:end_stone_stairs",
+    "great_big_world:mossy_mud_brick_stairs",
+    "great_big_world:deepslate_stairs"
   ]
 }

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": "minecraft:deepslate",
+  "result": {
+    "id": "great_big_world:deepslate_slab"
+  }
+}

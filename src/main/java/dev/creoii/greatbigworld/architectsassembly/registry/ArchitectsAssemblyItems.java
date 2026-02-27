@@ -248,6 +248,22 @@ public final class ArchitectsAssemblyItems {
     public static Item POLISHED_CALCITE_STAIRS;
     public static Item POLISHED_CALCITE_SLAB;
     public static Item POLISHED_CALCITE_WALL;
+    public static Item PACKED_MUD_STAIRS;
+    public static Item PACKED_MUD_SLAB;
+    public static Item PACKED_MUD_WALL;
+    public static Item NETHERRACK_STAIRS;
+    public static Item NETHERRACK_SLAB;
+    public static Item NETHERRACK_WALL;
+    public static Item END_STONE_STAIRS;
+    public static Item END_STONE_SLAB;
+    public static Item END_STONE_WALL;
+    public static Item DEEPSLATE_STAIRS;
+    public static Item DEEPSLATE_SLAB;
+    public static Item DEEPSLATE_WALL;
+    public static Item MOSSY_MUD_BRICKS;
+    public static Item MOSSY_MUD_BRICK_STAIRS;
+    public static Item MOSSY_MUD_BRICK_SLAB;
+    public static Item MOSSY_MUD_BRICK_WALL;
 
     private static void registerDecorativeBlocks() {
         CHISELED_GLASS = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_glass"), ArchitectsAssemblyBlocks.CHISELED_GLASS);
@@ -351,6 +367,23 @@ public final class ArchitectsAssemblyItems {
         POLISHED_CALCITE_STAIRS = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "polished_calcite_stairs"), ArchitectsAssemblyBlocks.POLISHED_CALCITE_STAIRS);
         POLISHED_CALCITE_SLAB = RegistryHelper.registerItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "polished_calcite_slab"), settings -> new SlabItem(ArchitectsAssemblyBlocks.POLISHED_CALCITE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_POLISHED_CALCITE_SLAB, settings.useBlockDescriptionPrefix()));
         POLISHED_CALCITE_WALL = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "polished_calcite_wall"), ArchitectsAssemblyBlocks.POLISHED_CALCITE_WALL);
+
+        PACKED_MUD_STAIRS = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "packed_mud_stairs"), ArchitectsAssemblyBlocks.PACKED_MUD_STAIRS);
+        PACKED_MUD_SLAB = RegistryHelper.registerItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "packed_mud_slab"), settings -> new SlabItem(ArchitectsAssemblyBlocks.PACKED_MUD_SLAB, ArchitectsAssemblyBlocks.VERTICAL_PACKED_MUD_SLAB, settings.useBlockDescriptionPrefix()));
+        PACKED_MUD_WALL = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "packed_mud_wall"), ArchitectsAssemblyBlocks.PACKED_MUD_WALL);
+        NETHERRACK_STAIRS = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "netherrack_stairs"), ArchitectsAssemblyBlocks.NETHERRACK_STAIRS);
+        NETHERRACK_SLAB = RegistryHelper.registerItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "netherrack_slab"), settings -> new SlabItem(ArchitectsAssemblyBlocks.NETHERRACK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_NETHERRACK_SLAB, settings.useBlockDescriptionPrefix()));
+        NETHERRACK_WALL = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "netherrack_wall"), ArchitectsAssemblyBlocks.NETHERRACK_WALL);
+        END_STONE_STAIRS = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "end_stone_stairs"), ArchitectsAssemblyBlocks.END_STONE_STAIRS);
+        END_STONE_SLAB = RegistryHelper.registerItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "end_stone_slab"), settings -> new SlabItem(ArchitectsAssemblyBlocks.END_STONE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_END_STONE_SLAB, settings.useBlockDescriptionPrefix()));
+        END_STONE_WALL = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "end_stone_wall"), ArchitectsAssemblyBlocks.END_STONE_WALL);
+        DEEPSLATE_STAIRS = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "deepslate_stairs"), ArchitectsAssemblyBlocks.DEEPSLATE_STAIRS);
+        DEEPSLATE_SLAB = RegistryHelper.registerItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "deepslate_slab"), settings -> new SlabItem(ArchitectsAssemblyBlocks.DEEPSLATE_SLAB, ArchitectsAssemblyBlocks.VERTICAL_DEEPSLATE_SLAB, settings.useBlockDescriptionPrefix()));
+        DEEPSLATE_WALL = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "deepslate_wall"), ArchitectsAssemblyBlocks.DEEPSLATE_WALL);
+        MOSSY_MUD_BRICKS = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "mossy_mud_bricks"), ArchitectsAssemblyBlocks.MOSSY_MUD_BRICKS);
+        MOSSY_MUD_BRICK_STAIRS = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "mossy_mud_brick_stairs"), ArchitectsAssemblyBlocks.MOSSY_MUD_BRICK_STAIRS);
+        MOSSY_MUD_BRICK_SLAB = RegistryHelper.registerItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "mossy_mud_brick_slab"), settings -> new SlabItem(ArchitectsAssemblyBlocks.MOSSY_MUD_BRICK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_MOSSY_MUD_BRICK_SLAB, settings.useBlockDescriptionPrefix()));
+        MOSSY_MUD_BRICK_WALL = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "mossy_mud_brick_wall"), ArchitectsAssemblyBlocks.MOSSY_MUD_BRICK_WALL);
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.COLORED_BLOCKS).register(entries -> {
             entries.getDisplayStacks().replaceAll(stack -> {
@@ -479,6 +512,11 @@ public final class ArchitectsAssemblyItems {
             entries.addAfter(WAXED_EXPOSED_CUT_COPPER_SLAB, WAXED_EXPOSED_CUT_COPPER_WALL);
             entries.addAfter(WAXED_WEATHERED_CUT_COPPER_SLAB, WAXED_WEATHERED_CUT_COPPER_WALL);
             entries.addAfter(WAXED_OXIDIZED_CUT_COPPER_SLAB, WAXED_OXIDIZED_CUT_COPPER_WALL);
+            entries.addAfter(Items.MUD_BRICK_WALL, MOSSY_MUD_BRICKS, MOSSY_MUD_BRICK_STAIRS, MOSSY_MUD_BRICK_SLAB, MOSSY_MUD_BRICK_WALL);
+            entries.addAfter(Items.NETHERRACK, NETHERRACK_STAIRS, NETHERRACK_SLAB, NETHERRACK_WALL);
+            entries.addAfter(Items.END_STONE, END_STONE_STAIRS, END_STONE_SLAB, END_STONE_WALL);
+            entries.addAfter(Items.PACKED_MUD, PACKED_MUD_STAIRS, PACKED_MUD_SLAB, PACKED_MUD_WALL);
+            entries.addAfter(Items.DEEPSLATE, DEEPSLATE_STAIRS, DEEPSLATE_SLAB, DEEPSLATE_WALL);
         });
     }
     // endregion

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": "minecraft:end_stone",
+  "result": {
+    "id": "great_big_world:end_stone_slab"
+  }
+}

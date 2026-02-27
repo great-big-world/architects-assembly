@@ -144,6 +144,27 @@ public final class ArchitectsAssemblyBlocks {
     public static Block POLISHED_CALCITE_SLAB;
     public static Block VERTICAL_POLISHED_CALCITE_SLAB;
     public static Block POLISHED_CALCITE_WALL;
+    public static Block PACKED_MUD_STAIRS;
+    public static Block PACKED_MUD_SLAB;
+    public static Block VERTICAL_PACKED_MUD_SLAB;
+    public static Block PACKED_MUD_WALL;
+    public static Block NETHERRACK_STAIRS;
+    public static Block NETHERRACK_SLAB;
+    public static Block VERTICAL_NETHERRACK_SLAB;
+    public static Block NETHERRACK_WALL;
+    public static Block END_STONE_STAIRS;
+    public static Block END_STONE_SLAB;
+    public static Block VERTICAL_END_STONE_SLAB;
+    public static Block END_STONE_WALL;
+    public static Block DEEPSLATE_STAIRS;
+    public static Block DEEPSLATE_SLAB;
+    public static Block VERTICAL_DEEPSLATE_SLAB;
+    public static Block DEEPSLATE_WALL;
+    public static Block MOSSY_MUD_BRICKS;
+    public static Block MOSSY_MUD_BRICK_STAIRS;
+    public static Block MOSSY_MUD_BRICK_SLAB;
+    public static Block VERTICAL_MOSSY_MUD_BRICK_SLAB;
+    public static Block MOSSY_MUD_BRICK_WALL;
 
     private static void registerDecorativeBlocks() {
         CRACKED_GLASS = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "cracked_glass"), settings -> new CrackedGlassBlock(settings, Blocks.GLASS::defaultBlockState, () -> ArchitectsAssemblyItems.GLASS_SHARD), BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).instabreak());
@@ -252,6 +273,28 @@ public final class ArchitectsAssemblyBlocks {
         POLISHED_CALCITE_SLAB = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "polished_calcite_slab"), SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(POLISHED_CALCITE));
         VERTICAL_POLISHED_CALCITE_SLAB = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "vertical_polished_calcite_slab"), VerticalSlabBlock::new, BlockBehaviour.Properties.ofFullCopy(POLISHED_CALCITE_SLAB));
         POLISHED_CALCITE_WALL = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "polished_calcite_wall"), WallBlock::new, BlockBehaviour.Properties.ofLegacyCopy(POLISHED_CALCITE).forceSolidOn());
+
+        PACKED_MUD_STAIRS = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "packed_mud_stairs"), settings -> new StairBlock(Blocks.PACKED_MUD.defaultBlockState(), settings), BlockBehaviour.Properties.ofFullCopy(Blocks.PACKED_MUD));
+        PACKED_MUD_SLAB = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "packed_mud_slab"), SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.PACKED_MUD));
+        VERTICAL_PACKED_MUD_SLAB = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "vertical_packed_mud_slab"), VerticalSlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.PACKED_MUD));
+        PACKED_MUD_WALL = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "packed_mud_wall"), WallBlock::new, BlockBehaviour.Properties.ofLegacyCopy(Blocks.PACKED_MUD).forceSolidOn());
+        NETHERRACK_STAIRS = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "netherrack_stairs"), settings -> new StairBlock(Blocks.NETHERRACK.defaultBlockState(), settings), BlockBehaviour.Properties.ofFullCopy(Blocks.NETHERRACK));
+        NETHERRACK_SLAB = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "netherrack_slab"), SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.NETHERRACK));
+        VERTICAL_NETHERRACK_SLAB = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "vertical_netherrack_slab"), VerticalSlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.NETHERRACK));
+        NETHERRACK_WALL = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "netherrack_wall"), WallBlock::new, BlockBehaviour.Properties.ofLegacyCopy(Blocks.NETHERRACK).forceSolidOn());
+        END_STONE_STAIRS = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "end_stone_stairs"), settings -> new StairBlock(Blocks.END_STONE.defaultBlockState(), settings), BlockBehaviour.Properties.ofFullCopy(Blocks.END_STONE));
+        END_STONE_SLAB = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "end_stone_slab"), SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.END_STONE));
+        VERTICAL_END_STONE_SLAB = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "vertical_end_stone_slab"), VerticalSlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.END_STONE));
+        END_STONE_WALL = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "end_stone_wall"), WallBlock::new, BlockBehaviour.Properties.ofLegacyCopy(Blocks.END_STONE).forceSolidOn());
+        DEEPSLATE_STAIRS = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "deepslate_stairs"), settings -> new StairBlock(Blocks.DEEPSLATE.defaultBlockState(), settings), BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE));
+        DEEPSLATE_SLAB = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "deepslate_slab"), SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE));
+        VERTICAL_DEEPSLATE_SLAB = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "vertical_deepslate_slab"), VerticalSlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE));
+        DEEPSLATE_WALL = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "deepslate_wall"), WallBlock::new, BlockBehaviour.Properties.ofLegacyCopy(Blocks.DEEPSLATE).forceSolidOn());
+        MOSSY_MUD_BRICKS = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "mossy_mud_bricks"), Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.MUD_BRICKS));
+        MOSSY_MUD_BRICK_STAIRS = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "mossy_mud_brick_stairs"), settings -> new StairBlock(MOSSY_MUD_BRICKS.defaultBlockState(), settings), BlockBehaviour.Properties.ofFullCopy(MOSSY_MUD_BRICKS));
+        MOSSY_MUD_BRICK_SLAB = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "mossy_mud_brick_slab"), SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(MOSSY_MUD_BRICKS));
+        VERTICAL_MOSSY_MUD_BRICK_SLAB = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "vertical_mossy_mud_brick_slab"), VerticalSlabBlock::new, BlockBehaviour.Properties.ofFullCopy(MOSSY_MUD_BRICKS));
+        MOSSY_MUD_BRICK_WALL = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "mossy_mud_brick_wall"), WallBlock::new, BlockBehaviour.Properties.ofLegacyCopy(MOSSY_MUD_BRICKS).forceSolidOn());
 
         StrippableBlockRegistry.register(CHISELED_OAK_LOG, STRIPPED_CHISELED_OAK_LOG);
         StrippableBlockRegistry.register(CHISELED_OAK_WOOD, STRIPPED_CHISELED_OAK_WOOD);

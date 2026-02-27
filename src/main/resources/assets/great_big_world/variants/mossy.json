@@ -14,6 +14,10 @@
     "great_big_world:mossy_bricks",
     "great_big_world:mossy_brick_slab",
     "great_big_world:mossy_brick_stairs",
-    "great_big_world:mossy_brick_wall"
+    "great_big_world:mossy_brick_wall",
+    "great_big_world:mossy_mud_bricks",
+    "great_big_world:mossy_mud_brick_slab",
+    "great_big_world:mossy_mud_brick_stairs",
+    "great_big_world:mossy_mud_brick_wall"
   ]
 }

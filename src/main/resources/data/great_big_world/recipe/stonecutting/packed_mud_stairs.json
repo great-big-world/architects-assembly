@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": "minecraft:packed_mud",
+  "result": {
+    "id": "great_big_world:packed_mud_stairs"
+  }
+}

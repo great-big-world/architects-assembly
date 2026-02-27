@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "great_big_world:block/packed_mud_slab"
+    },
+    "type=double": {
+      "model": "block/packed_mud"
+    },
+    "type=top": {
+      "model": "great_big_world:block/packed_mud_slab_top"
+    }
+  }
+}

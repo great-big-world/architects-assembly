@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "great_big_world:mossy_mud_bricks",
+  "result": {
+    "count": 2,
+    "id": "great_big_world:mossy_mud_brick_slab"
+  }
+}

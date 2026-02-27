@@ -55,6 +55,11 @@
     "great_big_world:vertical_tuff_slab",
     "great_big_world:vertical_tuff_brick_slab",
     "great_big_world:vertical_polished_tuff_slab",
-    "great_big_world:vertical_resin_brick_slab"
+    "great_big_world:vertical_resin_brick_slab",
+    "great_big_world:vertical_netherrack_slab",
+    "great_big_world:vertical_end_stone_slab",
+    "great_big_world:vertical_packed_mud_slab",
+    "great_big_world:vertical_mossy_mud_brick_slab",
+    "great_big_world:vertical_deepslate_slab"
   ]
 }
