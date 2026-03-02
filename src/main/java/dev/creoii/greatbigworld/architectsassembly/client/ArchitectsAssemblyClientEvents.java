@@ -1,7 +1,6 @@
 package dev.creoii.greatbigworld.architectsassembly.client;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import dev.creoii.greatbigworld.architectsassembly.variant.Variant;
 import dev.creoii.greatbigworld.architectsassembly.variant.VariantItem;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
@@ -86,11 +85,6 @@ public final class ArchitectsAssemblyClientEvents {
             }
 
             if (stack.getItem() instanceof VariantItem variantItem && !ItemStack.matches(stack, Raid.getOminousBannerInstance(context.registries().lookupOrThrow(Registries.BANNER_PATTERN)))) {
-                for (Variant variant : Variant.VARIANTS.values()) {
-                    if (variant.getItems().contains(variantItem) || variant.isStackInTags(stack))
-                        variantItem.gbw$addVariant(variant);
-                }
-
                 if (!variantItem.gbw$getVariants().isEmpty()) {
                     list.add(1, VariantItem.getVariantTooltip(variantItem));
                 } else if (stack.getItem() instanceof SpawnEggItem spawnEggItem) {

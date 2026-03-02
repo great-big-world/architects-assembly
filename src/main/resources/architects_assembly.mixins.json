@@ -38,7 +38,6 @@
     "item.BucketItemMixin",
     "item.DecorationItemMixin",
     "item.ItemMixin",
-    "item.ItemsMixin",
     "item.ItemStackMixin",
     "world.DripstoneHelperMixin",
     "world.feature.GeodeFeatureMixin"
@@ -55,7 +54,6 @@
     "client.RecipeBookTypeMixin"
   ],
   "injectors": {
-    "defaultRequire": 1,
-    "maxShiftBy": 2
+    "defaultRequire": 1
   }
 }
