@@ -44,6 +44,40 @@ public class PickaxeItem extends Item {
             .put(Blocks.QUARTZ_BRICKS, () -> ArchitectsAssemblyBlocks.CRACKED_QUARTZ_BRICKS)
             .put(Blocks.RED_NETHER_BRICKS, () -> ArchitectsAssemblyBlocks.CRACKED_RED_NETHER_BRICKS)
             .put(Blocks.END_STONE_BRICKS, () -> ArchitectsAssemblyBlocks.CRACKED_END_STONE_BRICKS)
+            .put(Blocks.GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_GLASS)
+            .put(Blocks.BROWN_STAINED_GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_BROWN_GLASS)
+            .put(Blocks.RED_STAINED_GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_RED_GLASS)
+            .put(Blocks.ORANGE_STAINED_GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_ORANGE_GLASS)
+            .put(Blocks.YELLOW_STAINED_GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_YELLOW_GLASS)
+            .put(Blocks.LIME_STAINED_GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_LIME_GLASS)
+            .put(Blocks.GREEN_STAINED_GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_GREEN_GLASS)
+            .put(Blocks.CYAN_STAINED_GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_CYAN_GLASS)
+            .put(Blocks.BLUE_STAINED_GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_BLUE_GLASS)
+            .put(Blocks.LIGHT_BLUE_STAINED_GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_LIGHT_BLUE_GLASS)
+            .put(Blocks.PINK_STAINED_GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_PINK_GLASS)
+            .put(Blocks.MAGENTA_STAINED_GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_MAGENTA_GLASS)
+            .put(Blocks.PURPLE_STAINED_GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_PURPLE_GLASS)
+            .put(Blocks.BLACK_STAINED_GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_BLACK_GLASS)
+            .put(Blocks.GRAY_STAINED_GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_GRAY_GLASS)
+            .put(Blocks.LIGHT_GRAY_STAINED_GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_LIGHT_GRAY_GLASS)
+            .put(Blocks.WHITE_STAINED_GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_WHITE_GLASS)
+            .put(ArchitectsAssemblyBlocks.GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_GLASS)
+            .put(ArchitectsAssemblyBlocks.BROWN_GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_BROWN_GLASS)
+            .put(ArchitectsAssemblyBlocks.RED_GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_RED_GLASS)
+            .put(ArchitectsAssemblyBlocks.ORANGE_GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_ORANGE_GLASS)
+            .put(ArchitectsAssemblyBlocks.YELLOW_GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_YELLOW_GLASS)
+            .put(ArchitectsAssemblyBlocks.LIME_GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_LIME_GLASS)
+            .put(ArchitectsAssemblyBlocks.GREEN_GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_GREEN_GLASS)
+            .put(ArchitectsAssemblyBlocks.CYAN_GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_CYAN_GLASS)
+            .put(ArchitectsAssemblyBlocks.BLUE_GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_BLUE_GLASS)
+            .put(ArchitectsAssemblyBlocks.LIGHT_BLUE_GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_LIGHT_BLUE_GLASS)
+            .put(ArchitectsAssemblyBlocks.PINK_GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_PINK_GLASS)
+            .put(ArchitectsAssemblyBlocks.MAGENTA_GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_MAGENTA_GLASS)
+            .put(ArchitectsAssemblyBlocks.PURPLE_GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_PURPLE_GLASS)
+            .put(ArchitectsAssemblyBlocks.BLACK_GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_BLACK_GLASS)
+            .put(ArchitectsAssemblyBlocks.GRAY_GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_GRAY_GLASS)
+            .put(ArchitectsAssemblyBlocks.LIGHT_GRAY_GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_LIGHT_GRAY_GLASS)
+            .put(ArchitectsAssemblyBlocks.WHITE_GLASS, () -> ArchitectsAssemblyBlocks.CRACKED_WHITE_GLASS)
             .build();
 
     public PickaxeItem(ToolMaterial material, float attackDamage, float attackSpeed, Properties settings) {
@@ -76,7 +110,7 @@ public class PickaxeItem extends Item {
     public void onUseTick(Level world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
         int i = getUseDuration(stack, user) - remainingUseTicks;
 
-        if (i > 4 && i % 4 == 0) {
+        if (i > 4) {
             BlockHitResult blockHitResult;
             if (user instanceof Player player && (blockHitResult = canPlayerCrack(world, player)) != null) {
                 BlockPos pos = blockHitResult.getBlockPos();

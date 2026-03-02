@@ -6,6 +6,7 @@ import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -29,8 +30,7 @@ public class CrackedGlassBlock extends TransparentBlock {
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
-        ItemStack stack = player.getItemInHand(player.getUsedItemHand());
+    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
         if (stack.is(shard.get())) {
             world.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, state));
             world.setBlock(pos, fixed.get(), 3);
@@ -40,7 +40,7 @@ public class CrackedGlassBlock extends TransparentBlock {
                 return InteractionResult.SUCCESS_SERVER;
             return InteractionResult.SUCCESS;
         }
-        return super.useWithoutItem(state, world, pos, player, hit);
+        return super.useItemOn(stack, state, world, pos, player, interactionHand, blockHitResult);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class CrackedGlassBlock extends TransparentBlock {
 
     @Override
     public void fallOn(Level world, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
-        entity.causeFallDamage(fallDistance * .8f, .5f, entity.damageSources().fall());
+        super.fallOn(world, state, pos, entity, fallDistance);
         if (!world.isClientSide() && fallDistance >= .6f && !entity.getType().is(ArchitectsAssemblyTags.LIGHTWEIGHT_ENTITIES)) {
             world.destroyBlock(pos, !(entity instanceof Player player) || !player.isCreative(), entity);
         }
