@@ -47,6 +47,7 @@
     "client.BlockStateManagersMixin",
     "client.BooleanPropertiesMixin",
     "client.CreativeInventoryScreenMixin",
+    "client.GuiGraphicsMixin",
     "client.InGameHudMixin",
     "client.ItemFrameEntityRendererMixin",
     "client.ItemFrameEntityRenderStateMixin",
