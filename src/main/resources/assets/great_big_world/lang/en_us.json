@@ -297,6 +297,7 @@
   "item.tooltip.damage": "\uD83D\uDDE1 %s",
   "item.tooltip.mining_speed": "⛏ %s",
   "item.tooltip.air": "\uD83E\uDEE7 %s",
+  "item.turtle_helmet.tooltip.duration": "10s",
   "item.tooltip.separator": " ",
 
   "great_big_world.subtitles.item.pickaxe.crack": "Pickaxe cracks",

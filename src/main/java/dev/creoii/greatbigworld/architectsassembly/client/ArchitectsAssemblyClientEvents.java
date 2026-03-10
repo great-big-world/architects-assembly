@@ -63,7 +63,7 @@ public final class ArchitectsAssemblyClientEvents {
             }
 
             if (stack.is(Items.TURTLE_HELMET)) {
-                itemTooltipInfos.add(Component.translatable("item.tooltip.air", "10s").withStyle(ChatFormatting.GRAY));
+                itemTooltipInfos.add(Component.translatable("item.tooltip.air", Component.translatable("item.turtle_helmet.tooltip.duration")).withStyle(ChatFormatting.GRAY));
             }
 
             Equippable equippableComponent = stack.getOrDefault(DataComponents.EQUIPPABLE, null);
