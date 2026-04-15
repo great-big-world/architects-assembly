@@ -1,6 +1,6 @@
 package dev.creoii.greatbigworld.architectsassembly.block;
 
-import dev.creoii.greatbigworld.architectsassembly.client.screen.SawmillScreenHandler;
+import dev.creoii.greatbigworld.architectsassembly.menu.SawmillMenu;
 import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyStats;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -25,17 +25,17 @@ public class SawmillBlock extends StonecutterBlock {
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
-        if (world.isClientSide()) {
-            return InteractionResult.SUCCESS;
+        if (!world.isClientSide()) {
+            player.openMenu(state.getMenuProvider(world, pos));
+            player.awardStat(ArchitectsAssemblyStats.INTERACT_WITH_SAWMILL);
         }
-        player.openMenu(state.getMenuProvider(world, pos));
-        player.awardStat(ArchitectsAssemblyStats.INTERACT_WITH_SAWMILL);
-        return InteractionResult.CONSUME;
+
+        return InteractionResult.SUCCESS;
     }
 
     @Override
     @Nullable
     public MenuProvider getMenuProvider(BlockState state, Level world, BlockPos pos) {
-        return new SimpleMenuProvider((syncId, playerInventory, player) -> new SawmillScreenHandler(syncId, playerInventory, ContainerLevelAccess.create(world, pos)), TITLE);
+        return new SimpleMenuProvider((syncId, playerInventory, player) -> new SawmillMenu(syncId, playerInventory, ContainerLevelAccess.create(world, pos)), TITLE);
     }
 }

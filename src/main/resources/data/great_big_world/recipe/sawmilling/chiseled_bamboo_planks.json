@@ -1,0 +1,8 @@
+{
+  "type": "great_big_world:sawmilling",
+  "count": 1,
+  "ingredient": "minecraft:bamboo_planks",
+  "result": {
+    "id": "great_big_world:chiseled_bamboo_planks"
+  }
+}

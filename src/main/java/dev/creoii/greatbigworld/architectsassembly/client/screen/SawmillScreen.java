@@ -1,6 +1,7 @@
 package dev.creoii.greatbigworld.architectsassembly.client.screen;
 
 import dev.creoii.greatbigworld.GreatBigWorld;
+import dev.creoii.greatbigworld.architectsassembly.menu.SawmillMenu;
 import dev.creoii.greatbigworld.architectsassembly.recipe.SawmillingRecipe;
 import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblySoundEvents;
 import net.fabricmc.api.EnvType;
@@ -21,16 +22,16 @@ import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.minecraft.world.item.crafting.display.SlotDisplayContext;
 
 @Environment(EnvType.CLIENT)
-public class SawmillScreen extends AbstractContainerScreen<SawmillScreenHandler> {
+public class SawmillScreen extends AbstractContainerScreen<SawmillMenu> {
     private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "textures/gui/container/sawmill.png");
     private float scrollAmount;
     private boolean mouseClicked;
     private int scrollOffset;
     private boolean canCraft;
 
-    public SawmillScreen(SawmillScreenHandler handler, Inventory inventory, Component title) {
+    public SawmillScreen(SawmillMenu handler, Inventory inventory, Component title) {
         super(handler, inventory, title);
-        handler.setContentsChangedListener(this::onInventoryChange);
+        handler.registerUpdateListener(this::onInventoryChange);
         --titleLabelY;
     }
 
@@ -61,7 +62,7 @@ public class SawmillScreen extends AbstractContainerScreen<SawmillScreenHandler>
             int i = this.leftPos + 52;
             int j = this.topPos + 14;
             int k = this.scrollOffset + 12;
-            SelectableRecipe.SingleInputSet<SawmillingRecipe> grouping = this.menu.getAvailableRecipes();
+            SelectableRecipe.SingleInputSet<SawmillingRecipe> grouping = this.menu.getVisibleRecipes();
 
             for(int l = this.scrollOffset; l < k && l < grouping.size(); ++l) {
                 int m = l - this.scrollOffset;
@@ -77,13 +78,13 @@ public class SawmillScreen extends AbstractContainerScreen<SawmillScreenHandler>
     }
 
     private void renderRecipeBackground(GuiGraphics context, int mouseX, int mouseY, int x, int y, int scrollOffset) {
-        for (int i = this.scrollOffset; i < scrollOffset && i < menu.getAvailableRecipeCount(); ++i) {
+        for (int i = this.scrollOffset; i < scrollOffset && i < menu.getNumberOfVisibleRecipes(); ++i) {
             int j = i - this.scrollOffset;
             int k = x + j % 4 * 16;
             int l = j / 4;
             int m = y + l * 18 + 2;
             int n = this.imageHeight;
-            if (i == menu.getSelectedRecipe()) {
+            if (i == menu.getSelectedRecipeIndex()) {
                 n += 18;
             } else if (mouseX >= k && mouseY >= m && mouseX < k + 16 && mouseY < m + 18) {
                 n += 36;
@@ -93,7 +94,7 @@ public class SawmillScreen extends AbstractContainerScreen<SawmillScreenHandler>
     }
 
     private void renderRecipeIcons(GuiGraphics context, int x, int y, int scrollOffset) {
-        SelectableRecipe.SingleInputSet<SawmillingRecipe> grouping = this.menu.getAvailableRecipes();
+        SelectableRecipe.SingleInputSet<SawmillingRecipe> grouping = this.menu.getVisibleRecipes();
         ContextMap contextParameterMap = SlotDisplayContext.fromLevel(this.minecraft.level);
 
         for(int i = this.scrollOffset; i < scrollOffset && i < grouping.size(); ++i) {
@@ -164,15 +165,15 @@ public class SawmillScreen extends AbstractContainerScreen<SawmillScreenHandler>
     }
 
     private boolean shouldScroll() {
-        return this.canCraft && menu.getAvailableRecipeCount() > 12;
+        return this.canCraft && menu.getNumberOfVisibleRecipes() > 12;
     }
 
     protected int getMaxScroll() {
-        return (menu.getAvailableRecipeCount() + 4 - 1) / 4 - 3;
+        return (menu.getNumberOfVisibleRecipes() + 4 - 1) / 4 - 3;
     }
 
     private void onInventoryChange() {
-        this.canCraft = menu.canCraft();
+        this.canCraft = menu.hasInputItem();
         if (!this.canCraft) {
             this.scrollAmount = 0.0f;
             this.scrollOffset = 0;

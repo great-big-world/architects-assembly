@@ -4,7 +4,7 @@ import com.mojang.blaze3d.platform.InputConstants;
 import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyBlocks;
 import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyParticleTypes;
-import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyScreens;
+import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyMenus;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
@@ -25,8 +25,9 @@ public class ArchitectsAssemblyClient implements ClientModInitializer {
     public void onInitializeClient() {
         ArchitectsAssemblyBlocks.registerClient();
         ArchitectsAssemblyParticleTypes.registerClient();
-        ArchitectsAssemblyScreens.registerClient();
+        ArchitectsAssemblyMenus.registerClient();
         ArchitectsAssemblyClientEvents.register();
+        ArchitectsAssemblyClientNetworking.register();
 
         KeyBindingHelper.registerKeyBinding(CYCLE_HOTBAR);
 

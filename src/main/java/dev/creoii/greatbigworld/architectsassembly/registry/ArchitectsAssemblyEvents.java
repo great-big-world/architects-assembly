@@ -1,6 +1,9 @@
 package dev.creoii.greatbigworld.architectsassembly.registry;
 
+import dev.creoii.greatbigworld.architectsassembly.util.SawmillingRecipeManager;
+import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.Items;
 
@@ -26,6 +29,10 @@ public final class ArchitectsAssemblyEvents {
             modifyContext.modify(Items.COPPER_CHESTPLATE, builder -> builder.set(DataComponents.MAX_DAMAGE, 170)); // drop
             modifyContext.modify(Items.COPPER_LEGGINGS, builder -> builder.set(DataComponents.MAX_DAMAGE, 160)); // drop
             modifyContext.modify(Items.COPPER_BOOTS, builder -> builder.set(DataComponents.MAX_DAMAGE, 145)); // drop
+        });
+
+        ServerPlayerEvents.JOIN.register(player -> {
+            ServerPlayNetworking.send(player, new SawmillingRecipeManager.SyncSawmillingRecipesS2C(((SawmillingRecipeManager) player.level().getServer().getRecipeManager()).gbw$getSawmillingRecipes()));
         });
     }
 }

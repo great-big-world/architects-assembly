@@ -1,0 +1,8 @@
+{
+  "type": "great_big_world:sawmilling",
+  "count": 1,
+  "ingredient": "minecraft:spruce_wood",
+  "result": {
+    "id": "great_big_world:chiseled_spruce_wood"
+  }
+}

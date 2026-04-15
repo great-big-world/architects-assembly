@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "great_big_world:block/kiln_bottom",
+    "east": "great_big_world:block/kiln_side",
+    "north": "great_big_world:block/kiln_front_on",
+    "south": "great_big_world:block/kiln_side",
+    "up": "great_big_world:block/kiln_top_on",
+    "west": "great_big_world:block/kiln_side",
+    "particle": "#north"
+  }
+}

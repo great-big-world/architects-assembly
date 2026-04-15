@@ -21,6 +21,7 @@
     "great_big_world:brown_item_frame",
     "great_big_world:brown_glow_item_frame",
     "great_big_world:brown_glass_shard",
-    "great_big_world:cracked_brown_glass"
+    "great_big_world:cracked_brown_glass",
+    "minecraft:brown_egg"
   ]
 }

@@ -5,8 +5,12 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "LanguageMixin",
+    "PlayerListMixin",
     "PotDecorationsMixin",
-    "ServerRecipeManagerMixin",
+    "RecipeBookSettingsMixin",
+    "RecipeBookTypeMixin",
+    "RecipeDisplaysMixin",
+    "RecipeManagerMixin",
     "block.AbstractBlockStateMixin",
     "block.AbstractCandleBlockMixin",
     "block.AmethystClusterBlockMixin",
@@ -37,22 +41,19 @@
     "item.BoneMealItemMixin",
     "item.BucketItemMixin",
     "item.DecorationItemMixin",
-    "item.ItemMixin",
     "item.ItemStackMixin",
     "world.DripstoneHelperMixin",
     "world.feature.GeodeFeatureMixin"
   ],
   "client": [
-    "TranslationStorageMixin",
+    "client.TranslationStorageMixin",
     "client.BlockStateManagersMixin",
     "client.BooleanPropertiesMixin",
-    "client.CreativeInventoryScreenMixin",
-    "client.GuiGraphicsMixin",
-    "client.InGameHudMixin",
+    "client.ClientRecipeContainerMixin",
     "client.ItemFrameEntityRendererMixin",
     "client.ItemFrameEntityRenderStateMixin",
     "client.MouseMixin",
-    "client.RecipeBookTypeMixin"
+    "client.SearchRecipeBookCategoryMixin"
   ],
   "injectors": {
     "defaultRequire": 1

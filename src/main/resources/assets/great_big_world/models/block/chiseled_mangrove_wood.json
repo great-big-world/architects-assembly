@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "great_big_world:block/chiseled_mangrove_log",
+    "side": "great_big_world:block/chiseled_mangrove_log"
+  }
+}

@@ -2,20 +2,14 @@ package dev.creoii.greatbigworld.architectsassembly.mixin;
 
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import dev.creoii.greatbigworld.architectsassembly.util.LocaleAwareLanguage;
-import dev.creoii.greatbigworld.architectsassembly.variant.Variant;
-import dev.creoii.greatbigworld.architectsassembly.variant.VariantItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.function.BiConsumer;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.locale.Language;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 
 @Mixin(Language.class)
 public class LanguageMixin implements LocaleAwareLanguage {
@@ -33,7 +27,6 @@ public class LanguageMixin implements LocaleAwareLanguage {
             return true;
 
         String translationKey = (String) key;
-        String translated = (String) value;
 
         if (translationKey.startsWith("item.")) {
             if (translationKey.contains("_pottery_sherd")) {
@@ -45,8 +38,7 @@ public class LanguageMixin implements LocaleAwareLanguage {
             }
         }
 
-        Item item = BuiltInRegistries.ITEM.getValue(toId(translationKey));
-        return renameItemForVariants(item, entryConsumer, translationKey, translated);
+        return true;
     }
 
     @Override
@@ -74,28 +66,5 @@ public class LanguageMixin implements LocaleAwareLanguage {
         else path = translationKey.substring(dot2 + 1, dot3);
 
         return Identifier.fromNamespaceAndPath(translationKey.substring(dot1, dot2), path);
-    }
-
-    @Unique
-    private static boolean renameItemForVariants(Item item, BiConsumer<String, String> consumer, String translationKey, String translated) {
-        if (item == Items.AIR)
-            return true;
-        if (item instanceof VariantItem variantItem) {
-            for (Variant variant : Variant.VARIANTS.values()) {
-                if (variant.getItems().contains(item) || variant.isStackInTags(item.getDefaultInstance())) {
-                    variantItem.gbw$addVariant(variant);
-                }
-            }
-
-            if (!variantItem.gbw$getVariants().isEmpty()) {
-                String variantKey = translationKey.endsWith(".variant") ? translationKey : translationKey + ".variant";
-                String translated1 = Component.translatable(variantKey).getString();
-                if (!translated1.equals(translated)) {
-                    consumer.accept(translationKey, translated1);
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 }

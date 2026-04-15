@@ -1,0 +1,11 @@
+{
+  "type": "great_big_world:sawmilling",
+  "count": 1,
+  "ingredient": [
+    "minecraft:dark_oak_wood",
+    "great_big_world:chiseled_dark_oak_wood"
+  ],
+  "result": {
+    "id": "minecraft:dark_oak_log"
+  }
+}

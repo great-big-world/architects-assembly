@@ -1,0 +1,11 @@
+{
+  "type": "great_big_world:sawmilling",
+  "count": 1,
+  "ingredient": [
+    "minecraft:cherry_wood",
+    "great_big_world:chiseled_cherry_wood"
+  ],
+  "result": {
+    "id": "minecraft:cherry_log"
+  }
+}

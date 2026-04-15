@@ -1,0 +1,233 @@
+package dev.creoii.greatbigworld.architectsassembly.menu;
+
+import dev.creoii.greatbigworld.architectsassembly.recipe.SawmillingRecipe;
+import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyBlocks;
+import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyMenus;
+import dev.creoii.greatbigworld.architectsassembly.util.SawmillingRecipeManager;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.SelectableRecipe;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
+import net.minecraft.world.level.Level;
+
+import java.util.List;
+import java.util.Optional;
+
+public class SawmillMenu extends AbstractContainerMenu {
+    private final ContainerLevelAccess access;
+    final DataSlot selectedRecipeIndex;
+    private final Level level;
+    private SelectableRecipe.SingleInputSet<SawmillingRecipe> recipesForInput;
+    private ItemStack input;
+    long lastSoundTime;
+    final Slot inputSlot;
+    final Slot resultSlot;
+    Runnable slotUpdateListener;
+    public final Container container;
+    final ResultContainer resultContainer;
+
+    public SawmillMenu(int syncId, Inventory playerInventory) {
+        this(syncId, playerInventory, ContainerLevelAccess.NULL);
+    }
+
+    public SawmillMenu(int syncId, Inventory inventory, final ContainerLevelAccess containerLevelAccess) {
+        super(ArchitectsAssemblyMenus.SAWMILL, syncId);
+        this.selectedRecipeIndex = DataSlot.standalone();
+        this.recipesForInput = SelectableRecipe.SingleInputSet.empty();
+        this.input = ItemStack.EMPTY;
+        this.slotUpdateListener = () -> {
+        };
+        this.container = new SimpleContainer(1) {
+            public void setChanged() {
+                super.setChanged();
+                SawmillMenu.this.slotsChanged(this);
+                SawmillMenu.this.slotUpdateListener.run();
+            }
+        };
+        this.resultContainer = new ResultContainer();
+        this.access = containerLevelAccess;
+        this.level = inventory.player.level();
+        this.inputSlot = this.addSlot(new Slot(this.container, 0, 20, 33));
+        this.resultSlot = this.addSlot(new Slot(this.resultContainer, 1, 143, 33) {
+            public boolean mayPlace(ItemStack itemStack) {
+                return false;
+            }
+
+            public void onTake(Player player, ItemStack itemStack) {
+                itemStack.onCraftedBy(player, itemStack.getCount());
+                SawmillMenu.this.resultContainer.awardUsedRecipes(player, this.getRelevantItems());
+                ItemStack itemStack2 = SawmillMenu.this.inputSlot.remove(1);
+                if (!itemStack2.isEmpty()) {
+                    SawmillMenu.this.setupResultSlot(SawmillMenu.this.selectedRecipeIndex.get());
+                }
+
+                containerLevelAccess.execute((level, blockPos) -> {
+                    long l = level.getGameTime();
+                    if (SawmillMenu.this.lastSoundTime != l) {
+                        level.playSound(null, blockPos, SoundEvents.UI_STONECUTTER_TAKE_RESULT, SoundSource.BLOCKS, 1.0F, 1.0F);
+                        SawmillMenu.this.lastSoundTime = l;
+                    }
+
+                });
+                super.onTake(player, itemStack);
+            }
+
+            private List<ItemStack> getRelevantItems() {
+                return List.of(SawmillMenu.this.inputSlot.getItem());
+            }
+        });
+        this.addStandardInventorySlots(inventory, 8, 84);
+        this.addDataSlot(this.selectedRecipeIndex);
+    }
+
+    public int getSelectedRecipeIndex() {
+        return this.selectedRecipeIndex.get();
+    }
+
+    public SelectableRecipe.SingleInputSet<SawmillingRecipe> getVisibleRecipes() {
+        return this.recipesForInput;
+    }
+
+    public int getNumberOfVisibleRecipes() {
+        return this.recipesForInput.size();
+    }
+
+    public boolean hasInputItem() {
+        return this.inputSlot.hasItem() && !this.recipesForInput.isEmpty();
+    }
+
+    public boolean stillValid(Player player) {
+        return stillValid(this.access, player, ArchitectsAssemblyBlocks.SAWMILL);
+    }
+
+    public boolean clickMenuButton(Player player, int i) {
+        if (this.selectedRecipeIndex.get() == i) {
+            return false;
+        } else {
+            if (this.isValidRecipeIndex(i)) {
+                this.selectedRecipeIndex.set(i);
+                this.setupResultSlot(i);
+            }
+
+            return true;
+        }
+    }
+
+    private boolean isValidRecipeIndex(int i) {
+        return i >= 0 && i < this.recipesForInput.size();
+    }
+
+    public void slotsChanged(Container container) {
+        ItemStack itemStack = this.inputSlot.getItem();
+        if (!itemStack.is(this.input.getItem())) {
+            this.input = itemStack.copy();
+            this.setupRecipeList(itemStack);
+        }
+    }
+
+    private void setupRecipeList(ItemStack itemStack) {
+        this.selectedRecipeIndex.set(-1);
+        this.resultSlot.set(ItemStack.EMPTY);
+        if (!itemStack.isEmpty()) {
+            this.recipesForInput = ((SawmillingRecipeManager)this.level.recipeAccess()).gbw$getSawmillingRecipes().selectByInput(itemStack);
+        } else {
+            this.recipesForInput = SelectableRecipe.SingleInputSet.empty();
+        }
+
+    }
+
+    void setupResultSlot(int i) {
+        Optional<RecipeHolder<SawmillingRecipe>> optional;
+        if (!this.recipesForInput.isEmpty() && this.isValidRecipeIndex(i)) {
+            SelectableRecipe.SingleInputEntry<SawmillingRecipe> singleInputEntry = this.recipesForInput.entries().get(i);
+            optional = singleInputEntry.recipe().recipe();
+        } else {
+            optional = Optional.empty();
+        }
+
+        optional.ifPresentOrElse((recipeHolder) -> {
+            this.resultContainer.setRecipeUsed(recipeHolder);
+            this.resultSlot.set(recipeHolder.value().assemble(new SingleRecipeInput(this.container.getItem(0)), this.level.registryAccess()));
+        }, () -> {
+            this.resultSlot.set(ItemStack.EMPTY);
+            this.resultContainer.setRecipeUsed(null);
+        });
+        this.broadcastChanges();
+    }
+
+    public MenuType<?> getType() {
+        return ArchitectsAssemblyMenus.SAWMILL;
+    }
+
+    public void registerUpdateListener(Runnable runnable) {
+        this.slotUpdateListener = runnable;
+    }
+
+    public boolean canTakeItemForPickAll(ItemStack itemStack, Slot slot) {
+        return slot.container != this.resultContainer && super.canTakeItemForPickAll(itemStack, slot);
+    }
+
+    public ItemStack quickMoveStack(Player player, int i) {
+        ItemStack itemStack = ItemStack.EMPTY;
+        Slot slot = this.slots.get(i);
+        if (slot != null && slot.hasItem()) {
+            ItemStack itemStack2 = slot.getItem();
+            Item item = itemStack2.getItem();
+            itemStack = itemStack2.copy();
+            if (i == 1) {
+                item.onCraftedBy(itemStack2, player);
+                if (!this.moveItemStackTo(itemStack2, 2, 38, true)) {
+                    return ItemStack.EMPTY;
+                }
+
+                slot.onQuickCraft(itemStack2, itemStack);
+            } else if (i == 0) {
+                if (!this.moveItemStackTo(itemStack2, 2, 38, false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (((SawmillingRecipeManager) this.level.recipeAccess()).gbw$getSawmillingRecipes().acceptsInput(itemStack2)) {
+                if (!this.moveItemStackTo(itemStack2, 0, 1, false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (i >= 2 && i < 29) {
+                if (!this.moveItemStackTo(itemStack2, 29, 38, false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (i >= 29 && i < 38 && !this.moveItemStackTo(itemStack2, 2, 29, false)) {
+                return ItemStack.EMPTY;
+            }
+
+            if (itemStack2.isEmpty()) {
+                slot.setByPlayer(ItemStack.EMPTY);
+            }
+
+            slot.setChanged();
+            if (itemStack2.getCount() == itemStack.getCount()) {
+                return ItemStack.EMPTY;
+            }
+
+            slot.onTake(player, itemStack2);
+            if (i == 1) {
+                player.drop(itemStack2, false);
+            }
+
+            this.broadcastChanges();
+        }
+
+        return itemStack;
+    }
+
+    public void removed(Player player) {
+        super.removed(player);
+        this.resultContainer.removeItemNoUpdate(1);
+        this.access.execute((level, blockPos) -> this.clearContainer(player, this.container));
+    }
+}

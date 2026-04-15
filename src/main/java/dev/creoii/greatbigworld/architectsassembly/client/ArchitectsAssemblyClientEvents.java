@@ -1,7 +1,6 @@
 package dev.creoii.greatbigworld.architectsassembly.client;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import dev.creoii.greatbigworld.architectsassembly.variant.VariantItem;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
@@ -9,18 +8,14 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentUtils;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.raid.Raid;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.item.component.Weapon;
@@ -82,14 +77,6 @@ public final class ArchitectsAssemblyClientEvents {
             if (stack.is(ItemTags.DECORATED_POT_SHERDS)) {
                 Identifier id = BuiltInRegistries.ITEM.getKey(stack.getItem());
                 list.add(Component.translatable("variant.item.sherd." + id.getPath().replace("_pottery_sherd", "")).withStyle(ChatFormatting.GRAY));
-            }
-
-            if (stack.getItem() instanceof VariantItem variantItem && !ItemStack.matches(stack, Raid.getOminousBannerInstance(context.registries().lookupOrThrow(Registries.BANNER_PATTERN)))) {
-                if (!variantItem.gbw$getVariants().isEmpty()) {
-                    list.add(1, VariantItem.getVariantTooltip(variantItem));
-                } else if (stack.getItem() instanceof SpawnEggItem spawnEggItem) {
-                    list.add(1, MutableComponent.create(spawnEggItem.getType(stack).getDescription().getContents()).withStyle(ChatFormatting.GRAY));
-                }
             }
         });
     }

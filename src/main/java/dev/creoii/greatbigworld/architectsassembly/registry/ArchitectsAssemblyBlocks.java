@@ -127,10 +127,33 @@ public final class ArchitectsAssemblyBlocks {
     public static Block LIGHT_GRAY_GLASS;
     public static Block WHITE_GLASS;
     public static Block CHISELED_OAK_PLANKS;
+    public static Block CHISELED_SPRUCE_PLANKS;
+    public static Block CHISELED_BIRCH_PLANKS;
+    public static Block CHISELED_JUNGLE_PLANKS;
+    public static Block CHISELED_ACACIA_PLANKS;
+    public static Block CHISELED_DARK_OAK_PLANKS;
+    public static Block CHISELED_MANGROVE_PLANKS;
+    public static Block CHISELED_CHERRY_PLANKS;
+    public static Block CHISELED_PALE_OAK_PLANKS;
+    public static Block CHISELED_BAMBOO_PLANKS;
     public static Block CHISELED_OAK_LOG;
     public static Block CHISELED_OAK_WOOD;
     public static Block STRIPPED_CHISELED_OAK_LOG;
     public static Block STRIPPED_CHISELED_OAK_WOOD;
+    public static Block CHISELED_SPRUCE_LOG;
+    public static Block CHISELED_SPRUCE_WOOD;
+    public static Block CHISELED_BIRCH_LOG;
+    public static Block CHISELED_BIRCH_WOOD;
+    public static Block CHISELED_JUNGLE_LOG;
+    public static Block CHISELED_JUNGLE_WOOD;
+    public static Block CHISELED_ACACIA_LOG;
+    public static Block CHISELED_ACACIA_WOOD;
+    public static Block CHISELED_DARK_OAK_LOG;
+    public static Block CHISELED_DARK_OAK_WOOD;
+    public static Block CHISELED_MANGROVE_LOG;
+    public static Block CHISELED_MANGROVE_WOOD;
+    public static Block CHISELED_CHERRY_LOG;
+    public static Block CHISELED_CHERRY_WOOD;
     public static Block CUT_COPPER_WALL;
     public static Block EXPOSED_CUT_COPPER_WALL;
     public static Block WEATHERED_CUT_COPPER_WALL;
@@ -256,10 +279,33 @@ public final class ArchitectsAssemblyBlocks {
         LIGHT_GRAY_GLASS = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "light_gray_glass"), settings -> new GlassBlock(settings, CRACKED_LIGHT_GRAY_GLASS.defaultBlockState()), BlockBehaviour.Properties.ofFullCopy(Blocks.LIGHT_GRAY_STAINED_GLASS));
         WHITE_GLASS = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "white_glass"), settings -> new GlassBlock(settings, CRACKED_WHITE_GLASS.defaultBlockState()), BlockBehaviour.Properties.ofFullCopy(Blocks.WHITE_STAINED_GLASS));
         CHISELED_OAK_PLANKS = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_oak_planks"), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS));
+        CHISELED_SPRUCE_PLANKS = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_spruce_planks"), BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_PLANKS));
+        CHISELED_BIRCH_PLANKS = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_birch_planks"), BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_PLANKS));
+        CHISELED_JUNGLE_PLANKS = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_jungle_planks"), BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_PLANKS));
+        CHISELED_ACACIA_PLANKS = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_acacia_planks"), BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_PLANKS));
+        CHISELED_DARK_OAK_PLANKS = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_dark_oak_planks"), BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_PLANKS));
+        CHISELED_MANGROVE_PLANKS = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_mangrove_planks"), BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_PLANKS));
+        CHISELED_CHERRY_PLANKS = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_cherry_planks"), BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_PLANKS));
+        CHISELED_PALE_OAK_PLANKS = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_pale_oak_planks"), BlockBehaviour.Properties.ofFullCopy(Blocks.PALE_OAK_PLANKS));
+        CHISELED_BAMBOO_PLANKS = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_bamboo_planks"), BlockBehaviour.Properties.ofFullCopy(Blocks.BAMBOO_PLANKS));
         CHISELED_OAK_LOG = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_oak_log"), RotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG));
         CHISELED_OAK_WOOD = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_oak_wood"), RotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WOOD));
         STRIPPED_CHISELED_OAK_LOG = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "stripped_chiseled_oak_log"), RotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_LOG));
         STRIPPED_CHISELED_OAK_WOOD = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "stripped_chiseled_oak_wood"), RotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_WOOD));
+        CHISELED_SPRUCE_LOG = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_spruce_log"), RotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_LOG));
+        CHISELED_SPRUCE_WOOD = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_spruce_wood"), RotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_WOOD));
+        CHISELED_BIRCH_LOG = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_birch_log"), RotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_LOG));
+        CHISELED_BIRCH_WOOD = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_birch_wood"), RotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_WOOD));
+        CHISELED_JUNGLE_LOG = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_jungle_log"), RotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_LOG));
+        CHISELED_JUNGLE_WOOD = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_jungle_wood"), RotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_WOOD));
+        CHISELED_ACACIA_LOG = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_acacia_log"), RotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_LOG));
+        CHISELED_ACACIA_WOOD = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_acacia_wood"), RotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_WOOD));
+        CHISELED_DARK_OAK_LOG = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_dark_oak_log"), RotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_LOG));
+        CHISELED_DARK_OAK_WOOD = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_dark_oak_wood"), RotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_WOOD));
+        CHISELED_MANGROVE_LOG = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_mangrove_log"), RotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_LOG));
+        CHISELED_MANGROVE_WOOD = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_mangrove_wood"), RotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_WOOD));
+        CHISELED_CHERRY_LOG = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_cherry_log"), RotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_LOG));
+        CHISELED_CHERRY_WOOD = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_cherry_wood"), RotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_WOOD));
         CUT_COPPER_WALL = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "cut_copper_wall"), WallBlock::new, BlockBehaviour.Properties.ofLegacyCopy(Blocks.CUT_COPPER).forceSolidOn());
         EXPOSED_CUT_COPPER_WALL = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "exposed_cut_copper_wall"), WallBlock::new, BlockBehaviour.Properties.ofLegacyCopy(Blocks.EXPOSED_CUT_COPPER).forceSolidOn());
         WEATHERED_CUT_COPPER_WALL = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "weathered_cut_copper_wall"), WallBlock::new, BlockBehaviour.Properties.ofLegacyCopy(Blocks.WEATHERED_CUT_COPPER).forceSolidOn());
@@ -567,9 +613,11 @@ public final class ArchitectsAssemblyBlocks {
 
     // region Misc Blocks
     public static Block SAWMILL;
+    public static Block KILN;
 
     private static void registerMiscBlocks() {
         SAWMILL = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "sawmill"), SawmillBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.STONECUTTER).strength(2f).sound(SoundType.WOOD));
+        KILN = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "kiln"), KilnBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BLAST_FURNACE));
     }
 
     @Environment(EnvType.CLIENT)

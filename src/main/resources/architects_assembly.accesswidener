@@ -1,6 +1,8 @@
 accessWidener v2 named
 accessible method net/minecraft/world/item/context/UseOnContext getHitResult ()Lnet/minecraft/world/phys/BlockHitResult;
 accessible method net/minecraft/world/item/crafting/SingleItemRecipe$Serializer <init> (Lnet/minecraft/world/item/crafting/SingleItemRecipe$Factory;)V
+accessible method net/minecraft/stats/RecipeBookSettings$TypeSettings codec (Ljava/lang/String;Ljava/lang/String;)Lcom/mojang/serialization/MapCodec;
+accessible method net/minecraft/stats/RecipeBookSettings <init> (Lnet/minecraft/stats/RecipeBookSettings$TypeSettings;Lnet/minecraft/stats/RecipeBookSettings$TypeSettings;Lnet/minecraft/stats/RecipeBookSettings$TypeSettings;Lnet/minecraft/stats/RecipeBookSettings$TypeSettings;)V
 
 accessible field net/minecraft/client/gui/GuiGraphics minecraft Lnet/minecraft/client/Minecraft;
 accessible field net/minecraft/client/KeyMapping key Lcom/mojang/blaze3d/platform/InputConstants$Key;
@@ -8,3 +10,7 @@ accessible field net/minecraft/world/level/block/FireBlock igniteOdds Lit/unimi/
 accessible field net/minecraft/world/level/block/FireBlock burnOdds Lit/unimi/dsi/fastutil/objects/Object2IntMap;
 accessible field net/minecraft/world/entity/decoration/ItemFrame fixed Z
 accessible field net/minecraft/client/gui/screens/inventory/AbstractContainerScreen hoveredSlot Lnet/minecraft/world/inventory/Slot;
+accessible field net/minecraft/stats/RecipeBookSettings crafting Lnet/minecraft/stats/RecipeBookSettings$TypeSettings;
+accessible field net/minecraft/stats/RecipeBookSettings furnace Lnet/minecraft/stats/RecipeBookSettings$TypeSettings;
+accessible field net/minecraft/stats/RecipeBookSettings blastFurnace Lnet/minecraft/stats/RecipeBookSettings$TypeSettings;
+accessible field net/minecraft/stats/RecipeBookSettings smoker Lnet/minecraft/stats/RecipeBookSettings$TypeSettings;

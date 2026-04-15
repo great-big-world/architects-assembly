@@ -1,5 +1,6 @@
 package dev.creoii.greatbigworld.architectsassembly.recipe;
 
+import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyItems;
 import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyRecipes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -7,7 +8,10 @@ import net.minecraft.world.item.crafting.RecipeBookCategory;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SingleItemRecipe;
+import net.minecraft.world.item.crafting.display.RecipeDisplay;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
+
+import java.util.List;
 
 public class SawmillingRecipe extends SingleItemRecipe {
     public SawmillingRecipe(String group, Ingredient input, ItemStack output) {
@@ -26,7 +30,12 @@ public class SawmillingRecipe extends SingleItemRecipe {
 
     @Override
     public RecipeBookCategory recipeBookCategory() {
-        return new RecipeBookCategory();
+        return ArchitectsAssemblyRecipes.SAWMILL_CATEGORY;
+    }
+
+    @Override
+    public List<RecipeDisplay> display() {
+        return List.of(new SawmillRecipeDisplay(this.input().display(), this.createResultDisplay(), new SlotDisplay.ItemSlotDisplay(ArchitectsAssemblyItems.SAWMILL)));
     }
 
     public SlotDisplay createResultDisplay() {

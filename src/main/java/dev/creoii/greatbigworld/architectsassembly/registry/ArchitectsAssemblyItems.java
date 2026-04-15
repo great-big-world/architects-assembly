@@ -232,10 +232,33 @@ public final class ArchitectsAssemblyItems {
     public static Item LIGHT_GRAY_GLASS;
     public static Item WHITE_GLASS;
     public static Item CHISELED_OAK_PLANKS;
+    public static Item CHISELED_SPRUCE_PLANKS;
+    public static Item CHISELED_BIRCH_PLANKS;
+    public static Item CHISELED_JUNGLE_PLANKS;
+    public static Item CHISELED_ACACIA_PLANKS;
+    public static Item CHISELED_DARK_OAK_PLANKS;
+    public static Item CHISELED_MANGROVE_PLANKS;
+    public static Item CHISELED_CHERRY_PLANKS;
+    public static Item CHISELED_PALE_OAK_PLANKS;
+    public static Item CHISELED_BAMBOO_PLANKS;
     public static Item CHISELED_OAK_LOG;
     public static Item CHISELED_OAK_WOOD;
     public static Item STRIPPED_CHISELED_OAK_LOG;
     public static Item STRIPPED_CHISELED_OAK_WOOD;
+    public static Item CHISELED_SPRUCE_LOG;
+    public static Item CHISELED_SPRUCE_WOOD;
+    public static Item CHISELED_BIRCH_LOG;
+    public static Item CHISELED_BIRCH_WOOD;
+    public static Item CHISELED_JUNGLE_LOG;
+    public static Item CHISELED_JUNGLE_WOOD;
+    public static Item CHISELED_ACACIA_LOG;
+    public static Item CHISELED_ACACIA_WOOD;
+    public static Item CHISELED_DARK_OAK_LOG;
+    public static Item CHISELED_DARK_OAK_WOOD;
+    public static Item CHISELED_MANGROVE_LOG;
+    public static Item CHISELED_MANGROVE_WOOD;
+    public static Item CHISELED_CHERRY_LOG;
+    public static Item CHISELED_CHERRY_WOOD;
     public static Item CUT_COPPER_WALL;
     public static Item WAXED_CUT_COPPER_WALL;
     public static Item EXPOSED_CUT_COPPER_WALL;
@@ -351,10 +374,33 @@ public final class ArchitectsAssemblyItems {
         LIGHT_GRAY_GLASS = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "light_gray_glass"), ArchitectsAssemblyBlocks.LIGHT_GRAY_GLASS);
         WHITE_GLASS = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "white_glass"), ArchitectsAssemblyBlocks.WHITE_GLASS);
         CHISELED_OAK_PLANKS = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_oak_planks"), ArchitectsAssemblyBlocks.CHISELED_OAK_PLANKS);
+        CHISELED_SPRUCE_PLANKS = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_spruce_planks"), ArchitectsAssemblyBlocks.CHISELED_SPRUCE_PLANKS);
+        CHISELED_BIRCH_PLANKS = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_birch_planks"), ArchitectsAssemblyBlocks.CHISELED_BIRCH_PLANKS);
+        CHISELED_JUNGLE_PLANKS = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_jungle_planks"), ArchitectsAssemblyBlocks.CHISELED_JUNGLE_PLANKS);
+        CHISELED_ACACIA_PLANKS = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_acacia_planks"), ArchitectsAssemblyBlocks.CHISELED_ACACIA_PLANKS);
+        CHISELED_DARK_OAK_PLANKS = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_dark_oak_planks"), ArchitectsAssemblyBlocks.CHISELED_DARK_OAK_PLANKS);
+        CHISELED_MANGROVE_PLANKS = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_mangrove_planks"), ArchitectsAssemblyBlocks.CHISELED_MANGROVE_PLANKS);
+        CHISELED_CHERRY_PLANKS = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_cherry_planks"), ArchitectsAssemblyBlocks.CHISELED_CHERRY_PLANKS);
+        CHISELED_PALE_OAK_PLANKS = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_pale_oak_planks"), ArchitectsAssemblyBlocks.CHISELED_PALE_OAK_PLANKS);
+        CHISELED_BAMBOO_PLANKS = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_bamboo_planks"), ArchitectsAssemblyBlocks.CHISELED_BAMBOO_PLANKS);
         CHISELED_OAK_LOG = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_oak_log"), ArchitectsAssemblyBlocks.CHISELED_OAK_LOG);
         CHISELED_OAK_WOOD = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_oak_wood"), ArchitectsAssemblyBlocks.CHISELED_OAK_WOOD);
         STRIPPED_CHISELED_OAK_LOG = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "stripped_chiseled_oak_log"), ArchitectsAssemblyBlocks.STRIPPED_CHISELED_OAK_LOG);
         STRIPPED_CHISELED_OAK_WOOD = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "stripped_chiseled_oak_wood"), ArchitectsAssemblyBlocks.STRIPPED_CHISELED_OAK_WOOD);
+        CHISELED_SPRUCE_LOG = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_spruce_log"), ArchitectsAssemblyBlocks.CHISELED_SPRUCE_LOG);
+        CHISELED_SPRUCE_WOOD = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_spruce_wood"), ArchitectsAssemblyBlocks.CHISELED_SPRUCE_WOOD);
+        CHISELED_BIRCH_LOG = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_birch_log"), ArchitectsAssemblyBlocks.CHISELED_BIRCH_LOG);
+        CHISELED_BIRCH_WOOD = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_birch_wood"), ArchitectsAssemblyBlocks.CHISELED_BIRCH_WOOD);
+        CHISELED_JUNGLE_LOG = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_jungle_log"), ArchitectsAssemblyBlocks.CHISELED_JUNGLE_LOG);
+        CHISELED_JUNGLE_WOOD = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_jungle_wood"), ArchitectsAssemblyBlocks.CHISELED_JUNGLE_WOOD);
+        CHISELED_ACACIA_LOG = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_acacia_log"), ArchitectsAssemblyBlocks.CHISELED_ACACIA_LOG);
+        CHISELED_ACACIA_WOOD = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_acacia_wood"), ArchitectsAssemblyBlocks.CHISELED_ACACIA_WOOD);
+        CHISELED_DARK_OAK_LOG = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_dark_oak_log"), ArchitectsAssemblyBlocks.CHISELED_DARK_OAK_LOG);
+        CHISELED_DARK_OAK_WOOD = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_dark_oak_wood"), ArchitectsAssemblyBlocks.CHISELED_DARK_OAK_WOOD);
+        CHISELED_MANGROVE_LOG = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_mangrove_log"), ArchitectsAssemblyBlocks.CHISELED_MANGROVE_LOG);
+        CHISELED_MANGROVE_WOOD = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_mangrove_wood"), ArchitectsAssemblyBlocks.CHISELED_MANGROVE_WOOD);
+        CHISELED_CHERRY_LOG = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_cherry_log"), ArchitectsAssemblyBlocks.CHISELED_CHERRY_LOG);
+        CHISELED_CHERRY_WOOD = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_cherry_wood"), ArchitectsAssemblyBlocks.CHISELED_CHERRY_WOOD);
         CUT_COPPER_WALL = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "cut_copper_wall"), ArchitectsAssemblyBlocks.CUT_COPPER_WALL);
         WAXED_CUT_COPPER_WALL = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "waxed_cut_copper_wall"), ArchitectsAssemblyBlocks.WAXED_CUT_COPPER_WALL);
         EXPOSED_CUT_COPPER_WALL = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "exposed_cut_copper_wall"), ArchitectsAssemblyBlocks.EXPOSED_CUT_COPPER_WALL);
@@ -517,6 +563,25 @@ public final class ArchitectsAssemblyItems {
             entries.addAfter(Items.END_STONE, END_STONE_STAIRS, END_STONE_SLAB, END_STONE_WALL);
             entries.addAfter(Items.PACKED_MUD, PACKED_MUD_STAIRS, PACKED_MUD_SLAB, PACKED_MUD_WALL);
             entries.addAfter(Items.DEEPSLATE, DEEPSLATE_STAIRS, DEEPSLATE_SLAB, DEEPSLATE_WALL);
+            entries.addAfter(Items.OAK_PLANKS, CHISELED_OAK_PLANKS);
+            entries.addAfter(Items.SPRUCE_PLANKS, CHISELED_SPRUCE_PLANKS);
+            entries.addAfter(Items.BIRCH_PLANKS, CHISELED_BIRCH_PLANKS);
+            entries.addAfter(Items.JUNGLE_PLANKS, CHISELED_JUNGLE_PLANKS);
+            entries.addAfter(Items.ACACIA_PLANKS, CHISELED_ACACIA_PLANKS);
+            entries.addAfter(Items.DARK_OAK_PLANKS, CHISELED_DARK_OAK_PLANKS);
+            entries.addAfter(Items.MANGROVE_PLANKS, CHISELED_MANGROVE_PLANKS);
+            entries.addAfter(Items.CHERRY_PLANKS, CHISELED_CHERRY_PLANKS);
+            entries.addAfter(Items.PALE_OAK_PLANKS, CHISELED_PALE_OAK_PLANKS);
+            entries.addAfter(Items.BAMBOO_PLANKS, CHISELED_BAMBOO_PLANKS);
+
+            entries.addAfter(Items.OAK_WOOD, CHISELED_OAK_LOG, CHISELED_OAK_WOOD);
+            entries.addAfter(Items.SPRUCE_WOOD, CHISELED_SPRUCE_LOG, CHISELED_SPRUCE_WOOD);
+            entries.addAfter(Items.BIRCH_WOOD, CHISELED_BIRCH_LOG, CHISELED_BIRCH_WOOD);
+            entries.addAfter(Items.JUNGLE_WOOD, CHISELED_JUNGLE_LOG, CHISELED_JUNGLE_WOOD);
+            entries.addAfter(Items.ACACIA_WOOD, CHISELED_ACACIA_LOG, CHISELED_ACACIA_WOOD);
+            entries.addAfter(Items.DARK_OAK_WOOD, CHISELED_DARK_OAK_LOG, CHISELED_DARK_OAK_WOOD);
+            entries.addAfter(Items.MANGROVE_WOOD, CHISELED_MANGROVE_LOG, CHISELED_MANGROVE_WOOD);
+            entries.addAfter(Items.CHERRY_WOOD, CHISELED_CHERRY_LOG, CHISELED_CHERRY_WOOD);
         });
     }
     // endregion
@@ -799,12 +864,15 @@ public final class ArchitectsAssemblyItems {
 
     // region Misc Blocks
     public static Item SAWMILL;
+    public static Item KILN;
 
     private static void registerMiscBlocks() {
         SAWMILL = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "sawmill"), ArchitectsAssemblyBlocks.SAWMILL);
+        KILN = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "kiln"), ArchitectsAssemblyBlocks.KILN);
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS).register(entries -> {
             entries.addAfter(Items.STONECUTTER, SAWMILL);
+            entries.addAfter(Items.BLAST_FURNACE, KILN);
         });
     }
     // endregion
