@@ -14,5 +14,6 @@ configurations {
 dependencies {
     common(project(path: ':core', configuration: 'namedElements')) { transitive false }
     common(project(path: ':flora-and-fauna', configuration: 'namedElements')) { transitive false }
+    common(project(path: ':farms-and-friends', configuration: 'namedElements')) { transitive false }
     common(project(path: ':delay-tool-usage', configuration: 'namedElements')) { transitive false }
 }
