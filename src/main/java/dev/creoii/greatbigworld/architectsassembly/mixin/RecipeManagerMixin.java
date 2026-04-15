@@ -1,19 +1,19 @@
 package dev.creoii.greatbigworld.architectsassembly.mixin;
 
 import com.google.common.collect.ImmutableList;
-import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
+import com.google.common.collect.Maps;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import dev.creoii.greatbigworld.architectsassembly.recipe.SawmillingRecipe;
+import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyMenus;
+import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyRecipes;
 import dev.creoii.greatbigworld.architectsassembly.util.SawmillingRecipeManager;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.flag.FeatureFlagSet;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeManager;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.SelectableRecipe;
-import net.minecraft.world.item.crafting.StonecutterRecipe;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.item.crafting.display.RecipeDisplayEntry;
 import org.slf4j.Logger;
 import org.spongepowered.asm.mixin.Final;
@@ -25,14 +25,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Consumer;
 
 @Mixin(RecipeManager.class)
-public abstract class ServerRecipeManagerMixin implements SawmillingRecipeManager {
+public abstract class RecipeManagerMixin implements SawmillingRecipeManager {
     @Shadow @Final private static Logger LOGGER;
     @Shadow private static boolean isIngredientEnabled(FeatureFlagSet features, Ingredient ingredient) {
         return false;
@@ -92,8 +89,22 @@ public abstract class ServerRecipeManagerMixin implements SawmillingRecipeManage
         sawmillingRecipes = new SelectableRecipe.SingleInputSet<>(preSawmillingRecipes);
     }
 
-    @WrapWithCondition(method = "unpackRecipeInfo", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z"))
-    private static <E> boolean gbw$removeRecipes(List<RecipeManager.ServerDisplayInfo> instance, E e, @Local RecipeHolder<?> recipeEntry, @Local RecipeDisplayEntry recipeDisplayEntry) {
-        return !CRAFTING_RECIPES_TO_REMOVE.contains(recipeEntry.id().identifier()) && recipeEntry.value().getType() == RecipeType.CRAFTING;
+    @WrapOperation(method = "unpackRecipeInfo", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z"))
+    private static <E> boolean gbw$removeRecipes(List<RecipeManager.ServerDisplayInfo> instance, E e, Operation<Boolean> original, @Local RecipeHolder<?> recipeEntry, @Local RecipeDisplayEntry recipeDisplayEntry) {
+        if (!CRAFTING_RECIPES_TO_REMOVE.contains(recipeEntry.id().identifier()) && recipeEntry.value().getType() == RecipeType.CRAFTING) {
+            return original.call(instance, e);
+        } else return false;
+    }
+
+    @ModifyExpressionValue(method = "<clinit>", at = @At(value = "INVOKE", target = "Ljava/util/Map;of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;"))
+    private static Map<ResourceKey<RecipePropertySet>, RecipeManager.IngredientExtractor> gbw$injectOvenRecipeProperty(Map<ResourceKey<RecipePropertySet>, RecipeManager.IngredientExtractor> original) {
+        Map<ResourceKey<RecipePropertySet>, RecipeManager.IngredientExtractor> map = Maps.newHashMap();
+        map.putAll(original);
+        map.put(ArchitectsAssemblyMenus.KILN_INPUT, (recipe) -> {
+            if (recipe.getType() == ArchitectsAssemblyRecipes.FIRING && recipe instanceof SingleItemRecipe singleItemRecipe) {
+                return Optional.of(singleItemRecipe.input());
+            } else return Optional.empty();
+        });
+        return map;
     }
 }
