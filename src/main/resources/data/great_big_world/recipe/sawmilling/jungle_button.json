@@ -1,0 +1,7 @@
+{
+  "type": "great_big_world:sawmilling",
+  "ingredient": "minecraft:jungle_planks",
+  "result": {
+    "id": "minecraft:jungle_button"
+  }
+}

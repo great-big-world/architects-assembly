@@ -1,0 +1,12 @@
+{
+  "type": "great_big_world:sawmilling",
+  "count": 1,
+  "ingredient": [
+    "#minecraft:jungle_logs",
+    "great_big_world:chiseled_jungle_log",
+    "great_big_world:chiseled_jungle_wood"
+  ],
+  "result": {
+    "id": "minecraft:jungle_planks"
+  }
+}

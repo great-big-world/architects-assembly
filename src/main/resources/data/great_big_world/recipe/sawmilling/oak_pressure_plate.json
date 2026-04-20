@@ -1,0 +1,7 @@
+{
+  "type": "great_big_world:sawmilling",
+  "ingredient": "minecraft:oak_planks",
+  "result": {
+    "id": "minecraft:oak_pressure_plate"
+  }
+}

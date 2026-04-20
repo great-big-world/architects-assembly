@@ -1,0 +1,7 @@
+{
+  "type": "great_big_world:sawmilling",
+  "ingredient": "minecraft:acacia_planks",
+  "result": {
+    "id": "minecraft:acacia_pressure_plate"
+  }
+}

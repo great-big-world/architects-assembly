@@ -1,0 +1,11 @@
+{
+  "type": "great_big_world:sawmilling",
+  "ingredient": [
+    "#minecraft:acacia_logs",
+    "great_big_world:chiseled_acacia_log",
+    "great_big_world:chiseled_acacia_wood"
+  ],
+  "result": {
+    "id": "minecraft:acacia_planks"
+  }
+}

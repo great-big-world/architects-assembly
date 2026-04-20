@@ -1,0 +1,12 @@
+{
+  "type": "great_big_world:sawmilling",
+  "count": 1,
+  "ingredient": [
+    "#minecraft:mangrove_logs",
+    "great_big_world:chiseled_mangrove_log",
+    "great_big_world:chiseled_mangrove_wood"
+  ],
+  "result": {
+    "id": "minecraft:mangrove_planks"
+  }
+}
