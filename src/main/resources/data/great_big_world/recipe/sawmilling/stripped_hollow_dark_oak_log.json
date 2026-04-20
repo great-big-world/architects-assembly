@@ -1,10 +1,13 @@
 {
   "type": "great_big_world:sawmilling",
-  "count": 1,
   "ingredient": [
-    "#minecraft:dark_oak_logs",
+    "minecraft:dark_oak_log",
+    "minecraft:dark_oak_wood",
+    "minecraft:stripped_dark_oak_log",
+    "minecraft:stripped_dark_oak_wood",
     "great_big_world:chiseled_dark_oak_log",
-    "great_big_world:chiseled_dark_oak_wood"
+    "great_big_world:chiseled_dark_oak_wood",
+    "great_big_world:hollow_dark_oak_log"
   ],
   "result": {
     "id": "great_big_world:stripped_hollow_dark_oak_log"

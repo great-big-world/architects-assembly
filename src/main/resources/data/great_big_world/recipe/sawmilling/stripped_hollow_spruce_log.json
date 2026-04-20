@@ -1,10 +1,13 @@
 {
   "type": "great_big_world:sawmilling",
-  "count": 1,
   "ingredient": [
-    "#minecraft:spruce_logs",
+    "minecraft:spruce_log",
+    "minecraft:spruce_wood",
+    "minecraft:stripped_spruce_log",
+    "minecraft:stripped_spruce_wood",
     "great_big_world:chiseled_spruce_log",
-    "great_big_world:chiseled_spruce_wood"
+    "great_big_world:chiseled_spruce_wood",
+    "great_big_world:hollow_spruce_log"
   ],
   "result": {
     "id": "great_big_world:stripped_hollow_spruce_log"

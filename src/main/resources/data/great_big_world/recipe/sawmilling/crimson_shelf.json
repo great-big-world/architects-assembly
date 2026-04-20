@@ -1,6 +1,6 @@
 {
   "type": "great_big_world:sawmilling",
-  "ingredient": "minecraft:stripped_crimson_log",
+  "ingredient": "minecraft:stripped_crimson_stem",
   "result": {
     "id": "minecraft:crimson_shelf"
   }

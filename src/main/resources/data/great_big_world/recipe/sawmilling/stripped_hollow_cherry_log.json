@@ -1,10 +1,13 @@
 {
   "type": "great_big_world:sawmilling",
-  "count": 1,
   "ingredient": [
-    "#minecraft:cherry_logs",
+    "minecraft:cherry_log",
+    "minecraft:cherry_wood",
+    "minecraft:stripped_cherry_log",
+    "minecraft:stripped_cherry_wood",
     "great_big_world:chiseled_cherry_log",
-    "great_big_world:chiseled_cherry_wood"
+    "great_big_world:chiseled_cherry_wood",
+    "great_big_world:hollow_cherry_log"
   ],
   "result": {
     "id": "great_big_world:stripped_hollow_cherry_log"

@@ -1,0 +1,14 @@
+{
+  "type": "great_big_world:sawmilling",
+  "ingredient": [
+    "minecraft:crimson_stem",
+    "minecraft:crimson_hyphae",
+    "minecraft:stripped_crimson_stem",
+    "minecraft:stripped_crimson_hyphae",
+    "great_big_world:hollow_crimson_stem",
+    "great_big_world:stripped_hollow_crimson_stem"
+  ],
+  "result": {
+    "id": "minecraft:crimson_planks"
+  }
+}

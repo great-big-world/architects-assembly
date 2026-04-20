@@ -1,0 +1,9 @@
+{
+  "type": "great_big_world:sawmilling",
+  "ingredient": [
+    "minecraft:crimson_hyphae"
+  ],
+  "result": {
+    "id": "minecraft:crimson_stem"
+  }
+}

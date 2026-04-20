@@ -1,6 +1,5 @@
 {
   "type": "great_big_world:sawmilling",
-  "count": 1,
   "ingredient": [
     "minecraft:acacia_log",
     "minecraft:acacia_wood"

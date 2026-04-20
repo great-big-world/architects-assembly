@@ -1,6 +1,5 @@
 {
   "type": "great_big_world:sawmilling",
-  "count": 1,
   "ingredient": "minecraft:jungle_wood",
   "result": {
     "id": "great_big_world:chiseled_jungle_wood"

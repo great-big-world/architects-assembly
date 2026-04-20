@@ -1,10 +1,13 @@
 {
   "type": "great_big_world:sawmilling",
-  "count": 1,
   "ingredient": [
-    "#minecraft:jungle_logs",
+    "minecraft:jungle_log",
+    "minecraft:jungle_wood",
+    "minecraft:stripped_jungle_log",
+    "minecraft:stripped_jungle_wood",
     "great_big_world:chiseled_jungle_log",
-    "great_big_world:chiseled_jungle_wood"
+    "great_big_world:chiseled_jungle_wood",
+    "great_big_world:hollow_jungle_log"
   ],
   "result": {
     "id": "great_big_world:stripped_hollow_jungle_log"

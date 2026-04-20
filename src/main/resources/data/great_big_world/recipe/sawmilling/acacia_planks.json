@@ -1,7 +1,12 @@
 {
   "type": "great_big_world:sawmilling",
   "ingredient": [
-    "#minecraft:acacia_logs",
+    "minecraft:acacia_log",
+    "minecraft:acacia_wood",
+    "minecraft:stripped_acacia_log",
+    "minecraft:stripped_acacia_wood",
+    "great_big_world:hollow_acacia_log",
+    "great_big_world:stripped_hollow_acacia_log",
     "great_big_world:chiseled_acacia_log",
     "great_big_world:chiseled_acacia_wood"
   ],

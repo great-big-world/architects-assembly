@@ -1,0 +1,7 @@
+{
+  "type": "great_big_world:sawmilling",
+  "ingredient": "minecraft:crimson_planks",
+  "result": {
+    "id": "minecraft:crimson_button"
+  }
+}
