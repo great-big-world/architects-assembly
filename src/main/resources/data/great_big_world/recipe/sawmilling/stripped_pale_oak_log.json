@@ -1,0 +1,11 @@
+{
+  "type": "great_big_world:sawmilling",
+  "count": 1,
+  "ingredient": [
+    "minecraft:pale_oak_wood",
+    "minecraft:pale_oak_log"
+  ],
+  "result": {
+    "id": "minecraft:stripped_pale_oak_log"
+  }
+}

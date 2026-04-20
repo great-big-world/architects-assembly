@@ -1,0 +1,12 @@
+{
+  "type": "great_big_world:sawmilling",
+  "count": 1,
+  "ingredient": [
+    "#minecraft:birch_logs",
+    "great_big_world:chiseled_birch_log",
+    "great_big_world:chiseled_birch_wood"
+  ],
+  "result": {
+    "id": "great_big_world:stripped_hollow_birch_log"
+  }
+}
