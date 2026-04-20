@@ -1,0 +1,7 @@
+{
+  "type": "great_big_world:sawmilling",
+  "ingredient": "minecraft:stripped_bamboo_block",
+  "result": {
+    "id": "minecraft:bamboo_shelf"
+  }
+}

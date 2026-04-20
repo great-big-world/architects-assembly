@@ -7,6 +7,7 @@ import dev.creoii.greatbigworld.util.RegistryHelper;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
@@ -353,6 +354,35 @@ public final class ArchitectsAssemblyBlocks {
         OxidizableBlocksRegistry.registerOxidizableBlockPair(CUT_COPPER_WALL, EXPOSED_CUT_COPPER_WALL);
         OxidizableBlocksRegistry.registerOxidizableBlockPair(EXPOSED_CUT_COPPER_WALL, WEATHERED_CUT_COPPER_WALL);
         OxidizableBlocksRegistry.registerOxidizableBlockPair(WEATHERED_CUT_COPPER_WALL, OXIDIZED_CUT_COPPER_WALL);
+
+        FlammableBlockRegistry.getDefaultInstance().add(CHISELED_OAK_PLANKS, 5, 20);
+        FlammableBlockRegistry.getDefaultInstance().add(CHISELED_OAK_LOG, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(CHISELED_OAK_WOOD, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(STRIPPED_CHISELED_OAK_LOG, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(STRIPPED_CHISELED_OAK_WOOD, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(CHISELED_SPRUCE_PLANKS, 5, 20);
+        FlammableBlockRegistry.getDefaultInstance().add(CHISELED_SPRUCE_LOG, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(CHISELED_SPRUCE_WOOD, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(CHISELED_BIRCH_PLANKS, 5, 20);
+        FlammableBlockRegistry.getDefaultInstance().add(CHISELED_BIRCH_LOG, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(CHISELED_BIRCH_WOOD, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(CHISELED_JUNGLE_PLANKS, 5, 20);
+        FlammableBlockRegistry.getDefaultInstance().add(CHISELED_JUNGLE_LOG, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(CHISELED_JUNGLE_WOOD, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(CHISELED_DARK_OAK_PLANKS, 5, 20);
+        FlammableBlockRegistry.getDefaultInstance().add(CHISELED_DARK_OAK_LOG, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(CHISELED_DARK_OAK_WOOD, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(CHISELED_ACACIA_PLANKS, 5, 20);
+        FlammableBlockRegistry.getDefaultInstance().add(CHISELED_ACACIA_LOG, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(CHISELED_ACACIA_WOOD, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(CHISELED_MANGROVE_PLANKS, 5, 20);
+        FlammableBlockRegistry.getDefaultInstance().add(CHISELED_MANGROVE_LOG, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(CHISELED_MANGROVE_WOOD, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(CHISELED_CHERRY_PLANKS, 5, 20);
+        FlammableBlockRegistry.getDefaultInstance().add(CHISELED_CHERRY_LOG, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(CHISELED_CHERRY_WOOD, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(CHISELED_PALE_OAK_PLANKS, 5, 20);
+        FlammableBlockRegistry.getDefaultInstance().add(CHISELED_BAMBOO_PLANKS, 5, 20);
     }
 
     @Environment(EnvType.CLIENT)

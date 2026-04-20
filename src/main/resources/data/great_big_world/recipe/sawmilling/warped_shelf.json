@@ -1,0 +1,7 @@
+{
+  "type": "great_big_world:sawmilling",
+  "ingredient": "minecraft:stripped_warped_log",
+  "result": {
+    "id": "minecraft:warped_shelf"
+  }
+}

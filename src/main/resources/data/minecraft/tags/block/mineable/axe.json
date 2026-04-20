@@ -3,6 +3,24 @@
     "#c:glass_blocks",
     "#c:glass_panes",
     "#great_big_world:wooden_vertical_slabs",
-    "great_big_world:vertical_bamboo_mosaic_slab"
+    "great_big_world:vertical_bamboo_mosaic_slab",
+    "great_big_world:chiseled_oak_planks",
+    "great_big_world:chiseled_spruce_planks",
+    "great_big_world:chiseled_birch_planks",
+    "great_big_world:chiseled_jungle_planks",
+    "great_big_world:chiseled_acacia_planks",
+    "great_big_world:chiseled_dark_oak_planks",
+    "great_big_world:chiseled_mangrove_planks",
+    "great_big_world:chiseled_cherry_planks",
+    "great_big_world:chiseled_pale_oak_planks",
+    "great_big_world:chiseled_bamboo_planks",
+    "great_big_world:chiseled_oak_log",
+    "great_big_world:chiseled_spruce_log",
+    "great_big_world:chiseled_birch_log",
+    "great_big_world:chiseled_jungle_log",
+    "great_big_world:chiseled_acacia_log",
+    "great_big_world:chiseled_dark_oak_log",
+    "great_big_world:chiseled_mangrove_log",
+    "great_big_world:chiseled_cherry_log"
   ]
 }

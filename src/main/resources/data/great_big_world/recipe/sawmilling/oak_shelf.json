@@ -1,0 +1,7 @@
+{
+  "type": "great_big_world:sawmilling",
+  "ingredient": "minecraft:stripped_oak_log",
+  "result": {
+    "id": "minecraft:oak_shelf"
+  }
+}
