@@ -9,7 +9,6 @@ import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.function.BiConsumer;
 import net.minecraft.locale.Language;
-import net.minecraft.resources.Identifier;
 
 @Mixin(Language.class)
 public class LanguageMixin implements LocaleAwareLanguage {
@@ -50,7 +49,7 @@ public class LanguageMixin implements LocaleAwareLanguage {
         gbw$langCode = langCode;
     }
 
-    @Unique
+    /*@Unique
     private static Identifier toId(String translationKey) {
         translationKey = translationKey.toLowerCase();
 
@@ -66,5 +65,5 @@ public class LanguageMixin implements LocaleAwareLanguage {
         else path = translationKey.substring(dot2 + 1, dot3);
 
         return Identifier.fromNamespaceAndPath(translationKey.substring(dot1, dot2), path);
-    }
+    }*/
 }
