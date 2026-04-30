@@ -1,15 +1,11 @@
 package dev.creoii.greatbigworld.architectsassembly.registry;
 
 import dev.creoii.greatbigworld.architectsassembly.util.SawmillingRecipeManager;
-import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.SpawnEggItem;
 
 public final class ArchitectsAssemblyEvents {
     public static void register() {
@@ -37,13 +33,6 @@ public final class ArchitectsAssemblyEvents {
 
         ServerPlayerEvents.JOIN.register(player -> {
             ServerPlayNetworking.send(player, new SawmillingRecipeManager.SyncSawmillingRecipesS2C(((SawmillingRecipeManager) player.level().getServer().getRecipeManager()).gbw$getSawmillingRecipes()));
-        });
-
-        ItemTooltipCallback.EVENT.register((stack, tooltipContext, tooltipType, lines) -> {
-            if (stack.getItem() instanceof SpawnEggItem spawnEggItem) {
-                MutableComponent mutableText = MutableComponent.create(spawnEggItem.getType(stack).getDescription().getContents()).withStyle(ChatFormatting.GRAY);
-                lines.add(1, mutableText);
-            }
         });
     }
 }

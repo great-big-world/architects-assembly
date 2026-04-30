@@ -16,6 +16,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.item.component.Weapon;
@@ -40,6 +41,11 @@ public final class ArchitectsAssemblyClientEvents {
         });
 
         ItemTooltipCallback.EVENT.register((stack, context, tooltipType, list) -> {
+            if (stack.getItem() instanceof SpawnEggItem spawnEggItem) {
+                MutableComponent mutableText = MutableComponent.create(spawnEggItem.getType(stack).getDescription().getContents()).withStyle(ChatFormatting.GRAY);
+                list.add(1, mutableText);
+            }
+
             List<MutableComponent> itemTooltipInfos = new ArrayList<>();
 
             FoodProperties foodComponent = stack.getOrDefault(DataComponents.FOOD, null);

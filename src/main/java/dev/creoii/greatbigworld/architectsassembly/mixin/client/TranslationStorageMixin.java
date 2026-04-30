@@ -1,6 +1,6 @@
 package dev.creoii.greatbigworld.architectsassembly.mixin.client;
 
-import dev.creoii.greatbigworld.architectsassembly.util.LocaleAwareLanguage;
+import dev.creoii.itemvariants.util.LocaleAwareLanguage;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

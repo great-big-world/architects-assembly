@@ -1,20 +1,17 @@
 package dev.creoii.greatbigworld.architectsassembly.mixin;
 
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
-import dev.creoii.greatbigworld.architectsassembly.util.LocaleAwareLanguage;
+import dev.creoii.itemvariants.util.LocaleAwareLanguage;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.function.BiConsumer;
 import net.minecraft.locale.Language;
 
 @Mixin(Language.class)
-public class LanguageMixin implements LocaleAwareLanguage {
+public class LanguageMixin {
     @Shadow private static volatile Language instance;
-    @Unique
-    private String gbw$langCode;
 
     @WrapWithCondition(method = "loadFromJson(Ljava/io/InputStream;Ljava/util/function/BiConsumer;)V", at = @At(value = "INVOKE", target = "Ljava/util/function/BiConsumer;accept(Ljava/lang/Object;Ljava/lang/Object;)V"))
     private static boolean gbw$applyTranslationLoadEvent(BiConsumer<String, String> entryConsumer, Object key, Object value) {
@@ -38,15 +35,6 @@ public class LanguageMixin implements LocaleAwareLanguage {
         }
 
         return true;
-    }
-
-    @Override
-    public String gbw$getLangCode() {
-        return gbw$langCode;
-    }
-
-    public void gbw$setLangCode(String langCode) {
-        gbw$langCode = langCode;
     }
 
     /*@Unique
