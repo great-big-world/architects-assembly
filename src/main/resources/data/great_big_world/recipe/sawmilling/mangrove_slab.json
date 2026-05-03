@@ -3,6 +3,6 @@
   "ingredient": "minecraft:mangrove_planks",
   "result": {
     "count": 2,
-    "id": "minecraft:mangrove_slab"
+    "id": "great_big_world:mangrove_slab"
   }
 }

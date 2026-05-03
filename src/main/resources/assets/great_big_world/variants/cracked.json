@@ -1,11 +1,5 @@
 {
   "values": [
-    "minecraft:infested_cracked_stone_bricks",
-    "minecraft:cracked_stone_bricks",
-    "minecraft:cracked_deepslate_bricks",
-    "minecraft:cracked_deepslate_tiles",
-    "minecraft:cracked_nether_bricks",
-    "minecraft:cracked_polished_blackstone_bricks",
     "great_big_world:cracked_bricks",
     "great_big_world:cracked_mud_bricks",
     "great_big_world:cracked_quartz_bricks",

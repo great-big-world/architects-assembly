@@ -3,6 +3,6 @@
   "ingredient": "minecraft:birch_planks",
   "result": {
     "count": 2,
-    "id": "minecraft:birch_slab"
+    "id": "great_big_world:birch_slab"
   }
 }

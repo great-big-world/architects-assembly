@@ -3,6 +3,6 @@
   "ingredient": "minecraft:pale_oak_planks",
   "result": {
     "count": 2,
-    "id": "minecraft:pale_oak_slab"
+    "id": "great_big_world:pale_oak_slab"
   }
 }

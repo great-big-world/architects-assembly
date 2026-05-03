@@ -1,27 +1,11 @@
 {
   "values": [
-    "minecraft:white_wool",
-    "minecraft:white_carpet",
-    "minecraft:white_concrete_powder",
-    "minecraft:white_concrete",
-    "minecraft:white_terracotta",
-    "minecraft:white_glazed_terracotta",
-    "minecraft:white_banner",
-    "minecraft:white_shulker_box",
-    "minecraft:white_dye",
-    "minecraft:white_candle",
-    "minecraft:white_stained_glass",
-    "minecraft:white_stained_glass_pane",
-    "minecraft:white_bed",
-    "minecraft:white_bundle",
-    "minecraft:white_harness",
     "great_big_world:white_glass",
     "great_big_world:chiseled_white_glass",
     "great_big_world:chiseled_white_glass_pane",
     "great_big_world:white_item_frame",
     "great_big_world:white_glow_item_frame",
     "great_big_world:white_glass_shard",
-    "great_big_world:cracked_white_glass",
-    "minecraft:white_tulip"
+    "great_big_world:cracked_white_glass"
   ]
 }

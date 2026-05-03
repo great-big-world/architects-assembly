@@ -1,27 +1,11 @@
 {
   "values": [
-    "minecraft:red_wool",
-    "minecraft:red_carpet",
-    "minecraft:red_concrete_powder",
-    "minecraft:red_concrete",
-    "minecraft:red_terracotta",
-    "minecraft:red_glazed_terracotta",
-    "minecraft:red_banner",
-    "minecraft:red_shulker_box",
-    "minecraft:red_dye",
-    "minecraft:red_candle",
-    "minecraft:red_stained_glass",
-    "minecraft:red_stained_glass_pane",
-    "minecraft:red_bed",
-    "minecraft:red_bundle",
-    "minecraft:red_harness",
     "great_big_world:red_glass",
     "great_big_world:chiseled_red_glass",
     "great_big_world:chiseled_red_glass_pane",
     "great_big_world:red_item_frame",
     "great_big_world:red_glow_item_frame",
     "great_big_world:red_glass_shard",
-    "great_big_world:cracked_red_glass",
-    "minecraft:red_tulip"
+    "great_big_world:cracked_red_glass"
   ]
 }

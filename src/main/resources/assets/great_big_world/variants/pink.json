@@ -1,27 +1,11 @@
 {
   "values": [
-    "minecraft:pink_wool",
-    "minecraft:pink_carpet",
-    "minecraft:pink_concrete_powder",
-    "minecraft:pink_concrete",
-    "minecraft:pink_terracotta",
-    "minecraft:pink_glazed_terracotta",
-    "minecraft:pink_banner",
-    "minecraft:pink_shulker_box",
-    "minecraft:pink_dye",
-    "minecraft:pink_candle",
-    "minecraft:pink_stained_glass",
-    "minecraft:pink_stained_glass_pane",
-    "minecraft:pink_bed",
-    "minecraft:pink_bundle",
-    "minecraft:pink_harness",
     "great_big_world:pink_glass",
     "great_big_world:chiseled_pink_glass",
     "great_big_world:chiseled_pink_glass_pane",
     "great_big_world:pink_item_frame",
     "great_big_world:pink_glow_item_frame",
     "great_big_world:pink_glass_shard",
-    "great_big_world:cracked_pink_glass",
-    "minecraft:pink_tulip"
+    "great_big_world:cracked_pink_glass"
   ]
 }
