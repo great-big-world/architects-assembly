@@ -22,6 +22,18 @@
     "great_big_world:polished_calcite",
     "great_big_world:polished_calcite_stairs",
     "great_big_world:polished_calcite_slab",
-    "great_big_world:polished_calcite_wall"
+    "great_big_world:polished_calcite_wall",
+    "great_big_world:polished_oak_planks",
+    "great_big_world:polished_spruce_planks",
+    "great_big_world:polished_birch_planks",
+    "great_big_world:polished_jungle_planks",
+    "great_big_world:polished_acacia_planks",
+    "great_big_world:polished_dark_oak_planks",
+    "great_big_world:polished_mangrove_planks",
+    "great_big_world:polished_cherry_planks",
+    "great_big_world:polished_pale_oak_planks",
+    "great_big_world:polished_bamboo_planks",
+    "great_big_world:polished_crimson_planks",
+    "great_big_world:polished_warped_planks"
   ]
 }

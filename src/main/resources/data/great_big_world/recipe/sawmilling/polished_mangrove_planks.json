@@ -1,0 +1,7 @@
+{
+  "type": "great_big_world:sawmilling",
+  "ingredient": "minecraft:mangrove_planks",
+  "result": {
+    "id": "great_big_world:polished_mangrove_planks"
+  }
+}
