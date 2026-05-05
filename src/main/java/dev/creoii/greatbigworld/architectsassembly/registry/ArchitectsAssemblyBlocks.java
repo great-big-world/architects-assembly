@@ -156,6 +156,9 @@ public final class ArchitectsAssemblyBlocks {
     public static Block CHISELED_CHERRY_LOG;
     public static Block CHISELED_CHERRY_WOOD;
     public static Block POLISHED_OAK_PLANKS;
+    public static Block POLISHED_OAK_SLAB;
+    public static Block VERTICAL_POLISHED_OAK_SLAB;
+    public static Block POLISHED_OAK_STAIRS;
     public static Block POLISHED_SPRUCE_PLANKS;
     public static Block POLISHED_BIRCH_PLANKS;
     public static Block POLISHED_JUNGLE_PLANKS;
@@ -320,6 +323,9 @@ public final class ArchitectsAssemblyBlocks {
         CHISELED_CHERRY_LOG = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_cherry_log"), RotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_LOG));
         CHISELED_CHERRY_WOOD = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_cherry_wood"), RotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_WOOD));
         POLISHED_OAK_PLANKS = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "polished_oak_planks"), Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS));
+        POLISHED_OAK_SLAB = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "polished_oak_slab"), SlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SLAB));
+        VERTICAL_POLISHED_OAK_SLAB = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "vertical_polished_oak_slab"), VerticalSlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SLAB));
+        POLISHED_OAK_STAIRS = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "polished_oak_stairs"), properties -> new StairBlock(POLISHED_OAK_PLANKS.defaultBlockState(), properties), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS));
         POLISHED_SPRUCE_PLANKS = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "polished_spruce_planks"), Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_PLANKS));
         POLISHED_BIRCH_PLANKS = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "polished_birch_planks"), Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_PLANKS));
         POLISHED_JUNGLE_PLANKS = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "polished_jungle_planks"), Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_PLANKS));
@@ -381,6 +387,9 @@ public final class ArchitectsAssemblyBlocks {
 
         FlammableBlockRegistry.getDefaultInstance().add(CHISELED_OAK_PLANKS, 5, 20);
         FlammableBlockRegistry.getDefaultInstance().add(POLISHED_OAK_PLANKS, 5, 20);
+        FlammableBlockRegistry.getDefaultInstance().add(POLISHED_OAK_STAIRS, 5, 20);
+        FlammableBlockRegistry.getDefaultInstance().add(POLISHED_OAK_SLAB, 5, 20);
+        FlammableBlockRegistry.getDefaultInstance().add(VERTICAL_POLISHED_OAK_SLAB, 5, 20);
         FlammableBlockRegistry.getDefaultInstance().add(CHISELED_OAK_LOG, 5, 5);
         FlammableBlockRegistry.getDefaultInstance().add(CHISELED_OAK_WOOD, 5, 5);
         FlammableBlockRegistry.getDefaultInstance().add(STRIPPED_CHISELED_OAK_LOG, 5, 5);

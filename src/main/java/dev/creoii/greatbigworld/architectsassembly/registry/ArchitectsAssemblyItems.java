@@ -242,6 +242,8 @@ public final class ArchitectsAssemblyItems {
     public static Item CHISELED_PALE_OAK_PLANKS;
     public static Item CHISELED_BAMBOO_PLANKS;
     public static Item POLISHED_OAK_PLANKS;
+    public static Item POLISHED_OAK_STAIRS;
+    public static Item POLISHED_OAK_SLAB;
     public static Item POLISHED_SPRUCE_PLANKS;
     public static Item POLISHED_BIRCH_PLANKS;
     public static Item POLISHED_JUNGLE_PLANKS;
@@ -396,6 +398,8 @@ public final class ArchitectsAssemblyItems {
         CHISELED_PALE_OAK_PLANKS = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_pale_oak_planks"), ArchitectsAssemblyBlocks.CHISELED_PALE_OAK_PLANKS);
         CHISELED_BAMBOO_PLANKS = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "chiseled_bamboo_planks"), ArchitectsAssemblyBlocks.CHISELED_BAMBOO_PLANKS);
         POLISHED_OAK_PLANKS = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "polished_oak_planks"), ArchitectsAssemblyBlocks.POLISHED_OAK_PLANKS);
+        POLISHED_OAK_STAIRS = RegistryHelper.registerItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "polished_oak_slab"), properties -> new SlabItem(ArchitectsAssemblyBlocks.POLISHED_OAK_SLAB, ArchitectsAssemblyBlocks.VERTICAL_POLISHED_OAK_SLAB, properties));
+        POLISHED_OAK_SLAB = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "polished_oak_stairs"), ArchitectsAssemblyBlocks.POLISHED_OAK_STAIRS);
         POLISHED_SPRUCE_PLANKS = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "polished_spruce_planks"), ArchitectsAssemblyBlocks.POLISHED_SPRUCE_PLANKS);
         POLISHED_BIRCH_PLANKS = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "polished_birch_planks"), ArchitectsAssemblyBlocks.POLISHED_BIRCH_PLANKS);
         POLISHED_JUNGLE_PLANKS = RegistryHelper.registerBlockItem(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "polished_jungle_planks"), ArchitectsAssemblyBlocks.POLISHED_JUNGLE_PLANKS);
@@ -587,7 +591,7 @@ public final class ArchitectsAssemblyItems {
             entries.addAfter(Items.END_STONE, END_STONE_STAIRS, END_STONE_SLAB, END_STONE_WALL);
             entries.addAfter(Items.PACKED_MUD, PACKED_MUD_STAIRS, PACKED_MUD_SLAB, PACKED_MUD_WALL);
             entries.addAfter(Items.DEEPSLATE, DEEPSLATE_STAIRS, DEEPSLATE_SLAB, DEEPSLATE_WALL);
-            entries.addAfter(Items.OAK_PLANKS, POLISHED_OAK_PLANKS, CHISELED_OAK_PLANKS);
+            entries.addAfter(Items.OAK_PLANKS, POLISHED_OAK_PLANKS, POLISHED_OAK_STAIRS, POLISHED_OAK_SLAB, CHISELED_OAK_PLANKS);
             entries.addAfter(Items.SPRUCE_PLANKS, POLISHED_SPRUCE_PLANKS, CHISELED_SPRUCE_PLANKS);
             entries.addAfter(Items.BIRCH_PLANKS, POLISHED_BIRCH_PLANKS, CHISELED_SPRUCE_PLANKS);
             entries.addAfter(Items.JUNGLE_PLANKS, POLISHED_JUNGLE_PLANKS, CHISELED_SPRUCE_PLANKS);
