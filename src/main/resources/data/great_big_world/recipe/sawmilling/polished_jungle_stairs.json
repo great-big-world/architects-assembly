@@ -1,0 +1,10 @@
+{
+  "type": "great_big_world:sawmilling",
+  "ingredient": [
+    "minecraft:jungle_planks",
+    "great_big_world:polished_jungle_planks"
+  ],
+  "result": {
+    "id": "great_big_world:polished_jungle_stairs"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "great_big_world:sawmilling",
+  "ingredient": [
+    "minecraft:acacia_planks",
+    "great_big_world:polished_acacia_planks"
+  ],
+  "result": {
+    "id": "great_big_world:polished_acacia_stairs"
+  }
+}

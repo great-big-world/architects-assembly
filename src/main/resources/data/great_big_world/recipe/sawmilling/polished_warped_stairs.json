@@ -1,0 +1,10 @@
+{
+  "type": "great_big_world:sawmilling",
+  "ingredient": [
+    "minecraft:warped_planks",
+    "great_big_world:polished_warped_planks"
+  ],
+  "result": {
+    "id": "great_big_world:polished_warped_stairs"
+  }
+}

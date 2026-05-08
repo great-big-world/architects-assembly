@@ -1,0 +1,8 @@
+{
+  "parent": "block/slab",
+  "textures": {
+    "bottom": "great_big_world:block/polished_mangrove_planks",
+    "side": "great_big_world:block/polished_mangrove_slab",
+    "top": "great_big_world:block/polished_mangrove_planks"
+  }
+}

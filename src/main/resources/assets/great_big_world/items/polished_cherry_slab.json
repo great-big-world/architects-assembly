@@ -1,0 +1,14 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "great_big_world:block/polished_cherry_slab"
+    },
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "great_big_world:block/vertical_polished_cherry_slab"
+    },
+    "property": "great_big_world:slab_placement"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "great_big_world:sawmilling",
+  "ingredient": [
+    "minecraft:spruce_planks",
+    "great_big_world:polished_spruce_planks"
+  ],
+  "result": {
+    "count": 2,
+    "id": "great_big_world:polished_spruce_slab"
+  }
+}

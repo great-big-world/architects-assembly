@@ -11,6 +11,18 @@
     "great_big_world:netherrack_stairs",
     "great_big_world:end_stone_stairs",
     "great_big_world:mossy_mud_brick_stairs",
-    "great_big_world:deepslate_stairs"
+    "great_big_world:deepslate_stairs",
+    "great_big_world:polished_oak_stairs",
+    "great_big_world:polished_spruce_stairs",
+    "great_big_world:polished_birch_stairs",
+    "great_big_world:polished_jungle_stairs",
+    "great_big_world:polished_acacia_stairs",
+    "great_big_world:polished_dark_oak_stairs",
+    "great_big_world:polished_mangrove_stairs",
+    "great_big_world:polished_cherry_stairs",
+    "great_big_world:polished_pale_oak_stairs",
+    "great_big_world:polished_bamboo_stairs",
+    "great_big_world:polished_crimson_stairs",
+    "great_big_world:polished_warped_stairs"
   ]
 }

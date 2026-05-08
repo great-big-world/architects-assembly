@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "great_big_world:block/polished_bamboo_planks",
+    "side": "great_big_world:block/polished_bamboo_slab"
+  }
+}
