@@ -3,7 +3,10 @@
   "category": "building",
   "group": "stained_glass",
   "key": {
-    "#": "minecraft:glass",
+    "#": [
+      "minecraft:glass",
+      "great_big_world:glass"
+    ],
     "X": "minecraft:purple_dye"
   },
   "pattern": [
