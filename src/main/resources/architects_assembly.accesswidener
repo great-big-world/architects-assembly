@@ -14,3 +14,5 @@ accessible field net/minecraft/stats/RecipeBookSettings crafting Lnet/minecraft/
 accessible field net/minecraft/stats/RecipeBookSettings furnace Lnet/minecraft/stats/RecipeBookSettings$TypeSettings;
 accessible field net/minecraft/stats/RecipeBookSettings blastFurnace Lnet/minecraft/stats/RecipeBookSettings$TypeSettings;
 accessible field net/minecraft/stats/RecipeBookSettings smoker Lnet/minecraft/stats/RecipeBookSettings$TypeSettings;
+
+accessible class net/minecraft/world/entity/monster/EnderMan$EndermanTakeBlockGoal

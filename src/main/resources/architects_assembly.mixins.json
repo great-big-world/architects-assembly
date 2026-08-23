@@ -35,6 +35,7 @@
     "block.WallBlockMixin",
     "block.WallMountedBlockMixin",
     "entity.ArmorStandEntityMixin",
+    "entity.EndermanTakeBlockGoalMixin",
     "entity.GlowItemFrameEntityMixin",
     "entity.ItemFrameEntityMixin",
     "entity.PlayerEntityMixin",
@@ -46,14 +47,14 @@
     "world.feature.GeodeFeatureMixin"
   ],
   "client": [
-    "client.TranslationStorageMixin",
     "client.BlockStateManagersMixin",
     "client.BooleanPropertiesMixin",
     "client.ClientRecipeContainerMixin",
     "client.ItemFrameEntityRendererMixin",
     "client.ItemFrameEntityRenderStateMixin",
     "client.MouseMixin",
-    "client.SearchRecipeBookCategoryMixin"
+    "client.SearchRecipeBookCategoryMixin",
+    "client.TranslationStorageMixin"
   ],
   "injectors": {
     "defaultRequire": 1
