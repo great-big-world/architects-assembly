@@ -6,13 +6,17 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
+import dev.creoii.farmsandfriends.recipe.OvenRecipe;
+import dev.creoii.farmsandfriends.registry.FarmsAndFriendsRecipes;
 import dev.creoii.greatbigworld.architectsassembly.recipe.SawmillingRecipe;
 import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyMenus;
 import dev.creoii.greatbigworld.architectsassembly.registry.ArchitectsAssemblyRecipes;
 import dev.creoii.greatbigworld.architectsassembly.util.SawmillingRecipeManager;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.flag.FeatureFlagSet;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.item.crafting.display.RecipeDisplayEntry;
 import org.slf4j.Logger;
@@ -103,6 +107,14 @@ public abstract class RecipeManagerMixin implements SawmillingRecipeManager {
         map.put(ArchitectsAssemblyMenus.KILN_INPUT, (recipe) -> {
             if (recipe.getType() == ArchitectsAssemblyRecipes.FIRING && recipe instanceof SingleItemRecipe singleItemRecipe) {
                 return Optional.of(singleItemRecipe.input());
+            } else return Optional.empty();
+        });
+        map.put(FarmsAndFriendsRecipes.OVEN_INPUT, recipe -> {
+            if (recipe instanceof OvenRecipe ovenRecipe) {
+                Item[] stacks = ovenRecipe.ingredients().stream()
+                        .flatMap(i -> Arrays.stream(i.items().map(Holder::value).toArray(Item[]::new)))
+                        .toArray(Item[]::new);
+                return Optional.of(Ingredient.of(stacks));
             } else return Optional.empty();
         });
         return map;
